@@ -1,0 +1,5 @@
+Cosas importantes:
+* Information Extraction (http://en.wikipedia.org/wiki/Information_extraction) es algo que ocuparé bastante. El paper este es importante: Natural Language Processing in Textual Information Retrieval and Related Topics http://www.hipertext.net/english/pag1025.htm
+
+
+
