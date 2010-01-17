@@ -15,7 +15,7 @@ NUEVA POLÍTICA:
 * agregar todo link visitado acá, para ver luego si va a  zotero
 * renombrar todo documento descargado al título (o algo descriptivo)
 
-
-
-
+=======================================================================
+Enero 16
+* [de "IEAcrossLingBarriers.pdf"] Para hacer extracción translingüe, se podría usar traducción de máquina primero y luego hacer el IE; PERO  esto tarda mucho tiempo y es mucho el precio a pagar por lo poco que en realidad se ocupa traducido, otro orden es primero IE y luego MT, pero, claro, se ocuparía tener una manera de hacer IE en el lenguaje de entrada.
 
