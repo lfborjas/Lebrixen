@@ -7,11 +7,13 @@ FIELD_MAX_WIDTH = 50
 #read the firefox download database and print it to a file:
 home=os.environ['HOME']
 downloads_file=os.path.join(home, '.mozilla','firefox','uqzxwi9f.default', "downloads.sqlite")
+backup_file=os.path.join(home, 'Lebrixen', 'Fase_I', 'Bibliografia', 'downloads_backup')
+
 if os.path.exists(downloads_file):
 	con=sqlite.connect(downloads_file)
 	cur=con.cursor()
 	cur.execute("SELECT * FROM moz_downloads")
-	destination=open('downloads_backup', 'w')
+	destination=open(backup_file, 'w')
 #	for row in cur:
 #		destination.write(repr(row)+'\n')
 #	destination.close()
