@@ -1,0 +1,107 @@
+#LyX 1.6.4 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass paper
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Institution
+Universidad Tecnológica Centroamericana (UNITEC)
+\end_layout
+
+\begin_layout Title
+Sistema recomendador de documentos aplicado a un contexto académico
+\end_layout
+
+\begin_layout Author
+Luis Felipe Borjas Reyes 10611066
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+El presente proyecto explora el concepto de un sistema 
+\emph on
+recomendador
+\emph default
+ de documentos, es decir, un sistema que permita la recuperación de documentos
+ relevantes a una necesidad de información 
+\emph on
+implícita
+\emph default
+; a diferencia de los sistemas tradicionales de recuperación de información,
+ como los motores de búsqueda, que responden -en propósito y diseño- a una
+ necesidad de información explícitamente proveida por el usuario.
+ Pero, ¿qué se puede entender como necesidad de información implícita? Sencillam
+ente, a aquella que se infiere del contexto en el cual el usuario está actuando.
+ Por ejemplo, y este será el caso en el cual se aplicará concretamente el
+ software desarrollado, cuando un docente está planificando una sesión (lección
+ magistral, proyecto, exposiciones, etc.) puede tener una descripción de
+ la misma y documentos que piense usar de referencia para la misma, la necesidad
+ latente de información radica en que quizá el docente se podría beneficiar
+ de documentos que se relacionen la sesión, tanto para referencia propia
+ como para ofrecer como lecturas o recursos suplementarios a los alumnos;
+ y, sin embargo, muchos docentes abdican de ampliar su cátedra de esta manera
+ por varias razones, muchas de las cuales se resumen en desánimo ante el
+ prospecto de buscar tales recursos.
+ Pero ¿qué tal si, en el uso de un sistema en el que administran sus clases,
+ estos documentos útiles les fueran recomendados sin necesidad de una búsqueda
+ activa.
+\end_layout
+
+\begin_layout Standard
+El propósito de este proyecto se centra, entonces, en explorar el uso de
+ técnicas alternativas a la recuperación de información en internet tradicional;
+ en concreto, el uso de agentes inteligentes, modelos estadísticos del lenguaje
+ y procesamiento de lenguaje natural.
+\end_layout
+
+\begin_layout Section
+Revisión Bibliográfica
+\end_layout
+
+\begin_layout Subsection
+Introducción a la recuperación de información
+\end_layout
+
+\end_body
+\end_document
