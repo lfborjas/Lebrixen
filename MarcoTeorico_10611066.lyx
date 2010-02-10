@@ -124,19 +124,153 @@ Introducción a la Recuperación de la Información
 \end_layout
 
 \begin_layout Standard
-La recuperación de información (IR, por sus siglas en inglés) es, primero
- que todo, un concepto anterior a la computación, pues se considera recuperación
- de información a la búsqueda manual de documentos en un sistema bibliotecario
- y es, de hecho, en el marco de las grandes colecciones de documentos que
- se acuña el término, véase, por ejemplo, la breve historia de sistemas
- de IR que presenta 
+Aunque últimamente, con extendido uso de los motores de búsqueda, se pueda
+ creer que el área de la recuperación de información (IR, por sus siglas
+ en inglés) es relativamente nueva y su máxima expresión son los susodichos
+ sistemas, la verdad es que la recuperación de información como tal nace
+ mucho antes, quizá desde que comenzaron a existir las primeras grandes
+ colecciones de documentos, pues la necesidad de información, y el consecuente
+ desarrollo de técnicas para buscarla entre lo que otros ya han documentado,
+ es inherente al desarrollo de una cultura escrita.
+\end_layout
+
+\begin_layout Standard
+En un primer intento por definir la recuperación de información, se puede
+ decir que:
+\end_layout
+
+\begin_layout Quote
+La recuperación de la información es la obtención de material que satisfaga
+ una necesidad de información.
+\end_layout
+
+\begin_layout Standard
+Entendiendo por material cualquier artefacto (video, sonido, texto, etc)
+ que sirva para resolver una carencia de información en quien emprende la
+ actividad de recuperación.
+ Así, una consulta al directorio de nuestro teléfono celular para recordar
+ el número de un amigo consistiría en una actividad de recuperación de informaci
+ón.
+\end_layout
+
+\begin_layout Standard
+Pero si de definiciones nos ocupamos, se puede citar la definición dada
+ en el primer capítulo de 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Walker1999"
+key "HinrichSchutze2009"
 
 \end_inset
 
-.
+ como una muy buena para comenzar la discusión de la que tratará esta introducci
+ón y esta primera parte en general:
+\end_layout
+
+\begin_layout Quotation
+La recuperación de la información es encontrar material (usualmente documentos)
+ de una naturaleza no estructurada (por lo general, texto) que satisface
+ una necesidad de información en colecciones grandes (que pueden estar guardadas
+ en computadoras).
+\end_layout
+
+\begin_layout Standard
+De lo anterior se pueden resaltar algunos conceptos que será de gran utilidad
+ elaborar, nótese que la referencia a sistema no implica uno computacional:
+\end_layout
+
+\begin_layout Description
+Material
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+naturaleza
+\begin_inset space ~
+\end_inset
+
+no
+\begin_inset space ~
+\end_inset
+
+estructurada: Se pueden considerar como la 
+\emph on
+salida
+\emph default
+ del sistema.
+ Los textos con los que nos encontraremos en grandes colecciones (e incluso,
+ en librerías digitales) no son, necesariamente, de naturaleza homogénea:
+ unos pueden ser formularios con campos rígidamente definidos, otros, documentos
+ con cierta estructura, como artículos científicos con un título, resumen,
+ palabras clave, etc; o bien en formatos electrónicos estándar, como xhtml
+ o xml; pero la mayor parte de los documentos no tienen una estructura reconocib
+le (lo cual no excluye que puedan tener alguna de naturaleza arbitraria)
+ y esta situación se agrava aún más cuando la colección en uso no es más
+ ni menos que la 
+\emph on
+world wide web.
+\end_layout
+
+\begin_layout Description
+Necesidad
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+información: Se puede considerar como la
+\emph on
+ entrada
+\emph default
+ del sistema.
+ Un usuario del sistema (una persona u otro sistema) expresa de alguna manera
+ una carencia de información, y se trata de procesar ésta de manera que
+ se le puedan proveer recursos relevantes.
+ Es importante notar que la necesidad de información puede ser explícita
+ o implícita, y es en esta segunda naturaleza en la que se basa el proyecto
+ a desarrollar.
+\end_layout
+
+\begin_layout Standard
+La definición dada es, a todas luces, una descripción precisa de los sistemas
+ modernos de recuperación de información, pues especifica la noción a los
+ sistemas de recuperación documental contemporáneos.
+\end_layout
+
+\begin_layout Standard
+De las definiciones dadas, se puede apuntar el equívoco nombre que se ha
+ dado a este concepto, o al menos a su implementación práctica: recuperación
+ de información parecería sugerir que, de una gran colección de documentos,
+ se puede extraer 
+\emph on
+información
+\emph default
+ que satisfaga, pero, como se puede observar, los sistemas de IR no aspiran
+ a tanto: sencillamente dan al usuario documentos que puedan suplir su necesidad
+, pero es la responsabilidad última del usuario determinar que en efecto
+ es así.
+ Como nota marginal, sin embargo, recuérdese que otra área de las ciencias
+ computacionales, la 
+\emph on
+extracción de la información, sí
+\emph default
+ aspira a llenar necesidades estructuradas de información.
+\end_layout
+
+\begin_layout Subsection
+El ciclo de la recuperación la de información
+\end_layout
+
+\begin_layout Subsection
+Componentes de los sistemas de recuperación de información
+\end_layout
+
+\begin_layout Subsection
+
 \end_layout
 
 \begin_layout Standard
