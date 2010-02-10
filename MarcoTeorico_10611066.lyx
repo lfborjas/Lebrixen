@@ -2,7 +2,7 @@
 \lyxformat 345
 \begin_document
 \begin_header
-\textclass book
+\textclass report
 \use_default_options true
 \language spanish
 \inputencoding auto
@@ -23,7 +23,7 @@
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
-\cite_engine basic
+\cite_engine natbib_authoryear
 \use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
@@ -41,10 +41,6 @@
 \end_header
 
 \begin_body
-
-\begin_layout Institution
-Universidad Tecnológica Centroamericana (UNITEC)
-\end_layout
 
 \begin_layout Title
 Sistema recomendador de documentos aplicado a un contexto académico
@@ -95,16 +91,63 @@ El propósito de este proyecto se centra, entonces, en explorar el uso de
  y procesamiento de lenguaje natural.
 \end_layout
 
-\begin_layout Chapter
+\begin_layout Part
 Marco Teórico
 \end_layout
 
-\begin_layout Section
-Fundamentos
+\begin_layout Chapter
+Fundamentos 
 \end_layout
 
-\begin_layout Subsection
-Introducción a la Recuperación de Información
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+En el presente capítulo se presentarán los conceptos de distintos campos
+ de las ciencias computacionales, tecnologías de información y otras áreas
+ afines que servirán de cimientos para la implementación final del proyecto.
+ Se comienza con una breve introducción y puesta al día en el área de la
+ recuperación de información (RI) , ya que, a pesar de ser los sistemas
+ recomendadores ya toda un área de investigación por mérito propio, es necesario
+ clarificar que lo que subyace a un sistema de este tipo es, en realidad,
+ una tarea de recuperación de documentos.
+ Luego de la introducción, se discutirá cómo un sistema de IR se puede aplicar
+ a la recomendación de documentos en un contexto académico, presentando
+ y evaluando distintas maneras de representar los conceptos contenidos en
+ los documentos, indizarlos y buscarlos en base al contexto de la tarea
+ que el usuario lleve a cabo, objetivo último del proyecto.
+\end_layout
+
+\begin_layout Section
+Introducción a la Recuperación de la Información
+\end_layout
+
+\begin_layout Standard
+La recuperación de información (IR, por sus siglas en inglés) es, primero
+ que todo, un concepto anterior a la computación, pues se considera recuperación
+ de información a la búsqueda manual de documentos en un sistema bibliotecario
+ y es, de hecho, en el marco de las grandes colecciones de documentos que
+ se acuña el término, véase, por ejemplo, la breve historia de sistemas
+ de IR que presenta 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Walker1999"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "avance1"
+options "/home/lfborjas/Aplicaciones/apa-good"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
