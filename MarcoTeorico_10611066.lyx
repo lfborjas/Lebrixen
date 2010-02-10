@@ -2,9 +2,9 @@
 \lyxformat 345
 \begin_document
 \begin_header
-\textclass paper
+\textclass book
 \use_default_options true
-\language english
+\language spanish
 \inputencoding auto
 \font_roman default
 \font_sans default
@@ -54,8 +54,8 @@ Sistema recomendador de documentos aplicado a un contexto académico
 Luis Felipe Borjas Reyes 10611066
 \end_layout
 
-\begin_layout Section
-Introducción
+\begin_layout Section*
+Introducción General
 \end_layout
 
 \begin_layout Standard
@@ -70,7 +70,7 @@ implícita
 \emph default
 ; a diferencia de los sistemas tradicionales de recuperación de información,
  como los motores de búsqueda, que responden -en propósito y diseño- a una
- necesidad de información explícitamente proveida por el usuario.
+ necesidad de información explícitamente proveída por el usuario.
  Pero, ¿qué se puede entender como necesidad de información implícita? Sencillam
 ente, a aquella que se infiere del contexto en el cual el usuario está actuando.
  Por ejemplo, y este será el caso en el cual se aplicará concretamente el
@@ -95,12 +95,16 @@ El propósito de este proyecto se centra, entonces, en explorar el uso de
  y procesamiento de lenguaje natural.
 \end_layout
 
+\begin_layout Chapter
+Marco Teórico
+\end_layout
+
 \begin_layout Section
-Revisión Bibliográfica
+Fundamentos
 \end_layout
 
 \begin_layout Subsection
-Introducción a la recuperación de información
+Introducción a la Recuperación de Información
 \end_layout
 
 \end_body
