@@ -18,8 +18,17 @@
 \graphics default
 \paperfontsize default
 \spacing single
-\use_hyperref false
-\papersize default
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize letterpaper
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
@@ -72,23 +81,27 @@ ente, a aquella que se infiere del contexto en el cual el usuario está actuando
  Por ejemplo, y este será el caso en el cual se aplicará concretamente el
  software desarrollado, cuando un docente está planificando una sesión (lección
  magistral, proyecto, exposiciones, etc.) puede tener una descripción de
- la misma y documentos que piense usar de referencia para la misma, la necesidad
- latente de información radica en que quizá el docente se podría beneficiar
- de documentos que se relacionen la sesión, tanto para referencia propia
- como para ofrecer como lecturas o recursos suplementarios a los alumnos;
- y, sin embargo, muchos docentes abdican de ampliar su cátedra de esta manera
- por varias razones, muchas de las cuales se resumen en desánimo ante el
- prospecto de buscar tales recursos.
+ la misma y documentos que piense usar de referencia, la necesidad latente
+ de información radica en que quizá el docente se podría beneficiar de documento
+s que se relacionen la sesión, tanto para referencia propia como para ofrecer
+ como lecturas o recursos suplementarios a los alumnos; y, sin embargo,
+ muchos docentes abdican de ampliar su cátedra de esta manera por varias
+ razones, muchas de las cuales se pueden resumir en desánimo ante el prospecto
+ de buscar tales recursos.
  Pero ¿qué tal si, en el uso de un sistema en el que administran sus clases,
  estos documentos útiles les fueran recomendados sin necesidad de una búsqueda
- activa.
+ activa?
 \end_layout
 
 \begin_layout Standard
 El propósito de este proyecto se centra, entonces, en explorar el uso de
- técnicas alternativas a la recuperación de información en internet tradicional;
- en concreto, el uso de agentes inteligentes, modelos estadísticos del lenguaje
- y procesamiento de lenguaje natural.
+ técnicas complementarias o alternativas a la recuperación de información
+ en internet tradicional; en concreto, el uso de agentes inteligentes, modelos
+ estadísticos del lenguaje y procesamiento de lenguaje natural.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Part
@@ -96,7 +109,7 @@ Marco Teórico
 \end_layout
 
 \begin_layout Chapter
-Fundamentos 
+Estado del arte de la recuperación de información
 \end_layout
 
 \begin_layout Section
@@ -104,34 +117,34 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-En el presente capítulo se presentarán los conceptos de distintos campos
- de las ciencias computacionales, tecnologías de información y otras áreas
- afines que servirán de cimientos para la implementación final del proyecto.
- Se comienza con una breve introducción y puesta al día en el área de la
- recuperación de información (RI) , ya que, a pesar de ser los sistemas
- recomendadores ya toda un área de investigación por mérito propio, es necesario
- clarificar que lo que subyace a un sistema de este tipo es, en realidad,
- una tarea de recuperación de documentos.
- Luego de la introducción, se discutirá cómo un sistema de IR se puede aplicar
- a la recomendación de documentos en un contexto académico, presentando
- y evaluando distintas maneras de representar los conceptos contenidos en
- los documentos, indizarlos y buscarlos en base al contexto de la tarea
- que el usuario lleve a cabo, objetivo último del proyecto.
+Se comienza con una puesta al día en el área de la recuperación de información
+ (IR, por sus siglas en inglés) , ya que, a pesar de ser los sistemas recomendad
+ores ya toda un área de investigación por mérito propio, es necesario clarificar
+ que lo que subyace a un sistema de este tipo es, en realidad, una tarea
+ de recuperación de documentos.
+ Se presentan los componentes e implementación de un sistema computacional
+ de IR, además del proceso genérico que sigue un usuario a la hora de utilizar
+ un sistema de esta índole.
+ A seguir, se discuten someramente las técnicas utilizadas en sistemas comercial
+es.
+ En el siguiente capítulo se discutirán más a fondo diferentes conceptos
+ de investigación activa que pueden servir para marcar el derrotero futuro
+ de sistemas de recuperación de información.
 \end_layout
 
 \begin_layout Section
-Introducción a la Recuperación de la Información
+Definiciones y conceptos preliminares 
 \end_layout
 
 \begin_layout Standard
 Aunque últimamente, con extendido uso de los motores de búsqueda, se pueda
- creer que el área de la recuperación de información (IR, por sus siglas
- en inglés) es relativamente nueva y su máxima expresión son los susodichos
- sistemas, la verdad es que la recuperación de información como tal nace
- mucho antes, quizá desde que comenzaron a existir las primeras grandes
- colecciones de documentos, pues la necesidad de información, y el consecuente
- desarrollo de técnicas para buscarla entre lo que otros ya han documentado,
- es inherente al desarrollo de una cultura escrita.
+ creer que el área de la recuperación de información es relativamente nueva
+ y su máxima expresión son los susodichos sistemas, la verdad es que la
+ recuperación de información como tal nace mucho antes, quizá desde que
+ comenzaron a existir las primeras grandes colecciones de documentos, pues
+ la necesidad de información, y el consecuente desarrollo de técnicas para
+ buscarla entre lo que otros ya han documentado, es inherente al desarrollo
+ de una cultura escrita.
 \end_layout
 
 \begin_layout Standard
@@ -231,7 +244,8 @@ información: Se puede considerar como la
  una carencia de información, y se trata de procesar ésta de manera que
  se le puedan proveer recursos relevantes.
  Es importante notar que la necesidad de información puede ser explícita
- o implícita, y es en esta segunda naturaleza en la que se basa el proyecto
+ -en forma de consulta- o implícita -inferible del contexto o de las preferencia
+s del usuario-, y es en esta segunda naturaleza en la que se basa el proyecto
  a desarrollar.
 \end_layout
 
@@ -261,16 +275,374 @@ extracción de la información, sí
  aspira a llenar necesidades estructuradas de información.
 \end_layout
 
-\begin_layout Subsection
-El ciclo de la recuperación la de información
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+ Menciona también otros conceptos que vale la pena clarificar:
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
+Documento
+\end_layout
+
+\begin_layout Standard
+Por el cual se entiende aquello que consideraremos una unidad en el sistema:
+ pueden ser las páginas de un libro, los mismos libros, los artículos de
+ un periódico o los periódicos de un día.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Relevancia
+\end_layout
+
+\begin_layout Standard
+El valor que el usuario le da a un documento en base a su necesidad de informaci
+ón.
+ Es un concepto que es, en realidad, bastante subjetivo, porque para algún
+ usuario documentos que pudieran coincidir exactamente con el tópico que
+ parecía ser el que deseaba conocer serían considerados menos relevantes
+ -por considerarlos quizá demasiado obvios- que otros que, aunque menos
+ relacionados, considere que le aportan más.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Precisión
+\end_layout
+
+\begin_layout Standard
+Que responde a la pregunta: De los documentos encontrados ¿cuántos son relevante
+s a la necesidad de información?
+\end_layout
+
+\begin_layout Standard
+Y se puede expresar con la siguiente ecuación, para un sistema convencional:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+p=\frac{documentos\, relevantes\, obtenidos}{documentos\, obtenidos}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Exhaustividad
+\end_layout
+
+\begin_layout Standard
+Mejor conocida por su nombre en inglés: 
+\emph on
+recall
+\emph default
+.
+
+\emph on
+ 
+\emph default
+Que responde a la pregunta: De los documentos 
+\emph on
+relevantes 
+\emph default
+que se encuentran en la colección ¿cuántos se han obtenido?
+\end_layout
+
+\begin_layout Standard
+Y también se puede expresar con una fórmula:
+\begin_inset Formula \begin{equation}
+r=\frac{documentos\, relevantes\, obtenidos}{documentos\, relevantes\, en\, la\, colección}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De estos dos últimos conceptos se hablará más adelante, cuando se discuta
+ la evaluación de sistemas de recuperación de información.
+\end_layout
+
+\begin_layout Section
 Componentes de los sistemas de recuperación de información
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+Un sistema de recuperación de la información de documentos en grandes coleccione
+s, como los entendemos actualmente, desde bibliotecas hasta motores de búsqueda,
+ a pesar de las grandes diferencias de implementación y arquitectura, tienen
+ algo en común: todos tienen ciertos componentes que, si bien pueden variar
+ en importancia o discernibilidad de otros, definen a un sistema de IR.
+ Antes de discutirlos más a fondo, véase en la figura
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:IR-cycle"
 
+\end_inset
+
+ el 
+\emph on
+ciclo de la recuperación de la información 
+\emph default
+-adaptado de 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Walker1999"
+
+\end_inset
+
+- para tener una idea de los roles que juegan los componentes de estos sistemas.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/1_IR_Cycle.dia
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:IR-cycle"
+
+\end_inset
+
+El ciclo de la recuperación de la información
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aunque de la figura se pueden determinar más, los componentes y actividades
+ más notables de un sistema de recuperación de información pueden considerarse,
+ según han determinado 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Russell1995,Walker1999"
+
+\end_inset
+
+ , las siguientes:
+\end_layout
+
+\begin_layout Description
+Una
+\begin_inset space ~
+\end_inset
+
+colección
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+documentos: Es el conjunto de todos aquellos documentos que el sistema conoce
+ y puede brindar como resultados a sus usuarios.
+ Constituye el componente central de un sistema de IR, pero sería de poco
+ valor
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Si se prescinde de la indización, la otra alternativa es una búsqueda lineal,
+ nada factible para grandes colecciones documentales.
+\end_layout
+
+\end_inset
+
+ si no fuera por el concepto de los 
+\emph on
+sustitutos documentales (en inglés, document surrogates), 
+\emph default
+que son representaciones de los documentos que el sistema conoce y que permiten
+ una obtención más rápida de los mismos.
+ Estos sustitutos documentales se elaboran mediante un proceso de gran importanc
+ia: 
+\emph on
+la indización
+\emph default
+; aunque es una actividad, es, en muchos de los casos, un componente bien
+ definido del sistema también.
+ El propósito de la indización es crear los sustitutos documentales que
+ se almacenarán en la colección y servirán de entrada al componente de igualació
+n.
+ Cada nuevo documento que es agregado al almacenamiento del sistema precisa
+ ser indizado, y esta actividad puede ser tan compleja como se quiera: puede
+ ir desde la simple actualización del índice inverso con el documento, como
+ puede también consistir en la clasificación o abstracción del mismo.
+ En cualquier caso, dos etapas tienen lugar.
+ En primera el documento se analiza: ya sea mediante un conteo de palabras,
+ ponderación, análisis estadístico, etc.
+ Y luego, el documento se traduce a cual sea la representación de sustitutos
+ documentales que se haya elegido: un índice inverso, una jerarquía conceptual,
+ una clasificación con vocabulario controlado, etc.
+ Es importante notar que esta segunda etapa corresponde a la adaptación
+ del documento a la 
+\emph on
+representación del conocimiento
+\emph default
+ interna del sistema, concepto que se ampliará en el siguiente capítulo.
+\end_layout
+
+\begin_layout Description
+El
+\begin_inset space ~
+\end_inset
+
+componente
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+igualación: Es la parte que sirve de intermediario entre el almacenamiento
+ documental y las consultas del usuario.
+ Es importante notar que la entrada de este componente no es necesariamente
+ la consulta original del usuario, sino que puede haber sido analizada y
+ traducida al 
+\emph on
+lenguaje interno
+\emph default
+ del sistema, que es, en última instancia, la representación del conocimiento
+ elegida; una vez en poder de la consulta, este componente la trata de asimilar
+ ésta con los sustitutos documentales y luego, si hay coincidencias, solicita
+ al almacenamiento los documentos.
+\end_layout
+
+\begin_layout Description
+La
+\begin_inset space ~
+\end_inset
+
+consulta
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+usuario: La consulta es la manera del usuario de expresar su necesidad de
+ información.
+ La cual puede ir desde una pregunta en lenguaje natural hasta unos cuantos
+ términos claves de un vocabulario controlado, pasando por consultas escritas
+ con lógica booleana.
+ La consulta se forma mediante la elección de parte del usuario de una 
+\emph on
+estrategia de búsqueda,
+\emph default
+ de la cual se habla con mayor detalle en la sección 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:El-proceso-de-IR"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+El
+\begin_inset space ~
+\end_inset
+
+conjunto
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+resultados: Los documentos que el sistema ha considerado relevantes a la
+ búsqueda del usuario, presentados de la manera que se considere idónea,
+ ya sea gráficamente, como los sistemas que se centran en mostrar al usuario
+ no sólo los documentos relevantes si no sus relaciones o como una lista
+ en orden de relevancia según criterios.
+\end_layout
+
+\begin_layout Section
+El proceso de recuperación de información
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:El-proceso-de-IR"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implementación de un sistema de recuperación de información
+\end_layout
+
+\begin_layout Subsection
+Refinamientos
+\end_layout
+
+\begin_layout Chapter
+Avances en la recuperación de información
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+En este capítulo se discuten con mayor detenimiento técnicas alternativas,
+ aunque no necesariamente no utilizadas o novedosas, de implementación de
+ sistemas de recuperación de información; como ser, aprendizaje de máquina
+ en la búsqueda o representación de documentos, el uso de agentes inteligentes,
+ la orientación a conceptos en lugar de palabras claves y el uso efectivo
+ del procesamiento de lenguaje natural.
+ 
+\end_layout
+
+\begin_layout Chapter
+Sistemas recomendadores
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+Se presentan los sistemas recomendadores desde el punto de vista de la recuperac
+ión de información.
+ Se termina discutiendo cómo un sistema de IR se puede aplicar a la recomendació
+n de documentos en un contexto académico, presentando y evaluando distintas
+ maneras de representar los conceptos contenidos en los documentos, indizarlos
+ y buscarlos en base al contexto de la tarea que el usuario lleve a cabo,
+ objetivo último del proyecto.
 \end_layout
 
 \begin_layout Standard
