@@ -574,6 +574,10 @@ resultados: Los documentos que el sistema ha considerado relevantes a la
  en orden de relevancia según criterios.
 \end_layout
 
+\begin_layout Subsection
+La estrategia de búsqueda
+\end_layout
+
 \begin_layout Standard
 La necesidad de un 
 \emph on
@@ -756,6 +760,154 @@ key "ThorstenBrants"
  internet, el uso del procesamiento de lenguaje natural en un sistema de
  IR debería usar herramientas especialmente confeccionadas para el mismo,
  y no adaptadas de otras áreas de investigación.
+\end_layout
+
+\begin_layout Subsection
+Presentación de los resultados
+\end_layout
+
+\begin_layout Standard
+Una vez que el sistema ha determinado los documentos que, según el modelo
+ que utiliza, son relevantes a la consulta del usuario, debe presentar éstos.
+ Cualquier usuario de motores de búsqueda diría, según su experiencia, que
+ este es un problema trivial: sencillamente se deberían presentar los documentos
+ en orden descendente de relevancia.
+ Para muchos sistemas, esto es suficiente porque los usuarios o sólo desean
+ alguna información somera o no se disponen a investigar más a fondo.
+ Pero, ¿qué sucede con aquellos que desean indagar a conciencia en un tema?
+ Los motores de búsqueda de propósito general más utilizados se quedan cortos
+ en este respecto, pero no significa que no haya otras maneras de representar
+ los resultados de una manera más útil, ni mucho menos que no se hayan implement
+ado.
+\end_layout
+
+\begin_layout Standard
+Una manera es mostrar las relaciones entre documentos, por ejemplo, si uno
+ cita a otro o conceptos aparecen de maneras similares en distintos documentos.
+ Un enfoque así se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gipp2009"
+
+\end_inset
+
+, donde el sistema muestra de manera gráfica los documentos y sus relaciones
+ (los documentos más relevantes se muestran de mayor tamaño, por ejemplo).
+ 
+\end_layout
+
+\begin_layout Standard
+Pero quizá el usuario esté más interesado en ver los documentos agrupados
+ de alguna manera.
+ Para esto se pueden utilizar dos técnicas estrechamente relacionadas con
+ el campo del aprendizaje de máquina:
+\end_layout
+
+\begin_layout Description
+Clasificación: Dada una categorización preexistente de conceptos, los resultados
+ se presentan agrupados bajo éstos.
+ Así, por ejemplo, en un sistema de recuperación de información en la base
+ de documentos de alguna enciclopedia, los resultados de una búsqueda respecto
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+Eco
+\begin_inset Quotes erd
+\end_inset
+
+ mostraría alguno resultados agrupados bajo la categoría 
+\begin_inset Quotes eld
+\end_inset
+
+Escritores
+\begin_inset Quotes erd
+\end_inset
+
+ con documentos refiriéndose a Umberto Eco, otros bajo la categoría 
+\begin_inset Quotes eld
+\end_inset
+
+Física
+\begin_inset Quotes erd
+\end_inset
+
+ con documentos relacionados al fenómenos físico del eco, etc.
+ Un sistema computacional de IR que desee utilizar clasificación debería
+ utilizar algún tipo de aprendizaje de máquina supervisado: en primera,
+ la categorías se deben decidir de alguna manera (ya sea a criterio de quien
+ compila la colección o mediante otras técnicas de inteligencia artificial),
+ a seguir, se debe elegir un conjunto de documentos y etiquetarlos con la
+ categoría a la que pertenecen; este conjunto se conoce como el 
+\emph on
+conjunto de entrenamiento
+\emph default
+.
+ El algoritmo de aprendizaje debe formular una 
+\emph on
+hipótesis
+\emph default
+ que explique por qué a los documentos se les dieron esas etiquetas de categoría
+s.
+ Luego, otro conjunto de documentos etiquetados se alimenta al sistema,
+ esta vez, sin las etiquetas, para ver si lo puede clasificar con éxito.
+ Los resultados se evalúan y la hipótesis se puede refinar (con una
+\emph on
+ matriz de confusión
+\emph default
+, por ejemplo).
+ Nótese que la clasificación cuenta con una 
+\emph on
+taxonomía de tópicos preexistente, 
+\emph default
+por lo que sólo es factible para colecciones de documentos manejables con
+ categorías claramente definidas.
+ Esta técnica es utilizada por 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "AlexanderGelbukh2005"
+
+\end_inset
+
+ en sus sistema clasificador.
+\end_layout
+
+\begin_layout Description
+Agrupación: (En inglés, 
+\emph on
+clustering
+\emph default
+).
+ A diferencia de la clasificación, los documentos se agrupan en categorías
+ determinadas 
+\emph on
+a la hora de presentar los resultados
+\emph default
+ -y no preexistentes.
+ La agrupación es un problema de aprendizaje 
+\emph on
+no supervisado
+\emph default
+ de máquina (mientras que la clasificación es supervisada) y se vale de
+ técnicas estadísticas para agrupar los documentos según ciertas medidas
+ de distancia: documentos con poca distancia entre sí se agruparán juntos;
+ luego, se pueden determinar las etiquetas a poner a los grupos, lo cual
+ se puede basar en los títulos de los documentos, según alguna medida estadístic
+a, por ejemplo, los más cercanos al 
+\emph on
+centro
+\emph default
+ del grupo; o sencillamente etiquetarlos con las palabras más frecuentes.
+ Dada su naturaleza no supervisada, esta técnica, aunque computacionalmente
+ más costosa, es preferida por los investigadores.
+ El sistema presentado en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stein2003"
+
+\end_inset
+
+ utiliza técnicas de agrupación para presentar los resultados.
 \end_layout
 
 \begin_layout Section
