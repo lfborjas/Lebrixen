@@ -28,7 +28,7 @@
 \pdf_colorlinks false
 \pdf_backref false
 \pdf_pdfusetitle true
-\papersize letterpaper
+\papersize default
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
@@ -100,16 +100,12 @@ El propósito de este proyecto se centra, entonces, en explorar el uso de
  estadísticos del lenguaje y procesamiento de lenguaje natural.
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Part
 Marco Teórico
 \end_layout
 
 \begin_layout Chapter
-Estado del arte de la recuperación de información
+Recuperación de información.
 \end_layout
 
 \begin_layout Section
@@ -125,11 +121,8 @@ ores ya toda un área de investigación por mérito propio, es necesario clarifi
  Se presentan los componentes e implementación de un sistema computacional
  de IR, además del proceso genérico que sigue un usuario a la hora de utilizar
  un sistema de esta índole.
- A seguir, se discuten someramente las técnicas utilizadas en sistemas comercial
-es.
- En el siguiente capítulo se discutirán más a fondo diferentes conceptos
- de investigación activa que pueden servir para marcar el derrotero futuro
- de sistemas de recuperación de información.
+ Para terminar, se determina cómo se podría evaluar un sistema de recuperación
+ de información.
 \end_layout
 
 \begin_layout Section
@@ -167,8 +160,8 @@ Entendiendo por material cualquier artefacto (video, sonido, texto, etc)
 \end_layout
 
 \begin_layout Standard
-Pero si de definiciones nos ocupamos, se puede citar la definición dada
- en el primer capítulo de 
+Pero si de definiciones se trata, se puede citar la definición dada en el
+ primer capítulo de 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "HinrichSchutze2009"
@@ -558,16 +551,7 @@ usuario: La consulta es la manera del usuario de expresar su necesidad de
  con lógica booleana.
  La consulta se forma mediante la elección de parte del usuario de una 
 \emph on
-estrategia de búsqueda,
-\emph default
- de la cual se habla con mayor detalle en la sección 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sec:El-proceso-de-IR"
-
-\end_inset
-
-
+estrategia de búsqueda.
 \end_layout
 
 \begin_layout Description
@@ -590,45 +574,196 @@ resultados: Los documentos que el sistema ha considerado relevantes a la
  en orden de relevancia según criterios.
 \end_layout
 
-\begin_layout Section
-El proceso de recuperación de información
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:El-proceso-de-IR"
+\begin_layout Standard
+La necesidad de un 
+\emph on
+índice
+\emph default
+ de la colección documental no es algo nuevo ni propio de sistemas computacional
+es de IR; más bien, como hace notar 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Safran2005"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Section
-Implementación de un sistema de recuperación de información
-\end_layout
-
-\begin_layout Subsection
-Refinamientos
-\end_layout
-
-\begin_layout Chapter
-Avances en la recuperación de información
-\end_layout
-
-\begin_layout Section
-Introducción
-\end_layout
-
-\begin_layout Standard
-En este capítulo se discuten con mayor detenimiento técnicas alternativas,
- aunque no necesariamente no utilizadas o novedosas, de implementación de
- sistemas de recuperación de información; como ser, aprendizaje de máquina
- en la búsqueda o representación de documentos, el uso de agentes inteligentes,
- la orientación a conceptos en lugar de palabras claves y el uso efectivo
- del procesamiento de lenguaje natural.
+, la recuperación de información nace de la necesidad de determinar si mediante
+ un documento cierta carencia de información se puede suplir sin tener que
+ recurrir a una lectura completa, o al menos significativa, del recurso.
+ Y es de esta necesidad, tanto en documentos de extensión considerable como
+ en colecciones grandes, que se crean los índices en los libros y los sistemas
+ de clasificación bibliotecarios.
+ Así, todo sistema de IR que se precie de ser útil deberá proveer alguna
+ manera de acceder a la información contenida en los documentos; de cualquier
+ manera, los documentos han de ser representados de forma que la técnica
+ elegida pueda valerse de ellos, y en esto radica la importancia de la elaboraci
+ón de 
+\emph on
+sustitutos documentales
+\emph default
+.
  
 \end_layout
 
+\begin_layout Standard
+En cualquier sistema de IR, ya sea mediante la ayuda de un profesional en
+ una biblioteca o en un motor de búsqueda, el usuario debe ser capaz de
+ expresar su necesidad de información, es decir, como bien señala 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Russell1995"
+
+\end_inset
+
+, que la IR es, en el fondo, un asunto de 
+\emph on
+comunicación.
+
+\emph default
+ 
+\end_layout
+
+\begin_layout Standard
+Pero el tema de la elaboración de una consulta no es nada sencillo.
+ En primera instancia, se debe discernir qué conceptos podrían satisfacer
+ la necesidad y expresarlos ya sea en un lenguaje natural o en alguna otra
+ representación conceptual de comunicación.
+ Mas precisamente aquí se encuentra el primer obstáculo de la recuperación
+ de la información: la naturaleza subjetiva de los conceptos, y, por tanto,
+ las múltiples maneras de expresar uno.
+ A esto muchos sistemas de recuperación de información responden con el
+ uso de palabras clave o vocabularios controlados -aquellos donde se da
+ preferencia a una expresión de un concepto sobre otro, por ejemplo, al
+ uso de la palabra automóvil para referirse a un carro.
+ El usuario podría tener acceso a éstos o podría 
+\emph on
+aprenderlos
+\emph default
+ mediante la experiencia adquirida en búsquedas anteriores.
+ Esta limitación, si se desea ver así, en los sistemas de recuperación de
+ información es expresada de una manera idónea por 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Walker1999"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+Queremos buscar conceptos, pero estamos forzados a buscar palabras.
+\end_layout
+
+\begin_layout Standard
+El otro lado de la comunicación es igualmente importante.
+ Una vez que el usuario ha elegido una consulta, el sistema debería ser
+ capaz de interpretarla y procesarla de manera que el componente de igualación
+ tenga éxito en encontrar coincidencias en los documentos.
+ Este proceso puede ser tan sencillo como simplemente procesarla tal cual
+ se introdujo o tan complicado como se quiera; de hecho, muchos sistemas
+ de recuperación de información pre-procesan las consultas de usuario expresadas
+ en algún lenguaje natural con técnicas que han probado hasta cierto punto
+ ser exitosas:
+\end_layout
+
+\begin_layout Enumerate
+Normalización de mayúsculas y minúsculas: convertir todo en los documentos
+ y consultas a sólo mayúsculas o minúsculas, evitando así que documentos
+ importantes se pierdan porque los términos no coinciden en este aspecto
+ con lo contenido en documentos.
+ Es evidente que esta técnica tiene sus desventajas, pues puede dar lugar
+ a falsos resultados (como documentos que contienen el término en inglés
+ 
+\emph on
+aids
+\emph default
+, refiriéndose quizá a apoyos económicos en el tercer mundo cuando se ha
+ buscado por el término 
+\emph on
+AIDS
+\emph default
+, el síndrome de inmunodeficiencia adquirida).
+\end_layout
+
+\begin_layout Enumerate
+Reducir las palabras a sus raíces: -en inglés 
+\emph on
+stemming
+\emph default
+- que consiste en eliminar terminaciones de plural/singular, femenino/masculino
+ o las conjugaciones en verbos regulares.
+ Aunque algoritmos de buena utilidad existen para ello, en muchos de los
+ casos se tiene menor ganancia de la que se podría esperar -2% en inglés,
+ según 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Russell1995"
+
+\end_inset
+
+- y hasta pueden dar lugar también a resultados equívocos.
+\end_layout
+
+\begin_layout Enumerate
+Usar sinónimos para ampliar o normalizar las consultas.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Corregir la ortografía.
+ Lo cual podría dar lugar a ganancias, pero, dado variedad documental en
+ internet y la frecuencia de surgimiento de neologismos, podría probarse
+ hasta cierto punto contraproducente.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stein2003"
+
+\end_inset
+
+ reporta el uso exitoso de un algoritmo de corrección ortográfica basado
+ en el sonido en un sistema de recuperación de información.
+\end_layout
+
+\begin_layout Enumerate
+Utilizar la estructura y la 
+\emph on
+metadata 
+\emph default
+de los documentos.
+ Los usuarios pensarán en conceptos que probablemente se encuentren en los
+ títulos, resúmenes o encabezados de los recursos.
+ Documentos internamente estructurados como artículos científicos y de periódico
+s o construidos en formatos organizados como xml pueden ser candidatos a
+ este tipo de refinamiento.
+\end_layout
+
+\begin_layout Standard
+Como se ve, el sistema debe tratar de entender la consulta del usuario antes
+ de buscar coincidencias.
+ En el capítulo siguiente técnicas relacionadas al procesamiento de la consulta
+ se presentarán más a detalle, pero cabe notar que, visto como un problema
+ de comunicación, la IR se podría valer de los avances en lingüística computacio
+nal, pero, como bien apunta 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ThorstenBrants"
+
+\end_inset
+
+, debido a la corta naturaleza de muchas consultas en sistemas basados en
+ internet, el uso del procesamiento de lenguaje natural en un sistema de
+ IR debería usar herramientas especialmente confeccionadas para el mismo,
+ y no adaptadas de otras áreas de investigación.
+\end_layout
+
+\begin_layout Section
+Evaluación de un sistema de recuperación de información.
+\end_layout
+
 \begin_layout Chapter
-Sistemas recomendadores
+Técnicas de recuperación de información
 \end_layout
 
 \begin_layout Section
@@ -636,13 +771,13 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-Se presentan los sistemas recomendadores desde el punto de vista de la recuperac
-ión de información.
- Se termina discutiendo cómo un sistema de IR se puede aplicar a la recomendació
-n de documentos en un contexto académico, presentando y evaluando distintas
- maneras de representar los conceptos contenidos en los documentos, indizarlos
- y buscarlos en base al contexto de la tarea que el usuario lleve a cabo,
- objetivo último del proyecto.
+En este capítulo se discuten con mayor detenimiento las técnicas, tanto
+ tradicionales como alternativas, de implementación de sistemas de recuperación
+ de información; como ser, modelados probabilísticos, estadísticos y lingüístico
+s; aprendizaje de máquina en la búsqueda o representación de documentos,
+ el uso de agentes inteligentes, la orientación a conceptos en lugar de
+ palabras claves y el uso efectivo del procesamiento de lenguaje natural.
+ 
 \end_layout
 
 \begin_layout Standard
