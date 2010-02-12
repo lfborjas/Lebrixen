@@ -59,6 +59,22 @@ Sistema recomendador de documentos aplicado a un contexto académico
 Luis Felipe Borjas Reyes 10611066
 \end_layout
 
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Introducción General
 \end_layout
@@ -118,9 +134,9 @@ Se comienza con una puesta al día en el área de la recuperación de informaci�
 ores ya toda un área de investigación por mérito propio, es necesario clarificar
  que lo que subyace a un sistema de este tipo es, en realidad, una tarea
  de recuperación de documentos.
- Se presentan los componentes e implementación de un sistema computacional
- de IR, además del proceso genérico que sigue un usuario a la hora de utilizar
- un sistema de esta índole.
+ Se presentan los componentes de un sistema computacional de IR, además
+ del proceso genérico que sigue un usuario a la hora de utilizar un sistema
+ de esta índole.
  Para terminar, se determina cómo se podría evaluar un sistema de recuperación
  de información.
 \end_layout
@@ -130,10 +146,10 @@ Definiciones y conceptos preliminares
 \end_layout
 
 \begin_layout Standard
-Aunque últimamente, con extendido uso de los motores de búsqueda, se pueda
- creer que el área de la recuperación de información es relativamente nueva
- y su máxima expresión son los susodichos sistemas, la verdad es que la
- recuperación de información como tal nace mucho antes, quizá desde que
+Aunque últimamente, con el extendido uso de los motores de búsqueda, se
+ pueda creer que el área de la recuperación de información es relativamente
+ nueva y su máxima expresión son los susodichos sistemas, la verdad es que
+ la recuperación de información como tal nace mucho antes, quizá desde que
  comenzaron a existir las primeras grandes colecciones de documentos, pues
  la necesidad de información, y el consecuente desarrollo de técnicas para
  buscarla entre lo que otros ya han documentado, es inherente al desarrollo
@@ -151,7 +167,7 @@ La recuperación de la información es la obtención de material que satisfaga
 \end_layout
 
 \begin_layout Standard
-Entendiendo por material cualquier artefacto (video, sonido, texto, etc)
+Entendiendo por material cualquier artefacto (video, sonido, texto, etc.)
  que sirva para resolver una carencia de información en quien emprende la
  actividad de recuperación.
  Así, una consulta al directorio de nuestro teléfono celular para recordar
@@ -256,10 +272,13 @@ De las definiciones dadas, se puede apuntar el equívoco nombre que se ha
 \emph on
 información
 \emph default
- que satisfaga, pero, como se puede observar, los sistemas de IR no aspiran
- a tanto: sencillamente dan al usuario documentos que puedan suplir su necesidad
-, pero es la responsabilidad última del usuario determinar que en efecto
- es así.
+ 
+\emph on
+útil
+\emph default
+, pero, como se puede observar, los sistemas de IR no aspiran a tanto: sencillam
+ente dan al usuario documentos que puedan suplir su necesidad, pero es la
+ responsabilidad última del usuario determinar que en efecto es así.
  Como nota marginal, sin embargo, recuérdese que otra área de las ciencias
  computacionales, la 
 \emph on
@@ -481,8 +500,8 @@ ia:
 \emph on
 la indización
 \emph default
-; aunque es una actividad, es, en muchos de los casos, un componente bien
- definido del sistema también.
+; aunque es una actividad, es también, en muchos de los casos, un componente
+ bien definido del sistema.
  El propósito de la indización es crear los sustitutos documentales que
  se almacenarán en la colección y servirán de entrada al componente de igualació
 n.
@@ -526,7 +545,7 @@ igualación: Es la parte que sirve de intermediario entre el almacenamiento
 lenguaje interno
 \emph default
  del sistema, que es, en última instancia, la representación del conocimiento
- elegida; una vez en poder de la consulta, este componente la trata de asimilar
+ elegida; una vez en poder de la consulta, este componente trata de asimilar
  ésta con los sustitutos documentales y luego, si hay coincidencias, solicita
  al almacenamiento los documentos.
 \end_layout
@@ -570,8 +589,8 @@ de
 resultados: Los documentos que el sistema ha considerado relevantes a la
  búsqueda del usuario, presentados de la manera que se considere idónea,
  ya sea gráficamente, como los sistemas que se centran en mostrar al usuario
- no sólo los documentos relevantes si no sus relaciones o como una lista
- en orden de relevancia según criterios.
+ no sólo los documentos relevantes sino sus relaciones o como una lista
+ en orden de relevancia según criterios propios del sistema.
 \end_layout
 
 \begin_layout Subsection
@@ -698,7 +717,7 @@ stemming
 - que consiste en eliminar terminaciones de plural/singular, femenino/masculino
  o las conjugaciones en verbos regulares.
  Aunque algoritmos de buena utilidad existen para ello, en muchos de los
- casos se tiene menor ganancia de la que se podría esperar -2% en inglés,
+ casos se tiene menor ganancia de la que se podría esperar -2% en inglés
  según 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -706,7 +725,15 @@ key "Russell1995"
 
 \end_inset
 
-- y hasta pueden dar lugar también a resultados equívocos.
+; aunque se ha determinado que es más útil en otros lenguajes como el alemán
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ThorstenBrants"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -716,8 +743,8 @@ Usar sinónimos para ampliar o normalizar las consultas.
 
 \begin_layout Enumerate
 Corregir la ortografía.
- Lo cual podría dar lugar a ganancias, pero, dado variedad documental en
- internet y la frecuencia de surgimiento de neologismos, podría probarse
+ Lo cual podría dar lugar a ganancias, pero, dada la variedad documental
+ en internet y la frecuencia del surgimiento de neologismos, podría probarse
  hasta cierto punto contraproducente.
  
 \begin_inset CommandInset citation
@@ -727,7 +754,7 @@ key "Stein2003"
 \end_inset
 
  reporta el uso exitoso de un algoritmo de corrección ortográfica basado
- en el sonido en un sistema de recuperación de información.
+ en el sonido.
 \end_layout
 
 \begin_layout Enumerate
@@ -741,6 +768,9 @@ de los documentos.
  Documentos internamente estructurados como artículos científicos y de periódico
 s o construidos en formatos organizados como xml pueden ser candidatos a
  este tipo de refinamiento.
+ Asimismo, el hecho de que documentos hayan sido citados o enlazados por
+ otros mediante términos que no aparecen necesariamente en el documento
+ permite ampliar las posibilidades de encontrarlo.
 \end_layout
 
 \begin_layout Standard
@@ -751,15 +781,15 @@ Como se ve, el sistema debe tratar de entender la consulta del usuario antes
  de comunicación, la IR se podría valer de los avances en lingüística computacio
 nal, pero, como bien apunta 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "ThorstenBrants"
 
 \end_inset
 
-, debido a la corta naturaleza de muchas consultas en sistemas basados en
- internet, el uso del procesamiento de lenguaje natural en un sistema de
- IR debería usar herramientas especialmente confeccionadas para el mismo,
- y no adaptadas de otras áreas de investigación.
+, debido a la naturaleza de corta extensión de muchas consultas en sistemas
+ basados en internet, el uso del procesamiento de lenguaje natural en un
+ sistema de IR debería usar herramientas especialmente confeccionadas para
+ el mismo, y no adaptadas de otras áreas de investigación.
 \end_layout
 
 \begin_layout Subsection
@@ -768,7 +798,7 @@ Presentación de los resultados
 
 \begin_layout Standard
 Una vez que el sistema ha determinado los documentos que, según el modelo
- que utiliza, son relevantes a la consulta del usuario, debe presentar éstos.
+ que utiliza, son relevantes a la consulta del usuario, debe presentarlos.
  Cualquier usuario de motores de búsqueda diría, según su experiencia, que
  este es un problema trivial: sencillamente se deberían presentar los documentos
  en orden descendente de relevancia.
@@ -850,7 +880,9 @@ hipótesis
  que explique por qué a los documentos se les dieron esas etiquetas de categoría
 s.
  Luego, otro conjunto de documentos etiquetados se alimenta al sistema,
- esta vez, sin las etiquetas, para ver si lo puede clasificar con éxito.
+ esta vez, sin las etiquetas, para ver si lo puede clasificar con éxito
+ -comparando al final si las etiquetas previamente asignadas coinciden con
+ las dadas por el sistema.
  Los resultados se evalúan y la hipótesis se puede refinar (con una
 \emph on
  matriz de confusión
@@ -869,7 +901,7 @@ key "AlexanderGelbukh2005"
 
 \end_inset
 
- en sus sistema clasificador.
+ en su sistema clasificador.
 \end_layout
 
 \begin_layout Description
@@ -890,10 +922,11 @@ no supervisado
 \emph default
  de máquina (mientras que la clasificación es supervisada) y se vale de
  técnicas estadísticas para agrupar los documentos según ciertas medidas
- de distancia: documentos con poca distancia entre sí se agruparán juntos;
- luego, se pueden determinar las etiquetas a poner a los grupos, lo cual
- se puede basar en los títulos de los documentos, según alguna medida estadístic
-a, por ejemplo, los más cercanos al 
+ de distancia (la cual es una medida estadística de frecuencia y reincidencia
+ de palabras en los textos): documentos con poca distancia entre sí se agruparán
+ juntos; luego, se pueden determinar las etiquetas a poner a los grupos,
+ lo cual se puede basar en los títulos de los documentos, según alguna medida
+ estadística, por ejemplo, los más cercanos al 
 \emph on
 centro
 \emph default
@@ -908,6 +941,19 @@ key "Stein2003"
 \end_inset
 
  utiliza técnicas de agrupación para presentar los resultados.
+\end_layout
+
+\begin_layout Standard
+Además, el sistema podría valerse de la 
+\emph on
+retroalimentación
+\emph default
+ del usuario, ya sea implícita, mediante el acceso a documentos, la estancia
+ en ellos, la impresión; o explícita, mediante evaluación de relevancia.
+ Así, con la retroalimentación, el sistema podría construir un nuevo conjunto
+ de resultados a partir de éste, buscando aquellos documentos que se aproximen
+ a los preferidos por el usuario -es importante resaltar que esta es una
+ característica básica de los sistemas recomendadores.
 \end_layout
 
 \begin_layout Section
