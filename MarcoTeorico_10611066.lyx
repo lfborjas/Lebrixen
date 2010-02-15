@@ -323,64 +323,6 @@ El valor que el usuario le da a un documento en base a su necesidad de informaci
  
 \end_layout
 
-\begin_layout Paragraph
-Precisión
-\end_layout
-
-\begin_layout Standard
-Que responde a la pregunta: De los documentos encontrados ¿cuántos son relevante
-s a la necesidad de información?
-\end_layout
-
-\begin_layout Standard
-Y se puede expresar con la siguiente ecuación, para un sistema convencional:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \begin{equation}
-p=\frac{documentos\, relevantes\, obtenidos}{documentos\, obtenidos}\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Exhaustividad
-\end_layout
-
-\begin_layout Standard
-Mejor conocida por su nombre en inglés: 
-\emph on
-recall
-\emph default
-.
-
-\emph on
- 
-\emph default
-Que responde a la pregunta: De los documentos 
-\emph on
-relevantes 
-\emph default
-que se encuentran en la colección ¿cuántos se han obtenido?
-\end_layout
-
-\begin_layout Standard
-Y también se puede expresar con una fórmula:
-\begin_inset Formula \begin{equation}
-r=\frac{documentos\, relevantes\, obtenidos}{documentos\, relevantes\, en\, la\, colección}\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-De estos dos últimos conceptos se hablará más adelante, cuando se discuta
- la evaluación de sistemas de recuperación de información.
-\end_layout
-
 \begin_layout Section
 Componentes de los sistemas de recuperación de información
 \end_layout
@@ -960,8 +902,398 @@ retroalimentación
 Evaluación de un sistema de recuperación de información.
 \end_layout
 
+\begin_layout Standard
+Como se hace ver en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Voorhees2002"
+
+\end_inset
+
+, los sistemas de recuperación de información se pueden medir ya sea según
+ el sistema, es decir en base al desempeño del mismo en términos estrictamente
+ computacionales o en base a cómo se ordenan los documentos por relevancia;
+ o se pueden medir según el usuario: el usuario considera que un sistema
+ de IR es útil si los resultados suplen su necesidad de información.
+ 
+\end_layout
+
+\begin_layout Standard
+Es definitivamente más difícil conducir pruebas con usuarios, tanto en tiempo
+ como en los recursos de los que se debe disponer.
+ Ambos enfoques se discutirán en esta sección, comenzando con el del usuario:
+ la evaluación desde el punto de vista el usuario se mide según su satisfacción
+ con el sistema.
+\end_layout
+
+\begin_layout Standard
+Antes de entrar en consideraciones precisas, nótese que los documentos de
+ una colección se pueden clasificar, vistos como los resultados de una búsqueda,
+ como se ilustra en la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Clasif-docs"
+
+\end_inset
+
+ 
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relevante
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+No relevante
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Obtenido
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Positivos verdaderos (vp)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Falsos positivos (fp)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+No obtenido
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Falsos negativos (fn)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verdaderos negativos (vn)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Clasif-docs"
+
+\end_inset
+
+Clasificación de los documentos en una colección, vistos como resultados
+ de una búsqueda
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Medidas de evaluación
+\end_layout
+
+\begin_layout Standard
+Se puede evaluar un sistema de recuperación de información en términos de
+ precisión y exhaustividad.
+ A continuación, ambas medidas definidas con claridad en
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Paragraph
+Precisión
+\end_layout
+
+\begin_layout Standard
+Responde a la pregunta: De los documentos encontrados ¿cuántos son relevantes
+ a la necesidad de información?
+\end_layout
+
+\begin_layout Standard
+Y se puede expresar con la siguiente ecuación, para un sistema convencional:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+p=\frac{documentos\, relevantes\, obtenidos}{documentos\, obtenidos}=\frac{vp}{(vp+fp)}=P(relevante|obtenido)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nótese que la precisión se puede expresar como la probabilidad de que un
+ documento sea relevante dado que fue obtenido.
+\end_layout
+
+\begin_layout Paragraph
+Exhaustividad
+\end_layout
+
+\begin_layout Standard
+Mejor conocida por su nombre en inglés: 
+\emph on
+recall
+\emph default
+.
+
+\emph on
+ 
+\emph default
+Responde a la pregunta: De los documentos 
+\emph on
+relevantes 
+\emph default
+que se encuentran en la colección ¿cuántos se han obtenido?
+\end_layout
+
+\begin_layout Standard
+Y también se puede expresar con una fórmula:
+\begin_inset Formula \begin{equation}
+r=\frac{documentos\, relevantes\, obtenidos}{documentos\, relevantes\, en\, la\, colección}=\frac{vp}{(vp+fn)}=P(obtenido|relevante)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La exhaustividad también se puede expresar como una probabilidad: la probabilida
+d de que un documento sea obtenido dado que es relevante.
+\end_layout
+
+\begin_layout Standard
+Se puede decir preliminarmente, entonces, que un buen sistema es preciso
+ y exhaustivo.
+ Pero, reflexionando un poco más, salta a la vista que la precisión y la
+ exhaustividad no siempre van de la mano, de hecho, en muchos de los casos
+ hay que preferir una a la otra: esto se conoce en inglés como 
+\emph on
+the precision-recall tradeoff
+\emph default
+.
+ Este fenómeno será evidente con un ejemplo, adaptado de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Walker1999"
+
+\end_inset
+
+: imagínense a dos usuarios de un sistema de IR, uno, buscando sobre teatros
+ famosos en el mundo para una asignación escolar: este usuario querrá obtener
+ pocos documentos de buena calidad, para terminar su tarea con rapidez;
+ este tipo de búsqueda se conoce como una 
+\emph on
+búsqueda de alta precisión
+\emph default
+.
+ El otro usuario, en cambio, es un investigador preparando su tesis de doctorado
+, así que querrá una gran cantidad de documentos para tener una considerable
+ base bibliográfica que revisar; esta búsqueda será entonces una 
+\emph on
+búsqueda de alta exhaustividad
+\emph default
+.
+ Ambos tipos de búsqueda son extremos en un continuo: las búsquedas tienen
+ siempre un poco de ambos tipos.
+ 
+\end_layout
+
+\begin_layout Standard
+Así, a la hora de evaluar el sistema, se debe tener en cuenta a qué extremo
+ del continuo de precisión-exhaustividad tenderán la mayor parte de las
+ búsquedas.
+ En un sistema recomendador, se puede asumir que los usuarios no desean
+ navegar por páginas y páginas de documentos que ellos ni siquiera buscaron
+ explícitamente (como se verá después, una de las máximas de un sistema
+ recomendador es su poca interferencia con la tarea del usuario).
+\end_layout
+
+\begin_layout Standard
+A la hora de evaluar la exhaustividad, surge la pregunta ¿cómo se puede
+ saber cuántos de los documentos en la colección son verdaderamente relevantes,
+ dado que el concepto de relevancia es subjetivo? A esta pregunta, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Walker1999"
+
+\end_inset
+
+ responde con el concepto de 
+\emph on
+exhaustividad normalizada
+\emph default
+: varios investigadores hacen búsquedas en la misma colección en base a
+ una misma necesidad de información; juzga cada quien qué documentos son
+ relevantes y el conjunto de todos los documentos relevantes elegidos por
+ los investigadores se considera el conjunto de recursos relevantes en la
+ colección para futuras mediciones.
+ 
+\end_layout
+
+\begin_layout Standard
+Se puede ver el problema de encontrar documentos relevantes como una tarea
+ de clasificación: donde relevante y no-relevante son dos etiquetas y el
+ sistema utiliza aprendizaje de máquina supervisado para la labor, una tercera
+ medida de evaluación se puede introducir: la 
+\emph on
+exactitud,
+\emph default
+ que se expresa de la siguiente manera:
+\end_layout
+
+\begin_layout Standard
+[TODO: cf lo de machine learning]
+\end_layout
+
+\begin_layout Subsection
+El proceso de evaluación
+\end_layout
+
+\begin_layout Standard
+Para sistematizar la tarea de la evaluación, tanto desde el punto de vista
+ del sistema como del usuario,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+ recomienda tener en cuenta los siguientes elementos:
+\end_layout
+
+\begin_layout Enumerate
+Una colección de documentos de dimensiones significativas.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Un conjunto de necesidades de información: nótese que esto no es equivalente
+ a un 
+\emph on
+conjunto de consultas
+\emph default
+.
+ La necesidad de información del usuario y cómo esta sea formulada deben
+ considerarse distintas.
+\end_layout
+
+\begin_layout Enumerate
+Un conjunto de juicios de relevancia; usualmente se califica a un documento,
+ dada una consulta, como relevante o no-relevante.
+ Estos juicios se formarán por usuarios que consideren que un documento
+ es o no relevante a su necesidad de información.
+ 
+\end_layout
+
+\begin_layout Standard
+Algunas colecciones estándar de prueba se pueden encontrar mencionadas en
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009,Voorhees2002"
+
+\end_inset
+
+ y los lineamientos para construir una colección para efectos de evaluación
+ de un sistema de recuperación de información se pueden encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Cormack1998"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Chapter
-Técnicas de recuperación de información
+Recuperación de información en un sistema recomendador
 \end_layout
 
 \begin_layout Section
@@ -969,12 +1301,12 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-En este capítulo se discuten con mayor detenimiento las técnicas, tanto
- tradicionales como alternativas, de implementación de sistemas de recuperación
- de información; como ser, modelados probabilísticos, estadísticos y lingüístico
-s; aprendizaje de máquina en la búsqueda o representación de documentos,
- el uso de agentes inteligentes, la orientación a conceptos en lugar de
- palabras claves y el uso efectivo del procesamiento de lenguaje natural.
+En el presente capítulo se explora la aplicabilidad de distintas técnicas
+ de recuperación de información en el contexto de un sistema recomendador.
+ En primer lugar, se introducen conceptos específicos a esta tarea, como
+ ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
+ Luego, se exploran y evalúan modelos de representación del conocimiento
+ y búsqueda de documentos que se consideran pertinentes.
  
 \end_layout
 
