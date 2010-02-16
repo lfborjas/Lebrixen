@@ -1149,6 +1149,73 @@ d de que un documento sea obtenido dado que es relevante.
 \end_layout
 
 \begin_layout Standard
+Cuando se trata de evaluar la exhaustividad, surge la pregunta ¿cómo se
+ puede saber cuántos de los documentos en la colección son verdaderamente
+ relevantes, dado que el concepto de relevancia es subjetivo? A esta pregunta,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Walker1999"
+
+\end_inset
+
+ responde con el concepto de 
+\emph on
+exhaustividad normalizada
+\emph default
+: varios investigadores hacen búsquedas en la misma colección en base a
+ una misma necesidad de información; juzga cada quien qué documentos son
+ relevantes y el conjunto de todos los documentos relevantes elegidos por
+ los investigadores se considera el conjunto de recursos relevantes en la
+ colección para futuras mediciones.
+ 
+\end_layout
+
+\begin_layout Standard
+Se puede ver el problema de encontrar documentos relevantes como una tarea
+ de clasificación: donde relevante y no-relevante son dos etiquetas y el
+ sistema utiliza aprendizaje de máquina supervisado para la labor, una tercera
+ medida de evaluación se puede introducir: la 
+\emph on
+exactitud: 
+\emph default
+de todos los documentos, ¿qué tan bien se han clasificado, de manera que
+ la mayor parte resulten, en una consulta, o verdaderos positivos (documentos
+ relevantes y obtenidos) o verdaderos negativos (documentos irrelevantes
+ y no obtenidos) -en otras palabras, que la colección tenga muy pocos o
+ ningunos falsos positivos y falsos negativos para cualquier consulta; la
+ exactitud, entonces, se expresa de la siguiente manera:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+e=\frac{vp+vn}{vp+vn+fp+fn}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pero, como ya se vio que la relevancia es en realidad bastante subjetiva,
+ los sistemas obtienen casi 99.9 % de documentos no verdaderamente relevantes
+ a una consulta 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+, por lo que la exactitud, aunque buena para medir el desempeño de tareas
+ de clasficación, es irreal para medir la recuperación de información: ¡un
+ sistema exacto no daría ningún resultado para casi ninguna consulta!
+\end_layout
+
+\begin_layout Subsubsection*
+Relación entre la precisión y la exhaustividad
+\end_layout
+
+\begin_layout Standard
 Se puede decir preliminarmente, entonces, que un buen sistema es preciso
  y exhaustivo.
  Pero, reflexionando un poco más, salta a la vista que la precisión y la
@@ -1182,7 +1249,149 @@ búsqueda de alta exhaustividad
 .
  Ambos tipos de búsqueda son extremos en un continuo: las búsquedas tienen
  siempre un poco de ambos tipos.
- 
+ Como se menciona en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+, se puede entonces ver a la exhaustividad como una función no-decreciente
+ respecto al número de documentos obtenidos (¡se puede obtener un 100% de
+ exhaustividad si se devuelven todos los documentos como resultado para
+ una consulta!) mientras que la precisión es decreciente respecto al número
+ de documentos obtenidos (Podría tenerse una precisión del 100% si se retornase
+ sólo un documento muy relevante).
+\end_layout
+
+\begin_layout Standard
+La relación entre ambas medidas se puede representar como un promedio, para
+ así ver en una sola cifra qué sucede al aumentar una o la otra.
+ Para expresar este promedio, un podría recurrir a la media aritmética (el
+ promedio convencional) pero, como es oportunamente llamado a la atención
+ por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+, la media aritmética sería engañosa: si obtuviésemos un 100% de exhaustividad
+ al retornar todos los documentos (un muy mal sistema de recuperación de
+ información) aún así obtendríamos un 50% de promedio -una medida que, vista
+ con optimismo, podría sugerir que el sistema es bueno.
+ En consecuencia, se debe recurrir a otra manera de medir el promedio que
+ de resultados más fidedignos, para ello, se puede pensar en el rendimiento
+ del sistema en términos de precisión y exhaustividad como la 
+\emph on
+media armónica ponderada 
+\emph default
+de ambos, siendo la media armónica la menor de las tres medias estándar
+ (la otra es la media geométrica).
+ Esta media armónica ponderada se conoce como 
+\emph on
+medida F:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+F=\frac{1}{\alpha\frac{1}{P}+(1-\alpha)\frac{1}{R}}=\frac{(\beta^{2}+1)PR}{\beta^{2}P+R}\: donde\,\beta^{2}=\frac{1-\alpha}{\alpha}\, y\,\alpha\in[0,1]\,(\therefore\beta^{2}\in[0,\infty])\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De esta manera, podemos ajustar el valor de alfa para dar prioridad a una
+ u otra medida, por ejemplo, ajustar alfa a 0.5 (equivalente a un valor de
+ beta al cuadrado de 1) resulta en una 
+\emph on
+medida F balanceada
+\emph default
+: se da el mismo valor tanto a la precisión y a la exhaustividad.
+ Por conveniencia, el valor de beta cuadrada se expresa como subíndice de
+ la medida F en uso, así, para la medida F balanceada:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+F{}_{1}=\frac{2PR}{P+R}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Claro está que se pueden elegir otros valores en función del tipo de sistema
+ construido: valores de beta mayores a uno corresponden a énfasis en la
+ exhaustividad; mientras que valores de beta menores a uno, en la precisión.
+\end_layout
+
+\begin_layout Standard
+Para ilustrar este intercambio entre la precisión y la exhaustividad, se
+ suele utilizar una ayuda gráfica: la curva de 
+\emph on
+Características operativas del receptor
+\emph default
+ (ROC, por sus siglas en inglés) : el eje de las abcisas (x) representa
+ la tasa de falsos positivos y el de las ordenadas (y), la tasa de falsos
+ negativos; el área bajo la curva representará la eficacia del sistema,
+ esto según 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Russell1995"
+
+\end_inset
+
+.
+ Por otro lado, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+ propone una curva ROC como la gráfica de la 
+\emph on
+sensitividad 
+\emph default
+(sinónimo de exhaustividad) en el eje de las ordenadas y la tasa de falsos
+ positivos -que constituye el inverso de la 
+\emph on
+especificidad 
+\emph default
+(cuántos de los documentos no obtenidos son, en realidad, no relevantes);
+ como paréntesis, la especificidad se define de la siguiente manera:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+especificidad=\frac{vn}{fp+vn}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Así, la tasa de falsos positivos se puede ver como:
+\begin_inset Formula \begin{equation}
+tasa\, falsos\, positivos=\frac{fp}{fp+tn}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pero, claro, la especificidad en la mayor parte de los casos tenderá a la
+ unidad: el número de verdaderos negativos siempre será grande; de ahí que
+ la especificidad no sea una medida tan significativa.
+ En términos de una curva ROC, ésta crecerá con una pendiente pronunciada
+ en el lado izquierdo de la gráfica, es decir, que la tasa de falsos positivos
+ será mínima y la exhaustividad crecerá tempranamente.
 \end_layout
 
 \begin_layout Standard
@@ -1195,41 +1404,62 @@ Así, a la hora de evaluar el sistema, se debe tener en cuenta a qué extremo
  recomendador es su poca interferencia con la tarea del usuario).
 \end_layout
 
+\begin_layout Subsubsection*
+Otras consideraciones
+\end_layout
+
 \begin_layout Standard
-A la hora de evaluar la exhaustividad, surge la pregunta ¿cómo se puede
- saber cuántos de los documentos en la colección son verdaderamente relevantes,
- dado que el concepto de relevancia es subjetivo? A esta pregunta, 
+Las medidas que se han discutido hasta este punto son para sistemas donde
+ los documentos resultantes para una búsqueda se presentan como un 
+\emph on
+conjunto
+\emph default
+ esto es, sin ningún orden específico.
+ Existen otras medidas y consideraciones matemáticas que tener en mente
+ a la hora de presentar los resultados en un orden específico, por rango
+ de relevancia, por ejemplo, ya que otros asuntos como la efectividad del
+ algoritmo de asignación de rango vienen a consideración.
+ Para un sistema como el que se desarrolla en este proyecto, donde el orden
+ no es tan relevante ya que se apunta a obtener una pequeña de documentos
+ y presentarlos como un conjunto -esto es, se pretende que la recomendación
+ consista en una búsqueda de alta precisión- no se ahondará en los detalles
+ de evaluación de sistemas con rangos de relevancia.
+ Sin embargo, si el lector está interesado, puede consultar la sección 8.5
+ de 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Walker1999"
+key "HinrichSchutze2009"
 
 \end_inset
 
- responde con el concepto de 
-\emph on
-exhaustividad normalizada
-\emph default
-: varios investigadores hacen búsquedas en la misma colección en base a
- una misma necesidad de información; juzga cada quien qué documentos son
- relevantes y el conjunto de todos los documentos relevantes elegidos por
- los investigadores se considera el conjunto de recursos relevantes en la
- colección para futuras mediciones.
- 
+.
 \end_layout
 
 \begin_layout Standard
-Se puede ver el problema de encontrar documentos relevantes como una tarea
- de clasificación: donde relevante y no-relevante son dos etiquetas y el
- sistema utiliza aprendizaje de máquina supervisado para la labor, una tercera
- medida de evaluación se puede introducir: la 
-\emph on
-exactitud,
-\emph default
- que se expresa de la siguiente manera:
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Russell1995"
 
-\begin_layout Standard
-[TODO: cf lo de machine learning]
+\end_inset
+
+ introduce someramente otras medidas, importantes más que todo, para motores
+ de búsqueda: 
+\emph on
+rango reciproco
+\emph default
+, para denotar cuáles de los resultados relevantes para el usuario se encuentran
+ entre los primeros y 
+\emph on
+tiempo de respuesta, 
+\emph default
+refiriéndose al tiempo total en el cual el usuario satisface su necesidad
+ de información.
+ Ambos conceptos son irrelevantes para el sistema a desarrollar en este
+ proyecto precisamente por la cualidad de la no interferencia: respecto
+ al primero, como ya se mencionó, los resultados se presentarán como un
+ conjunto, así que no aplica; y para el segundo, sería indeseable que el
+ usuario suspendiese y recomenzase su labor sólo para ver si obtiene otros
+ documentos más relevantes.
 \end_layout
 
 \begin_layout Subsection
@@ -1245,17 +1475,17 @@ key "HinrichSchutze2009"
 
 \end_inset
 
- recomienda tener en cuenta los siguientes elementos:
+ recomienda tener en cuenta los siguientes pasos:
 \end_layout
 
 \begin_layout Enumerate
-Una colección de documentos de dimensiones significativas.
+Elegir una colección de documentos de dimensiones significativas.
  
 \end_layout
 
 \begin_layout Enumerate
-Un conjunto de necesidades de información: nótese que esto no es equivalente
- a un 
+Determinar un conjunto de necesidades de información: nótese que esto no
+ es equivalente a un 
 \emph on
 conjunto de consultas
 \emph default
@@ -1265,11 +1495,21 @@ conjunto de consultas
 \end_layout
 
 \begin_layout Enumerate
-Un conjunto de juicios de relevancia; usualmente se califica a un documento,
- dada una consulta, como relevante o no-relevante.
+Obtener un conjunto de juicios de relevancia; usualmente se califica a un
+ documento, dada una consulta, como relevante o no-relevante.
  Estos juicios se formarán por usuarios que consideren que un documento
  es o no relevante a su necesidad de información.
  
+\end_layout
+
+\begin_layout Enumerate
+A partir de los juicios de relevancia, calcular el rendimiento del sistema
+ en términos de precisión, relevancia y cualesquiera otras medidas elegidas.
+\end_layout
+
+\begin_layout Enumerate
+Según los resultados de los cálculos afinar manualmente o mediante técnicas
+ de aprendizaje de máquina el sistema.
 \end_layout
 
 \begin_layout Standard
@@ -1290,6 +1530,28 @@ key "Cormack1998"
 \end_inset
 
 .
+ En todo caso, es necesario que las necesidades de información sean coherentes
+ con la colección elegida.
+\end_layout
+
+\begin_layout Standard
+Como es evidente, en la tarea de evaluación de un sistema desde el punto
+ de vista del usuario se debe recurrir a consultar a verdaderos usuarios
+ humanos, pero, ¿cómo hacer para grandes colecciones documentales? Por lo
+ usual, se elige cierta cantidad 
+\emph on
+k
+\emph default
+ de documentos obtenidos con algún sistema de IR, posiblemente del que se
+ evaluará, como subconjunto de evaluación.
+ De este subconjunto, entonces, se obtendrán los juicios de relevancia de
+ los usuarios.
+ 
+\end_layout
+
+\begin_layout Standard
+[TODO]Pero los juicios de relevancia variarán entre las personas, por lo
+ que se utilizan estadísticas kappa, blabla
 \end_layout
 
 \begin_layout Chapter
