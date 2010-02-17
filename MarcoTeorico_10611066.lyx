@@ -75,7 +75,7 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Section*
+\begin_layout Chapter*
 Introducción General
 \end_layout
 
@@ -94,26 +94,151 @@ implícita
  necesidad de información explícitamente proveída por el usuario.
  Pero, ¿qué se puede entender como necesidad de información implícita? Sencillam
 ente, a aquella que se infiere del contexto en el cual el usuario está actuando.
- Por ejemplo, y este será el caso en el cual se aplicará concretamente el
- software desarrollado, cuando un docente está planificando una sesión (lección
- magistral, proyecto, exposiciones, etc.) puede tener una descripción de
- la misma y documentos que piense usar de referencia, la necesidad latente
- de información radica en que quizá el docente se podría beneficiar de documento
-s que se relacionen la sesión, tanto para referencia propia como para ofrecer
- como lecturas o recursos suplementarios a los alumnos; y, sin embargo,
- muchos docentes abdican de ampliar su cátedra de esta manera por varias
- razones, muchas de las cuales se pueden resumir en desánimo ante el prospecto
- de buscar tales recursos.
+ Se puede pensar que el sistema estaría recomendando documentos en base
+ a los 
+\emph on
+conceptos
+\emph default
+ que se encuentran en el contexto.Por ejemplo, y este será el caso en el
+ cual se aplicará concretamente el software desarrollado, cuando un docente
+ está planificando una sesión (lección magistral, proyecto, exposiciones,
+ etc.) puede tener una descripción de la misma y documentos que piense usar
+ de referencia, la necesidad latente de información radica en que quizá
+ el docente se podría beneficiar de documentos que se relacionen con la
+ sesión, tanto para referencia propia como para ofrecer como lecturas o
+ recursos suplementarios a los alumnos; y, sin embargo, muchos docentes
+ abdican de ampliar su cátedra de esta manera por varias razones, muchas
+ de las cuales se pueden resumir en desánimo ante el prospecto de buscar
+ tales recursos.
  Pero ¿qué tal si, en el uso de un sistema en el que administran sus clases,
  estos documentos útiles les fueran recomendados sin necesidad de una búsqueda
  activa?
 \end_layout
 
+\begin_layout Subsection*
+Sistemas recomendadores y sistemas de recuperación de información.
+\end_layout
+
 \begin_layout Standard
-El propósito de este proyecto se centra, entonces, en explorar el uso de
- técnicas complementarias o alternativas a la recuperación de información
- en internet tradicional; en concreto, el uso de agentes inteligentes, modelos
- estadísticos del lenguaje y procesamiento de lenguaje natural.
+Se puede comparar la tarea descrita a la que realiza una persona que compra
+ un artículo en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.amazon.com
+\end_layout
+
+\end_inset
+
+: el usuario está interesado en el artículo que está adquiriendo, su propósito
+ principal es ese, pero el sitio también le sugiere, cuando el usuario ha
+ elegido un producto, otros que podrían intesarle; eso es precisamente un
+ sistema recomendador: un componente 
+\emph on
+secundario
+\emph default
+ en otro contexto mayor -como un sitio de compras o de renta de películas-
+ que, de manera no intrusiva, exacta y rápida, ofrece al usuario opciones
+ que puedan enriquecer su experiencia.
+ Un sistema recomendador por excelencia, entonces, 
+\emph on
+intuye
+\emph default
+ qué podría ser de interés a un usuario en base al contexto en el que está
+ actuando o al perfil que ya ha construido del usuario (en sitios de recomendaci
+ón de música -por ejemplo, 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.last.fm
+\end_layout
+
+\end_inset
+
+, - se mantiene un perfil de los usuarios para predecir qué podría interesarles
+ después de un tiempo de uso); un sistema recomendador, entonces y como
+ aclara 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Safran2005"
+
+\end_inset
+
+, se vale de la 
+\emph on
+contextualización
+\emph default
+ y la 
+\emph on
+adaptación 
+\emph default
+para llevar a cabo su tarea.
+ Los sistemas recomendadores son un ejemplo muy bueno de 
+\emph on
+inteligencia colectiva
+\emph default
+, construir conocimiento a partir de información brindada por los usuarios,
+ porque se valen de lo que los mismos usuarios dicen, y esto mediante algún
+ tipo de retroalimentación o comunicación explícita, de los artículos en
+ la colección de artefactos del sistema.
+ En suma, un sistema recomendador, en base al contexto o al usuario, determina
+ qué artículos de la colección de artefactos que maneja podrían interesar
+ a quien lo usa 
+\emph on
+dado que haya elegido algún artefacto de la colección
+\emph default
+.
+ Un sistema recomendador convencional no puede, ni debería, por definición,
+ recomendar algo en relación a un artículo que no conoce.
+ 
+\end_layout
+
+\begin_layout Standard
+Por otro lado, la recuperación de información pretende suplir necesidades
+ de información tratando de asimilar consultas de un usuario a documentos
+ en una colección, retornando el subconjunto de aquéllos que considere relevante
+s.
+ Se puede decir que las consultas del usuario son 
+\emph on
+documentos desconocidos
+\emph default
+ -en cuanto que no están presentes íntegra y textualmente en la colección
+ manejada por el sistema y que, en base a éstos, el sistema busca qué documentos
+ en su colección guardan alguna relación de similitud con ellos.
+ Un sistema de recuperación de información, por excelencia, es 
+\emph on
+el
+\emph default
+ componente principal y la tarea primordial de un usuario en cualquier contexto,
+ por lo que pueden darse la licencia de dejar que el usuario examine el
+ conjunto de resultados, que puede ser considerablemente grande; además
+ del hecho que es común que un usuario refine o reformule las consultas.
+ Se concluye que un sistema de recuperación de información extrae documentos
+ en base a consultas que 
+\emph on
+no están en su colección explícitamente
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection*
+Ni lo uno ni lo otro
+\end_layout
+
+\begin_layout Standard
+El sistema que se pretende construir en este proyecto puede ser visto como
+ un híbrido de recomendador y recuperador de información: del primero toma
+ el importante papel de la inteligencia colectiva y la no interferencia
+ con el usuario -lo que incluye presentar conjuntos de resultados que no
+ sean tan grandes que obliguen al usuario a dejar su tarea principal por
+ explorarlos, menos a cambiar drásticamente su trabajo sólo para obtener
+ otros resultados; y de los sistemas de recuperación de información toma
+ el hecho de búsquedas de consultas y documentos no necesariamente existentes
+ en la colección.
 \end_layout
 
 \begin_layout Part
@@ -1549,9 +1674,13 @@ k
  
 \end_layout
 
+\begin_layout Subsection
+Evaluación de sistemas recomendadores
+\end_layout
+
 \begin_layout Standard
-[TODO]Pero los juicios de relevancia variarán entre las personas, por lo
- que se utilizan estadísticas kappa, blabla
+Además de la precisión y la exhaustividad, otras medidas como la cobertura
+ y la exactitud son de importancia en un sistema recomendador.
 \end_layout
 
 \begin_layout Chapter
