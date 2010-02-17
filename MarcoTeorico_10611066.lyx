@@ -257,8 +257,8 @@ Introducción
 Se comienza con una puesta al día en el área de la recuperación de información
  (IR, por sus siglas en inglés) , ya que, a pesar de ser los sistemas recomendad
 ores ya toda un área de investigación por mérito propio, es necesario clarificar
- que lo que subyace a un sistema de este tipo es, en realidad, una tarea
- de recuperación de documentos.
+ que lo que subyace a un sistema como el que se presenta en este proyecto
+ es, en mayor medida, una tarea de recuperación de documentos.
  Se presentan los componentes de un sistema computacional de IR, además
  del proceso genérico que sigue un usuario a la hora de utilizar un sistema
  de esta índole.
@@ -1674,17 +1674,8 @@ k
  
 \end_layout
 
-\begin_layout Subsection
-Evaluación de sistemas recomendadores
-\end_layout
-
-\begin_layout Standard
-Además de la precisión y la exhaustividad, otras medidas como la cobertura
- y la exactitud son de importancia en un sistema recomendador.
-\end_layout
-
 \begin_layout Chapter
-Recuperación de información en un sistema recomendador
+Sistemas Recomendadores
 \end_layout
 
 \begin_layout Section
