@@ -1683,13 +1683,263 @@ Introducción
 \end_layout
 
 \begin_layout Standard
+En el presente capitulo se introducirá el concepto general de sistemas de
+ recomendación, las técnicas más comunes para su implementación y los métodos
+ utilizados en su evaluación.
+ Se introducen, además, otros conceptos útiles para el proyecto a realizar.
+ Se introduce, además, el concepto de 
+\emph on
+sistema de recomendación proactivo
+\emph default
+.
+\end_layout
+
+\begin_layout Section
+Definiciones
+\end_layout
+
+\begin_layout Standard
+Como se dijo en el capítulo anterior, un sistema de recomendación se puede
+ ver como un caso especial de un sistema de recuperación de información
+ de alta precisión; el quid es, sin embargo, la 
+\emph on
+recomendación
+\emph default
+: ¿cómo un sistema puede suplir una necesidad implícita de información?
+ 
+\end_layout
+
+\begin_layout Standard
+En este punto es idónea una analogía con una situación cotidiana -la cual,
+ dicho sea de paso, es suficientemente popular como para ser el ejemplo
+ por antonomasia de sistemas de recomendación: imagínese el lector que desea
+ ver una película, para ello, decide ver la cartelera del cine más cercano,
+ y elige como opciones unas cuantas que tienen muy buena publicidad en la
+ televisión; indeciso, llama a un amigo que usted sabe que tiene un gusto
+ similar al suyo y le pide que le recomiende una película, su amigo, que
+ le conoce, trata de darle un par que se adecúe más a sus preferencias;
+ aún indeciso, cuando está en la taquilla decide preguntarle a la persona
+ que vende los boletos por una y esta persona le recomienda la que más se
+ ha vendido en esa tanda, la cual no está entre las que su amigo le recomendó.
+ Al final, usted sopesa las recomendaciones y decide ver una de las que
+ su amigo le recomendó.
+\end_layout
+
+\begin_layout Standard
+El funcionamiento de un sistema recomendador es similar: de una cantidad
+ considerable de opciones que responden a su necesidad original de información,
+ qué película ver, el sistema 
+\emph on
+filtra
+\emph default
+ aquellas que, de alguna manera, considere pueden interesarle más.
+ El amigo y el vendedor de taquilla se pueden ver como dos enfoques distintos
+ de recomendación: el primero filtra la información en base a un 
+\emph on
+perfil
+\emph default
+ que ha construido de usted y sus preferencias, además de los gustos similares;
+ esto tiene su contraparte en sistemas de recomendación en la técnica conocida
+ como 
+\emph on
+filtrado colaborativo
+\emph default
+, en el cual, se vale de la inteligencia colectiva para construir recomendacione
+s 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Segaran2007"
+
+\end_inset
+
+, el segundo también se vale del saber colectivo, pero de una manera más
+ general, a saber, en la 
+\emph on
+popularidad
+\emph default
+ de un artefacto.
+\end_layout
+
+\begin_layout Standard
+En suma, los sistemas de recomendación se pueden ver como sistemas de filtración
+ de información en base a cierto perfil, ya sea construido con las preferencias
+ del usuario, con el contexto en el que el usuario se desenvuelve o con
+ ambos.
+\end_layout
+
+\begin_layout Subsection
+Sistemas recomendadores proactivos
+\end_layout
+
+\begin_layout Standard
+Un sistema de recomendación proactivo no es más que un sistema de recomendación
+ que se adapta al contexto del usuario y ofrece sugerencias sin que éste
+ haya elegido antes otros artículos de la colección.
+ El proyecto 
+\emph on
+À propos 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "PuertaMelquizo2007"
+
+\end_inset
+
+ 
+\emph default
+es un ejemplo de un sistema de este tipo: asiste a escritores construyendo
+ consultas en base a lo que están escribiendo en el momento, las cuales
+ alimenta a distintos motores de búsqueda; por otro lado, 
+\emph on
+Scienstein 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gipp2009"
+
+\end_inset
+
+, 
+\emph default
+otro sistema que se puede considerar de este tipo, se vale también de las
+ citas que el autor ha hecho para recomendar materiales relacionados, además
+ de incorporar técnicas de filtrado de información para presentar los resultados.
+\end_layout
+
+\begin_layout Section
+Tipos de sistemas de recomendación
+\end_layout
+
+\begin_layout Subsection
+Filtrado basado en el contenido
+\end_layout
+
+\begin_layout Standard
+Los sistemas de recomendación basados en contenido se centran en el artefacto
+ que el usuario provea en el momento: ya sea un documento propio en el que
+ está trabajando o ha proveido o en un artículo de la colección que haya
+ elegido; además, un sistema de este tipo puede haber construido con el
+ tiempo un perfil del usuario y los artículos por los cuales se ha decidido
+ antes.
+ Partiendo de estas dos premisas, el sistema trata de predecir qué otros
+ elementos podrían interesar al usuario.
+ Como se puede apreciar, esto se puede tratar desde el punto de vista del
+ aprendizaje de máquina: a partir de otras cosas que al usuario le han interesad
+o, se construye una hipótesis de los gustos de éste para, en base a un conjunto
+ de documentos relevantes al contexto actual -obtenidos, quizá, mediante
+ técnicas de recuperación de información- determinar cuáles podrían interesarle.
+ Técnicas avanzadas de recuperación de información en un sistema orientado
+ al contenido se pueden ver en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chen2008"
+
+\end_inset
+
+; aprendizaje de máquina para construir el perfil del usuario, en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Mooney1999"
+
+\end_inset
+
+; técnicas de clasificación para recomendación, en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Basu1998"
+
+\end_inset
+
+ y el uso del procesamiento del lenguaje natural para obtener recomendaciones
+ donde las preferencias del usuario son escasas, mas el contenido es rico
+ en detalles útiles, en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fleischman2003"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Para ciertos tipos de artefactos, este tipo de filtrado puede mostrarse
+ muy útil, como, por ejemplo, para entradas bien estructuradas de referencias
+ bibliográficas, puesto que es usual que ciertos autores o citas sean reincident
+es en tópicos de interés para el usuario.
+ Sin embargo, para datos pocos estructurados o de valoraciones más subjetivas,
+ como música o sitios web, estos sistemas se quedan atrás, al sólo ser capaces
+ de analizar lo que tienen a mano.
+\end_layout
+
+\begin_layout Subsection
+Filtrado colaborativo.
+\end_layout
+
+\begin_layout Standard
+Con el cambio de paradigma que se ha venido dando en el internet en los
+ últimos años, las personas empiezan a esperar un ambiente más social en
+ los sistemas que utilizan.
+ Esto se ve reflejado en la creciente popularidad del uso de las opiniones
+ de otros usuarios para determinar las recomendaciones en los sistemas.
+ 
+\end_layout
+
+\begin_layout Standard
+Un sistema que utilice este enfoque, como lo define 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Segaran2007"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+Busca en un grupo grande de personas y encuentra un conjunto más pequeño
+ cuyos gustos se asemejen a los del usuario.
+ Mira qué otras cosas ellos favorecen y las combina en una lista de sugerencias.
+\end_layout
+
+\begin_layout Standard
+Evidentemente, debe haber alguna manera de expresar los gustos de las personas
+ cuantitativamente, lo cual se hace usualmente mediante valores numéricos,
+ para sitios como 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.delicious.com
+\end_layout
+
+\end_inset
+
+, se puede usar el valor de 1 para indicar que un usuario ha publicado un
+ vínculo y 0 para el caso contrario; para sitios de películas, se podrían
+ usar valores entre uno y cinco para indicar qué tanto disfutó el usuario
+ cierta película.
+ Se podría incluso pensar en un modelo simple para el sistema a desarrollar
+ en este proyecto: 1 para denotar que cierto usuario utilizó un recurso
+ y cero para lo contario.
+ 
+\end_layout
+
+\begin_layout Standard
+Una vez en posesión de datos cuantitativos de los gustos de los usuarios,
+  
+\end_layout
+
+\begin_layout Chapter
+Implementación de un sistema recomendador proactivo
+\end_layout
+
+\begin_layout Standard
 En el presente capítulo se explora la aplicabilidad de distintas técnicas
  de recuperación de información en el contexto de un sistema recomendador.
  En primer lugar, se introducen conceptos específicos a esta tarea, como
  ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
  Luego, se exploran y evalúan modelos de representación del conocimiento
  y búsqueda de documentos que se consideran pertinentes.
- 
 \end_layout
 
 \begin_layout Standard
