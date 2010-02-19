@@ -1847,59 +1847,6 @@ Numeración del autor
 
 \end_layout
 
-\begin_layout Standard
-De lo anterior, se puede ver que el sistema cuenta con dos componentes de
- entrada: el perfil del usuario y el elemento actual, a partir de éstos
- el sistema trata de predecir qué otros elementos podrían interesar al usuario.
- Como se puede apreciar, la construcción del perfil se puede tratar desde
- el punto de vista del aprendizaje de máquina, en concreto de clasificación:
- a partir de otras cosas que al usuario le han interesado, se construye
- una hipótesis de los gustos de éste para, en base a un conjunto de documentos
- relevantes al contexto actual -obtenidos, quizá, mediante técnicas de recuperac
-ión de información- determinar cuáles podrían interesarle; métodos como
- Naive-Bayes, exitosos en otras tareas de clasificación, se podrían aplicar
- en este tipo de sistemas de recomendación 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Fox2010"
-
-\end_inset
-
-.
- Técnicas avanzadas de recuperación de información en un sistema orientado
- al contenido se pueden ver en 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Chen2008"
-
-\end_inset
-
-; aprendizaje de máquina para construir el perfil del usuario, en 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Mooney1999"
-
-\end_inset
-
-; técnicas de clasificación para recomendación, en 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Basu1998"
-
-\end_inset
-
- y el uso del procesamiento del lenguaje natural para obtener recomendaciones
- donde las preferencias del usuario son escasas, mas el contenido es rico
- en detalles útiles, en 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Fleischman2003"
-
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsubsection
 Componentes
 \end_layout
@@ -1946,8 +1893,229 @@ Hecho el simil, se procede ahora a discutir los detalles y el rol de los
  componentes:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Paragraph
+Representación de los componentes:
+\end_layout
 
+\begin_layout Standard
+Al igual que un sistema de IR, se debe elegir la representación de los artefacto
+s que sea más idónea para la labor de recomendación; puesto que los usuarios
+ evalúan los artículos, lo más natural sería contar con un resumen de los
+ 
+\emph on
+atributos
+\emph default
+ más conspicuos de los elementos, haciendo sencillo el almacenamiento: se
+ pueden ver los atributos como las columnas y cada componente como una fila.
+ Pero para tener verdadera utilidad para el sistema, los valores de estos
+ atributos deberían estar en un 
+\emph on
+dominio cerrado
+\emph default
+, es decir, deberían elegirse de entre opciones previamente definidas; por
+ ejemplo, para el atributo 
+\emph on
+género
+\emph default
+ en una película, es mucho más preferible decir 
+\begin_inset Quotes eld
+\end_inset
+
+suspenso
+\begin_inset Quotes erd
+\end_inset
+
+ a sabiendas de que éste es uno de quizá cinco posibles valores, y no decir
+ 
+\begin_inset Quotes eld
+\end_inset
+
+película que da ganas de que no termine nunca
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Como se ve en el ejemplo anterior, tener demasiados atributos de texto
+ libre vuelve inútil al sistema, o innecesariamente complicado, pues todas
+ las ambigüedades inherentes al lenguaje natural se presentan.
+ Una solución al problema de campos de texto libre es el uso de técnicas
+ de asignación de relevancia y conversión de los términos a otras representacion
+es más manejables por un sistema -por ejemplo, el uso del famoso modelo
+ de espacio vectorial 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Salton1975"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Definidos los atributos a considerar y los dominios de éstos, resta el no
+ menos importante problema de obtenerlos.
+ Esta tarea es sencilla para cuando los elementos tienen una naturaleza
+ estructurada (por ejemplo, recursos bibliográficos en formato bibtex
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.bibtex.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ ) o documentos en xml.
+ Pero la mayor parte de documentos, los cuales serán los artefactos a manejar
+ en este proyecto, tienen una estructura arbitraria o carecen de cualquier
+ tipo de estructura; como se mencionó antes, técnicas de la recuperación
+ de información se pueden aplicar a este tipo de entradas para indizarlas;
+ aunque se puede también valer de técnicas de extracción de información
+ para tratar de llenar los atributos -por ejemplo, cierto nivel de extracción
+ de información se utilizó en el sistema de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kitamura2002"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+El perfil del usuario
+\end_layout
+
+\begin_layout Standard
+Para que un sistema orientado al contenido tenga éxito, debe 
+\emph on
+conocer
+\emph default
+ al usuario.
+ Esto lo hace mediante el aprendizaje de las 
+\emph on
+preferencias 
+\emph default
+del usuario y el historial de las interacciones de con el sistema.
+ Como se puede apreciar, la construcción del perfil se puede tratar desde
+ el punto de vista de la clasificación: partiendo del historial de interacciones
+ con el sistema, llevando un control de qué artículos le interesaron al
+ usuario ya sea mediante retroalimentación explícita (asignar un juicio
+ cualitativo de valor, por ejemplo) o implícita (comprar o utilizar un artefacto
+) se etiquetan los elementos como, por ejemplo, 
+\begin_inset Quotes eld
+\end_inset
+
+interesantes
+\begin_inset Quotes erd
+\end_inset
+
+ y 
+\begin_inset Quotes eld
+\end_inset
+
+no interesantes
+\begin_inset Quotes erd
+\end_inset
+
+ y se usan estos datos para entrenar al algoritmo.
+ De esta manera, se construye una hipótesis de los gustos de éste para predecir
+ cuáles otros podrían interesarle.
+ Métodos como Naive-Bayes, exitosos en otras tareas de clasificación, se
+ podrían aplicar en este tipo de sistemas de recomendación 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mooney1999"
+
+\end_inset
+
+, otros algoritmos de clasificación más avanzados se han propuesto para
+ estas tareas, como RIPPER 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Cohen1999"
+
+\end_inset
+
+, árboles de decisión y k-vecinos más cercanos, clasificación en base al
+ algoritmo de Rocchio para el modelo de espacio vectorial, el uso de clasificado
+res lineales -Widrow-Hoff, gradiente exponenciado o máquinas de vectores
+ de soporte- 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Pazzani2007"
+
+\end_inset
+
+.
+ Ahora bien, también se puede pedir al usuario que llene formularios sobre
+ sus preferencias (por ejemplo, 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.mendeley.com
+\end_layout
+
+\end_inset
+
+, pide al usuario recién registrado que elija su área de investigación y
+ temas de interés para recomendarle lecturas), lo cual, en la práctica,
+ se hace poco o pobremente; o bien, el sistema puede tener un conjunto de
+ reglas, las cuales, aunadas al historial del usuario, se usan para inferir
+ las preferencias (por ejemplo, un sitio de venta de computadoras puede
+ recomendar productos de cierta marca a usuarios que han comprado varios
+ artículos de ella).
+\end_layout
+
+\begin_layout Paragraph
+El componente de recomendación
+\end_layout
+
+\begin_layout Standard
+Dado el perfil del usuario y la representación de los elementos, se puede
+ ver a este componente como uno que lleva a cabo una tarea de recuperación
+ de información.
+ Técnicas avanzadas de recuperación de información en un sistema de recomendació
+n orientado al contenido se pueden ver en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chen2008"
+
+\end_inset
+
+; técnicas de clasificación para recomendación, en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Basu1998"
+
+\end_inset
+
+ y el uso del procesamiento del lenguaje natural para obtener recomendaciones
+ donde las preferencias del usuario son escasas, mas el contenido es rico
+ en detalles útiles, en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fleischman2003"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Limitaciones
 \end_layout
 
 \begin_layout Standard
@@ -1955,9 +2123,11 @@ Para ciertos tipos de artefactos, este tipo de filtrado puede mostrarse
  muy útil, como, por ejemplo, para entradas bien estructuradas de referencias
  bibliográficas, puesto que es usual que ciertos autores o citas sean reincident
 es en tópicos de interés para el usuario.
- Sin embargo, para datos pocos estructurados o de valoraciones más subjetivas,
- como música o sitios web, estos sistemas se quedan atrás, al sólo ser capaces
- de analizar lo que tienen a mano.
+ Sin embargo, para datos escasos, poco estructurados o de valoraciones más
+ subjetivas, como música o sitios web, estos sistemas se quedan atrás, al
+ necesitar suficiente información como para categorizar y requerir del al
+ usuario el uso del sistema por un tiempo considerable o llenar un perfil
+ detallado para refinar la recomendación.
 \end_layout
 
 \begin_layout Subsection
@@ -2011,7 +2181,16 @@ www.delicious.com
  Se podría incluso pensar en un modelo simple para el sistema a desarrollar
  en este proyecto: 1 para denotar que cierto usuario utilizó un recurso
  y cero para lo contrario.
- 
+ De hecho, se podrían ver las opiniones cuantitativas de los usuarios como
+ atributos de los elementos, permitiendo así el uso de aprendizaje de máquina
+ para el filtrado 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Pazzani2007"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2032,7 +2211,8 @@ key "Grcar2005"
 
 \end_inset
 
-
+.
+ 
 \end_layout
 
 \begin_layout Chapter
