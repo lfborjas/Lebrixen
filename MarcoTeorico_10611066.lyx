@@ -1705,8 +1705,8 @@ Como se dijo en el capítulo anterior, un sistema de recomendación se puede
 \emph on
 recomendación
 \emph default
-: ¿cómo un sistema puede suplir una necesidad implícita de información?
- 
+: ¿cómo un sistema puede deducir qué puede preferir el usuario de un conjunto
+ de resultados? 
 \end_layout
 
 \begin_layout Standard
@@ -1761,10 +1761,13 @@ popularidad
 \end_layout
 
 \begin_layout Standard
-En suma, los sistemas de recomendación se pueden ver como sistemas de filtración
- de información en base a cierto perfil, ya sea construido con las preferencias
- del usuario, con el contexto en el que el usuario se desenvuelve o con
- ambos.
+En suma, los sistemas de recomendación se pueden ver como 
+\emph on
+sistemas de filtración de información
+\emph default
+ en base a cierto perfil, ya sea construido con las preferencias del usuario
+ solamente o uniendo éstas a las de otros usuarios, con el contexto en el
+ que el usuario se desenvuelve o con ambos.
 \end_layout
 
 \begin_layout Subsection
@@ -1944,7 +1947,7 @@ es más manejables por un sistema -por ejemplo, el uso del famoso modelo
  de espacio vectorial 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Salton1975"
+key "Salton1975a"
 
 \end_inset
 
@@ -2161,6 +2164,45 @@ Busca en un grupo grande de personas y encuentra un conjunto más pequeño
 \end_layout
 
 \begin_layout Standard
+O, más sencillamente, 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fox2010"
+
+\end_inset
+
+ expresa que un sistema de recomendación de filtrado colaborativo es:
+\end_layout
+
+\begin_layout Quotation
+Es un método basado en el ambiente social, usado para proponer artículos
+ que usuarios que piensan de manera similar favorecen.
+\end_layout
+
+\begin_layout Standard
+En consecuencia, los sistemas que utilizan filtrado colaborativo trascienden
+ las limitaciones de los basados en contenido: se valen de la inteligencia
+ colectiva para hacer recomendaciones y no tanto en un extenso perfil del
+ usuario, puesto que pueden inferir en menos tiempo de uso del sistema o
+ con un perfil más reducido, qué otros usuarios opinan de manera similar
+ al actual; las recomendaciones dependen de las evaluaciones, más que del
+ contenido de los artefactos, por lo se puede omitir la fase de análisis
+ de contenido, la cual es computacionalmente costosa, y particularmente
+ difícil para artefactos con multimedia y, por último, un sistema de filtrado
+ colaborativo se orienta a la comunidad, lo cual permite que los elementos
+ subjetivos y complejos encontrados en cualquier sociedad humana puedan
+ tener cabida en el sistema
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mortensen2007"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 Evidentemente, debe haber alguna manera de expresar los gustos de las personas
  cuantitativamente, lo cual se hace usualmente mediante valores numéricos,
  para sitios como 
@@ -2181,7 +2223,11 @@ www.delicious.com
  Se podría incluso pensar en un modelo simple para el sistema a desarrollar
  en este proyecto: 1 para denotar que cierto usuario utilizó un recurso
  y cero para lo contrario.
- De hecho, se podrían ver las opiniones cuantitativas de los usuarios como
+ 
+\end_layout
+
+\begin_layout Standard
+Incluso , pueden verse las opiniones cuantitativas de los usuarios como
  atributos de los elementos, permitiendo así el uso de aprendizaje de máquina
  para el filtrado 
 \begin_inset CommandInset citation
@@ -2194,10 +2240,10 @@ key "Pazzani2007"
 \end_layout
 
 \begin_layout Standard
-Una vez en posesión de datos cuantitativos de los gustos de los usuarios,
- se calcula la similitud entre usuarios; las técnicas utilizadas para esto
- pueden ser bastante complejas: desde el uso de la distancia euclideana
- 
+De cualquier manera, una vez en posesión de datos cuantitativos de los gustos
+ de los usuarios, se calcula la similitud entre usuarios; las técnicas utilizada
+s para esto pueden ser bastante complejas: desde el uso de la distancia
+ euclideana 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Segaran2007"
@@ -2212,7 +2258,360 @@ key "Grcar2005"
 \end_inset
 
 .
+ Algunos de estos algoritmos se discuten a continuación.
+\end_layout
+
+\begin_layout Subsubsection
+Métodos de filtrado colaborativo
+\end_layout
+
+\begin_layout Standard
+El filtrado colaborativo se ha valido tradicionalmente de una matriz que
+ representa las valoraciones de los usuarios respecto a los artefactos en
+ la colección; esta matriz se conoce como 
+\emph on
+matriz de usuarios y artículos.
  
+\emph default
+Por ejemplo, para un sistema de recomendación de literatura con cuatro libros
+ y sendos usuarios, se podría tener la siguiente representación mostrada
+ en la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:User-item-matrix-ex"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Usuarios/Libros
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+El castillo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+La caverna
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fundación
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gödel, Escher, Bach
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Luis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jorge
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fernando
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+María
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:User-item-matrix-ex"
+
+\end_inset
+
+Ejemplo de matriz de usuarios y artículos.
+ Las valoraciones están en el rango [1-5], 0 equivale a no haber votado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De la matriz, si se separa en distintos vectores para las filas, se obtienen
+ los perfiles de cada usuario (lo que juzgó de cada artículo).
+ Tal separación es la base del primer enfoque de filtrado colaborativo:
+ el 
+\emph on
+basado en memoria.
+\end_layout
+
+\begin_layout Standard
+Asimismo, si la matriz se separase en columnas, se obtendrían los votos
+ de todos los usuarios para un artículo en específico, lo cual lleva al
+ segundo enfoque: el 
+\emph on
+basado en modelos.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Paragraph
+Filtrado colaborativo basado en memoria
+\end_layout
+
+\begin_layout Subsubsection
+Limitaciones
+\end_layout
+
+\begin_layout Standard
+[cold start paper, lo de wikiversity] La orientación a la comunidad es un
+ arma de doble filo: si bien la mayor parte de las recomendaciones son exactas,
+ el sistema se basa en datos que son intrínsecamente inexactos: las opiniones
+ de personas.
+\end_layout
+
+\begin_layout Section
+Sistemas de recomendación híbridos
+\end_layout
+
+\begin_layout Section
+Evaluación de un sistema recomendador
 \end_layout
 
 \begin_layout Chapter
