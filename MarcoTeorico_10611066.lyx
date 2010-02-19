@@ -52,7 +52,7 @@
 \begin_body
 
 \begin_layout Title
-Sistema recomendador de documentos aplicado a un contexto académico
+Sistema de recomendación de documentos aplicado a un contexto académico
 \end_layout
 
 \begin_layout Author
@@ -80,9 +80,9 @@ Introducción General
 \end_layout
 
 \begin_layout Standard
-El presente proyecto explora el concepto de un sistema 
+El presente proyecto explora el concepto de un sistema de
 \emph on
-recomendador
+ recomendación
 \emph default
  de documentos, es decir, un sistema que permita la recuperación de documentos
  relevantes a una necesidad de información 
@@ -116,7 +116,7 @@ conceptos
 \end_layout
 
 \begin_layout Subsection*
-Sistemas recomendadores y sistemas de recuperación de información.
+Sistemas de recomendación y sistemas de recuperación de información.
 \end_layout
 
 \begin_layout Standard
@@ -135,14 +135,14 @@ www.amazon.com
 : el usuario está interesado en el artículo que está adquiriendo, su propósito
  principal es ese, pero el sitio también le sugiere, cuando el usuario ha
  elegido un producto, otros que podrían intesarle; eso es precisamente un
- sistema recomendador: un componente 
+ sistema de recomendación: un componente 
 \emph on
 secundario
 \emph default
  en otro contexto mayor -como un sitio de compras o de renta de películas-
  que, de manera no intrusiva, exacta y rápida, ofrece al usuario opciones
  que puedan enriquecer su experiencia.
- Un sistema recomendador por excelencia, entonces, 
+ Un sistema de recomendación por excelencia, entonces, 
 \emph on
 intuye
 \emph default
@@ -160,7 +160,7 @@ www.last.fm
 \end_inset
 
 , - se mantiene un perfil de los usuarios para predecir qué podría interesarles
- después de un tiempo de uso); un sistema recomendador, entonces y como
+ después de un tiempo de uso); un sistema de recomendación, entonces y como
  aclara 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -177,7 +177,7 @@ contextualización
 adaptación 
 \emph default
 para llevar a cabo su tarea.
- Los sistemas recomendadores son un ejemplo muy bueno de 
+ Los sistemas de recomendación son un ejemplo muy bueno de 
 \emph on
 inteligencia colectiva
 \emph default
@@ -185,14 +185,14 @@ inteligencia colectiva
  porque se valen de lo que los mismos usuarios dicen, y esto mediante algún
  tipo de retroalimentación o comunicación explícita, de los artículos en
  la colección de artefactos del sistema.
- En suma, un sistema recomendador, en base al contexto o al usuario, determina
- qué artículos de la colección de artefactos que maneja podrían interesar
- a quien lo usa 
+ En suma, un sistema de recomendación, en base al contexto o al usuario,
+ determina qué artículos de la colección de artefactos que maneja podrían
+ interesar a quien lo usa 
 \emph on
 dado que haya elegido algún artefacto de la colección
 \emph default
 .
- Un sistema recomendador convencional no puede, ni debería, por definición,
+ Un sistema de recomendación convencional no puede, ni debería, por definición,
  recomendar algo en relación a un artículo que no conoce.
  
 \end_layout
@@ -255,10 +255,10 @@ Introducción
 
 \begin_layout Standard
 Se comienza con una puesta al día en el área de la recuperación de información
- (IR, por sus siglas en inglés) , ya que, a pesar de ser los sistemas recomendad
-ores ya toda un área de investigación por mérito propio, es necesario clarificar
- que lo que subyace a un sistema como el que se presenta en este proyecto
- es, en mayor medida, una tarea de recuperación de documentos.
+ (IR, por sus siglas en inglés) , ya que, a pesar de ser los sistemas de
+ recomendación ya toda un área de investigación por mérito propio, es necesario
+ clarificar que lo que subyace a un sistema como el que se presenta en este
+ proyecto es, en mayor medida, una tarea de recuperación de documentos.
  Se presentan los componentes de un sistema computacional de IR, además
  del proceso genérico que sigue un usuario a la hora de utilizar un sistema
  de esta índole.
@@ -1020,7 +1020,7 @@ retroalimentación
  Así, con la retroalimentación, el sistema podría construir un nuevo conjunto
  de resultados a partir de éste, buscando aquellos documentos que se aproximen
  a los preferidos por el usuario -es importante resaltar que esta es una
- característica básica de los sistemas recomendadores.
+ característica básica de los sistemas de recomendación.
 \end_layout
 
 \begin_layout Section
@@ -1523,10 +1523,10 @@ Pero, claro, la especificidad en la mayor parte de los casos tenderá a la
 Así, a la hora de evaluar el sistema, se debe tener en cuenta a qué extremo
  del continuo de precisión-exhaustividad tenderán la mayor parte de las
  búsquedas.
- En un sistema recomendador, se puede asumir que los usuarios no desean
+ En un sistema de recomendación, se puede asumir que los usuarios no desean
  navegar por páginas y páginas de documentos que ellos ni siquiera buscaron
  explícitamente (como se verá después, una de las máximas de un sistema
- recomendador es su poca interferencia con la tarea del usuario).
+ de recomendación es su poca interferencia con la tarea del usuario).
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1642,7 +1642,7 @@ Algunas colecciones estándar de prueba se pueden encontrar mencionadas en
  
 \begin_inset CommandInset citation
 LatexCommand citet
-key "HinrichSchutze2009,Voorhees2002"
+key "HinrichSchutze2009,Voorhees2002a"
 
 \end_inset
 
@@ -1650,7 +1650,7 @@ key "HinrichSchutze2009,Voorhees2002"
  de un sistema de recuperación de información se pueden encontrar en 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Cormack1998"
+key "Cormack1998a"
 
 \end_inset
 
@@ -1675,7 +1675,7 @@ k
 \end_layout
 
 \begin_layout Chapter
-Sistemas Recomendadores
+Sistemas de Recomendación
 \end_layout
 
 \begin_layout Section
@@ -1726,7 +1726,7 @@ En este punto es idónea una analogía con una situación cotidiana -la cual,
 \end_layout
 
 \begin_layout Standard
-El funcionamiento de un sistema recomendador es similar: de una cantidad
+El funcionamiento de un sistema de recomendación es similar: de una cantidad
  considerable de opciones que responden a su necesidad original de información,
  qué película ver, el sistema 
 \emph on
@@ -1768,7 +1768,7 @@ En suma, los sistemas de recomendación se pueden ver como sistemas de filtraci�
 \end_layout
 
 \begin_layout Subsection
-Sistemas recomendadores proactivos
+Sistemas de recomendación proactivos
 \end_layout
 
 \begin_layout Standard
@@ -1815,17 +1815,57 @@ Filtrado basado en el contenido
 \begin_layout Standard
 Los sistemas de recomendación basados en contenido se centran en el artefacto
  que el usuario provea en el momento: ya sea un documento propio en el que
- está trabajando o ha proveido o en un artículo de la colección que haya
- elegido; además, un sistema de este tipo puede haber construido con el
- tiempo un perfil del usuario y los artículos por los cuales se ha decidido
- antes.
- Partiendo de estas dos premisas, el sistema trata de predecir qué otros
- elementos podrían interesar al usuario.
- Como se puede apreciar, esto se puede tratar desde el punto de vista del
- aprendizaje de máquina: a partir de otras cosas que al usuario le han interesad
-o, se construye una hipótesis de los gustos de éste para, en base a un conjunto
- de documentos relevantes al contexto actual -obtenidos, quizá, mediante
- técnicas de recuperación de información- determinar cuáles podrían interesarle.
+ está trabajando o en un artículo de la colección que haya elegido; además,
+ un sistema de este tipo puede haber construido con el tiempo un perfil
+ del usuario y los artículos por los cuales se ha decidido antes.
+ O, como se define en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Pazzani2007"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+[Los sistemas de recomendación basados en el contenido] sugieren un artículo
+ basado en una descripción del mismo y un perfil de los intereses del usuario.
+ [...] Tienen en común (1) un medio para describir los elementos que se recomendarí
+an, (2) un medio para crear un perfil que describa el tipo de artefactos
+ que un usuario favorece y (3) un medio para comparar elementos con el perfil
+ del usuario para determinar qué recomendar.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Numeración del autor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De lo anterior, se puede ver que el sistema cuenta con dos componentes de
+ entrada: el perfil del usuario y el elemento actual, a partir de éstos
+ el sistema trata de predecir qué otros elementos podrían interesar al usuario.
+ Como se puede apreciar, la construcción del perfil se puede tratar desde
+ el punto de vista del aprendizaje de máquina, en concreto de clasificación:
+ a partir de otras cosas que al usuario le han interesado, se construye
+ una hipótesis de los gustos de éste para, en base a un conjunto de documentos
+ relevantes al contexto actual -obtenidos, quizá, mediante técnicas de recuperac
+ión de información- determinar cuáles podrían interesarle; métodos como
+ Naive-Bayes, exitosos en otras tareas de clasificación, se podrían aplicar
+ en este tipo de sistemas de recomendación 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Fox2010"
+
+\end_inset
+
+.
  Técnicas avanzadas de recuperación de información en un sistema orientado
  al contenido se pueden ver en 
 \begin_inset CommandInset citation
@@ -1858,6 +1898,56 @@ key "Fleischman2003"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsubsection
+Componentes
+\end_layout
+
+\begin_layout Standard
+De la definición dada por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pazzani2007"
+
+\end_inset
+
+ , los tres elementos numerados pueden encontrar su contraparte en los component
+es de un sistema de recuperación de información, a saber, la 
+\emph on
+representación de los artículos
+\emph default
+ se puede asimilar al concepto de 
+\emph on
+sustitutos documentales
+\emph default
+ en la indización de la colección; el 
+\emph on
+perfil de usuario
+\emph default
+, en papel de entrada principal al sistema, se equipararía a la 
+\emph on
+consulta
+\emph default
+ de un sistema de IR (nótese que esto refuerza lo antes mencionado como
+ diferencia fundamental entre ambos sistemas: mientras que la consulta contiene
+ todo lo necesario para la búsqueda, en un sistema de recomendación muchos
+ detalles sobre la necesidad de información se deben inferir del perfil
+ del usuario) y, por último, el componente que compara los artículos al
+ perfil sería equivalente al 
+\emph on
+componente de igualación
+\emph default
+ de un sistema de recuperación de información.
+\end_layout
+
+\begin_layout Standard
+Hecho el simil, se procede ahora a discutir los detalles y el rol de los
+ componentes:
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
@@ -1916,26 +2006,42 @@ www.delicious.com
 
 , se puede usar el valor de 1 para indicar que un usuario ha publicado un
  vínculo y 0 para el caso contrario; para sitios de películas, se podrían
- usar valores entre uno y cinco para indicar qué tanto disfutó el usuario
+ usar valores entre uno y cinco para indicar qué tanto disfrutó el usuario
  cierta película.
  Se podría incluso pensar en un modelo simple para el sistema a desarrollar
  en este proyecto: 1 para denotar que cierto usuario utilizó un recurso
- y cero para lo contario.
+ y cero para lo contrario.
  
 \end_layout
 
 \begin_layout Standard
 Una vez en posesión de datos cuantitativos de los gustos de los usuarios,
-  
+ se calcula la similitud entre usuarios; las técnicas utilizadas para esto
+ pueden ser bastante complejas: desde el uso de la distancia euclideana
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Segaran2007"
+
+\end_inset
+
+, hasta máquinas de vectores de soporte 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Grcar2005"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
-Implementación de un sistema recomendador proactivo
+Implementación de un sistema de recomendación proactivo
 \end_layout
 
 \begin_layout Standard
 En el presente capítulo se explora la aplicabilidad de distintas técnicas
- de recuperación de información en el contexto de un sistema recomendador.
+ de recuperación de información en el contexto de un sistema de recomendación.
  En primer lugar, se introducen conceptos específicos a esta tarea, como
  ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
  Luego, se exploran y evalúan modelos de representación del conocimiento
