@@ -1,0 +1,2 @@
+#!/bin/sh
+cat bibtex_references/ReferenciasFaseI.bib > bibtex_references/ReferenciasFaseI.bib.back
