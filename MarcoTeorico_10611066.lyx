@@ -1945,7 +1945,7 @@ En el presente capítulo se explora la aplicabilidad de distintas técnicas
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "avance1"
+bibfiles "bibtex_references/ReferenciasFaseI"
 options "/home/lfborjas/Aplicaciones/apa-good"
 
 \end_inset
