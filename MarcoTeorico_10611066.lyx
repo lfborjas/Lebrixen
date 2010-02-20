@@ -3079,7 +3079,65 @@ key "Schein2002"
 \end_layout
 
 \begin_layout Section
+Sistemas de recomendación orientados al conocimiento
+\end_layout
+
+\begin_layout Standard
+Los dos grandes enfoques discutidos antes son los más usados a nivel comercial,
+ pero ambos tienen una desventaja fundamental: requieren que se logre obtener
+ suficiente información de los usuarios o artículos para comenzar a dar
+ recomendaciones útiles, lo cual es algo difícil de superar: sin suficientes
+ usuarios, no se tienen muchas evaluaciones de artículos, y, sin recomendaciones
+ de artículos, no se logra conseguir una base suficiente de usuarios.
+ Para superar este problema, se ha propuesto un tercer tipo de sistemas
+ de recomendación: los 
+\emph on
+orientados al conocimiento
+\emph default
+.
+ Éstos tratan de 
+\emph on
+razonar
+\emph default
+ la razón que subyace a la elección de cierto artefacto por el usuario,
+ determinando qué atributos, y qué relaciones entre éstos, han influenciado
+ la decisión para determinar otros artefactos que podrían 
+\end_layout
+
+\begin_layout Section
 Sistemas de recomendación híbridos
+\end_layout
+
+\begin_layout Standard
+Luego de examinar los dos enfoques convencionales, el orientado a contenido
+ y el colaborativo, se puede notar que ambos tienen sus fortalezas y debilidades
+: los orientados al contenido son exactos, pero requieren un uso extenso
+ y no toman en cuenta el aspecto social del uso de sistemas basados en internet;
+ por otro lado, los colaborativos pierden exactitud a cambio de la implementació
+n del saber colectivo de los usuarios, además de su característico costo
+ computacional.
+ Sería ideal, entonces, poder combinar la exactitud y eficiencia de los
+ sistemas orientados al contenido con la inteligencia colectiva conseguida
+ mediante un enfoque colaborativo.
+\end_layout
+
+\begin_layout Subsection
+Sistemas de recomendación colaborativos y orientados al contenido
+\end_layout
+
+\begin_layout Subsection
+Sistemas de recomendación colaborativos y orientados al conocimiento
+\end_layout
+
+\begin_layout Standard
+Este híbrido, propuesto por 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Burke1999"
+
+\end_inset
+
+ [mettre la table de comparison]
 \end_layout
 
 \begin_layout Section
