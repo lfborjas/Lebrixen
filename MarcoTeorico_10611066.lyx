@@ -1997,6 +1997,13 @@ key "Kitamura2002"
 
 \begin_layout Paragraph
 El perfil del usuario
+\begin_inset CommandInset label
+LatexCommand label
+name "par:El-perfil-del"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2273,8 +2280,8 @@ El filtrado colaborativo se ha valido tradicionalmente de una matriz que
 matriz de usuarios y artículos.
  
 \emph default
-Por ejemplo, para un sistema de recomendación de literatura con cuatro libros
- y sendos usuarios, se podría tener la siguiente representación mostrada
+Por ejemplo, para un sistema de recomendación de literatura con seis libros
+ y cuatro usuarios, se podría tener la siguiente representación mostrada
  en la tabla 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2289,12 +2296,14 @@ reference "tab:User-item-matrix-ex"
 \begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="5">
+<lyxtabular version="3" rows="5" columns="7">
 <features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
@@ -2337,11 +2346,29 @@ Fundación
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 Gödel, Escher, Bach
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hamlet
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The Silmarillion
 \end_layout
 
 \end_inset
@@ -2384,11 +2411,29 @@ Luis
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 4.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.5
 \end_layout
 
 \end_inset
@@ -2431,11 +2476,29 @@ Jorge
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 4.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
 \end_layout
 
 \end_inset
@@ -2455,7 +2518,7 @@ Fernando
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.0
+3.0
 \end_layout
 
 \end_inset
@@ -2478,11 +2541,29 @@ Fernando
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.0
+2.0
 \end_layout
 
 \end_inset
@@ -2502,7 +2583,7 @@ María
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0
+5.0
 \end_layout
 
 \end_inset
@@ -2511,7 +2592,7 @@ María
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.5
+3.7
 \end_layout
 
 \end_inset
@@ -2525,11 +2606,29 @@ María
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 0.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.0
 \end_layout
 
 \end_inset
@@ -2561,10 +2660,6 @@ Ejemplo de matriz de usuarios y artículos.
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -2588,22 +2683,399 @@ basado en modelos.
 \end_layout
 
 \begin_layout Standard
-
+Ambos enfoques pretenden 
+\emph on
+predecir
+\emph default
+ cuál sería la opinión del usuario respecto a los artículos relevantes,
+ eligiendo así aquellos que el usuario preferiría.
 \end_layout
 
 \begin_layout Paragraph
 Filtrado colaborativo basado en memoria
 \end_layout
 
-\begin_layout Subsubsection
-Limitaciones
+\begin_layout Standard
+El filtrado basado en memoria trata de simular la situación cotidiana de
+ buscar una opinión: las personas se vuelven a aquellos otros que sepan
+ que tienen gustos similares a los propios, pues encuentran de más valor
+ en esas opiniones.
+ Para realizarlo computacionalmente, una vez existente la matriz de usuarios-art
+ículos, se deb buscar en toda la base de datos todas aquellas filas que
+ sean similares a la del usuario -es decir, se buscan aquellos perfiles
+ que sean más parecidos al del usuario- y luego, en función de esto, se
+ puede predecir la preferencia respecto a los elementos a recomendar -lo
+ cual tiene también su ejemplo en la vida cotidiana: si sabemos que a los
+ amigos cercanos de una persona les gusta cierto género musical, es probable
+ que a esta persona también.
+ Esta manera de predecir las preferencias del usuario se conoce con el nombre
+ genérico de 
+\emph on
+cálculo del vecino (o k-vecinos) más cercano(s)
+\emph default
+.
+ Es de notar que el algoritmo compara el perfil del usuario con el de todos
+ los demás, lo cual ya vaticina una labor computacionalmente exigente.
+ 
 \end_layout
 
 \begin_layout Standard
-[cold start paper, lo de wikiversity] La orientación a la comunidad es un
- arma de doble filo: si bien la mayor parte de las recomendaciones son exactas,
- el sistema se basa en datos que son intrínsecamente inexactos: las opiniones
- de personas.
+Las diferencias en implementaciones radican en la función que se use para
+ calcular la similitud entre los distintos perfiles.
+ A continuación se definen algunas de las funciones más comunes para calcular
+ qué tan similares son dos vectores de perfiles:
+\end_layout
+
+\begin_layout Subparagraph
+Distancia
+\begin_inset space ~
+\end_inset
+
+euclideana: 
+\end_layout
+
+\begin_layout Standard
+Es la función más común para medir las distancias entre dos puntos.
+ Se expresa en la siguiente fórmula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+d=\sqrt{(x_{2}-x_{1})^{2}-(y_{2}-y_{1})^{2}}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sin embargo, la fórmula, tal como está, lo que hace es dar valores inversamente
+ proporcionales a la similitud (esto es evidente ya que entre más similares
+ son dos personas, más corta es la distancia).
+ Lo que se espera, claro, es una función que de valores 
+\emph on
+mayores
+\emph default
+ entre más grande sea la similitud, para este efecto, se puede invertir
+ y ampliar la fórmula de esta manera:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\Delta=\frac{1}{1+d}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Así, se puede hablar del porcentaje de similitud entre personas.
+\end_layout
+
+\begin_layout Subparagraph
+Similitud de coseno
+\end_layout
+
+\begin_layout Standard
+Si se entienden los perfiles de preferencias del usuario como un vector,
+ se puede aplicar esta técnica extensamente utilizada en el modelo de espacio
+ vectorial de recuperación de información: si el ángulo entre los vectores
+ se hace más corto, el ángulo de coseno se acerca a la unidad 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Garcia"
+
+\end_inset
+
+.
+ Se expresa de la siguiente manera:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\cos\theta=\frac{a\cdot b}{\parallel a\parallel\parallel b\parallel}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Coeficiente de correlación de Pearson
+\end_layout
+
+\begin_layout Standard
+Definida con sencillez y elegancia en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Segaran2007"
+
+\end_inset
+
+ como
+\end_layout
+
+\begin_layout Quotation
+La relación entre qué tanto cambian las variables juntas e individualmente.
+\end_layout
+
+\begin_layout Standard
+Lo cual se traduce en lenguaje estadístico como la razón entre la covarianza
+ de ambas variables y la desviación estándar de cada una.
+ Se puede escribir así, para dos usuarios 
+\emph on
+i 
+\emph default
+y 
+\emph on
+j
+\emph default
+ que han calificado un conjunto común de elementos 
+\emph on
+E
+\emph default
+ (adapatada de 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Sarwar2001"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+corr_{i,j}=\frac{\sum_{e\in E}(P_{e,i}-\bar{P_{i}})(P_{e,j}-\bar{P_{j}})}{\sqrt{\sum_{e\in E}(P_{e,i}-P_{i})^{2}}\sqrt{\sum_{e\in E}(P_{e,j}-P_{j})^{2}}}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+donde 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $P_{e,i}$
+\end_inset
+
+ representa la ponderación del usuario 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+i
+\emph default
+ para el elemento 
+\emph on
+e 
+\emph default
+y 
+\begin_inset Formula $\bar{P_{i}}$
+\end_inset
+
+ es el promedio de todas las calificaciones del usuario.
+\end_layout
+
+\begin_layout Standard
+Una vez determinados los usuarios más similares, se procede a calcular cuánto
+ le daría el usuario actual a los elementos que los otros usuarios similares
+ han calificado.
+ Para ello, se pueden usar dos métodos: 
+\emph on
+suma ponderada
+\emph default
+ y 
+\emph on
+regresión
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+En el método de suma ponderada, se suman los valores que los usuarios similares
+ han dado al elemento actual, ponderándolos por la similaridad que exista
+ entre el usuario actual y los demás.
+ 
+\end_layout
+
+\begin_layout Standard
+El método de regresión trata de ajustar una línea recta entre las ponderaciones
+ para el elemento actual, lo cual tiene la ventaja de dar resultados más
+ exactos, al tratar de ajustar a un mismo criterio valores que podrían estar
+ muy distantes.
+\end_layout
+
+\begin_layout Standard
+Con cualquier método, el resultado será la predicción del juicio que el
+ usuario actual tendría sobre elementos que él no ha calificado aún; los
+ elementos con mayor calificación consistirán en la recomendación.
+\end_layout
+
+\begin_layout Standard
+Hasta el momento, el filtrado colaborativo discutido ha sido uno 
+\emph on
+orientado a los usuarios
+\emph default
+.
+ Sin embargo, como ya se mencionó, esto puede volverse computacionalmente
+ difícil para grandes colecciones de elementos con un número considerable
+ de usuarios.
+ Una alternativa es calcular periódicamente los elementos que son similares
+ entre sí y, a la hora de recomendar, en lugar de buscar entre todos los
+ usuarios, sólo se busca entre todos los elementos similares y las correspondien
+tes valoraciones.
+ Los algoritmos involucrados son muy similares a su contraparte basada en
+ usuarios, e implementaciones y resultados experimentales de este enfoque
+ alternativo, así como una explicación más detallada, se pueden encontrar
+ en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sarwar2001"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Filtrado colaborativo basado en modelos
+\end_layout
+
+\begin_layout Standard
+Como se discutirá en el apartado 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Limitaciones"
+
+\end_inset
+
+, un problema de los sistemas basados en memoria es el escaso uso del historial
+ del usuario.
+ Los sistemas basados en modelos tratan de superar este problema: en vez
+ de calcular las predicciones cada vez, construyen hipótesis de 
+\emph on
+por qué
+\emph default
+ los usuarios en una vecindad de preferencias han preferido un sistema y
+ a partir de ésta calculan las predicciones para filtrar los elementos.
+ Técnicas de aprendizaje de máquina, como las mencionadas en el apartado
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:El-perfil-del"
+
+\end_inset
+
+ se pueden utilizar para ese fin.
+ La orientación a artículos en lugar de usuarios es un componente central
+ de este tipo de sistemas
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mortensen2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Limitaciones
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Limitaciones"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La orientación a la comunidad es un arma de doble filo: si bien la mayor
+ parte de las recomendaciones son exactas, el sistema se basa en datos que
+ son intrínsecamente inexactos: las opiniones de personas.
+ [arranque en frío...]
+\end_layout
+
+\begin_layout Standard
+Las limitaciones más comunes presentadas por 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Mortensen2007,Fox2010"
+
+\end_inset
+
+ para este tipo de sistemas son:
+\end_layout
+
+\begin_layout Description
+Dispersión: Los sistemas implementados para grandes colecciones de productos
+ probablemente tengan una gran cantidad de productos que han sido evaluados
+ por pocos usuarios, resultando así en recomendaciones pobres para éstos.
+ 
+\end_layout
+
+\begin_layout Description
+Escalabilidad: Como se notó antes, los algoritmos convencionales para el
+ cálculo de recomendaciones son computacionalmente costosos, lo cual puede
+ tener un impacto significativo cuando la colección de artículos y usuarios
+ crezca.
+\end_layout
+
+\begin_layout Description
+Aprendizaje: En los sistemas basados en memoria, nada se aprende del usuario
+ más allá del momento en el que se le recomienda, por lo que cada vez que
+ el usuario utilice el sistema, recibirá recomendaciones genéricas que no
+ aprovechan en realidad su historial de consumo.
+\end_layout
+
+\begin_layout Description
+Preferencias
+\begin_inset space ~
+\end_inset
+
+inusuales: para usuarios que no tienen similitud con otros, las recomendaciones
+ serían también pobres, dado que las funciones de predicción dependen de
+ la existencia de más usuarios con preferencias similares.
+\end_layout
+
+\begin_layout Description
+Sobre-especialización: artículos de uso más común que otros tendrán más
+ evaluaciones.
+\end_layout
+
+\begin_layout Description
+Arranque
+\begin_inset space ~
+\end_inset
+
+en
+\begin_inset space ~
+\end_inset
+
+frío: Sucede cuando el sistema aún no ha podido construir una matriz de
+ usuarios-artículos que provea suficiente información.
+ Esto se puede resolver con algoritmos heurísticos, como proponen 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schein2002"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
