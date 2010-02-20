@@ -1686,12 +1686,7 @@ Introducción
 En el presente capitulo se introducirá el concepto general de sistemas de
  recomendación, las técnicas más comunes para su implementación y los métodos
  utilizados en su evaluación.
- Se introducen, además, otros conceptos útiles para el proyecto a realizar.
- Se introduce, además, el concepto de 
-\emph on
-sistema de recomendación proactivo
-\emph default
-.
+ 
 \end_layout
 
 \begin_layout Section
@@ -1705,8 +1700,8 @@ Como se dijo en el capítulo anterior, un sistema de recomendación se puede
 \emph on
 recomendación
 \emph default
-: ¿cómo un sistema puede deducir qué puede preferir el usuario de un conjunto
- de resultados? 
+: ¿cómo un sistema puede deducir qué puede preferir el usuario de entre
+ un conjunto de resultados? 
 \end_layout
 
 \begin_layout Standard
@@ -1766,8 +1761,8 @@ En suma, los sistemas de recomendación se pueden ver como
 sistemas de filtración de información
 \emph default
  en base a cierto perfil, ya sea construido con las preferencias del usuario
- solamente o uniendo éstas a las de otros usuarios, con el contexto en el
- que el usuario se desenvuelve o con ambos.
+ y el contexto en el que el usuario se desenvuelve o infiriéndolo del comportami
+ento de éste y otros usuarios similares .
 \end_layout
 
 \begin_layout Subsection
@@ -2131,8 +2126,9 @@ s que sea más idónea para la labor de recomendación; puesto que los usuarios
 \emph on
 atributos
 \emph default
- más conspicuos de los elementos, haciendo sencillo el almacenamiento: se
- pueden ver los atributos como las columnas y cada componente como una fila.
+ más conspicuos de los elementos, haciendo así sencillo el almacenamiento
+ porque se pueden ver los atributos como las columnas y cada componente
+ como una fila.
  Pero para tener verdadera utilidad para el sistema, los valores de estos
  atributos deberían estar en un 
 \emph on
@@ -2166,8 +2162,8 @@ película que da ganas de que no termine nunca
  las ambigüedades inherentes al lenguaje natural se presentan.
  Una solución al problema de campos de texto libre es el uso de técnicas
  de asignación de relevancia y conversión de los términos a otras representacion
-es más manejables por un sistema -por ejemplo, el uso del famoso modelo
- de espacio vectorial 
+es más manejables por un sistema computacional -por ejemplo, el uso del
+ famoso modelo de espacio vectorial 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Salton1975a"
@@ -2245,7 +2241,7 @@ del usuario y el historial de las interacciones de con el sistema.
  con el sistema, llevando un control de qué artículos le interesaron al
  usuario ya sea mediante retroalimentación explícita (asignar un juicio
  cualitativo de valor, por ejemplo) o implícita (comprar o utilizar un artefacto
-) se etiquetan los elementos como, por ejemplo, 
+) se etiquetan los elementos -por ejemplo, como 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2261,7 +2257,7 @@ no interesantes
 \begin_inset Quotes erd
 \end_inset
 
- y se usan estos datos para entrenar al algoritmo.
+- y se usan estos datos para entrenar al algoritmo.
  De esta manera, se construye una hipótesis de los gustos de éste para predecir
  cuáles otros podrían interesarle.
  Métodos como Naive-Bayes, exitosos en otras tareas de clasificación, se
@@ -2358,9 +2354,9 @@ Para ciertos tipos de artefactos, este tipo de filtrado puede mostrarse
 es en tópicos de interés para el usuario.
  Sin embargo, para datos escasos, poco estructurados o de valoraciones más
  subjetivas, como música o sitios web, estos sistemas se quedan atrás, al
- necesitar suficiente información como para categorizar y requerir del al
- usuario el uso del sistema por un tiempo considerable o llenar un perfil
- detallado para refinar la recomendación.
+ necesitar suficiente información como para categorizar y requerir del usuario
+ el uso del sistema por un tiempo considerable o llenar un perfil detallado
+ para refinar la recomendación.
 \end_layout
 
 \begin_layout Subsection
@@ -2420,9 +2416,9 @@ Es un método basado en el ambiente social, usado para proponer artículos
 En consecuencia, los sistemas que utilizan filtrado colaborativo trascienden
  las limitaciones de los basados en contenido: se valen de la inteligencia
  colectiva para hacer recomendaciones y no tanto en un extenso perfil del
- usuario, puesto que pueden inferir en menos tiempo de uso del sistema o
- con un perfil más reducido, qué otros usuarios opinan de manera similar
- al actual; las recomendaciones dependen de las evaluaciones, más que del
+ usuario, puesto que pueden inferir en menos tiempo de uso del sistema,
+ o con un perfil más reducido, qué otros usuarios opinan de manera similar
+ al actual; las recomendaciones dependen de las evaluaciones más que del
  contenido de los artefactos, por lo se puede omitir la fase de análisis
  de contenido, la cual es computacionalmente costosa, y particularmente
  difícil para artefactos con multimedia y, por último, un sistema de filtrado
@@ -2474,28 +2470,6 @@ key "Pazzani2007"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-De cualquier manera, una vez en posesión de datos cuantitativos de los gustos
- de los usuarios, se calcula la similitud entre usuarios; las técnicas utilizada
-s para esto pueden ser bastante complejas: desde el uso de la distancia
- euclideana 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Segaran2007"
-
-\end_inset
-
-, hasta máquinas de vectores de soporte 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Grcar2005"
-
-\end_inset
-
-.
- Algunos de estos algoritmos se discuten a continuación.
 \end_layout
 
 \begin_layout Standard
@@ -2564,10 +2538,6 @@ key "Baudisch1999"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -2714,13 +2684,31 @@ key "Baudisch1999"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+De cualquier manera, una vez en posesión de datos cuantitativos de los gustos
+ de los usuarios, se calcula la similitud entre usuarios; las técnicas utilizada
+s para esto pueden ser bastante complejas: desde el uso de la distancia
+ euclideana 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Segaran2007"
+
+\end_inset
+
+, hasta máquinas de vectores de soporte 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Grcar2005"
+
+\end_inset
+
+.
+ Algunos de estos algoritmos se discuten a continuación.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2736,8 +2724,8 @@ matriz de usuarios y artículos.
  
 \emph default
 Por ejemplo, para un sistema de recomendación de literatura con seis libros
- y cuatro usuarios, se podría tener la siguiente representación mostrada
- en la tabla 
+ y cuatro usuarios, se podría tener la representación mostrada en la tabla
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:User-item-matrix-ex"
@@ -3157,7 +3145,7 @@ El filtrado basado en memoria trata de simular la situación cotidiana de
  que tienen gustos similares a los propios, pues encuentran de más valor
  en esas opiniones.
  Para realizarlo computacionalmente, una vez existente la matriz de usuarios-art
-ículos, se deb buscar en toda la base de datos todas aquellas filas que
+ículos, se debe buscar en toda la base de datos todas aquellas filas que
  sean similares a la del usuario -es decir, se buscan aquellos perfiles
  que sean más parecidos al del usuario- y luego, en función de esto, se
  puede predecir la preferencia respecto a los elementos a recomendar -lo
@@ -3467,14 +3455,14 @@ La orientación a la comunidad es un arma de doble filo: si bien la mayor
 \end_layout
 
 \begin_layout Standard
-Las limitaciones más comunes presentadas por 
+Las limitaciones más comunes, presentadas por 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Mortensen2007,Fox2010"
 
 \end_inset
 
- para este tipo de sistemas son:
+, para este tipo de sistemas son:
 \end_layout
 
 \begin_layout Description
@@ -3596,8 +3584,8 @@ Pero, a diferencia de los otros, estos sistemas requieren una interacción
 
 \begin_layout Standard
 La desventaja de estos sistemas es que requieren del uso de técnicas avanzadas
- de ingeniería del conocimiento, conviertiéndolos en una opción arquitecturalmen
-te costosa, además de exigir un uso exclusivo, lo cual es indeseable para
+ de ingeniería del conocimiento, convirtiéndolos en una opción arquitecturalment
+e costosa, además de exigir un uso exclusivo, lo cual es indeseable para
  implementaciones que requieran de poca intrusión en la actividad principal
  del usuario.
 \end_layout
@@ -4218,7 +4206,7 @@ H.
 
 \begin_layout Plain Layout
 I.
- La abilidad de sugerir es estática
+ La habilidad de sugerir es estática
 \end_layout
 
 \end_inset
