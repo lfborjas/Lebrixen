@@ -1813,6 +1813,13 @@ Tipos de sistemas de recomendación
 
 \begin_layout Subsection
 Filtrado basado en el contenido
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Filtrado-contenido"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1843,6 +1850,222 @@ status collapsed
 
 \begin_layout Plain Layout
 Numeración del autor
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Baudisch1999"
+
+\end_inset
+
+ propone una analogía basada en las bases de datos relacionales: ver a un
+ sistema orientado al contenido como una relación entre entidades, la cual
+ se muestra en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:E-R-content-RC"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+placement b
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/2_ER_content_based_RC.dia
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:E-R-content-RC"
+
+\end_inset
+
+E-R representando a los sistemas orientados al contenido, adaptado de 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Baudisch1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De esa relación entre entidades, se puede inferir la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:contentRc_app"
+
+\end_inset
+
+, donde se muestran las posibles combinaciones de entradas y salidas para
+ un sistema de filtrado de información orientado al contenido.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement b
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Entradas/Salidas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Descriptores
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objetos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objetos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Indización
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Búsqueda basada en ejemplos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Descriptores
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tesauros asociativos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Recuperación y filtrado de información
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:contentRc_app"
+
+\end_inset
+
+Aplicaciones de sistemas orientados al contenido, con las filas como entradas
+ y las columnas como salidas.
+ Adaptada de 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Baudisch1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2141,7 +2364,14 @@ es en tópicos de interés para el usuario.
 \end_layout
 
 \begin_layout Subsection
-Filtrado colaborativo.
+Filtrado colaborativo
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Filtrado-colaborativo."
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2268,6 +2498,231 @@ key "Grcar2005"
  Algunos de estos algoritmos se discuten a continuación.
 \end_layout
 
+\begin_layout Standard
+De manera análoga a la definición dada para los sistemas orientados al contenido
+, en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Baudisch1999"
+
+\end_inset
+
+ también se puede encontrar una representación de los sistemas colaborativos
+ como una relación entre entidades (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:E-R_collab_sys"
+
+\end_inset
+
+) y las distintas combinaciones de entradas y salidas para esta relación
+ (tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:collab_RC_app"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement b
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/2_ER_collaborative_RC.dia
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:E-R_collab_sys"
+
+\end_inset
+
+E-R de los sistemas colaborativos, adaptado de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baudisch1999"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement b
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Entradas/Salidas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Usuario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objeto
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objeto
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Búsqueda de expertos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Filtrado colaborativo automatizado
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Usuario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Casamentero/Emparejador
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Filtrado colaborativo activo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:collab_RC_app"
+
+\end_inset
+
+Combinación de entradas y salidas para un sistema colaborativo, adaptada
+ de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baudisch1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Métodos de filtrado colaborativo
 \end_layout
@@ -2294,6 +2749,7 @@ reference "tab:User-item-matrix-ex"
 
 \begin_layout Standard
 \begin_inset Float table
+placement h
 wide false
 sideways false
 status open
@@ -3094,14 +3550,56 @@ Los dos grandes enfoques discutidos antes son los más usados a nivel comercial,
 \emph on
 orientados al conocimiento
 \emph default
+ -introducidos en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Burke2000"
+
+\end_inset
+
 .
  Éstos tratan de 
 \emph on
 razonar
 \emph default
- la razón que subyace a la elección de cierto artefacto por el usuario,
+ la motivación que subyace a la elección de cierto artefacto por el usuario,
  determinando qué atributos, y qué relaciones entre éstos, han influenciado
- la decisión para determinar otros artefactos que podrían 
+ la decisión para así determinar otros artefactos que podrían ser de interés
+ al usuario.
+ Nótese la diferencia entre estos sistemas y los orientados al contenido:
+ mientras que los de contenido infieren un patrón de preferencias del usuario,
+ los orientados al conocimiento no sólo saben del usuario, sino que también
+ de los artefactos, y la combinación de estas dos fuentes de conocimientos
+ permite un razonamiento (y no sólo una conjetura, como lo derivado del
+ mero aprendizaje de máquina) de las necesidades del usuario.
+ Este enfoque se deriva del 
+\emph on
+razonamiento basado en casos:
+\emph default
+ dado un problema, se utiliza una base de conocimiento de problemas anteriores
+ para asimilar el problema nuevo con algunos precedentes y derivar una solución
+ similar a la de éstos.
+\end_layout
+
+\begin_layout Standard
+Pero, a diferencia de los otros, estos sistemas requieren una interacción
+ más estrecha con el usuario: luego de las recomendaciones preliminares,
+ ofrecen opciones implícitas de retroalimentación al usuario, como darle
+ más valor a un atributo o ignorar otro, para poder así construir un modelo
+ de conocimiento a medida que se navega entre las sugerencias, convirtiéndose
+ también en agentes de navegación asistida.
+ La intromisión, sin embargo, está orientada a recabar datos cada vez más
+ precisos del usuario a la vez que ofrece mejores opciones a éste, por lo
+ que se compensa la frecuente intrusión con el aporte de cada vez mejores
+ sugerencias.
+\end_layout
+
+\begin_layout Standard
+La desventaja de estos sistemas es que requieren del uso de técnicas avanzadas
+ de ingeniería del conocimiento, conviertiéndolos en una opción arquitecturalmen
+te costosa, además de exigir un uso exclusivo, lo cual es indeseable para
+ implementaciones que requieran de poca intrusión en la actividad principal
+ del usuario.
 \end_layout
 
 \begin_layout Section
@@ -3125,23 +3623,829 @@ n del saber colectivo de los usuarios, además de su característico costo
 Sistemas de recomendación colaborativos y orientados al contenido
 \end_layout
 
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Mortensen2007"
+
+\end_inset
+
+ resume las combinaciones de ambos enfoques en cuatro tipos:
+\end_layout
+
+\begin_layout Enumerate
+Combinar sistemas de recomendación separados: consiste en tomar las listas
+ de sistemas distintos que utilicen cualquier enfoque y luego ordenarlas
+ mediante otras técnicas de ordenamiento por relevancia.
+\end_layout
+
+\begin_layout Enumerate
+Agregar elementos orientados al contenido a sistemas colaborativos: determinando
+ similitud entre usuarios mediante sus perfiles y no en base a artefactos
+ en común; aunque esto requiere que se recabe una base histórica aún mayor,
+ permite recomendaciones personalizadas.
+\end_layout
+
+\begin_layout Enumerate
+Agregar características colaborativas al enfoque orientado a contenido:
+ consiste en representar los perfiles de usuarios como vectores de términos
+ y luego usar técnicas de agrupamiento para asimilarlos.
+\end_layout
+
+\begin_layout Enumerate
+Unificar en un solo sistema: esto incluye las dos técnicas anteriores en
+ una implementación diseñada desde un inicio para este efecto, un ejemplo
+ de un sistema unificado se puede encontrar en 
+\emph on
+Fab 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Balabanovic1997"
+
+\end_inset
+
+
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Tradicionalmente, la unión de ambos enfoques, en concreto, de agregar caracterís
+ticas de orientación al contenido a un sistema colaborativo se hace tradicionalm
+ente agregando reglas relacionadas con el contenido del dominio a la matriz
+ de usuarios-artículos -por ejemplo, si un artículo tiene mala ortografía,
+ la regla puede decidir darle una puntuación desfavorable; aunque esto resuelve
+ el problema de la dispersión y el arranque en frío -que artículos nuevos
+ no son evaluados, ni recomendados, por carecer de evaluación- al hacer
+ que las reglas sean los primeros evaluadores de los elementos; 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baudisch1999"
+
+\end_inset
+
+, ofrece una alternativa: en vez de 
+\emph on
+combinar 
+\emph default
+las técnicas, propone 
+\emph on
+unirlas
+\emph default
+ -en jerga de bases de datos, en vez de agregar una a la otra, propone unirlas
+ en una nueva
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+Join
+\emph default
+, el término en inglés para este concepto de b.d.
+ relacionales quizá clarifique el sentido de la frase
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Para ilustrar esta unificación, se vale de las definiciones alternas para
+ ambos sistemas -mencionadas en las secciones 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Filtrado-contenido"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Filtrado-colaborativo."
+
+\end_inset
+
+ para hacer una unión de la representación de entidades, que se presenta
+ en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:E-R-Hybrid"
+
+\end_inset
+
+y que ofrece las aplicaciones ilustradas en la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Hybrid"
+
+\end_inset
+
+; en ésta, al contar con todos los datos de ambos enfoques en un sistema
+ unificado, se puede ir más allá del filtrado de información, pero la columna
+ pertinente al tópico de la recomendación es la central: nótese que resulta
+ en poder un filtrado colaborativo orientado a objetos y a usuarios a la
+ vez que permite contar con recuperación de información en base a perfiles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement b
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/3_ER_hybrid.dia
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:E-R-Hybrid"
+
+\end_inset
+
+E-R Híbrido resultante de la combinación de sistemas colaborativos y orientados
+ al contenido.
+ Adaptado de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baudisch1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Entradas/Salidas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Descriptor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objeto
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Usuario
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Usuario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exportación de perfiles
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Filtrado colaborativo activo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Emparejador
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Objeto
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Indización
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Búsqueda mediante ejemplos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Filtrado colaborativo automatizado
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Búsqueda de expertos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Descriptor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tesauro
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Recuperación y filtrado de información
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Búsqueda de expertos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Importación de perfiles
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Hybrid"
+
+\end_inset
+
+Aplicaciones de un sistema híbrido de recomendación, adaptada de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baudisch1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Sistemas de recomendación colaborativos y orientados al conocimiento
 \end_layout
 
 \begin_layout Standard
-Este híbrido, propuesto por 
+Aunque los sistemas orientados al conocimiento pueden encontrar recomendaciones
+ más adecuadas, carecen del importante elemento social de los sistemas colaborat
+ivos, filtrando menos elementos que éstos, al carecer del contexto que la
+ comunidad aporta.
+ Por ello
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Burke1999"
 
 \end_inset
 
- [mettre la table de comparison]
+ propuso, mediante una tabla como la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:knowledge-vs-collaborative"
+
+\end_inset
+
+, un híbrido entre estos dos enfoques.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Técnica
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ventajas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Desventajas
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Orientada al conocimiento
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="1">
+<features>
+<column alignment="center" valignment="top" width="20page%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+A.
+ No se necesita mucha información inicial.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+B.
+ Retroalimentación detallada y cualitativa de preferencias.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C.
+ Sensible a la variación a corto plazo.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features>
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+H.
+ Ingeniería del conocimiento
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I.
+ La abilidad de sugerir es estática
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Filtrado colaborativo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="1">
+<features>
+<column alignment="center" valignment="top" width="20page%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+D.
+ Identifica nichos con precisión.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+E.
+ No se necesita conocimiento específico al dominio.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+F.
+ La calidad mejora con el tiempo.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+G.
+ Las recomendaciones son personalizadas.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="1">
+<features>
+<column alignment="center" valignment="top" width="15page%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+J.
+ La calidad depende de los datos históricos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+K.
+ Sujeta a anomalías estadísticas
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+L.
+ Reacciona lentamente a la variación a corto plazo.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Híbrido Ideal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+A, B, C, D, F, G
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+H
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:knowledge-vs-collaborative"
+
+\end_inset
+
+Comparación entre sistemas colaborativos y orientados al conocimiento.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Estos híbridos, entonces, paliarían el problema de la poca atención a las
+ tendencias entre varios usuarios, ofreciendo recomendaciones exactas mediante
+ la base del conocimiento y filtradas mediante lo que otros usuarios han
+ hecho con los artefactos del conjunto de resultados, dotando a los sistemas
+ basados en el conocimiento de la alta precisión y la orientación social
+ de la que inherentemente carecen.
 \end_layout
 
 \begin_layout Section
-Evaluación de un sistema recomendador
+Evaluación de un sistema de recomendación
+\end_layout
+
+\begin_layout Standard
+[Se planea la lectura y posible inclusión de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schein,Mortensen2007,Hayes,Chen2008,Schein2002"
+
+\end_inset
+
+]
 \end_layout
 
 \begin_layout Chapter
@@ -3153,8 +4457,8 @@ En el presente capítulo se explora la aplicabilidad de distintas técnicas
  de recuperación de información en el contexto de un sistema de recomendación.
  En primer lugar, se introducen conceptos específicos a esta tarea, como
  ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
- Luego, se exploran y evalúan modelos de representación del conocimiento
- y búsqueda de documentos que se consideran pertinentes.
+ Luego, se exploran y evalúan modelos de representación del conocimiento,,
+ búsqueda de documentos y filtrado que se consideran pertinentes.
 \end_layout
 
 \begin_layout Standard
