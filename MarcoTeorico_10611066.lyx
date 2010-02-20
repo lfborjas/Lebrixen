@@ -484,7 +484,7 @@ key "Walker1999"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1030,8 +1030,8 @@ Evaluación de un sistema de recuperación de información.
 \begin_layout Standard
 Como se hace ver en 
 \begin_inset CommandInset citation
-LatexCommand citep
-key "Voorhees2002"
+LatexCommand citet
+key "Voorhees2002a"
 
 \end_inset
 
@@ -1066,7 +1066,7 @@ reference "tab:Clasif-docs"
 placement h
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -1870,7 +1870,7 @@ reference "fig:E-R-content-RC"
 
  
 \begin_inset Float figure
-placement b
+placement h
 wide false
 sideways false
 status open
@@ -1878,6 +1878,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/2_ER_content_based_RC.dia
+	scale 30
 
 \end_inset
 
@@ -1926,7 +1927,7 @@ reference "tab:contentRc_app"
 
 \begin_layout Standard
 \begin_inset Float table
-placement b
+placement h
 wide false
 sideways false
 status open
@@ -2502,7 +2503,7 @@ reference "tab:collab_RC_app"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement b
+placement h
 wide false
 sideways false
 status open
@@ -2510,6 +2511,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/2_ER_collaborative_RC.dia
+	scale 30
 
 \end_inset
 
@@ -2548,10 +2550,10 @@ key "Baudisch1999"
 
 \begin_layout Standard
 \begin_inset Float table
-placement b
+placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -2746,13 +2748,13 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="7">
 <features>
+<column alignment="center" valignment="top" width="10page%">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="10page%">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2794,7 +2796,7 @@ Fundación
 \begin_inset Text
 
 \begin_layout Plain Layout
-Gödel, Escher, Bach
+G.E.B
 \end_layout
 
 \end_inset
@@ -3739,7 +3741,7 @@ reference "tab:Hybrid"
 
 \begin_layout Standard
 \begin_inset Float figure
-placement b
+placement h
 wide false
 sideways false
 status open
@@ -3747,6 +3749,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/3_ER_hybrid.dia
+	scale 30
 
 \end_inset
 
@@ -3787,6 +3790,7 @@ key "Baudisch1999"
 
 \begin_layout Standard
 \begin_inset Float table
+placement h
 wide false
 sideways false
 status open
@@ -3795,7 +3799,7 @@ status open
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="4">
 <features>
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="10text%">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
