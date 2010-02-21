@@ -3705,14 +3705,14 @@ Join
 Para ilustrar esta unificación, se vale de las definiciones alternas para
  ambos sistemas -mencionadas en las secciones 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "sub:Filtrado-contenido"
 
 \end_inset
 
  y 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "sub:Filtrado-colaborativo."
 
 \end_inset
