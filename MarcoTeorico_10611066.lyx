@@ -4430,16 +4430,145 @@ Evaluación de un sistema de recomendación
 \end_layout
 
 \begin_layout Standard
-[Se planea la lectura y posible inclusión de 
+Un componente importante de un sistema de recomendación es el que obtiene
+ de la colección de artefactos aquellos que se filtrarán para luego sugerirlos;
+ como ya se ha mencionado, este componente es, en realidad, un sistema de
+ recuperación de información, de ahí que parte de la evaluación se pueda
+ hacer en términos de precisión y exhaustividad del subconjunto de resultados.
+ Sin embargo, 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Schein,Mortensen2007,Hayes,Chen2008,Schein2002"
+key "Herlocker2004"
 
 \end_inset
 
-]
+ proponen nuevas métricas para la medida de este tipo de sistemas, en especial
+ los de filtrado colaborativo, puesto que los orientados al contenido bien
+ podrían ser medidos como nada más que un caso especial de recuperación
+ de información.
 \end_layout
 
+\begin_layout Subsection
+Métricas
+\end_layout
+
+\begin_layout Subsection
+Otras medidas
+\end_layout
+
+\begin_layout Standard
+Aunque el análisis puramente sistemático del desempeño de un sistema de
+ recomendación pueda ser suficiente, el papel del usuario no puede ser dejado
+ de lado del todo, por ello, en la evaluación de su sistema, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chen2008"
+
+\end_inset
+
+ se centran en la satisfacción del usuario utilizando dos evaluaciones:
+\end_layout
+
+\begin_layout Description
+Satisfacción
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+usuario
+\begin_inset space ~
+\end_inset
+
+respecto
+\begin_inset space ~
+\end_inset
+
+al
+\begin_inset space ~
+\end_inset
+
+sistema: se refiere a la interacción del usuario con el sistema mismo (mejor
+ dicho, con la interfaz de usuario), se proponen cinco medidas:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Facilidad de uso.
+\end_layout
+
+\begin_layout Enumerate
+Comprensibilidad de las funciones del sistema.
+\end_layout
+
+\begin_layout Enumerate
+Fiabilidad.
+\end_layout
+
+\begin_layout Enumerate
+Facilidad del aprendizaje de uso.
+\end_layout
+
+\begin_layout Enumerate
+Tiempo de respuesta.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Satisfacción
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+usuario
+\begin_inset space ~
+\end_inset
+
+respecto
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+la
+\begin_inset space ~
+\end_inset
+
+información: o qué tan satisfecho está el usuario con los resultados que
+ el sistema le presenta.
+ Así como en el aspecto anterior, se presentan cinco medidas, respecto a
+ las recomendaciones como tales:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Qué tanto de los requerimientos del usuario se ve cubierto.
+\end_layout
+
+\begin_layout Enumerate
+Confiabilidad.
+\end_layout
+
+\begin_layout Enumerate
+No-ambigüedad.
+\end_layout
+
+\begin_layout Enumerate
+Precisión.
+\end_layout
+
+\begin_layout Enumerate
+Inteligibildad.
+\end_layout
+
+\end_deeper
 \begin_layout Chapter
 Implementación de un sistema de recomendación proactivo
 \end_layout
