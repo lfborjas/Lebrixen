@@ -1195,6 +1195,13 @@ Clasificación de los documentos en una colección, vistos como resultados
 
 \begin_layout Subsection
 Medidas de evaluación
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:eval-metrics"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4492,23 +4499,50 @@ key "HinrichSchutze2009"
 \end_inset
 
  pueden ser aplicadas.
+ Es de enfatizar que lo que se mide con la curva ROC es la relación entre
+ precisión y exhaustividad, pero una característica interesante de los sistemas
+ de filtrado de información es que podrían sugerir más elementos de los
+ que un usuario encontraría verdaderamente útiles; para normalizar esta
+ situación, se puede introducir una restricción en la presentación de resultados
+: sólo mostrar una cantidad constante de recomendaciones a todos los usuarios,
+ las cuales consistirían en las 
+\emph on
+k
+\emph default
+ mejores sugerencias.
+ Un sistema donde se ha introducido tal restricción se puede medir con una
+ curva CROC (curva ROC de cliente), medida sugerida por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schein"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Asimismo, se puede tratar a un sistema de recomendación como una instancia
- del problema de clasificación mediante aprendizaje de máquina o de regresión,
- en concreto, la igualación a un perfil aprendido (sistemas orientados al
- contenido) se podría ver como clasificar y la predicción del favor del
- usuario (sistemas colaborativos) como una aplicación de regresión.
- 
+Asmismo medidas de evaluación de aprendizaje de máquina en sistemas orientados
+ al contenido se podrían aplicar, como la exactitud
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+definida en la sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:eval-metrics"
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-Así, entonces, medidas de evaluación de aprendizaje de máquina en sistemas
- orientados al contenido se podrían aplicar, como la exactitud, el afinamiento
- mediante matrices de confusión o la validación cruzada (más sobre estos
- métodos de valoración se puede encontrar en los capítulos sobre aprendizaje
- de máquina de 
+\end_inset
+
+, el afinamiento mediante matrices de confusión o la validación cruzada
+ (más sobre estos métodos de valoración se puede encontrar en los capítulos
+ sobre aprendizaje de máquina de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Russell1995"
@@ -4519,25 +4553,80 @@ key "Russell1995"
 \end_layout
 
 \begin_layout Standard
-Y para los sistemas de colaboración vistos como un problema de regresión,
+Y para los sistemas de colaboración, vistos como un problema de regresión,
  se podrían usar medidas de correlación entre los resultados esperados y
  los estimados, así como otros cálculos de error, como ser la media cuadrática.
-\end_layout
-
-\begin_layout Standard
-Sin embargo, 
+ En 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Herlocker2004"
 
 \end_inset
 
- proponen ciertas métricas para la medida de este tipo de sistemas, en especial
- los de filtrado colaborativo.
+ se examinan a fondo las métricas antes mencionadas para la medida de este
+ tipo de sistemas, específicamente los de filtrado colaborativo.
 \end_layout
 
 \begin_layout Standard
-[accuracy, coverage, et al.]
+De las anteriores consideraciones se pueden destacar tres medidas extensamente
+ utilizadas en la investigación de la evaluación de sistemas de recomendación:
+\end_layout
+
+\begin_layout Description
+Exactitud: que mide qué tan bien clasifica un sistema (o predice) comparando
+ los resultados obtenidos con resultados estimados o evaluados por usuarios.
+\end_layout
+
+\begin_layout Description
+Cobertura: que mide qué tanto de la colección puede ser sugerido por el
+ sistema, puesto que muchos de los artículos podrían no ser nunca evaluados
+ o no ser semánticamente relevantes a ningún perfil de usuario.
+\end_layout
+
+\begin_layout Description
+Tasa
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+aprendizaje: qué tan rápido pueden aprender los algoritmos la cantidad suficient
+e de información como para empezar a dar recomendaciones significativas.
+ 
+\end_layout
+
+\begin_layout Standard
+Una de las mayores limitaciones de este tipo de análisis de desempeño es
+ el sesgo en el conjunto de resultados a evaluar: usualmente, los usuarios
+ sólo han calificado lo que ellos favorecen, y no se toman la importancia
+ de dar retroalimentación explícita a aquellos artefactos que no encuentren
+ útiles, y se puede mencionar también en contra de las métricas puramente
+ estadísticas que ignoran la 
+\emph on
+utilidad
+\emph default
+ de los resultados: aunque ciertos artefactos puedan significar alta precisión
+ o exactitud, quizá no sean -por ser muy obvios- de gran aporte al usuario
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Adomavicius2005"
+
+\end_inset
+
+, esto se relaciona con los conceptos de 
+\emph on
+novedad 
+\emph default
+y 
+\emph on
+serendipia:
+\emph default
+ si el artículo sugerido es uno que no se le hubiera ocurrido, por no conocer
+ -novedad- o ignorar su utilidad para el contexto presente -serendipia,
+ al usuario.
 \end_layout
 
 \begin_layout Subsection
@@ -4547,9 +4636,10 @@ en línea
 \end_layout
 
 \begin_layout Standard
-Aunque el análisis puramente sistemático del desempeño de un sistema de
- recomendación pueda ser suficiente, el papel del usuario no puede ser dejado
- de lado del todo, por ello, en la evaluación de su sistema, 
+Además de las limitaciones mencionadas, y aunque el análisis puramente sistemáti
+co del desempeño de un sistema de recomendación pueda ser suficiente en
+ ciertos casos, el papel del usuario no puede ser dejado de lado del todo,
+ por ello, en la evaluación de su sistema, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Chen2008"
@@ -4678,7 +4768,7 @@ key "Hayes"
 
 \begin_layout Standard
 En primera, la evaluación se ha de llevar a cabo en una aplicación en línea
- utilizada por usuarios reales, en la cual dos motores de recomendación
+ utilizada por usuarios reales, en la cual los dos motores de recomendación
  distintos se utilizan mediante la misma interfaz de usuario, de manera
  que la satisfacción del usuario respecto al sistema sea mantenga constante
  -ya que el usuario final ignora cuál de los sistemas está utilizando- puesto
@@ -4866,6 +4956,27 @@ key "Hayes"
 
 \end_layout
 
+\begin_layout Standard
+Como conclusión, parece conveniente citar lo que se menciona en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Herlocker2004"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+Un sistema [de recomendación] es útil en la medida en que ayude a un usuario
+ a llevar a cabo sus tareas.
+\end_layout
+
+\begin_layout Standard
+Por ello, se deben elegir las medidas y experimentos de evaluación acordes
+ al propósito del sistema.
+\end_layout
+
 \begin_layout Chapter
 Implementación de un sistema de recomendación proactivo
 \end_layout
@@ -4875,7 +4986,7 @@ En el presente capítulo se explora la aplicabilidad de distintas técnicas
  de recuperación de información en el contexto de un sistema de recomendación.
  En primer lugar, se introducen conceptos específicos a esta tarea, como
  ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
- Luego, se exploran y evalúan modelos de representación del conocimiento,,
+ Luego, se exploran y evalúan modelos de representación del conocimiento,
  búsqueda de documentos y filtrado que se consideran pertinentes.
 \end_layout
 
@@ -4883,7 +4994,7 @@ En el presente capítulo se explora la aplicabilidad de distintas técnicas
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "bibtex_references/ReferenciasFaseI"
-options "/home/lfborjas/Aplicaciones/apa-good"
+options "bibtotoc,/home/lfborjas/Aplicaciones/apa-good"
 
 \end_inset
 
