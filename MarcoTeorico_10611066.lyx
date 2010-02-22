@@ -4430,30 +4430,120 @@ Evaluación de un sistema de recomendación
 \end_layout
 
 \begin_layout Standard
+Se puede evaluar un sistema de recomendación en base a los resultados estimados
+ mediante alguna técnica estadística contra los resultados obtenidos, determinan
+do así si los conjuntos de resultados obtenidos por el sistema cumplen con
+ ciertos requerimientos cuantitativos y cualitativos estáticos.
+ Pero existen otras consideraciones a medir, como el nivel de confianza
+ del usuario en el sistema y qué tanta utilidad tienen los resultados para
+ él.
+ Esta distinción es hecha en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hayes"
+
+\end_inset
+
+cuando califica al primer tipo de mediciones como 
+\emph on
+fuera de línea
+\emph default
+ y a las postreras, como 
+\emph on
+en línea
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection
+Medidas de evaluación 
+\emph on
+fuera de línea
+\end_layout
+
+\begin_layout Standard
 Un componente importante de un sistema de recomendación es el que obtiene
  de la colección de artefactos aquellos que se filtrarán para luego sugerirlos;
  como ya se ha mencionado, este componente es, en realidad, un sistema de
  recuperación de información, de ahí que parte de la evaluación se pueda
  hacer en términos de precisión y exhaustividad del subconjunto de resultados.
- Sin embargo, 
+ Además, si se tiene en mente que las recomendaciones tienen algún sistema
+ de rango para el filtrado, medidas como la curva ROC, la precisión media,
+ la 
+\emph on
+precisión-R
+\emph default
+ y la de 
+\emph on
+once puntos
+\emph default
+, resumidas en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ThorstenBrants"
+
+\end_inset
+
+ y explicadas con mayor detalle en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+ pueden ser aplicadas.
+\end_layout
+
+\begin_layout Standard
+Asimismo, se puede tratar a un sistema de recomendación como una instancia
+ del problema de clasificación mediante aprendizaje de máquina o de regresión,
+ en concreto, la igualación a un perfil aprendido (sistemas orientados al
+ contenido) se podría ver como clasificar y la predicción del favor del
+ usuario (sistemas colaborativos) como una aplicación de regresión.
+ 
+\end_layout
+
+\begin_layout Standard
+Así, entonces, medidas de evaluación de aprendizaje de máquina en sistemas
+ orientados al contenido se podrían aplicar, como la exactitud, el afinamiento
+ mediante matrices de confusión o la validación cruzada (más sobre estos
+ métodos de valoración se puede encontrar en los capítulos sobre aprendizaje
+ de máquina de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Russell1995"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Y para los sistemas de colaboración vistos como un problema de regresión,
+ se podrían usar medidas de correlación entre los resultados esperados y
+ los estimados, así como otros cálculos de error, como ser la media cuadrática.
+\end_layout
+
+\begin_layout Standard
+Sin embargo, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Herlocker2004"
 
 \end_inset
 
- proponen nuevas métricas para la medida de este tipo de sistemas, en especial
- los de filtrado colaborativo, puesto que los orientados al contenido bien
- podrían ser medidos como nada más que un caso especial de recuperación
- de información.
+ proponen ciertas métricas para la medida de este tipo de sistemas, en especial
+ los de filtrado colaborativo.
+\end_layout
+
+\begin_layout Standard
+[accuracy, coverage, et al.]
 \end_layout
 
 \begin_layout Subsection
-Métricas
-\end_layout
-
-\begin_layout Subsection
-Otras medidas
+Medidas de evaluación 
+\emph on
+en línea
 \end_layout
 
 \begin_layout Standard
@@ -4569,6 +4659,213 @@ Inteligibildad.
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+Asimismo, se puede argüir que una evaluación fuera de línea puede estar
+ ignorando tanto el contexto de uso del usuario como el nivel de confianza
+ que le tiene al sistema (si las recomendaciones le son útiles y le instan
+ a continuar utilizando el sistema), de ahí que un marco de evaluación en
+ línea basado en la comparación directa de rendimiento entre dos métodos
+ de recomendación y la retroalimentación de usuarios reales sea propuesto
+ por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hayes"
+
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout Standard
+En primera, la evaluación se ha de llevar a cabo en una aplicación en línea
+ utilizada por usuarios reales, en la cual dos motores de recomendación
+ distintos se utilizan mediante la misma interfaz de usuario, de manera
+ que la satisfacción del usuario respecto al sistema sea mantenga constante
+ -ya que el usuario final ignora cuál de los sistemas está utilizando- puesto
+ que, en última instancia, se desea medir solamente el desempeño de las
+ recomendaciones.
+ Para ello se propone una arquitectura -ilustrada en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:online-framework"
+
+\end_inset
+
+- que defina:
+\end_layout
+
+\begin_layout Description
+Los
+\begin_inset space ~
+\end_inset
+
+recursos
+\begin_inset space ~
+\end_inset
+
+disponibles: una interfaz de aplicación (API) definiendo los recursos a
+ los cuales los sistemas tendrán acceso.
+ Nótese que es importante normalizar esto, puesto que los sistemas orientados
+ la contenido utilizan datos semánticos de los recursos y los de filtrado
+ utilizan datos de evaluaciones de usuarios; esto se puede normalizar mediante
+ el uso de un lenguaje común para representar y estructurar los datos.
+\end_layout
+
+\begin_layout Description
+Los
+\begin_inset space ~
+\end_inset
+
+métodos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+sistemas
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+recomendación: otra interfaz, que defina qué métodos deberá implementar
+ cada sistema.
+\end_layout
+
+\begin_layout Description
+Una
+\begin_inset space ~
+\end_inset
+
+política
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+presentación: definiendo cómo mostra los resultados al usuario.
+ Puesto que éstos pueden ser una combinación de las sugerencias de los dos
+ métodos puestos a prueba, se sugieren tres alternativas:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Un conjunto combinado de los resultados de ambos.
+\end_layout
+
+\begin_layout Enumerate
+Un conjunto contrastado, mostrando los dos conjuntos de resultados claramente
+ separados -de manera que se sepa que provienen de fuentes distintas, pero
+ sin decir cuál ha dado qué conjunto.
+\end_layout
+
+\begin_layout Enumerate
+Conjuntos en cascada, mostrando, cuando un usuario pide recomendaciones,
+ los resultados de un sistema y, cuando pida recomendaciones de nuevo, los
+ del otro.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Lineamientos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retroalimentación: cuáles acciones del usuario, implícitas o explícitas,
+ se considerarán un signo de preferencia
+\end_layout
+
+\begin_layout Description
+Una
+\begin_inset space ~
+\end_inset
+
+métrica
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+comparación: mediante la cual analiza la retroalimentación y determinar
+ un ganador.
+\end_layout
+
+\begin_layout Standard
+Téngase en cuenta que, las condiciones en una evaluación de dos métodos
+ debe ser lo más justa posible: técnicas que requieran una sola interacción,
+ como los sistemas colaborativos convencionales, deberían ser comparadas
+ con otras que también requieran una sola interacción, asi como otros enfoques,
+ como ciertas implementaciones de recomendaciones basadas en el conocimiento
+ -las cuales son más 
+\emph on
+conversacionales
+\emph default
+- deberían ser evaluadas frente a otras de su clase.
+ De igual manera, debe también tenerse en cuenta que existen métodos que
+ requieren un tiempo de adaptación o aprendizaje, como la mayor parte de
+ implementaciones orientadas al contenido o de filtrado colaborativo.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/4_online-framework.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:online-framework"
+
+\end_inset
+
+Comparación en línea de sistemas de recomendación.
+ Adaptada de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hayes"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Implementación de un sistema de recomendación proactivo
 \end_layout
