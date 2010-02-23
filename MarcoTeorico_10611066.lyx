@@ -4981,6 +4981,10 @@ Por ello, se deben elegir las medidas y experimentos de evaluación acordes
 Implementación de un sistema de recomendación proactivo
 \end_layout
 
+\begin_layout Section
+Introducción
+\end_layout
+
 \begin_layout Standard
 En el presente capítulo se explora la aplicabilidad de distintas técnicas
  de recuperación de información en el contexto de un sistema de recomendación.
@@ -4988,6 +4992,36 @@ En el presente capítulo se explora la aplicabilidad de distintas técnicas
  ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
  Luego, se exploran y evalúan modelos de representación del conocimiento,
  búsqueda de documentos y filtrado que se consideran pertinentes.
+\end_layout
+
+\begin_layout Standard
+Para implementar un sistema de recomendación se debe tener en mente qué
+ elementos lo conformarán; según lo mencionado en los capítulos anteriores,
+ se puede esbozar una macro-arquitectura del sistema la cual consistirá
+ de los siguientes elementos:
+\end_layout
+
+\begin_layout Enumerate
+Una colección de documentos.
+\end_layout
+
+\begin_layout Enumerate
+Un componente de recuperación de información.
+ El cual incluirá sus respectivos sub-componentes de indización, igualación
+ y obtención de consultas.
+\end_layout
+
+\begin_layout Enumerate
+Un componente de filtrado de información.
+ El cual contempla los aspectos de elección de resultados a mostrar, interfaz
+ de presentación y obtención de retroalimentación.
+\end_layout
+
+\begin_layout Standard
+En el resto del capítulo, se discutirán los distintos aspectos que atañen
+ a la arquitectura esbozada, así como las técnicas que permitirán su implementac
+ión.
+ 
 \end_layout
 
 \begin_layout Standard
