@@ -75,7 +75,7 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Chapter*
+\begin_layout Chapter
 Introducción General
 \end_layout
 
@@ -115,7 +115,7 @@ conceptos
  activa?
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Section
 Sistemas de recomendación y sistemas de recuperación de información.
 \end_layout
 
@@ -225,8 +225,8 @@ no están en su colección explícitamente
 .
 \end_layout
 
-\begin_layout Subsection*
-Ni lo uno ni lo otro
+\begin_layout Section
+Ni lo uno ni lo otro: Sistemas de recuperación oportuna de la información
 \end_layout
 
 \begin_layout Standard
@@ -239,6 +239,473 @@ El sistema que se pretende construir en este proyecto puede ser visto como
  otros resultados; y de los sistemas de recuperación de información toma
  el hecho de búsquedas de consultas y documentos no necesariamente existentes
  en la colección.
+\end_layout
+
+\begin_layout Standard
+Relativamente poca investigación se ha hecho respecto a sistemas que asistan
+ a la tarea del usuario sin obstruirle.
+ Pero poco no es ninguno, y, así, podemos encontrar la definición de un
+ sistema del tipo que este proyecto se propone desarrollar en la tesis que
+ sentó las bases de este campo, la de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Un agente de recuperación oportuna de información es un programa que proactivame
+nte encuentra y presenta información basada en el contexto local de una
+ persona de una manera fácilmente accesible y a la vez no intrusiva.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Los agentes descritos en la tesis antes mencionada reciben ya un nombre
+ propio: sistemas de recuperación oportuna de información (en inglés, 
+\emph on
+JITIRS: Just-in-time Information Retrieval Systems).
+ 
+\emph default
+Nótese que, como se había establecido antes, la principal utilidad de un
+ sistema de esta especie es encontrar la necesidad latente de información:
+ presentarle información al usuario cuando éste ni siquiera haya pensado
+ en buscarla, o ni supiese que ésta existía.
+ 
+\end_layout
+
+\begin_layout Standard
+Un agente de recuperación oportuna de información difiere de un sistema
+ de recuperación de información tradicional en que la búsqueda no es la
+ tarea principal, las consultas son potencialmente más largas -el contexto
+ local del usuario, por el cual entiéndase cualquier contexto, desde lo
+ que está escribiendo en un procesador de texto hasta el lugar geográfico
+ donde está; y que la principal medida de evaluación de un sistema así es
+ la 
+\emph on
+utilidad
+\emph default
+ que tienen los documentos -contrario a los sistemas de recuperación de
+ información, que se miden por la precisión y exhaustividad de sus resultados.
+ 
+\end_layout
+
+\begin_layout Standard
+Asimismo, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+, establece tres criterios a tener en cuenta a la hora de desarrollar un
+ 
+\emph on
+JITIR:
+\emph default
+ 
+\end_layout
+
+\begin_layout Description
+¿Cómo
+\begin_inset space ~
+\end_inset
+
+afecta
+\begin_inset space ~
+\end_inset
+
+el
+\begin_inset space ~
+\end_inset
+
+sistema
+\begin_inset space ~
+\end_inset
+
+la
+\begin_inset space ~
+\end_inset
+
+manera
+\begin_inset space ~
+\end_inset
+
+en
+\begin_inset space ~
+\end_inset
+
+la
+\begin_inset space ~
+\end_inset
+
+cual
+\begin_inset space ~
+\end_inset
+
+una
+\begin_inset space ~
+\end_inset
+
+persona
+\begin_inset space ~
+\end_inset
+
+busca
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+usa
+\begin_inset space ~
+\end_inset
+
+información? Tomando la teoría de la ciencia cognitiva, se establece que
+ el sistema debería poder permitir la serendipia :encontrar información
+ que resulta útil y de la cual no se sabía; y poder reducir el costo: encontrar
+ información de la cual se sabía, pero se consideraba demasiado el esfuerzo
+ que hubiera implicado buscarla por cuenta propia.
+\end_layout
+
+\begin_layout Description
+¿Cómo
+\begin_inset space ~
+\end_inset
+
+puede
+\begin_inset space ~
+\end_inset
+
+el
+\begin_inset space ~
+\end_inset
+
+sistema
+\begin_inset space ~
+\end_inset
+
+encontrar
+\begin_inset space ~
+\end_inset
+
+información
+\begin_inset space ~
+\end_inset
+
+que
+\begin_inset space ~
+\end_inset
+
+resultaría
+\begin_inset space ~
+\end_inset
+
+útil
+\begin_inset space ~
+\end_inset
+
+en
+\begin_inset space ~
+\end_inset
+
+base
+\begin_inset space ~
+\end_inset
+
+al
+\begin_inset space ~
+\end_inset
+
+contexto? Es en este punto donde entra en juego la recuperación de información:
+ se ha de elegir un modelo que trascienda la mera relevancia para poder
+ ofrecer documentos que sean de utilidad -lo cual se puede aproximar utilizando
+ técnicas de alta precisión y trayendo a colación el filtrado: basarse en
+ el contenido del contexto actual aunado a las preferencias del usuario
+ o de un grupo de usuarios para eliminar documentos que se consideren, aunque
+ relevantes, inútiles.
+ Enfoques orientados al conocimiento del dominio específico pueden ser de
+ utilidad, por ejemplo, en el sistema 
+\emph on
+FIXIT
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hart1997"
+
+\end_inset
+
+ se valieron de la existencia de una red de inferencia para el sistema principal
+ -un sistema experto de reparación de artículos de oficina- para poder usar
+ esas mismas reglas en la recuperación de documentación útil a la tarea.
+\end_layout
+
+\begin_layout Description
+¿Cómo
+\begin_inset space ~
+\end_inset
+
+debería
+\begin_inset space ~
+\end_inset
+
+el
+\begin_inset space ~
+\end_inset
+
+sistema
+\begin_inset space ~
+\end_inset
+
+presentar
+\begin_inset space ~
+\end_inset
+
+los
+\begin_inset space ~
+\end_inset
+
+resultados? El diseño de la interfaz debería ser tal que los resultados
+ sean fácilmente accesibles y evaluables, pero que no interfiera con la
+ tarea principal; así, no debería distraer de ésta pero la atención debería
+ poder dividirse entre ambas interfaces.
+ Es práctica común en el diseño de sitios web el ubicar los elementos más
+ importantes a la izquierda, por lo que, en principio, se podrían ubicar
+ los resultados más a la derecha del lugar donde se realice la tarea principal,
+ práctica adoptada por el sistema 
+\emph on
+PIRA
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gruzd2006"
+
+\end_inset
+
+.
+ Asimismo, se ha probado útil ofrecer un sumario del documento o una vista
+ previa en caso de que el artefacto consista de multimedia 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Proyectos relacionados
+\end_layout
+
+\begin_layout Standard
+A partir de la definición dada, se pueden encontrar algunos sistemas surgidos
+ de la investigación en este campo:
+\end_layout
+
+\begin_layout Enumerate
+Remembrance Agent: Un módulo que se utiliza en el editor de textos 
+\emph on
+emacs
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.gnu.org/software/emacs/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\emph default
+y que sirve para realizar búsquedas de información relacionada a lo que
+ se escribe en distintos repositorios, desde el correo electrónico del usuario
+ hasta librerías digitales, mostrando los resultados en un apartado de la
+ ventana de edición.
+ Disponible para descarga en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.remem.org/
+\end_layout
+
+\end_inset
+
+ y descrito en detalle en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Margin Notes: Un agente que revisa documentos escritos en html y agrega,
+ en margen derecho, vínculos a páginas de internet que podrían ser de interés.
+ Presentado en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000a"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Jimminy: mediante una computadora portátil, sugerir información relacionada
+ al lugar donde se está o lo que se está hablando con otras personas.
+ También introducido por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+FIXIT: aplicado al dominio de la reparación de fotocopiadoras y bienes relaciona
+dos, permite a los asesores de servicio técnico obtener información de los
+ manuales de usuario en base a la consulta que estén atendiendo.
+ Construye las consultas mediante los síntomas y problemas identificados.
+ Definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hart1997"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Watson: un sistema que supervisa el entorno del usuario (su uso de procesadores
+ de texto, navegadores de internet y clientes de correo electrónico) para
+ sugerir documentos útiles.
+ Definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Budzik1999"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+À propos: trata de determinar en qué etapa de la composición de un documento
+ está el usuario para sugerirle lecturas y recursos para ampliar su composición.
+ Presentado en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "PuertaMelquizo2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+PIRA: un sistema basado en internet que, a medida que se escribe una investigaci
+ón, sugiere documentos relacionados y términos de búsqueda, a la vez que
+ permite citarlos automáticamente al elegirlos de los resultados, agregándolos
+ también a una bibliografía.
+ Se basa en servicios web de terceros para encontrar los términos clave,
+ ampliar la búsqueda con sinónimos y ofrecer las facilidades de cita automática.
+ Disponible para pruebas en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.writencite.com
+\end_layout
+
+\end_inset
+
+ y propuesto en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gruzd2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Implicit Queries y Stuff I've Seen: sistemas de administración de la información
+ personal que permiten la búsqueda más allá de palabras clave, basándose
+ en tipos de documento, personas y fechas; el sistema Implicit Queries infiere
+ las necesidades de información mientras el usuario escribe un correo electrónic
+o y le sugiere documentos que podrían servirle de apoyo,como correos anteriores,
+ entradas de agendas, etc.
+ Una descripción se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Cutrell2006,Dumais2004"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+AMIDA: supervisa lo que se discute en una reunión de trabajo y recupera
+ textos de reuniones anteriores que puedan servir para fundamentar puntos
+ de la presente.
+ El concepto y la descripción del sistema se pueden encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Popescu-belis1920"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Scienstein: un sistema de recomendación que se basa en lo que se ha escrito
+ y citado para sugerir documentos que puedan ampliar una investigación.
+ Descrito en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gipp2009"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Part
