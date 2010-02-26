@@ -99,17 +99,17 @@ ente, a aquella que se infiere del contexto en el cual el usuario está actuando
 \emph on
 conceptos
 \emph default
- que se encuentran en el contexto.Por ejemplo, y este será el caso en el
- cual se aplicará concretamente el software desarrollado, cuando un docente
- está planificando una sesión (lección magistral, proyecto, exposiciones,
- etc.) puede tener una descripción de la misma y documentos que piense usar
- de referencia, la necesidad latente de información radica en que quizá
- el docente se podría beneficiar de documentos que se relacionen con la
- sesión, tanto para referencia propia como para ofrecer como lecturas o
- recursos suplementarios a los alumnos; y, sin embargo, muchos docentes
- abdican de ampliar su cátedra de esta manera por varias razones, muchas
- de las cuales se pueden resumir en desánimo ante el prospecto de buscar
- tales recursos.
+ que se encuentran en el contexto.
+ Por ejemplo, y este será el caso en el cual se aplicará concretamente el
+ software desarrollado, cuando un docente está planificando una sesión (lección
+ magistral, proyecto, exposiciones, etc.) puede tener una descripción de
+ la misma y documentos que piense usar de referencia, la necesidad latente
+ de información radica en que quizá el docente se podría beneficiar de documento
+s que se relacionen con la sesión, tanto para referencia propia como para
+ ofrecer como lecturas o recursos suplementarios a los alumnos; y, sin embargo,
+ muchos docentes abdican de ampliar su cátedra de esta manera por varias
+ razones, muchas de las cuales se pueden resumir en desánimo ante el prospecto
+ de buscar tales recursos o desconocimiento de la existencia de los mismo.
  Pero ¿qué tal si, en el uso de un sistema en el que administran sus clases,
  estos documentos útiles les fueran recomendados sin necesidad de una búsqueda
  activa?
@@ -566,11 +566,20 @@ key "Rhodes2000"
 \end_inset
 
 .
+ Utiliza búsqueda mediante palabras clave y permite buscar explícitamente
+ otros documentos relacionados a las sugerencias.
+ 
 \end_layout
 
 \begin_layout Enumerate
-Margin Notes: Un agente que revisa documentos escritos en html y agrega,
- en margen derecho, vínculos a páginas de internet que podrían ser de interés.
+Margin Notes: Un agente que revisa páginas en html y agrega, en un margen
+ derecho, vínculos a documentos locales que podrían ser de interés a las
+ distintas secciones del documento; extrae palabras clave de la página y
+ se basa en la 
+\emph on
+co-ocurrencia
+\emph default
+ de éstas en los documentos locales para sugerir.
  Presentado en 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -582,8 +591,11 @@ key "Rhodes2000a"
 \end_layout
 
 \begin_layout Enumerate
-Jimminy: mediante una computadora portátil, sugerir información relacionada
- al lugar donde se está o lo que se está hablando con otras personas.
+Jimminy: desarrollado para una computadora que se porta en el hombro con
+ una terminal en un casco, recaba datos del contexto físico y social de
+ la parsona mediante sensores (GPS, infrarrojos, etc) y permite tomar notas
+ mediante un teclado que se porta en el brazo.
+ A partir del contexto local, sugiere notas que podrían ser de utilidad.
  También introducido por 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -598,7 +610,9 @@ key "Rhodes2000"
 FIXIT: aplicado al dominio de la reparación de fotocopiadoras y bienes relaciona
 dos, permite a los asesores de servicio técnico obtener información de los
  manuales de usuario en base a la consulta que estén atendiendo.
- Construye las consultas mediante los síntomas y problemas identificados.
+ Construye las consultas mediante los síntomas y problemas identificados,
+ se vale de una red de inferencia bayesiana para determinar la probabilidad
+ de relevancia de un documento a una consulta.
  Definido en 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -612,7 +626,10 @@ key "Hart1997"
 \begin_layout Enumerate
 Watson: un sistema que supervisa el entorno del usuario (su uso de procesadores
  de texto, navegadores de internet y clientes de correo electrónico) para
- sugerir documentos útiles.
+ sugerir documentos útiles, utiliza algoritmos heurísticos que encuentran
+ unidades conceptuales en los documentos, a partir de las cuales realiza
+ búsquedas concurrentes en distintas bases de datos y luego elimina duplicados
+ en los resultados mediante algoritmos de agrupamiento.
  Definido en 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -625,7 +642,9 @@ key "Budzik1999"
 
 \begin_layout Enumerate
 À propos: trata de determinar en qué etapa de la composición de un documento
- está el usuario para sugerirle lecturas y recursos para ampliar su composición.
+ está el usuario para sugerirle lecturas y recursos para ampliar su composición,
+ también se basa en búsquedas basadas en palabras clave en distintas bases
+ de datos.
  Presentado en 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -706,6 +725,34 @@ key "Gipp2009"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Los sistemas anteriores tienen en común el uso de servicios de terceros
+ para la búsqueda de información, así como basar las consultas en palabras
+ clave extraídas del contexto local.
+ Se ha explorado poco la posibilidad de utilizar la recuperación de información
+ orientada a conceptos: en lugar de utilizar palabras clave -el contexto
+ léxico, basarse en la semántica subyacente para obtener artefactos que
+ se relacionen sin tener necesariamente una relación léxica.
+\end_layout
+
+\begin_layout Standard
+Se pueden considerar sistemas de recomendación basados en contenido.
+ Sin embargo, puesto que se han orientado al uso de un único usuario para
+ tareas individuales, ninguno hace uso de la 
+\emph on
+inteligencia colectiva
+\emph default
+: las preferencias sociales y las tendencias a utilizar ciertos recursos,
+ la cual sería útil en un contexto educativo.
+\end_layout
+
+\begin_layout Standard
+A la luz de estos nuevos conceptos, se puede considerar el presente proyecto
+ como un sistema de recuperación idónea de la información que utiliza un
+ filtrado híbrido colaborativo y basado en contenido para hacer sugerencias
+ de recursos útiles a una sesión de clase en preparación.
 \end_layout
 
 \begin_layout Part
@@ -845,9 +892,9 @@ información: Se puede considerar como la
  una carencia de información, y se trata de procesar ésta de manera que
  se le puedan proveer recursos relevantes.
  Es importante notar que la necesidad de información puede ser explícita
- -en forma de consulta- o implícita -inferible del contexto o de las preferencia
-s del usuario-, y es en esta segunda naturaleza en la que se basa el proyecto
- a desarrollar.
+ -en forma de consulta- o implícita -que se puede inferir del contexto o
+ de las preferencias del usuario-, y es en esta segunda naturaleza en la
+ que se basa el proyecto a desarrollar.
 \end_layout
 
 \begin_layout Standard
@@ -936,14 +983,8 @@ reference "fig:IR-cycle"
 \emph on
 ciclo de la recuperación de la información 
 \emph default
--adaptado de 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Walker1999"
-
-\end_inset
-
-- para tener una idea de los roles que juegan los componentes de estos sistemas.
+-- para tener una idea de los roles que juegan los componentes de estos
+ sistemas.
 \end_layout
 
 \begin_layout Standard
@@ -970,7 +1011,15 @@ name "fig:IR-cycle"
 
 \end_inset
 
-El ciclo de la recuperación de la información
+El ciclo de la recuperación de la información.
+ Adaptado de 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Walker1999"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1040,7 +1089,7 @@ la indización
  se almacenarán en la colección y servirán de entrada al componente de igualació
 n.
  Cada nuevo documento que es agregado al almacenamiento del sistema precisa
- ser indizado, y esta actividad puede ser tan compleja como se quiera: puede
+ ser indizado; y esta actividad puede ser tan compleja como se quiera: puede
  ir desde la simple actualización del índice inverso con el documento, como
  puede también consistir en la clasificación o abstracción del mismo.
  En cualquier caso, dos etapas tienen lugar.
@@ -1054,7 +1103,8 @@ n.
 \emph on
 representación del conocimiento
 \emph default
- interna del sistema, concepto que se ampliará en el siguiente capítulo.
+ interna del sistema, concepto básico del campo de la ingeniería del conocimient
+o.
 \end_layout
 
 \begin_layout Description
@@ -1079,8 +1129,9 @@ igualación: Es la parte que sirve de intermediario entre el almacenamiento
 lenguaje interno
 \emph default
  del sistema, que es, en última instancia, la representación del conocimiento
- elegida; una vez en poder de la consulta, este componente trata de asimilar
- ésta con los sustitutos documentales y luego, si hay coincidencias, solicita
+ elegida.
+ Una vez en poder de la consulta, este componente trata de asimilar ésta
+ con los sustitutos documentales y luego, si hay coincidencias, solicita
  al almacenamiento los documentos.
 \end_layout
 
@@ -1251,8 +1302,8 @@ stemming
 - que consiste en eliminar terminaciones de plural/singular, femenino/masculino
  o las conjugaciones en verbos regulares.
  Aunque algoritmos de buena utilidad existen para ello, en muchos de los
- casos se tiene menor ganancia de la que se podría esperar -2% en inglés
- según 
+ casos se tiene menor ganancia de la que se podría esperar -sólo de un 2%
+ en inglés según 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Russell1995"
@@ -1294,7 +1345,7 @@ key "Stein2003"
 \begin_layout Enumerate
 Utilizar la estructura y la 
 \emph on
-metadata 
+meta-data 
 \emph default
 de los documentos.
  Los usuarios pensarán en conceptos que probablemente se encuentren en los
@@ -1483,7 +1534,8 @@ Además, el sistema podría valerse de la
 retroalimentación
 \emph default
  del usuario, ya sea implícita, mediante el acceso a documentos, la estancia
- en ellos, la impresión; o explícita, mediante evaluación de relevancia.
+ en ellos -si éstos consisten en hipervínculos o la impresión; o explícita,
+ mediante evaluación de relevancia.
  Así, con la retroalimentación, el sistema podría construir un nuevo conjunto
  de resultados a partir de éste, buscando aquellos documentos que se aproximen
  a los preferidos por el usuario -es importante resaltar que esta es una
@@ -1513,9 +1565,8 @@ key "Voorhees2002a"
 \begin_layout Standard
 Es definitivamente más difícil conducir pruebas con usuarios, tanto en tiempo
  como en los recursos de los que se debe disponer.
- Ambos enfoques se discutirán en esta sección, comenzando con el del usuario:
- la evaluación desde el punto de vista el usuario se mide según su satisfacción
- con el sistema.
+ Ambos enfoques se discutirán en esta sección, comenzando con el del usuario,
+ cuya valoración se mide según su satisfacción con el sistema.
 \end_layout
 
 \begin_layout Standard
@@ -1674,7 +1725,7 @@ name "sub:eval-metrics"
 \begin_layout Standard
 Se puede evaluar un sistema de recuperación de información en términos de
  precisión y exhaustividad.
- A continuación, ambas medidas definidas con claridad en
+ A continuación, se presentan ambas medidas, definidas con claridad en
 \begin_inset CommandInset citation
 LatexCommand citet
 key "HinrichSchutze2009"
@@ -1773,8 +1824,11 @@ exhaustividad normalizada
 \begin_layout Standard
 Se puede ver el problema de encontrar documentos relevantes como una tarea
  de clasificación: donde relevante y no-relevante son dos etiquetas y el
- sistema utiliza aprendizaje de máquina supervisado para la labor, una tercera
- medida de evaluación se puede introducir: la 
+ sistema utiliza aprendizaje de máquina supervisado para la labor.
+\end_layout
+
+\begin_layout Standard
+Una tercera medida de evaluación se puede introducir: la 
 \emph on
 exactitud: 
 \emph default
@@ -1797,7 +1851,7 @@ e=\frac{vp+vn}{vp+vn+fp+fn}\end{equation}
 
 \begin_layout Standard
 Pero, como ya se vio que la relevancia es en realidad bastante subjetiva,
- los sistemas obtienen casi 99.9 % de documentos no verdaderamente relevantes
+ los sistemas obtienen casi 99.9 % de documentos no exactamente relevantes
  a una consulta 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1806,8 +1860,8 @@ key "HinrichSchutze2009"
 \end_inset
 
 , por lo que la exactitud, aunque buena para medir el desempeño de tareas
- de clasficación, es irreal para medir la recuperación de información: ¡un
- sistema exacto no daría ningún resultado para casi ninguna consulta!
+ de clasificación, es irreal para medir la recuperación de información:
+ ¡un sistema exacto no daría ningún resultado para casi ninguna consulta!
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1831,7 +1885,7 @@ key "Walker1999"
 
 \end_inset
 
-: imagínense a dos usuarios de un sistema de IR, uno, buscando sobre teatros
+: imagínese a dos usuarios de un sistema de IR, uno, buscando sobre teatros
  famosos en el mundo para una asignación escolar: este usuario querrá obtener
  pocos documentos de buena calidad, para terminar su tarea con rapidez;
  este tipo de búsqueda se conoce como una 
@@ -1880,7 +1934,7 @@ key "HinrichSchutze2009"
  información) aún así obtendríamos un 50% de promedio -una medida que, vista
  con optimismo, podría sugerir que el sistema es bueno.
  En consecuencia, se debe recurrir a otra manera de medir el promedio que
- de resultados más fidedignos, para ello, se puede pensar en el rendimiento
+ dé resultados más fidedignos, para ello, se puede pensar en el rendimiento
  del sistema en términos de precisión y exhaustividad como la 
 \emph on
 media armónica ponderada 
@@ -1934,7 +1988,7 @@ Para ilustrar este intercambio entre la precisión y la exhaustividad, se
 \emph on
 Características operativas del receptor
 \emph default
- (ROC, por sus siglas en inglés) : el eje de las abcisas (x) representa
+ (ROC, por sus siglas en inglés) : el eje de las abscisas (x) representa
  la tasa de falsos positivos y el de las ordenadas (y), la tasa de falsos
  negativos; el área bajo la curva representará la eficacia del sistema,
  esto según 
@@ -2019,10 +2073,10 @@ conjunto
  de relevancia, por ejemplo, ya que otros asuntos como la efectividad del
  algoritmo de asignación de rango vienen a consideración.
  Para un sistema como el que se desarrolla en este proyecto, donde el orden
- no es tan relevante ya que se apunta a obtener una pequeña de documentos
- y presentarlos como un conjunto -esto es, se pretende que la recomendación
- consista en una búsqueda de alta precisión- no se ahondará en los detalles
- de evaluación de sistemas con rangos de relevancia.
+ no es tan relevante ya que se apunta a obtener una pequeña cantidad de
+ documentos y presentarlos como un conjunto -esto es, se pretende que la
+ recomendación consista en una búsqueda de alta precisión- no se ahondará
+ en los detalles de evaluación de sistemas con rangos de relevancia.
  Sin embargo, si el lector está interesado, puede consultar la sección 8.5
  de 
 \begin_inset CommandInset citation
@@ -2096,9 +2150,7 @@ conjunto de consultas
 \begin_layout Enumerate
 Obtener un conjunto de juicios de relevancia; usualmente se califica a un
  documento, dada una consulta, como relevante o no-relevante.
- Estos juicios se formarán por usuarios que consideren que un documento
- es o no relevante a su necesidad de información.
- 
+ Estos juicios se formarán por usuarios que evaluen manualmente los documentos.
 \end_layout
 
 \begin_layout Enumerate
@@ -2585,7 +2637,7 @@ componente de igualación
 \end_layout
 
 \begin_layout Standard
-Hecho el simil, se procede ahora a discutir los detalles y el rol de los
+Hecho el símil, se procede ahora a discutir los detalles y el rol de los
  componentes:
 \end_layout
 
@@ -2753,7 +2805,7 @@ key "Cohen1999"
 
 , árboles de decisión y k-vecinos más cercanos, clasificación en base al
  algoritmo de Rocchio para el modelo de espacio vectorial, el uso de clasificado
-res lineales -Widrow-Hoff, gradiente exponenciado o máquinas de vectores
+res lineales -Widrow-Hoff, gradiente exponencial o máquinas de vectores
  de soporte- 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -3169,7 +3221,7 @@ key "Baudisch1999"
 De cualquier manera, una vez en posesión de datos cuantitativos de los gustos
  de los usuarios, se calcula la similitud entre usuarios; las técnicas utilizada
 s para esto pueden ser bastante complejas: desde el uso de la distancia
- euclideana 
+ euclidiana 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Segaran2007"
@@ -3651,7 +3703,7 @@ Distancia
 \begin_inset space ~
 \end_inset
 
-euclideana: 
+euclidiana: 
 \end_layout
 
 \begin_layout Standard
@@ -3755,7 +3807,7 @@ j
 \emph on
 E
 \emph default
- (adapatada de 
+ (adaptada de 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Sarwar2001"
@@ -3827,7 +3879,7 @@ regresión
 
 \begin_layout Standard
 En el método de suma ponderada, se suman los valores que los usuarios similares
- han dado al elemento actual, ponderándolos por la similaridad que exista
+ han dado al elemento actual, ponderándolos por la similitud que exista
  entre el usuario actual y los demás.
  
 \end_layout
@@ -4989,7 +5041,7 @@ key "Schein"
 \end_layout
 
 \begin_layout Standard
-Asmismo medidas de evaluación de aprendizaje de máquina en sistemas orientados
+Asimismo medidas de evaluación de aprendizaje de máquina en sistemas orientados
  al contenido se podrían aplicar, como la exactitud
 \begin_inset Foot
 status collapsed
@@ -5212,7 +5264,7 @@ Precisión.
 \end_layout
 
 \begin_layout Enumerate
-Inteligibildad.
+Inteligibilidad.
 \end_layout
 
 \end_deeper
@@ -5306,7 +5358,7 @@ de
 \begin_inset space ~
 \end_inset
 
-presentación: definiendo cómo mostra los resultados al usuario.
+presentación: definiendo cómo mostrar los resultados al usuario.
  Puesto que éstos pueden ser una combinación de las sugerencias de los dos
  métodos puestos a prueba, se sugieren tres alternativas:
 \end_layout
@@ -5363,7 +5415,7 @@ comparación: mediante la cual analiza la retroalimentación y determinar
 Téngase en cuenta que, las condiciones en una evaluación de dos métodos
  debe ser lo más justa posible: técnicas que requieran una sola interacción,
  como los sistemas colaborativos convencionales, deberían ser comparadas
- con otras que también requieran una sola interacción, asi como otros enfoques,
+ con otras que también requieran una sola interacción, así como otros enfoques,
  como ciertas implementaciones de recomendaciones basadas en el conocimiento
  -las cuales son más 
 \emph on
