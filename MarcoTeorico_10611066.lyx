@@ -755,15 +755,15 @@ A la luz de estos nuevos conceptos, se puede considerar el presente proyecto
  de recursos útiles a una sesión de clase en preparación.
 \end_layout
 
-\begin_layout Part
-Marco Teórico
-\end_layout
-
 \begin_layout Chapter
-Recuperación de información.
+Marco teórico
 \end_layout
 
 \begin_layout Section
+Recuperación de información.
+\end_layout
+
+\begin_layout Subsection
 Introducción
 \end_layout
 
@@ -780,7 +780,7 @@ Se comienza con una puesta al día en el área de la recuperación de informaci�
  de información.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Definiciones y conceptos preliminares 
 \end_layout
 
@@ -936,7 +936,7 @@ key "HinrichSchutze2009"
  Menciona también otros conceptos que vale la pena clarificar:
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Documento
 \end_layout
 
@@ -947,7 +947,7 @@ Por el cual se entiende aquello que consideraremos una unidad en el sistema:
  
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Relevancia
 \end_layout
 
@@ -962,7 +962,7 @@ El valor que el usuario le da a un documento en base a su necesidad de informaci
  
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Componentes de los sistemas de recuperación de información
 \end_layout
 
@@ -1178,7 +1178,7 @@ resultados: Los documentos que el sistema ha considerado relevantes a la
  en orden de relevancia según criterios propios del sistema.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 La estrategia de búsqueda
 \end_layout
 
@@ -1377,7 +1377,7 @@ key "ThorstenBrants"
  el mismo, y no adaptadas de otras áreas de investigación.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Presentación de los resultados
 \end_layout
 
@@ -1542,7 +1542,7 @@ retroalimentación
  característica básica de los sistemas de recomendación.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Evaluación de un sistema de recuperación de información.
 \end_layout
 
@@ -1711,7 +1711,7 @@ Clasificación de los documentos en una colección, vistos como resultados
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Medidas de evaluación
 \begin_inset CommandInset label
 LatexCommand label
@@ -1735,7 +1735,7 @@ key "HinrichSchutze2009"
 :
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Precisión
 \end_layout
 
@@ -1762,7 +1762,7 @@ Nótese que la precisión se puede expresar como la probabilidad de que un
  documento sea relevante dado que fue obtenido.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Exhaustividad
 \end_layout
 
@@ -1864,7 +1864,7 @@ key "HinrichSchutze2009"
  ¡un sistema exacto no daría ningún resultado para casi ninguna consulta!
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Relación entre la precisión y la exhaustividad
 \end_layout
 
@@ -2057,7 +2057,7 @@ Así, a la hora de evaluar el sistema, se debe tener en cuenta a qué extremo
  de recomendación es su poca interferencia con la tarea del usuario).
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Otras consideraciones
 \end_layout
 
@@ -2115,7 +2115,7 @@ refiriéndose al tiempo total en el cual el usuario satisface su necesidad
  documentos más relevantes.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 El proceso de evaluación
 \end_layout
 
@@ -2200,11 +2200,11 @@ k
  
 \end_layout
 
-\begin_layout Chapter
+\begin_layout Section
 Sistemas de Recomendación
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Introducción
 \end_layout
 
@@ -2215,7 +2215,7 @@ En el presente capitulo se introducirá el concepto general de sistemas de
  
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Definiciones
 \end_layout
 
@@ -2291,7 +2291,7 @@ sistemas de filtración de información
 ento de éste y otros usuarios similares .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Sistemas de recomendación proactivos
 \end_layout
 
@@ -2328,11 +2328,11 @@ otro sistema que se puede considerar de este tipo, se vale también de las
  de incorporar técnicas de filtrado de información para presentar los resultados.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Tipos de sistemas de recomendación
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Filtrado basado en el contenido
 \begin_inset CommandInset label
 LatexCommand label
@@ -2595,7 +2595,7 @@ key "Baudisch1999"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Componentes
 \end_layout
 
@@ -2870,7 +2870,7 @@ key "Fleischman2003"
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Limitaciones
 \end_layout
 
@@ -2886,7 +2886,7 @@ es en tópicos de interés para el usuario.
  para refinar la recomendación.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Filtrado colaborativo
 \begin_inset CommandInset label
 LatexCommand label
@@ -3239,7 +3239,7 @@ key "Grcar2005"
  Algunos de estos algoritmos se discuten a continuación.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Métodos de filtrado colaborativo
 \end_layout
 
@@ -3698,7 +3698,7 @@ Las diferencias en implementaciones radican en la función que se use para
  qué tan similares son dos vectores de perfiles:
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Distancia
 \begin_inset space ~
 \end_inset
@@ -3745,7 +3745,7 @@ mayores
 Así, se puede hablar del porcentaje de similitud entre personas.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Similitud de coseno
 \end_layout
 
@@ -3773,7 +3773,7 @@ key "Garcia"
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Coeficiente de correlación de Pearson
 \end_layout
 
@@ -3964,7 +3964,7 @@ key "Mortensen2007"
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Limitaciones
 \begin_inset CommandInset label
 LatexCommand label
@@ -4050,7 +4050,7 @@ key "Schein2002"
 .
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Sistemas de recomendación orientados al conocimiento
 \end_layout
 
@@ -4118,7 +4118,7 @@ e costosa, además de exigir un uso exclusivo, lo cual es indeseable para
  del usuario.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Sistemas de recomendación híbridos
 \end_layout
 
@@ -4135,7 +4135,7 @@ n del saber colectivo de los usuarios, además de su característico costo
  mediante un enfoque colaborativo.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Sistemas de recomendación colaborativos y orientados al contenido
 \end_layout
 
@@ -4578,7 +4578,7 @@ key "Baudisch1999"
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Sistemas de recomendación colaborativos y orientados al conocimiento
 \end_layout
 
@@ -4951,7 +4951,7 @@ Estos híbridos, entonces, paliarían el problema de la poca atención a las
  de la que inherentemente carecen.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Evaluación de un sistema de recomendación
 \end_layout
 
@@ -4981,7 +4981,7 @@ en línea
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Medidas de evaluación 
 \emph on
 fuera de línea
@@ -5148,7 +5148,7 @@ serendipia:
  al usuario.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Medidas de evaluación 
 \emph on
 en línea
@@ -5496,11 +5496,11 @@ Por ello, se deben elegir las medidas y experimentos de evaluación acordes
  al propósito del sistema.
 \end_layout
 
-\begin_layout Chapter
+\begin_layout Subsection
 Implementación de un sistema de recomendación proactivo
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsubsection
 Introducción
 \end_layout
 
