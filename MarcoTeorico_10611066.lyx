@@ -2311,43 +2311,6 @@ filtrado colaborativo
 .
 \end_layout
 
-\begin_layout Subsubsection
-Sistemas de recomendación proactivos
-\end_layout
-
-\begin_layout Standard
-Un sistema de recomendación proactivo no es más que un sistema de recomendación
- que se adapta al contexto del usuario y ofrece sugerencias sin que éste
- haya elegido antes otros artículos de la colección.
- El proyecto 
-\emph on
-À propos 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "PuertaMelquizo2007"
-
-\end_inset
-
- 
-\emph default
-es un ejemplo de un sistema de este tipo: asiste a escritores construyendo
- consultas en base a lo que están escribiendo en el momento, las cuales
- alimenta a distintos motores de búsqueda; por otro lado, 
-\emph on
-Scienstein 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Gipp2009"
-
-\end_inset
-
-, 
-\emph default
-otro sistema que se puede considerar de este tipo, se vale también de las
- citas que el autor ha hecho para recomendar materiales relacionados, además
- de incorporar técnicas de filtrado de información para presentar los resultados.
-\end_layout
-
 \begin_layout Subsection
 Recomendación con filtrado basado en el contenido
 \begin_inset CommandInset label
@@ -5574,6 +5537,39 @@ En el resto del capítulo, se discutirán los distintos aspectos que atañen
  a la arquitectura esbozada, así como las técnicas que permitirán su implementac
 ión.
  
+\end_layout
+
+\begin_layout Standard
+Nótese que un sistema de recomendación proactivo no es más que un sistema
+ de recomendación que se adapta al contexto del usuario y ofrece sugerencias
+ sin que éste haya elegido antes otros artículos de la colección.
+ El proyecto 
+\emph on
+À propos 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "PuertaMelquizo2007"
+
+\end_inset
+
+ 
+\emph default
+es un ejemplo de un sistema de este tipo: asiste a escritores construyendo
+ consultas en base a lo que están escribiendo en el momento, las cuales
+ alimenta a distintos motores de búsqueda; por otro lado, 
+\emph on
+Scienstein 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gipp2009"
+
+\end_inset
+
+, 
+\emph default
+otro sistema que se puede considerar de este tipo, se vale también de las
+ citas que el autor ha hecho para recomendar materiales relacionados, además
+ de incorporar técnicas de filtrado de información para presentar los resultados.
 \end_layout
 
 \begin_layout Standard
