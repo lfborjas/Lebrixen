@@ -2208,6 +2208,36 @@ k
 \end_layout
 
 \begin_layout Section
+Implementación de sistemas de recuperación de información
+\end_layout
+
+\begin_layout Standard
+El componente más importante de un sistema de IR, como ya se vio anteriormente,
+ es la consulta del usuario -la expresión de su necesidad de información.
+ Se presentan los distintos enfoques de implementación, que se pueden separar
+ en dos grandes grupos: los basados en 
+\emph on
+palabras
+\emph default
+ y los basados en 
+\emph on
+conceptos.
+
+\emph default
+ Como ya se apuntó, los sistemas tradicionales parten de la premisa de que
+ las palabras que están en la consulta son suficientes para la búsqueda,
+ sin embargo, como se sabe, el lenguaje natural encierra 
+\emph on
+conceptos
+\emph default
+ que trascienden una mera instancia léxica, y por ello se presentarán también
+ técnicas que parten de la premisa de que la consulta sólo es una base semántica
+ para la búsqueda y que ésta se puede aumentar (ya sea mediante sinónimos
+ aportados por tesauros o búsquedas en ontologías o colecciones indizadas
+ por conceptos) o refinar (mediante la desambiguación de términos).
+\end_layout
+
+\begin_layout Section
 Sistemas de Recomendación
 \end_layout
 
@@ -2216,9 +2246,8 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-En el presente capitulo se introducirá el concepto general de sistemas de
- recomendación, las técnicas más comunes para su implementación y los métodos
- utilizados en su evaluación.
+Se introducirá el concepto general de sistemas de recomendación, las técnicas
+ más comunes para su implementación y los métodos utilizados en su evaluación.
  
 \end_layout
 
