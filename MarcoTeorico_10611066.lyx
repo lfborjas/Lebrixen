@@ -1577,8 +1577,66 @@ conceptos
  para la búsqueda y que ésta se puede aumentar (ya sea mediante sinónimos
  aportados por tesauros, búsquedas en ontologías o colecciones indizadas
  por conceptos) o refinar (mediante la desambiguación de términos, por ejemplo).
- En la figura [] se presenta una taxonomía de los modelos de recuperación
- de información que se explorarán.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:IR_model_taxonomy"
+
+\end_inset
+
+ se presenta una taxonomía de los modelos de recuperación de información
+ que se explorarán.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/5_IR_taxonomy.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:IR_model_taxonomy"
+
+\end_inset
+
+Taxonomía de modelos de recuperación de información.
+ Adaptada de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Safran2005,Spoerri1993"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
