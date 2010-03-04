@@ -755,6 +755,48 @@ A la luz de estos nuevos conceptos, se puede considerar el presente proyecto
  de recursos útiles a una sesión de clase en preparación.
 \end_layout
 
+\begin_layout Paragraph
+Relevancia Vs.
+ Utilidad
+\end_layout
+
+\begin_layout Standard
+Los sistemas de recuperación de información tradicionales asumen que la
+ relevancia de un documento es equivalente a su similitud con la consulta
+ del usuario, y están en lo correcto, para aplicaciones orientadas a la
+ búsqueda activa.
+ Pero, en un sistema que pretenda apoyar una tarea realizada por el usuario
+ ¿sería verdaderamente 
+\emph on
+útil
+\emph default
+ proporcionarle documentos que probablemente ya buscó o está buscando fuera
+ del sistema? En realidad, el sistema debería traer a la atención del usuario
+ artefactos que habría pasado por alto por no saber cómo buscar o ni siquiera
+ estar al tanto de su existencia o relación con su contexto local.
+ Para ello, la medida por la cual se debería regir un sistema como el propuesto
+ debería ser la 
+\emph on
+utilidad
+\emph default
+: qué artefactos pueden traerle una ganancia al usuario mediante la reducción
+ de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
+ o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Herlocker2004,Rhodes2000"
+
+\end_inset
+
+.
+ En este trabajo se tratará de probar qué tanto aportan los modelos de recuperac
+ión de información semánticamente orientados a la utilidad, por sobre la
+ relevancia, de los resultados.
+ Esto mediante una comparación entre modelos basados en palabras claves
+ y modelos orientados a conceptos.
+\end_layout
+
 \begin_layout Chapter
 Marco teórico
 \end_layout
@@ -1702,10 +1744,10 @@ ente.
 \begin_layout Enumerate
 Hacer pre-procesamiento lingüístico (esto es, aislar raíces, normalizar
  mayúsculas o minúsculas, ignorar puntuación o palabras vacías, hacer etiquetado
- gramático, etc.) El pre-procesamiento puede parecer trivial para lenguajes
- cuya sintaxis y alfabeto lo permiten (como los que utilizan los alfabeto
- latino, griego y cirílico, por ejemplo; sin embargo, la tarea es más difícil
- en otros).
+ gramático, desambiguar palabras mediante análisis semańtico, etc.) El pre-proces
+amiento puede parecer trivial para lenguajes cuya sintaxis y alfabeto lo
+ permiten (como los que utilizan los alfabeto latino, griego y cirílico,
+ por ejemplo; sin embargo, la tarea es más difícil en otros).
  Para una discusión más a fondo del tema del procesamiento lingüístico de
  documentos, consúltense 
 \begin_inset CommandInset citation
@@ -1714,7 +1756,16 @@ key "Bird2009,HinrichSchutze2009"
 
 \end_inset
 
+.
+ Por su parte, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ThorstenBrants"
 
+\end_inset
+
+, presenta un sumario de las técnicas más utilizadas en sistemas comerciales
+ en esta etapa y sus resultados.
 \end_layout
 
 \begin_layout Enumerate
@@ -1864,16 +1915,787 @@ key "Salton1975a"
 
  y trata a las consultas y los documentos como vectores multidimensionales,
  donde cada término es una dimension.
- A la hora de la búsqueda, se computa la similitud mediante el coseno del
- ángulo entre el vector de consulta y los de los documentos, por lo general,
- las dimensiones se ponderan en base a la frecuencia de los términos en
- los documentos y así se pueden ordenar los resultados por relevancia.
+ A la hora de la búsqueda, se computa la similitud entre el vector de consulta
+ y los de los documentos, retornando los resultados ordenados según su relevanci
+a (proporcional a la similitud).
+\end_layout
+
+\begin_layout Standard
+Por lo general, las dimensiones se ponderan en base a la frecuencia de los
+ términos en los documentos y así se pueden ordenar los resultados por relevanci
+a.
  Dada la fundamental importancia de este modelo, se explicará a detalle
  a continuación:
 \end_layout
 
 \begin_layout Standard
+En primer lugar, se debe tener en cuenta la representación de la colección
+ documental.
+ Como ya se dijo, el modelo de espacio vectorial parte de la premisa que
+ los documentos se representan como vectores multidimensionales, tomando
+ todas las palabras de la colección documental como las dimensiones.
+ Nótese que estos vectores se han de construir con los términos que hayan
+ quedado luego del pre-procesamiento lingüístico, en especial de la remoción
+ de palabras vacías, que podrían crear múltiples dimensiones innecesarias.
+ 
+\end_layout
 
+\begin_layout Standard
+El vector para un documento 
+\emph on
+D
+\emph default
+ consisten en el 
+\emph on
+peso 
+\emph default
+asociado a cada término del espacio; este puede ir desde identificar la
+ presencia de éste en el documento (1 si el término de la dimensión está
+ presente, 0 en caso contrario) hasta algún peso calculado estadísticamente,
+ como se discutirá enseguida.
+ Visto de esta manera, entonces, para un vector con 
+\emph on
+t
+\emph default
+ dimensiones, un documento se representa así:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+D_{i}=<w_{i1},w_{i2},\ldots,w_{it}>\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A lo largo de este apartado, se utilizarán los documentos presentados en
+ la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:VSM-examples"
+
+\end_inset
+
+ para ilustrar los conceptos clave.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+id
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Original
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pre-procesado
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vector
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+Dijo alguien que decía lo que dícese: Ser o no ser el ser que se es
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+decir[3]
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<3,0,0>
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+Ser alguien en la vida, es poco decir, mi vida
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+decir[1] vida[2] poco[1] 
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<1,3.17,1>
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+Dije que a poco es vida
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+decir[1] vida[1] poco[1] 
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<1,1.58,1>
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:VSM-examples"
+
+\end_inset
+
+Documentos de ejemplo para el modelo de espacio vectorial.
+ El procesamiento lingüístico elimina palabras vacías, puntuación y mayúsculas
+ y reduce a raíces.
+ Por claridad, las frecuencias se muestran contiguas a las palabras, aunque
+ esto es responsabilidad del índice inverso.
+ Las ponderaciones se han calculado con 
+\emph on
+if*tdf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El peso 
+\emph on
+w
+\emph default
+ de un término se puede calcular respecto a ciertas medidas estadísticas,
+ algunas de las más utilizadas en la implementación de este modelo son:
+\end_layout
+
+\begin_layout Itemize
+Peso booleano: asigna 0 ó 1, dependiendo de la presencia o ausencia del
+ término.
+\end_layout
+
+\begin_layout Itemize
+Frecuencia local: el peso es proporcional a la cantidad de veces que la
+ palabra ocurre en el documento.
+ Esta ponderación es fácil de calcular y refleja de manera transparente
+ una premisa común en mayor o menor medida a los modelos basados en palabras:
+ la posición de la palabra no es importante, suposición heredada de los
+ modelos estadísticos basados en inferencia bayesiana 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Lewis1998"
+
+\end_inset
+
+.
+ La frecuencia del k-ésimo término en el i-ésimo documento de una colección
+ se puede expresar como 
+\begin_inset Formula $f_{i}^{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Frecuencia local multiplicada por la frecuencia global inversa: conocida
+ en la literatura como 
+\emph on
+tf*idf
+\emph default
+, se basa en la observación que dice que los términos verdaderamente importantes
+ en una colección documental son aquellos que aparecen con la suficiente
+ frecuencia en un documento para definirlo y a la vez son poco frecuentes
+ globalmente.
+ Esta ponderación será proporcional a 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $f_{i}^{k}\cdot IDF_{k}$
+\end_inset
+
+ donde, para una frecuencia documental 
+\begin_inset Formula $d_{k}$
+\end_inset
+
+ que representa el número de documentos en los que aparece el k-ésimo término,
+ para 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\noun default
+\color inherit
+n 
+\emph default
+documentos; la
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+ frecuencia documental inversa se define como:
+\begin_inset Formula \begin{equation}
+IDF_{k}=\log\frac{n}{1+d_{k}}=\log_{2}n-\log_{2}d_{k}+1\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Valores discriminantes: aunque la medida 
+\emph on
+tf*idf 
+\emph default
+es ampliamente utilizada, el mismo 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Salton1975a"
+
+\end_inset
+
+, reconoció que aún así hay términos que son más decisivos en definir el
+ caracter relevante de los documentos, en especial dentro de colecciones
+ relativamente homogéneas; por lo cual introduce el concepto de 
+\emph on
+valores discriminantes
+\emph default
+ en función de la densidad del espacio vectorial: un término es discriminante
+ en la medida en que su ausencia o presencia en la colección afecte qué
+ tan cerca están, en términos de similitud, los documentos; un buen término,
+ entonces, sería aquel que, al ser eliminado, hace que los documentos queden
+ más cerca entre sí, afectando peyorativamente la precisión de las búsquedas.
+ Puesto que no es factible computacionalmente encontrar el valor discriminante
+ de todos los términos de la colección -ya que habría que calcular la densidad
+ 
+\emph on
+t
+\emph default
+ veces, lo cual sería 
+\begin_inset Formula $O(n^{3})$
+\end_inset
+
+- el mismo autor propone examinar el comportamiento de los términos respecto
+ a las frecuencias, y reporta que buenos términos discriminantes son aquellos
+ que no son demasiado raros ni demasiado frecuentes, por lo que los términos
+ poco frecuentes se deberían agrupar bajo un sinónimo (una clase de tesauro)
+ y los más frecuentes, en 
+\emph on
+frases
+\emph default
+, dado que éstas son, por lo general, menos propensas a tener la misma ocurrenci
+a global que sus componentes individuales.
+\end_layout
+
+\begin_layout Itemize
+Frecuencias de grupo: en el mismo trabajo, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Salton1975a"
+
+\end_inset
+
+, propone un multiplicador similar al 
+\emph on
+tf*idf
+\emph default
+, pero en vez de hacerlo relativo a toda la colección, calcularlo en base
+ a las frecuencias en grupos, luego, claro, de haber agrupado los documentos
+ relacionados mediante algún algoritmo de 
+\emph on
+clustering
+\emph default
+ (una explicación más exhaustiva de algoritmos de agrupamiento en la tarea
+ de recuperación de información se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+ y una implementación simple del agrupamiento jerárquico, en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Segaran2007"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+En la enumeración anterior, nótese el uso indistinto de 
+\begin_inset Quotes eld
+\end_inset
+
+término
+\begin_inset Quotes erd
+\end_inset
+
+ y 
+\begin_inset Quotes eld
+\end_inset
+
+palabra
+\begin_inset Quotes erd
+\end_inset
+
+ como equivalentes, esto es debido al extendido uso de 
+\emph on
+unigramas
+\emph default
+ como los componentes fundamentales de los sistemas de recuperación de informaci
+ón -lo cual no es necesariamente el mejor ni único enfoque, pero es el más
+ simple 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Russell1995"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Una vez obtenidos los vectores, se pueden representar como en la figura
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:vectors_for_example"
+
+\end_inset
+
+; pero la longitud de los vectores no es importante, sino la 
+\emph on
+similitud
+\emph default
+ que hay entre ellos, la cual se puede calcular con un producto interno
+ o como una función inversa al ángulo que hay entre ellos 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Levow2003"
+
+\end_inset
+
+.
+ Por lo general, se utiliza la medida de 
+\emph on
+similitud de coseno 
+\emph default
+(definida en el apartado 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:cosine_sim"
+
+\end_inset
+
+) porque ésta es independiente de la magnitud del vector, a diferencia de
+ la mera diferencia de magnitudes, que puede ser ambigua, porque dos documentos
+ muy similares pueden tener magnitudes proporcionales y, así, una diferencia
+ significativa 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+.
+ El modelo se puede simplificar tomando la intersección de cada vector con
+ la esfera unitaria y luego estirando ésta sobre dos dimensiones, de manera
+ que los vectores ahora se aprecian como puntos en un plano y estos puntos
+ estarán cerca unos de otros si los vectores originales estaban angularmente
+ próximos.
+ La figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:plane_for_example"
+
+\end_inset
+
+ ilustra esta simplificación para el ejemplo de esta sección.
+\end_layout
+
+\begin_layout Standard
+El quid de este modelo estriba en la siguiente hipótesis 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Salton1975a"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+La densidad de un espacio documental y el rendimiento de un sistema de recuperac
+ión de información están inversamente relacionados
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lo cual, llevado al espacio simplificado, implica que los documentos más
+ similares a una consulta estén lo más cerca posible a ésta y unos a otros;
+ y, al mismo tiempo, que los menos relevantes estén lo más alejado posible
+ a la consulta, esto debido a que la precisión de la búsqueda se puede ver
+ afectada por la densidad del espacio: entre más cerca están los documentos,
+ más posible es que, para una consulta, se obtengan resultados no-relevantes;
+ por lo que es deseable que la densidad se minimice, distinguiendo lo más
+ posible, mediante indización y ponderaciones óptimas, entre los documentos.
+ Técnicas de agrupamiento basadas en la ponderación dada a los términos
+ se pueden aplicar para hacer posibles estos requerimientos, acercando los
+ grupos de documentos similares y alejando los disímiles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/6_VSM_vectors.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:vectors_for_example"
+
+\end_inset
+
+Representación en vectores
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/7_VSM_flat_space.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:plane_for_example"
+
+\end_inset
+
+Representación en un espacio plano
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Representaciones en el espacio vectorial para el ejemplo de la tabla
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:VSM-examples"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Mejoras del modelo de espacio vectorial
+\end_layout
+
+\begin_layout Standard
+Aunque el modelo de espacio vectorial tiene en cuenta algunos aspectos del
+ lenguaje natural, los términos individuales siguen consistiendo en dimensiones,
+ por lo que documentos semánticamente similares a una consulta, pero léxicamente
+ diferentes, seguirán apareciendo con un bajo puntaje de relevancia -este
+ fenómeno se da aún cuando se usa el valor discriminante bajo clases de
+ sinónimos, puesto que los términos son o equivalentes o no equivalentes
+ a una clase.
+ Para resolver este problema, el 
+\emph on
+modelo de espacio vectorial orientado a tópicos
+\emph default
+ asume que los términos no sólo pueden ser equivalentes o no equivalentes,
+ si no que pueden pertenecer en distintos grados a estas dos clases -tomado
+ de la lógica difusa; este modelo se define y compara con otros basados
+ en el de espacio vectorial clásico en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Becker2003"
+
+\end_inset
+
+.
+ Por su parte, el 
+\emph on
+modelo generalizado de espacio vectorial
+\emph default
+, asume que los términos individuales de un vector también pueden ser similares
+ entre sí, por lo que los representan también con vectores en un espacio
+ combinatorio.
+ Una implementación de este modelo se puede encontrar explicada en 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Tsatsaronis2009"
+
+\end_inset
+
+.
+ Ambos modelos parten de la idea de aprovechar las relaciones entre términos,
+ y difieren en que el primero utiliza información basada en tesauros y ontología
+s y el segundo infiere las relaciones entre términos a partir de la colección
+ documental.
+ 
+\end_layout
+
+\begin_layout Standard
+Estos modelos probarían ser más útiles para un sistema como el propuesto
+ para el presente proyecto, porque, a diferencia del modelo de espacio vectorial
+ clásico, orientado a palabras clave -similitud léxica- y relevancia; podrían
+ probar ser más útiles a la hora de encontrar documentos útiles.
 \end_layout
 
 \begin_layout Subsection
@@ -4068,7 +4890,14 @@ Así, se puede hablar del porcentaje de similitud entre personas.
 \end_layout
 
 \begin_layout Paragraph
-Similitud de coseno:
+Similitud de coseno
+\begin_inset CommandInset label
+LatexCommand label
+name "par:cosine_sim"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
