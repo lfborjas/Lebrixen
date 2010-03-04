@@ -1187,6 +1187,13 @@ resultados: Los documentos que el sistema ha considerado relevantes a la
 
 \begin_layout Subsubsection
 La estrategia de búsqueda
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:search-strategy"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1584,8 +1591,8 @@ reference "fig:IR_model_taxonomy"
 
 \end_inset
 
- se presenta una taxonomía de los modelos de recuperación de información
- que se explorarán.
+ se presenta una taxonomía de algunos de los modelos de recuperación de
+ información utilizados comercialmente y en investigación.
 \end_layout
 
 \begin_layout Standard
@@ -1630,12 +1637,242 @@ key "Safran2005,Spoerri1993"
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
+\begin_layout Paragraph
+El índice invertido
+\end_layout
+
+\begin_layout Standard
+Antes de explorar los modelos de recuperación de información, es menester
+ definir una de las técnicas de indización presente en la mayor parte de
+ las implementaciones: el 
+\emph on
+índice invertido
+\emph default
+.
+ Éste consiste en un archivo que contiene todas las palabras de la colección
+ documental y en qué documentos ocurren éstas.
+ Es esta estructura de datos la que permite que los sistemas de recuperación
+ de información computacionales sean factibles, ya que la búsqueda por una
+ palabra no se hace en los documentos, sino en este archivo.
+ Puesto que la construcción de esta estructura ocurre en la etapa de indización,
+ es aquí donde se hacen decisiones fundamentales sobre el tratamiento de
+ los documentos como qué hacercon la puntuación, utilizar las palabras completas
+ o sólo las raíces, si distinguir entre mayúsculas y minúsculas, etc -nótese
+ que estas decisiones deben reflejarse en el tratamiento dado a las consultas,
+ como se define en el apartado 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:search-strategy"
+
 \end_inset
 
+.
+\end_layout
+
+\begin_layout Standard
+El proceso general de construcción de un índice invertido se puede encontrar
+ explicado en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009,Walker1999"
+
+\end_inset
+
+, y se resume a continuación:
+\end_layout
+
+\begin_layout Enumerate
+Juntar los documentos a ser indizados, en alguna estructura de datos.
+\end_layout
+
+\begin_layout Enumerate
+Separar en unidades (
+\emph on
+tokens
+\emph default
+) cada documento; las unidades son, por lo general, palabras, pero no exclusivam
+ente.
+\end_layout
+
+\begin_layout Enumerate
+Hacer pre-procesamiento lingüístico (esto es, aislar raíces, normalizar
+ mayúsculas o minúsculas, ignorar puntuación o palabras vacías, hacer etiquetado
+ gramático, etc.) El pre-procesamiento puede parecer trivial para lenguajes
+ cuya sintaxis y alfabeto lo permiten (como los que utilizan los alfabeto
+ latino, griego y cirílico, por ejemplo; sin embargo, la tarea es más difícil
+ en otros).
+ Para una discusión más a fondo del tema del procesamiento lingüístico de
+ documentos, consúltense 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bird2009,HinrichSchutze2009"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Por cada palabra, construir el índice agregando los documentos en los cuales
+ ocurre ésta y, si se decide por considerar la estructura, agregar también
+ en qué parte del documento es la ocurrencia.
+ Los documentos, por lo general, se representan mediante una clave numérica
+ única y las partes mediante una clave o una abreviación.
+\end_layout
+
+\begin_layout Enumerate
+Se ordena el índice alfabéticamente.
+\end_layout
+
+\begin_layout Standard
+Nótese que el índice contiene entradas únicas para las palabras, así que
+ es responsabilidad de quien lo implementa incluir un campo donde se incluya
+ también la cantidad de veces que una palabra ocurre en un documento (o
+ en una parte del documento, si es más granular); esta decisión, como las
+ demás, depende del modelo en uso.
+\end_layout
+
+\begin_layout Paragraph
+Modelo Booleano
+\end_layout
+
+\begin_layout Standard
+Es el modelo más simple de recuperación de información.
+ Podemos definirlo como una función que, dados un documento y una consulta
+ escrita como una expresión booleana de palabras, el documento es relevante
+ a la consulta si y sólo si la expresión evalúa a verdadera en el documento,
+ entendiendo como verdadero la presencia de una palabra en el documento.
+ 
+\end_layout
+
+\begin_layout Standard
+Si se utiliza un índice invertido, basta con hacer búsquedas para las palabras
+ de la consulta y devolver los documentos en los que éstas se encuentran,
+ aplicando operaciones simples de conjuntos según la expresión booleana.
+ La consulta se puede hacer en un tiempo lineal respecto a la cantidad de
+ documentos y palabras en la consulta; asimismo, optimizaciones heurísticas
+ se pueden aplicar a las consultas.
+\end_layout
+
+\begin_layout Standard
+Este modelo es tan fácil de implementar y tan eficiente computacionalmente,
+ que se ha usado en sistemas comerciales de búsquedas en bases de datos
+ desde hace casi medio siglo.
+ Pero los sistemas implementados fueron más allá de los simples operadores
+ booleanos, e introdujeron 
+\emph on
+operadores de proximidad
+\emph default
+ y comodines de búsqueda, con el propósito de mejorar los resultados.
+ Un ejemplo de un sistema comercial con una implementación altamente especializa
+da y optimizada del modelo booleano es el sistema 
+\emph on
+DIALOG
+\emph default
+, explorado en detalle en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Walker1999"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Las desventajas del modelo booleano radican en que no hay manera de ordenar
+ los resultados, puesto que los terminos o están, o no están, sin manera
+ de saber si la palabra está realmente relacionada al tema central del documento
+ o sólo apareció allí una vez.
+ Asimismo, los usuarios podrían no estar familiarizados con la lógica booleana,
+ y aún siendo así, la diferencia de resultados entre una conjunción y una
+ disyunción de términos puede ser demasiado abismal como para dar al usuario
+ una idea de cómo refinar su consulta.
+\end_layout
+
+\begin_layout Paragraph
+Modelo booleano extendido mediante lógica difusa
+\end_layout
+
+\begin_layout Standard
+Trata de sobreponerse a las limitaciones del modelo booleano tradicional
+ implementado la lógica difusa para las operaciones, así, los resultados
+ de las expresiones no serán sólo verdadero o falso (0 ó 1), sino cualquier
+ valor entre ellos, usualmente representado en el continuo [0, 1].
+\end_layout
+
+\begin_layout Standard
+Los documentos se tratan como conjuntos difusos y la membresía de cada término
+ se puede calcular en base a la frecuencia de su ocurrencia, por lo que
+ los resultados de las operaciones difusas extendidas se pueden utilizar
+ para dar una medida de relevancia a los documentos en el conjunto de resultados.
+ Aunque este es el enfoque más intuitivo, la lógica difusa se puede utilizar
+ para extensiones más drásticas del modelo de conjuntos de recuperación
+ de información.
+ Nótese también que este tipo de lógica se asemeja más al lenguaje natural,
+ pues toma en cuenta la incertidumbre y la ambigüedad.
+ Una discusión más a fondo de la lógica difusa aplicada al modelo booleano
+ se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Crestani"
+
+\end_inset
+
+, la presentación de un modelo de recuperación de información generalizado
+ -que trasciende al mero uso de palabras clave para la búsqueda y se extiende
+ al uso de 
+\emph on
+conceptos- 
+\emph default
+se puede ver discutida en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baziz2004"
+
+\end_inset
+
+ y los fundamentos de la lógica difusa para la manipulación y representación
+ del conocimiento se encuentran esbozados en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pajares1999"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Modelo de espacio vectorial
+\end_layout
+
+\begin_layout Standard
+Es el modelo más utilizado en la actualidad, y ha servido de base para otros
+ modelos que han reportado éxito en la investigación.
+ Fue propuesto para la tarea de recuperación de información por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Salton1975a"
+
+\end_inset
+
+ y trata a las consultas y los documentos como vectores multidimensionales,
+ donde cada término es una dimension.
+ A la hora de la búsqueda, se computa la similitud mediante el coseno del
+ ángulo entre el vector de consulta y los de los documentos, por lo general,
+ las dimensiones se ponderan en base a la frecuencia de los términos en
+ los documentos y así se pueden ordenar los resultados por relevancia.
+ Dada la fundamental importancia de este modelo, se explicará a detalle
+ a continuación:
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
