@@ -1604,28 +1604,11 @@ Modelos de recuperación de información
 
 \begin_layout Standard
 El componente más importante de un sistema de IR, como ya se vio anteriormente,
- es la consulta del usuario -la expresión de su necesidad de información.
- En este apartado se presentan los distintos enfoques de implementación,
- los cuales se pueden separar en dos grandes grupos: los basados en 
-\emph on
-palabras
-\emph default
- y los basados en 
-\emph on
-conceptos.
-
-\emph default
- Como ya se apuntó, los sistemas tradicionales parten de la premisa de que
- las palabras que están en la consulta son suficientes para la búsqueda,
- sin embargo, como se sabe, el lenguaje natural encierra 
-\emph on
-conceptos
-\emph default
- que trascienden una mera instancia léxica, y por ello se presentarán también
- técnicas que parten de la premisa de que la consulta sólo es una base semántica
- para la búsqueda y que ésta se puede aumentar (ya sea mediante sinónimos
- aportados por tesauros, búsquedas en ontologías o colecciones indizadas
- por conceptos) o refinar (mediante la desambiguación de términos, por ejemplo).
+ es el tratamiento de la consulta del usuario en el componente de igualación;
+ para que éste devuelva objetos verdaderamente relevantes o útiles, la indizació
+n debe haber construido una representación óptima de los mismos, y es en
+ esta etapa en la que entran en juego los distintos modelos presentados
+ en este apartado.
  En la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1635,6 +1618,9 @@ reference "fig:IR_model_taxonomy"
 
  se presenta una taxonomía de algunos de los modelos de recuperación de
  información utilizados comercialmente y en investigación.
+ De éstos, se explorarán someramente unos pocos en este apartado, evaluándolos
+ al final desde el punto de vista crítico de la implementación de un sistema
+ como el propuesto en este proyecto.
 \end_layout
 
 \begin_layout Standard
@@ -1786,6 +1772,69 @@ Nótese que el índice contiene entradas únicas para las palabras, así que
  también la cantidad de veces que una palabra ocurre en un documento (o
  en una parte del documento, si es más granular); esta decisión, como las
  demás, depende del modelo en uso.
+\end_layout
+
+\begin_layout Paragraph
+Búsqueda orientada a conceptos vs.
+ la búsqueda orientada a palabras
+\end_layout
+
+\begin_layout Standard
+En este apartado se presentarán los distintos enfoques de implementación
+\emph on
+.
+
+\emph default
+ Como ya se apuntó, los sistemas tradicionales parten de la premisa de que
+ las palabras que están en la consulta son suficientes para la búsqueda,
+ sin embargo, como se sabe, el lenguaje natural encierra 
+\emph on
+conceptos
+\emph default
+ que trascienden una mera instancia léxica, y por ello se presentarán también
+ técnicas que parten de la premisa de que la consulta sólo es una base semántica
+ para la búsqueda y que ésta se puede aumentar (ya sea mediante sinónimos
+ aportados por tesauros, búsquedas en ontologías o colecciones indizadas
+ por conceptos) o refinar (mediante la desambiguación de términos, por ejemplo).
+ Ambos enfoques pueden llamar también 
+\emph on
+búsquedas léxicas
+\emph default
+ y 
+\emph on
+búsquedas semánticas
+\emph default
+, respectivamente.
+\end_layout
+
+\begin_layout Standard
+La motivación que subyace a la transición de la recuperación de información
+ léxicamente orientada a una semánticamente orientada es la observación
+ de la incertidumbre inherente al lenguaje natural, observable en dos aspectos
+ del mismo: la 
+\emph on
+sinonimia
+\emph default
+ y la 
+\emph on
+polisemia
+\emph default
+.
+ Las consultas pueden ser expresadas en palabras que no aparezcan como tales
+ en documentos verdaderamente relevantes -sino que en su lugar se utilicen
+ sinónimos, por lo que la exhaustividad del sistema se ve afectada, al no
+ traer todos los artículos relevantes.
+ Asimismo, documentos irrelevantes a una consulta pueden ser obtenidos debido
+ a la polisemia -la variabilidad contextual del significado de una misma
+ palabra- por lo que la precisión se ve afectada 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Dumais1988"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -2565,10 +2614,6 @@ Representación en vectores
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -2608,10 +2653,6 @@ Representación en un espacio plano
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -2633,16 +2674,12 @@ reference "tab:VSM-examples"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Mejoras del modelo de espacio vectorial
 \end_layout
 
@@ -2654,7 +2691,10 @@ Aunque el modelo de espacio vectorial tiene en cuenta algunos aspectos del
  fenómeno se da aún cuando se usa el valor discriminante bajo clases de
  sinónimos, puesto que los términos son o equivalentes o no equivalentes
  a una clase.
- Para resolver este problema, el 
+\end_layout
+
+\begin_layout Standard
+Para resolver este problema, el 
 \emph on
 modelo de espacio vectorial orientado a tópicos
 \emph default
@@ -2692,10 +2732,259 @@ s y el segundo infiere las relaciones entre términos a partir de la colección
 \end_layout
 
 \begin_layout Standard
+Un tercer modelo que extiende al de espacio vectorial clásico es el basado
+ en 
+\emph on
+Semántica Distribuida 
+\emph default
+(DSIR, por sus siglas en inglés); éste utiliza la distribución contextual
+ de las palabras, basada en una matriz de co-ocurrencia, para ponderar los
+ términos y así sobreponerse a los problemas de sinonimia y polisemia, dejando
+ alejados en el espacio vectorial aquellos documentos donde los términos
+ sólo sean polisémicamente equivalentes y cercanos aquellos donde haya similitud
+ sinonímica.
+ Este modelo ha sido implementado y probado con una colección documental
+ relativamente grande por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rungsawang1988"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Estos modelos probarían ser más útiles para un sistema como el propuesto
  para el presente proyecto, porque, a diferencia del modelo de espacio vectorial
  clásico, orientado a palabras clave -similitud léxica- y relevancia; podrían
  probar ser más útiles a la hora de encontrar documentos útiles.
+\end_layout
+
+\begin_layout Paragraph
+Indización semántica latente
+\end_layout
+
+\begin_layout Standard
+Este modelo parte de la premisa de que existe una 
+\begin_inset Quotes eld
+\end_inset
+
+estructura semántica latente que subyace a la elección de palabras específicas
+ de una consulta
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Dumais1988"
+
+\end_inset
+
+.
+ Es decir, las palabras que el usuario elige para realizar una consulta
+ son instancias de un 
+\emph on
+concepto
+\emph default
+ expresable de otras maneras.
+ Este modelo trata de encontrar esta estructura latente mediante una aproximació
+n estadística: parte de una matriz donde se representan todos los términos
+ contra los documentos en los que aparecen (cada entrada de ésta corresponde
+ a la frecuencia del i-ésimo término en el j-ésimo documento) y luego esta
+ matriz se descompone en tres matrices menores mediante la técnica de 
+\emph on
+descomposición en valores singulares, 
+\emph default
+reduciendo así la cantidad de dimensiones del espacio documental y dejando
+ que términos sinonímicamente relacionados se representan en una sola dimensión.
+ Esta reducción dimensional basada en la contextualización estadística de
+ los términos es la que permite que documentos semánticamente relacionados
+ a una consulta queden en la vecindad de ésta en el espacio vectorial, mejorando
+ el rendimiento del sistema 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Levow2003,Spoerri1993a"
+
+\end_inset
+
+.
+ Por su parte, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+, resume el proceso de representación documental como la transformación
+ de la matriz original de términos/documentos a un espacio con 
+\emph on
+k
+\emph default
+ dimensiones (donde 
+\emph on
+k
+\emph default
+ es una constante elegida usualmente con un valor entre los pocos cienes)
+ donde éstas son representadas por los 
+\emph on
+k 
+\emph default
+principales 
+\emph on
+eigenvectores (vectores propios)
+\emph default
+, haciendo así que sólo aquellas dimensiones que son verdaderamente representati
+vas de los documentos subsistan, haciendo que otras que en realidad representaba
+n valores cuasi-sinonímicos desaparezcan y se vean reducidas a las dimensiones
+ propias del espacio.
+ Una explicación más detallada y matemáticamente fundamentada de este modelo
+ se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Deerwester1990"
+
+\end_inset
+
+.
+ Y una comparación entre este modelo y otro basado en la expansión de consultas
+ de usuarios mediante el uso de ontologías se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Ozcan2004"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dos grandes problemas de este modelo son, en primer lugar, el costo computaciona
+l relacionado a la transformación matricial -el cual se debe hacer cada
+ vez que la colección documental cambie drásticamente 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Dumais1988"
+
+\end_inset
+
+; y, a medida que las colecciones crecen, la polisemia de los términos puede
+ afectar negativamente a la transformación (al introducir vectores propios
+ espurios o equívocos).
+ Una solución a ambos problemas puede ser una partición de la colección
+ documental en segmentos más manejables, como se propone en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bassu2003"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Análisis formal de conceptos
+\end_layout
+
+\begin_layout Standard
+Se basa en relacionar documentos con conceptos determinados de la colección
+ documental.
+ Esta relación entre conceptos y documentos se representa mediante un 
+\emph on
+retículo
+\emph default
+ (
+\emph on
+lattice
+\emph default
+, en inglés) de conceptos organizados jerárquicamente, por lo que la búsqueda
+ de un término puede hacerse buscándolo en el retículo y luego extrayendo
+ los documentos con los cuales está relacionado directa o indirectamente
+ en la estructura 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Becker2001"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Por otro lado, se puede utilizar el análisis formal de conceptos para construir
+ jerarquías conceptuales a partir de la colección documental 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Cimiano2005"
+
+\end_inset
+
+ y expandir la etapa de indización 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Schonhofen2001"
+
+\end_inset
+
+: la idea básica es mejorar la ponderación de los términos -o la asignación
+ de dimensiones, en el caso de los modelos generalizados de espacio vectorial.
+\end_layout
+
+\begin_layout Paragraph
+Similitud basada en hash
+\end_layout
+
+\begin_layout Standard
+Este es un modelo relativamente nuevo, al menos en la aplicación a la recuperaci
+ón documental, la idea central es simple pero poderosa: se utilizan funciones
+ 
+\emph on
+hash
+\emph default
+ aplicadas a los documentos y, cuando existe una colisión (se asigna la
+ misma firma 
+\emph on
+hash
+\emph default
+ a dos o más documentos) es porque éstos son similares y, por tanto, probablemen
+te igual de relevantes a una consulta.
+ Este método se ha probado computacionalmente más eficiente que la búsqueda
+ en un espacio vectorial 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Stein2007"
+
+\end_inset
+
+, pero tiene un par de debilidades: en primera, la elección de una función
+ 
+\emph on
+hash
+\emph default
+ debe ser en extremo cuidadosa, funciones muy estrictas podrían no asignar
+ las mismas firmas a documentos no relacionados y lo contrario para funciones
+ muy permisivas; otra debilidad radica en la premisa misma del modelo: es
+ totalmente basado en palabras clave -puesto que la función hash es intrínsecame
+nte léxica- por lo que es inaplicable para escenarios donde una orientación
+ más semántica que léxica sería deseable.
+\end_layout
+
+\begin_layout Paragraph
+Recuperación probabilística de la información
+\end_layout
+
+\begin_layout Standard
+[russel, el paper aquel, FIXIT]
+\end_layout
+
+\begin_layout Paragraph
+Modelos lingüísticos y orientados al conocimiento
+\end_layout
+
+\begin_layout Standard
+[russel, sporri-loquesea, schütze]
 \end_layout
 
 \begin_layout Subsection
