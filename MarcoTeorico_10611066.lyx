@@ -1603,7 +1603,7 @@ Modelos de recuperación de información
 \end_layout
 
 \begin_layout Standard
-El componente más importante de un sistema de IR, como ya se vio anteriormente,
+El componente más importante de un sistema de IR, como se vio anteriormente,
  es el tratamiento de la consulta del usuario en el componente de igualación;
  para que éste devuelva objetos verdaderamente relevantes o útiles, la indizació
 n debe haber construido una representación óptima de los mismos, y es en
@@ -1689,10 +1689,10 @@ Antes de explorar los modelos de recuperación de información, es menester
  palabra no se hace en los documentos, sino en este archivo.
  Puesto que la construcción de esta estructura ocurre en la etapa de indización,
  es aquí donde se hacen decisiones fundamentales sobre el tratamiento de
- los documentos como qué hacercon la puntuación, utilizar las palabras completas
- o sólo las raíces, si distinguir entre mayúsculas y minúsculas, etc -nótese
- que estas decisiones deben reflejarse en el tratamiento dado a las consultas,
- como se define en el apartado 
+ los documentos como qué hacer con la puntuación, utilizar las palabras
+ completas o sólo las raíces, si distinguir entre mayúsculas y minúsculas,
+ etc -nótese que estas decisiones deben reflejarse en el tratamiento dado
+ a las consultas, como se define en el apartado 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:search-strategy"
@@ -1730,7 +1730,7 @@ ente.
 \begin_layout Enumerate
 Hacer pre-procesamiento lingüístico (esto es, aislar raíces, normalizar
  mayúsculas o minúsculas, ignorar puntuación o palabras vacías, hacer etiquetado
- gramático, desambiguar palabras mediante análisis semańtico, etc.) El pre-proces
+ gramático, desambiguar palabras mediante análisis semántico, etc.) El pre-proces
 amiento puede parecer trivial para lenguajes cuya sintaxis y alfabeto lo
  permiten (como los que utilizan los alfabeto latino, griego y cirílico,
  por ejemplo; sin embargo, la tarea es más difícil en otros).
@@ -1794,7 +1794,7 @@ conceptos
  que trascienden una mera instancia léxica, y por ello se presentarán también
  técnicas que parten de la premisa de que la consulta sólo es una base semántica
  para la búsqueda y que ésta se puede aumentar (ya sea mediante sinónimos
- aportados por tesauros, búsquedas en ontologías o colecciones indizadas
+ aportados por tesauros, búsquedas en ontologías o colecciones indexadas
  por conceptos) o refinar (mediante la desambiguación de términos, por ejemplo).
  Ambos enfoques pueden llamar también 
 \emph on
@@ -1886,7 +1886,7 @@ key "Walker1999"
 
 \begin_layout Standard
 Las desventajas del modelo booleano radican en que no hay manera de ordenar
- los resultados, puesto que los terminos o están, o no están, sin manera
+ los resultados, puesto que los términos o están, o no están, sin manera
  de saber si la palabra está realmente relacionada al tema central del documento
  o sólo apareció allí una vez.
  Asimismo, los usuarios podrían no estar familiarizados con la lógica booleana,
@@ -1963,7 +1963,7 @@ key "Salton1975a"
 \end_inset
 
  y trata a las consultas y los documentos como vectores multidimensionales,
- donde cada término es una dimension.
+ donde cada término es una dimensión.
  A la hora de la búsqueda, se computa la similitud entre el vector de consulta
  y los de los documentos, retornando los resultados ordenados según su relevanci
 a (proporcional a la similitud).
@@ -2378,7 +2378,7 @@ key "Salton1975a"
 \end_inset
 
 , reconoció que aún así hay términos que son más decisivos en definir el
- caracter relevante de los documentos, en especial dentro de colecciones
+ carácter relevante de los documentos, en especial dentro de colecciones
  relativamente homogéneas; por lo cual introduce el concepto de 
 \emph on
 valores discriminantes
@@ -2578,7 +2578,7 @@ Lo cual, llevado al espacio simplificado, implica que los documentos más
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Float figure
@@ -2589,7 +2589,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/6_VSM_vectors.dia
-	scale 30
+	scale 39
+	groupId vector-space-graphics
 
 \end_inset
 
@@ -2628,7 +2629,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/7_VSM_flat_space.dia
-	scale 30
+	scale 39
+	groupId vector-space-graphics
 
 \end_inset
 
@@ -4141,7 +4143,7 @@ Se puede decir preliminarmente, entonces, que un buen sistema es preciso
  exhaustividad no siempre van de la mano, de hecho, en muchos de los casos
  hay que preferir una a la otra: esto se conoce en inglés como 
 \emph on
-the precision-recall tradeoff
+the precisión-recall tradeoff
 \emph default
 .
  Este fenómeno será evidente con un ejemplo, adaptado de 
@@ -4416,7 +4418,7 @@ conjunto de consultas
 \begin_layout Enumerate
 Obtener un conjunto de juicios de relevancia; usualmente se califica a un
  documento, dada una consulta, como relevante o no-relevante.
- Estos juicios se formarán por usuarios que evaluen manualmente los documentos.
+ Estos juicios se formarán por usuarios que evalúen manualmente los documentos.
 \end_layout
 
 \begin_layout Enumerate
@@ -5027,7 +5029,7 @@ no interesantes
 - y se usan estos datos para entrenar al algoritmo.
  De esta manera, se construye una hipótesis de los gustos de éste para predecir
  cuáles otros podrían interesarle.
- Métodos como Naive-Bayes, exitosos en otras tareas de clasificación, se
+ Métodos como Naïve-Bayes, exitosos en otras tareas de clasificación, se
  podrían aplicar en este tipo de sistemas de recomendación 
 \begin_inset CommandInset citation
 LatexCommand citep
