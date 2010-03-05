@@ -1686,7 +1686,7 @@ Antes de explorar los modelos de recuperación de información, es menester
  documental y en qué documentos ocurren éstas.
  Es esta estructura de datos la que permite que los sistemas de recuperación
  de información computacionales sean factibles, ya que la búsqueda por una
- palabra no se hace en los documentos, sino en este archivo.
+ palabra no se hace en los documentos en sí, sino en este archivo.
  Puesto que la construcción de esta estructura ocurre en la etapa de indización,
  es aquí donde se hacen decisiones fundamentales sobre el tratamiento de
  los documentos como qué hacer con la puntuación, utilizar las palabras
@@ -1723,7 +1723,7 @@ Separar en unidades (
 \emph on
 tokens
 \emph default
-) cada documento; las unidades son, por lo general, palabras, pero no exclusivam
+) cada documento; las unidades son, por lo general, palabras, pero no necesariam
 ente.
 \end_layout
 
@@ -1743,21 +1743,21 @@ key "Bird2009,HinrichSchutze2009"
 \end_inset
 
 .
- Por su parte, 
+ Además 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "ThorstenBrants"
 
 \end_inset
 
-, presenta un sumario de las técnicas más utilizadas en sistemas comerciales
+ presenta un sumario de las técnicas más utilizadas en sistemas comerciales
  en esta etapa y sus resultados.
 \end_layout
 
 \begin_layout Enumerate
 Por cada palabra, construir el índice agregando los documentos en los cuales
- ocurre ésta y, si se decide por considerar la estructura, agregar también
- en qué parte del documento es la ocurrencia.
+ ocurre ésta y, si se decide considerar la estructura, agregar también en
+ qué parte del documento es la ocurrencia.
  Los documentos, por lo general, se representan mediante una clave numérica
  única y las partes mediante una clave o una abreviación.
 \end_layout
@@ -1787,7 +1787,8 @@ En este apartado se presentarán los distintos enfoques de implementación
 \emph default
  Como ya se apuntó, los sistemas tradicionales parten de la premisa de que
  las palabras que están en la consulta son suficientes para la búsqueda,
- sin embargo, como se sabe, el lenguaje natural encierra 
+ sin embargo, como se sabe, la necesidad de información del usuario encierra
+ 
 \emph on
 conceptos
 \emph default
@@ -1821,7 +1822,7 @@ polisemia
 \emph default
 .
  Las consultas pueden ser expresadas en palabras que no aparezcan como tales
- en documentos verdaderamente relevantes -sino que en su lugar se utilicen
+ en documentos verdaderamente relevantes sino que en su lugar se utilicen
  sinónimos, por lo que la exhaustividad del sistema se ve afectada, al no
  traer todos los artículos relevantes.
  Asimismo, documentos irrelevantes a una consulta pueden ser obtenidos debido
@@ -1846,14 +1847,16 @@ Es el modelo más simple de recuperación de información.
  Podemos definirlo como una función que, dados un documento y una consulta
  escrita como una expresión booleana de palabras, el documento es relevante
  a la consulta si y sólo si la expresión evalúa a verdadera en el documento,
- entendiendo como verdadero la presencia de una palabra en el documento.
+ donde las cláusulas de la expresión son las palabras mismas y la presencia
+ de una palabra en el documento implica que la cláusula es verdadera.
  
 \end_layout
 
 \begin_layout Standard
 Si se utiliza un índice invertido, basta con hacer búsquedas para las palabras
  de la consulta y devolver los documentos en los que éstas se encuentran,
- aplicando operaciones simples de conjuntos según la expresión booleana.
+ aplicando operaciones simples de conjuntos a los resultados según la expresión
+ booleana.
  La consulta se puede hacer en un tiempo lineal respecto a la cantidad de
  documentos y palabras en la consulta; asimismo, optimizaciones heurísticas
  se pueden aplicar a las consultas.
@@ -1863,8 +1866,8 @@ Si se utiliza un índice invertido, basta con hacer búsquedas para las palabras
 Este modelo es tan fácil de implementar y tan eficiente computacionalmente,
  que se ha usado en sistemas comerciales de búsquedas en bases de datos
  desde hace casi medio siglo.
- Pero los sistemas implementados fueron más allá de los simples operadores
- booleanos, e introdujeron 
+ Pero los sistemas implementados han ido más allá de los simples operadores
+ booleanos y han introducido 
 \emph on
 operadores de proximidad
 \emph default
@@ -1886,9 +1889,9 @@ key "Walker1999"
 
 \begin_layout Standard
 Las desventajas del modelo booleano radican en que no hay manera de ordenar
- los resultados, puesto que los términos o están, o no están, sin manera
+ los resultados, puesto que los términos o están o no están, sin manera
  de saber si la palabra está realmente relacionada al tema central del documento
- o sólo apareció allí una vez.
+ o sólo aparece allí una o pocas veces en contextos distintos.
  Asimismo, los usuarios podrían no estar familiarizados con la lógica booleana,
  y aún siendo así, la diferencia de resultados entre una conjunción y una
  disyunción de términos puede ser demasiado abismal como para dar al usuario
@@ -1913,18 +1916,17 @@ Los documentos se tratan como conjuntos difusos y la membresía de cada término
  para dar una medida de relevancia a los documentos en el conjunto de resultados.
  Aunque este es el enfoque más intuitivo, la lógica difusa se puede utilizar
  para extensiones más drásticas del modelo de conjuntos de recuperación
- de información.
- Nótese también que este tipo de lógica se asemeja más al lenguaje natural,
- pues toma en cuenta la incertidumbre y la ambigüedad.
- Una discusión más a fondo de la lógica difusa aplicada al modelo booleano
- se puede encontrar en 
+ de información 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "Crestani"
 
 \end_inset
 
-, la presentación de un modelo de recuperación de información generalizado
+.
+ Nótese también que este tipo de lógica se asemeja más al lenguaje natural,
+ pues toma en cuenta la incertidumbre y la ambigüedad.
+ La presentación de un modelo de recuperación de información generalizado
  -que trasciende al mero uso de palabras clave para la búsqueda y se extiende
  al uso de 
 \emph on
@@ -1966,15 +1968,10 @@ key "Salton1975a"
  donde cada término es una dimensión.
  A la hora de la búsqueda, se computa la similitud entre el vector de consulta
  y los de los documentos, retornando los resultados ordenados según su relevanci
-a (proporcional a la similitud).
-\end_layout
-
-\begin_layout Standard
-Por lo general, las dimensiones se ponderan en base a la frecuencia de los
- términos en los documentos y así se pueden ordenar los resultados por relevanci
-a.
- Dada la fundamental importancia de este modelo, se explicará a detalle
- a continuación:
+a (siendo ésta proporcional a la similitud).Por lo general, las dimensiones
+ se ponderan en base a la frecuencia de los términos en los documentos y
+ así se pueden ordenar los resultados por relevancia.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1985,7 +1982,7 @@ En primer lugar, se debe tener en cuenta la representación de la colección
  todas las palabras de la colección documental como las dimensiones.
  Nótese que estos vectores se han de construir con los términos que hayan
  quedado luego del pre-procesamiento lingüístico, en especial de la remoción
- de palabras vacías, que podrían crear múltiples dimensiones innecesarias.
+ de palabras vacías, para eliminar dimensiones posiblemente innecesarias.
  
 \end_layout
 
@@ -1994,14 +1991,11 @@ El vector para un documento
 \emph on
 D
 \emph default
- consisten en el 
+ se construye con los 
 \emph on
-peso 
+pesos 
 \emph default
-asociado a cada término del espacio; este puede ir desde identificar la
- presencia de éste en el documento (1 si el término de la dimensión está
- presente, 0 en caso contrario) hasta algún peso calculado estadísticamente,
- como se discutirá enseguida.
+asociados a cada término del espacio -el cálculo de éstos se discutirá enseguida.
  Visto de esta manera, entonces, para un vector con 
 \emph on
 t
@@ -2277,8 +2271,8 @@ El peso
 \emph on
 w
 \emph default
- de un término se puede calcular respecto a ciertas medidas estadísticas,
- algunas de las más utilizadas en la implementación de este modelo son:
+ de un término se puede calcular respecto a ciertas medidas estadísticas
+ y algunas de las más utilizadas en la implementación de este modelo son:
 \end_layout
 
 \begin_layout Itemize
@@ -2291,8 +2285,8 @@ Frecuencia local: el peso es proporcional a la cantidad de veces que la
  palabra ocurre en el documento.
  Esta ponderación es fácil de calcular y refleja de manera transparente
  una premisa común en mayor o menor medida a los modelos basados en palabras:
- la posición de la palabra no es importante, suposición heredada de los
- modelos estadísticos basados en inferencia bayesiana 
+ que la posición de la palabra no es importante, suposición heredada de
+ los modelos estadísticos basados en inferencia bayesiana 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Lewis1998"
@@ -2347,7 +2341,7 @@ tf*idf
 \color inherit
 n 
 \emph default
-documentos; la
+documentos, la
 \family roman
 \series medium
 \shape up
@@ -2521,7 +2515,7 @@ key "HinrichSchutze2009"
 
 \end_inset
 
-.
+ que no refleja la verdadera similitud.
  El modelo se puede simplificar tomando la intersección de cada vector con
  la esfera unitaria y luego estirando ésta sobre dos dimensiones, de manera
  que los vectores ahora se aprecian como puntos en un plano y estos puntos
@@ -2716,7 +2710,7 @@ key "Becker2003"
 modelo generalizado de espacio vectorial
 \emph default
 , asume que los términos individuales de un vector también pueden ser similares
- entre sí, por lo que los representan también con vectores en un espacio
+ entre sí, por lo que se representan también con vectores en un espacio
  combinatorio.
  Una implementación de este modelo se puede encontrar explicada en 
 \begin_inset CommandInset citation
@@ -2800,7 +2794,7 @@ n estadística: parte de una matriz donde se representan todos los términos
 descomposición en valores singulares, 
 \emph default
 reduciendo así la cantidad de dimensiones del espacio documental y dejando
- que términos sinonímicamente relacionados se representan en una sola dimensión.
+ que términos sinonímicamente relacionados se representen en una sola dimensión.
  Esta reducción dimensional basada en la contextualización estadística de
  los términos es la que permite que documentos semánticamente relacionados
  a una consulta queden en la vecindad de ésta en el espacio vectorial, mejorando
@@ -2838,9 +2832,9 @@ principales
 eigenvectores (vectores propios, los que mejor representan un espacio) 
 \emph default
 del espacio original, haciendo así que sólo aquellas dimensiones que son
- verdaderamente representativas de los documentos subsistan, haciendo que
- otras que en realidad representaban valores cuasi-sinonímicos desaparezcan
- y se vean reducidas a las dimensiones propias del espacio.
+ verdaderamente representativas de los documentos subsistan y que otras
+ que en realidad representaban valores cuasi-sinonímicos desaparezcan y
+ se vean reducidas a las dimensiones propias del espacio.
  Una explicación más detallada y matemáticamente fundamentada de este modelo
  se puede encontrar en 
 \begin_inset CommandInset citation
@@ -2935,8 +2929,12 @@ A (la intensión) y B
  un concepto en común, definido éste por la intensión del nodo -el conjunto
  de atributos elegido para representarlo.
  Dada la construcción de esta estructura, todos los sub-nodos de un nodo
- consistirán en sub-conceptos.
- La tarea de recuperación sencillamente consistirá entonces en representar
+ consistirán en sub-conceptos del concepto que éste represente.
+ 
+\end_layout
+
+\begin_layout Standard
+La tarea de recuperación sencillamente consistirá, entonces, en representar
  la consulta como un pseudo-nodo del retículo y luego encontrar el conjunto
  de nodos que tenga la intensión de la la consulta, siendo los documentos
  más relevantes la extensión combinada de éste.
@@ -2995,13 +2993,13 @@ Similitud basada en hash
 
 \begin_layout Standard
 Este es un modelo relativamente nuevo, al menos en la aplicación a la recuperaci
-ón documental, la idea central es simple pero poderosa: se utilizan funciones
+ón documental, cuya idea central es simple pero poderosa: se utilizan funciones
  
 \emph on
 hash
 \emph default
- aplicadas a los documentos y, cuando existe una colisión (se asigna la
- misma firma 
+ aplicadas a los documentos y cuando existe una colisión (se asigna la misma
+ firma 
 \emph on
 hash
 \emph default
@@ -3021,7 +3019,7 @@ key "Stein2007"
 hash
 \emph default
  debe ser en extremo cuidadosa, funciones muy estrictas podrían no asignar
- las mismas firmas a documentos no relacionados y lo contrario para funciones
+ las mismas firmas a documentos relacionados y lo contrario para funciones
  muy permisivas; otra debilidad radica en la premisa misma del modelo: es
  totalmente basado en palabras clave -puesto que la función hash es intrínsecame
 nte léxica- por lo que es inaplicable para escenarios donde una orientación
@@ -3058,7 +3056,9 @@ a una consulta
 \emph on
 Q
 \emph default
- se puede expresar con la probabilidad condicional
+ se puede expresar con la probabilidad condicional expresada en la siguiente
+ probabilidad, la cual se desea maximizar en un sistema de recuperación
+ de información:
 \begin_inset Formula \begin{equation}
 P(r|D,Q)\label{eq:IR_probability}\end{equation}
 
@@ -3081,9 +3081,13 @@ reference "eq:IR_probability"
 \end_inset
 
  se puede expresar como la probabilidad de que una consulta se dé dado un
- documento relevante si se sabe que el documento es verdaderamente relevante
- y, finalmente, asumiendo que la probabilidad de relevancia es constante,
- ya que ésta sólo puede ser 0 ó 1; se obtiene la siguiente transformación:
+ documento relevante si se sabe que el documento es verdaderamente relevante-
+ y, finalmente, asumiendo que la probabilidad de relevancia es constante
+ (la constante 
+\begin_inset Formula $\alpha$
+\end_inset
+
+), ya que ésta sólo puede ser 0 ó 1; se obtiene la siguiente transformación:
 \end_layout
 
 \begin_layout Standard
@@ -3169,9 +3173,10 @@ Las ventajas de este modelo radican en el cálculo preciso de relevancia
  de los documentos, así como de liberar al usuario de la preocupación de
  los lenguajes estructurados de consulta (dado que se puede escribir en
  un lenguaje natural), pero sobre-simplifican el modelo lingüístico, lo
- cual puede impactar en la precisión del sistema; además, requieren de estimació
-n de las probabilidades de relevancia de los documentos, que requieren un
- conocimiento o procesamiento previos de la colección documental 
+ cual puede ir en detrimento en la precisión del sistema; además, requieren
+ de estimación de las probabilidades de relevancia de los documentos, que
+ requieren un conocimiento o procesamiento previos de la colección documental
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Spoerri1993a"
@@ -3204,7 +3209,7 @@ agente inteligente
 \emph default
 , se puede aducir que, si el agente ha aprendido lo suficiente de la colección
  documental o el dominio del conocimiento como para poder procesar preguntas
- y contestarlas, un sistema de IR se vería entonces reducido a la 
+ y contestarlas, un sistema de IR se reduce a la 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3220,12 +3225,15 @@ key "Russell1995"
 \end_inset
 
 .
- Sin embargo, poder representar de manera satisfactoria y utilizable la
- colección documental como información para agentes inteligentes sigue siendo
- demasiado costoso, tanto en términos de recursos computacionales como de
- tiempo.
+ 
+\end_layout
+
+\begin_layout Standard
+Sin embargo, poder representar de manera satisfactoria y utilizable la colección
+ documental como información para agentes inteligentes sigue siendo demasiado
+ costoso, tanto en términos de recursos computacionales como de tiempo.
  De ahí que la tendencia más común en el campo de la recuperación de la
- información es combinar la lingüística computacional con otros enfoques:
+ información es combinar la lingüística computacional con los otros modelos:
  utilizar información contextual para ponderar las palabras -por ejemplo,
  una palabra en función de sustantivo usualmente es más relevante que la
  misma palabra en función de objeto indirecto; valerse de 
@@ -3250,11 +3258,11 @@ key "ThorstenBrants"
 s para el procesamiento del lenguaje natural en textos.
  Por otro lado, sistemas con enfoques más centrados en la lingüística computacio
 nal pura, se han implementado con cierto éxito, entre los que se cuentan
- el legendario sistema 
+ el famoso sistema 
 \emph on
 SMART 
 \emph default
-del promotor del modelo de espacio vectorial, Gerard Salton, el sistema
+del promotor del modelo de espacio vectorial, Gerard Salton; el sistema
  
 \emph on
 CLARIT, 
@@ -3265,7 +3273,7 @@ que en una etapa de análisis morfológico y sintáctico elegía palabras que
 \emph on
 SIMPR
 \emph default
-, que tiene un enfoque iterativo similar CLARIT 
+, que tiene un enfoque iterativo similar al de CLARIT 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Leiva1996"
@@ -3309,9 +3317,9 @@ key "Hart1997"
 \end_inset
 
 ).
- Estos sistemas son totalmente dependientes de agentes inteligentes o sistemas
- expertos, por lo que se requiere del uso extenso de técnicas de ingeniería
- del conocimiento.
+ Estos sistemas son completamente basados en el uso agentes inteligentes
+ o sistemas expertos, por lo que se requiere del uso extenso de técnicas
+ de ingeniería del conocimiento.
  
 \end_layout
 
@@ -4143,7 +4151,7 @@ Se puede decir preliminarmente, entonces, que un buen sistema es preciso
  exhaustividad no siempre van de la mano, de hecho, en muchos de los casos
  hay que preferir una a la otra: esto se conoce en inglés como 
 \emph on
-the precisión-recall tradeoff
+the precision-recall tradeoff
 \emph default
 .
  Este fenómeno será evidente con un ejemplo, adaptado de 
