@@ -2578,7 +2578,7 @@ Lo cual, llevado al espacio simplificado, implica que los documentos más
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Float figure
@@ -2862,16 +2862,31 @@ key "Ozcan2004"
 \begin_layout Standard
 Dos grandes problemas de este modelo son, en primer lugar, el costo computaciona
 l relacionado a la transformación matricial -el cual se debe hacer cada
- vez que la colección documental cambie drásticamente 
+ vez que la colección documental cambie 
+\emph on
+drásticamente
+\emph default
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Dumais1988"
 
 \end_inset
 
-; y, a medida que las colecciones crecen, la polisemia de los términos puede
- afectar negativamente a la transformación (al introducir vectores propios
- espurios o equívocos).
+ -énfasis en qué se considere como drástico, pues la adición de pocos documentos
+ nuevos se puede hacer al espacio ya existente, ignorando momentáneamente
+ las nuevas dimensiones que éstos pudieran introducir y sólo redefiniendo
+ el espacio cuando se alcance algún umbral fijo o relativo al rendimiento
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+ ; y, a medida que las colecciones crecen, la polisemia de los términos
+ puede afectar negativamente a la transformación (al introducir vectores
+ propios espurios o equívocos).
  Una solución a ambos problemas puede ser una partición de la colección
  documental en segmentos más manejables, como se propone en 
 \begin_inset CommandInset citation
@@ -2888,28 +2903,67 @@ Análisis formal de conceptos
 \end_layout
 
 \begin_layout Standard
-Se basa en relacionar documentos con conceptos determinados de la colección
- documental.
- Esta relación entre conceptos y documentos se representa mediante un 
-\emph on
-retículo
-\emph default
- (
-\emph on
-lattice
-\emph default
-, en inglés) de conceptos organizados jerárquicamente, por lo que la búsqueda
- de un término puede hacerse buscándolo en el retículo y luego extrayendo
- los documentos con los cuales está relacionado directa o indirectamente
- en la estructura 
+Modelo propuesto para recuperación de información por 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Becker2001"
 
 \end_inset
 
-.
+, se basa en la construcción de un 
+\emph on
+retículo
+\emph default
+ (en inglés, 
+\emph on
+lattice) 
+\emph default
+a partir de los conceptos y los documentos, de manera que cada nodo de esta
+ estructura consista en dos conjuntos 
+\emph on
+A (la intensión) y B
+\emph default
  
+\emph on
+(la extensión)
+\emph default
+ tales que A tenga todos los atributos comunes a los documentos del nodo
+ y B tenga todos los documentos que comparten los atributos de A.
+ De esta manera, en un nodo se agruparían todos los documentos que tengan
+ un concepto en común, definido éste por la intensión del nodo -el conjunto
+ de atributos elegido para representarlo.
+ Dada la construcción de esta estructura, todos los sub-nodos de un nodo
+ consistirán en sub-conceptos.
+ La tarea de recuperación sencillamente consistirá entonces en representar
+ la consulta como un pseudo-nodo del retículo y luego encontrar el conjunto
+ de nodos que tenga la intensión de la la consulta, siendo los documentos
+ más relevantes la extensión combinada de éste.
+ Se pueden sugerir refinamientos de la consulta explorando los sub-nodos
+ del pseudo-nodo de consulta, garantizando que el conjunto de resultados
+ será siempre más preciso (puesto que, dada la naturaleza de la estructura,
+ los sub-nodos son siempre más específicos que sus antecesores).
+ El ordenamiento por relevancia de los resultados se puede hacer en función
+ de la distancia entre los nodos de los conceptos y la magnitud de las extension
+es de cada nodo.
+ 
+\end_layout
+
+\begin_layout Standard
+Las ventajas de este modelo radican en la facilidad que da al usuario de
+ ampliar o refinar sus consultas: sólo se le sugieren súper-nodos y sub-nodos
+ de la estructura, según sea el caso; además, la magnitud del conjunto de
+ resultados de una consulta refinada o ampliada se puede conocer antes de
+ realizar la recuperación de los documentos, por lo que el usuario puede
+ conocer el tamaño de este conjunto antes de llevar a cabo la consulta en
+ sí, ahorrándose tiempo y costo computacional.
+ 
+\end_layout
+
+\begin_layout Standard
+Como se puede observar, el aporte de este enfoque radica más en el mejor
+ rendimiento a la hora de refinar o ampliar las consultas, siendo la primera
+ búsqueda quizá menos eficiente, computacionalmente, que la de otros modelos,
+ puesto que implica búsquedas en todo el espacio reticular.
 \end_layout
 
 \begin_layout Standard
@@ -2928,8 +2982,9 @@ key "Schonhofen2001"
 
 \end_inset
 
-: la idea básica es mejorar la ponderación de los términos -o la asignación
- de dimensiones, en el caso de los modelos generalizados de espacio vectorial.
+: la idea básica es mejorar la ponderación de los términos mediante la determina
+ción de clases de sinónimos y reducción de la polisemia, esto es, la asignación
+ de dimensiones en el caso de los modelos generalizados de espacio vectorial.
 \end_layout
 
 \begin_layout Paragraph
@@ -2976,7 +3031,162 @@ Recuperación probabilística de la información
 \end_layout
 
 \begin_layout Standard
-[russel, el paper aquel, FIXIT]
+Mientras que los modelos basados en el espacio vectorial y otros similares
+ se basan en medidas heurísticas para maximizar la relevancia verdadera
+ de los documentos y así poder obtener buen rendimiento, los modelos basados
+ en probabilidades cuentan con cierta información de relevancia preliminar
+ que utilizan para estimar la probabilidad de que un documento sea relevante
+ a una consulta.
+ Esta información previa puede ser obtenida al momento de construir el índice
+ mediante análisis estadístico similar al de otros modelos: frecuencias,
+ co-ocurrencias o distribuciones.
+ Estadísticamente hablando, que un documento 
+\emph on
+D 
+\emph default
+sea relevante (
+\emph on
+r
+\emph default
+)
+\emph on
+ 
+\emph default
+a una consulta 
+\emph on
+Q
+\emph default
+ se puede expresar con la probabilidad condicional
+\begin_inset Formula \begin{equation}
+P(r|D,Q)\label{eq:IR_probability}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si se aplica la regla de Bayes, que dice que una probabilidad depende de
+ su inversa (en este caso, la probabilidad de que una consulta sea relevante
+ a un documento) y se aplica la regla de cadena -que dice que se puede estimar
+ una probabilidad conjunta una vez conocido el antecedente de una probabilidad
+ condicional de alguno de los elementos, en el caso de la recuperación de
+ información, que la probabilidad inversa a 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:IR_probability"
+
+\end_inset
+
+ se puede expresar como la probabilidad de que una consulta se dé dado un
+ documento relevante si se sabe que el documento es verdaderamente relevante
+ y, finalmente, asumiendo que la probabilidad de relevancia es constante,
+ ya que ésta sólo puede ser 0 ó 1; se obtiene la siguiente transformación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P(r|D,Q)=\frac{P(D,Q|r)P(r)}{P(D,Q)}=\frac{P(Q|D,r)P(D|r)P(r)}{P(D,Q)}=\frac{\alpha P(Q|D,r)P(r|D)}{P(D,Q)}\label{eq:IR_bayesed}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si además decimos que en vez de maximizar la probabilidad de relevancia
+ de un documento a una consulta queremos maximizar la razón de ésta probabilidad
+ respecto a su negación - es decir, se maximizará la razón 
+\begin_inset Formula $P(r|D,Q)/P(\neg r|D,Q)$
+\end_inset
+
+ y luego se asume que si un documento es irrelevante a una consulta, la
+ probabilidad de éste es independiente de la consulta, basándonos en 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:IR_bayesed"
+
+\end_inset
+
+, tenemos la siguiente transformación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{P(r|D,Q)}{P(\neg r|D,Q)}=\frac{P(Q|D,r)P(r|D)}{P(Q|D,\neg r)P(\neg r|D)}=P(Q|D,r)\frac{P(r|D)}{P(\neg r|D)}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En donde la razón 
+\begin_inset Formula $P(r|D)/P(\neg r|D)$
+\end_inset
+
+ representa la calidad intrínseca del documento: qué tan probable es que
+ resulte un documento relevante a cualquier consulta, ya sea en base a su
+ riqueza de términos discriminantes o su magnitud.
+ Así, al maximizar la razón de relevancia de los documentos, llegamos a
+ obtener una probabilidad proporcional a su inversa, descubriendo una relación
+ causal entre las consultas y los documentos, lo cual permitiría construir
+ una red de inferencia bayesiana 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Turtle1991"
+
+\end_inset
+
+ que establezca que, cuando ocurran ciertas palabras en las consultas, ciertos
+ documentos serán relevantes.
+ 
+\end_layout
+
+\begin_layout Standard
+Este modelo de inferencia asume que el orden de las palabras en un documento
+ no es importante, sino su frecuencia, por lo que la probabilidad 
+\begin_inset Formula $P(Q|D,r)$
+\end_inset
+
+ se puede expresar como el producto de las probabilidades de cada palabra
+ que conforma la consulta; como ya vimos, esto está lejos de ser verdad,
+ pero es una condición necesaria para el desarrollo de estos modelos y usualment
+e da buenos resultados 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Lewis1998"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Las ventajas de este modelo radican en el cálculo preciso de relevancia
+ de los documentos, así como de liberar al usuario de la preocupación de
+ los lenguajes estructurados de consulta (dado que se puede escribir en
+ un lenguaje natural), pero sobre-simplifican el modelo lingüístico, lo
+ cual puede impactar en la precisión del sistema; además, requieren de estimació
+n de las probabilidades de relevancia de los documentos, que requieren un
+ conocimiento o procesamiento previos de la colección documental 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Spoerri1993a"
+
+\end_inset
+
+.
+ Una discusión más detallada del trasfondo estadístico de estos modelos,
+ así como la presentación de otros enfoques de naturaleza similar, se puede
+ encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Fuhr1992"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
