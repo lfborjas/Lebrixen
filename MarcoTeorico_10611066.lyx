@@ -1627,7 +1627,7 @@ reference "fig:IR_model_taxonomy"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -2833,12 +2833,12 @@ k
 \emph default
 principales 
 \emph on
-eigenvectores (vectores propios)
+eigenvectores (vectores propios, los que mejor representan un espacio) 
 \emph default
-, haciendo así que sólo aquellas dimensiones que son verdaderamente representati
-vas de los documentos subsistan, haciendo que otras que en realidad representaba
-n valores cuasi-sinonímicos desaparezcan y se vean reducidas a las dimensiones
- propias del espacio.
+del espacio original, haciendo así que sólo aquellas dimensiones que son
+ verdaderamente representativas de los documentos subsistan, haciendo que
+ otras que en realidad representaban valores cuasi-sinonímicos desaparezcan
+ y se vean reducidas a las dimensiones propias del espacio.
  Una explicación más detallada y matemáticamente fundamentada de este modelo
  se puede encontrar en 
 \begin_inset CommandInset citation
@@ -2860,9 +2860,9 @@ key "Ozcan2004"
 \end_layout
 
 \begin_layout Standard
-Dos grandes problemas de este modelo son, en primer lugar, el costo computaciona
-l relacionado a la transformación matricial -el cual se debe hacer cada
- vez que la colección documental cambie 
+Este modelo no carece de problemas: en primer lugar, el costo computacional
+ relacionado a la transformación matricial -el cual se debe hacer cada vez
+ que la colección documental cambie 
 \emph on
 drásticamente
 \emph default
@@ -3194,7 +3194,607 @@ Modelos lingüísticos y orientados al conocimiento
 \end_layout
 
 \begin_layout Standard
-[russel, sporri-loquesea, schütze]
+Como ya se ha observado, la recuperación de la información es, en el fondo,
+ un problema de comunicación, y, si se toma del campo de la inteligencia
+ artificial el concepto de 
+\emph on
+agente inteligente
+\emph default
+, se puede aducir que, si el agente ha aprendido lo suficiente de la colección
+ documental o el dominio del conocimiento como para poder procesar preguntas
+ y contestarlas, un sistema de IR se vería entonces reducido a la 
+\begin_inset Quotes eld
+\end_inset
+
+respuesta de preguntas a partir de una base de conocimiento
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Russell1995"
+
+\end_inset
+
+.
+ Sin embargo, poder representar de manera satisfactoria y utilizable la
+ colección documental como información para agentes inteligentes sigue siendo
+ demasiado costoso, tanto en términos de recursos computacionales como de
+ tiempo.
+ De ahí que la tendencia más común en el campo de la recuperación de la
+ información es combinar la lingüística computacional con otros enfoques:
+ utilizar información contextual para ponderar las palabras -por ejemplo,
+ una palabra en función de sustantivo usualmente es más relevante que la
+ misma palabra en función de objeto indirecto; valerse de 
+\emph on
+colocaciones
+\emph default
+ (frases que son más relevantes como tales que sus componentes individuales)
+ a la hora de indizar, desambiguación de palabras según conocimiento previo
+ del dominio, para eliminar la polisemia, entre otras.
+ Sin embargo, el estudio de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "ThorstenBrants"
+
+\end_inset
+
+ respecto a este enfoque híbrido es desalentador: sistemas que lo utilizan
+ son igual o menos eficaces que otros con métodos más ortodoxos, tal falta
+ de ganancia se debe en gran parte a la longitud promedio de las consultas
+ de los usuarios en motores de búsqueda comerciales: son demasiado cortas
+ como para la inferencia de contextos y desambiguación, componentes fundamentale
+s para el procesamiento del lenguaje natural en textos.
+ Por otro lado, sistemas con enfoques más centrados en la lingüística computacio
+nal pura, se han implementado con cierto éxito, entre los que se cuentan
+ el legendario sistema 
+\emph on
+SMART 
+\emph default
+del promotor del modelo de espacio vectorial, Gerard Salton, el sistema
+ 
+\emph on
+CLARIT, 
+\emph default
+que en una etapa de análisis morfológico y sintáctico elegía palabras que
+ fueran candidatos fuertes para ser consideradas dimensiones en el índice
+ y el sistema 
+\emph on
+SIMPR
+\emph default
+, que tiene un enfoque iterativo similar CLARIT 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Leiva1996"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Por su parte, un modelo estadístico basado en un modelado probabilístico
+ del lenguaje se puede incluir aquí.
+ Este modelo, relacionado con los modelos basados en probabilidad, computa
+ una probabilidad distinta: trata de construir un perfil lingüístico de
+ cada documento y luego se pregunta qué tan probable es que un documento
+ pudiera generar una consulta, en base a este perfil; los documentos con
+ mayor probabilidad se devolverán 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Un enfoque más general se encuentra en sistemas orientados al conocimiento,
+ que utilizan reglas obtenidas del dominio del conocimiento para elegir
+ términos discriminantes o para establecer la causalidad en el caso del
+ uso de redes de inferencia bayesiana (como en el sistema 
+\emph on
+FIXIT, 
+\emph default
+de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hart1997"
+
+\end_inset
+
+).
+ Estos sistemas son totalmente dependientes de agentes inteligentes o sistemas
+ expertos, por lo que se requiere del uso extenso de técnicas de ingeniería
+ del conocimiento.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Cuadro comparativo de los modelos presentados
+\end_layout
+
+\begin_layout Standard
+Con el fin de ofrecer un sumario sucinto y crítico de los modelos introducidos,
+ se ha elaborado la tabla <TABLA> que también evalúa someramente cada uno
+ en términos de la utilidad al proyecto propuesto.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="4">
+<features>
+<column alignment="center" valignment="top" width="10page%">
+<column alignment="center" valignment="top" width="10page%">
+<column alignment="center" valignment="top" width="15page%">
+<column alignment="center" valignment="top" width="15page%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Modelo
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tipo/orientación
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ventajas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Desventajas
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Booleano
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conjuntos, coincidencia exacta, palabras clave.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fácil implementación.
+\end_layout
+
+\begin_layout Plain Layout
+Computacionalmente eficientes.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Demasiado estrictos.
+\end_layout
+
+\begin_layout Plain Layout
+Requieren el aprendizaje de un lenguaje de consulta.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Booleano extendido
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+ídem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Concilian la fácil implementación con un enfoque más natural.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Aún requieren de un lenguaje especializado de consulta.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Espacio vectorial (VSM)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coincidencia aproximada, palabras clave.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maximiza la similitud léxica entre documentos.
+\end_layout
+
+\begin_layout Plain Layout
+Automatiza la indización.
+\end_layout
+
+\begin_layout Plain Layout
+Representación óptima de los documentos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Basado en coincidencias léxicas.
+\end_layout
+
+\begin_layout Plain Layout
+Puede llegar a ser computacionalmente costoso.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+VSM extendido
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coincidencia aproximada, conceptos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Igual que el VSM, y además permite un tratamiento más eficiente del lenguaje
+ natural.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Los cálculos pueden llegar a ser poco factibles computacionalmente.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Análisis semántico latente
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coincidencia aproximada, conceptos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Se vale de la estructura semántica de las consultas.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+La transformación de la matriz es costosa.
+\end_layout
+
+\begin_layout Plain Layout
+Para colecciones muy grandes pierde el rendimiento.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Análisis formal de conceptos
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coincidencia aproximada, conceptos.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Permite consultas más interactivas.
+\end_layout
+
+\begin_layout Plain Layout
+Aprovecha la semántica de la colección.
+\end_layout
+
+\begin_layout Plain Layout
+Eficiente en términos de estimación de resultados.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+La búsqueda en el espacio reticular puede llegar a ser lenta y difícil de
+ computar.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Basado en Hash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coincidencia exacta.
+ Palabras clave.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+El orden de la computación es casi lineal, muy eficiente.
+\end_layout
+
+\begin_layout Plain Layout
+La búsqueda se hace en tiempo constante.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Depende demasiado de la función de hash seleccionada.
+\end_layout
+
+\begin_layout Plain Layout
+Sin posibilidad de consideraciones lingüísticas o de conocimiento, como
+ el VSM.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probabilístico
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coincidencia estimada.
+ Palabras clave.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Puede integrar consideraciones expertas para las probabilidades.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Implica procesamiento matemático intensivo.
+\end_layout
+
+\begin_layout Plain Layout
+Asume un modelo de estricta coincidencia léxica y sobre-simplificación lingüísti
+ca.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lingüístico
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Contextualización semántica.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reduce el problema de la recuperación de información a comunicación, el
+ modelo ideal.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sólo aproximaciones estadísticas o modelos híbridos son actualmente factibles.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:IR-comparison"
+
+\end_inset
+
+Cuadro comparativo de los modelos de recuperación de información
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
