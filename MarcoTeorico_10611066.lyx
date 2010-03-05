@@ -1837,7 +1837,7 @@ key "Dumais1988"
  
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Modelo Booleano
 \end_layout
 
@@ -1895,7 +1895,7 @@ Las desventajas del modelo booleano radican en que no hay manera de ordenar
  una idea de cómo refinar su consulta.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Modelo booleano extendido mediante lógica difusa
 \end_layout
 
@@ -1948,7 +1948,7 @@ key "Pajares1999"
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Modelo de espacio vectorial
 \end_layout
 
@@ -2038,7 +2038,7 @@ status open
 <lyxtabular version="3" rows="4" columns="4">
 <features>
 <column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="20page%">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row>
@@ -2679,7 +2679,7 @@ reference "tab:VSM-examples"
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Mejoras del modelo de espacio vectorial
 \end_layout
 
@@ -2761,7 +2761,7 @@ Estos modelos probarían ser más útiles para un sistema como el propuesto
  probar ser más útiles a la hora de encontrar documentos útiles.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Indización semántica latente
 \end_layout
 
@@ -2898,7 +2898,7 @@ key "Bassu2003"
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Análisis formal de conceptos
 \end_layout
 
@@ -2987,7 +2987,7 @@ ción de clases de sinónimos y reducción de la polisemia, esto es, la asignaci
  de dimensiones en el caso de los modelos generalizados de espacio vectorial.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Similitud basada en hash
 \end_layout
 
@@ -3026,8 +3026,8 @@ nte léxica- por lo que es inaplicable para escenarios donde una orientación
  más semántica que léxica sería deseable.
 \end_layout
 
-\begin_layout Paragraph
-Recuperación probabilística de la información
+\begin_layout Subsubsection
+Modelos probabilísticos 
 \end_layout
 
 \begin_layout Standard
@@ -3189,7 +3189,7 @@ key "Fuhr1992"
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Modelos lingüísticos y orientados al conocimiento
 \end_layout
 
@@ -3313,14 +3313,21 @@ key "Hart1997"
  
 \end_layout
 
-\begin_layout Paragraph
-Cuadro comparativo de los modelos presentados
+\begin_layout Subsubsection
+Comparación de los modelos presentados
 \end_layout
 
 \begin_layout Standard
 Con el fin de ofrecer un sumario sucinto y crítico de los modelos introducidos,
- se ha elaborado la tabla <TABLA> que también evalúa someramente cada uno
- en términos de la utilidad al proyecto propuesto.
+ se ha elaborado la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:IR-comparison"
+
+\end_inset
+
+ que también evalúa someramente cada uno en términos de la utilidad al proyecto
+ propuesto.
 \end_layout
 
 \begin_layout Standard
@@ -3335,8 +3342,8 @@ status open
 <features>
 <column alignment="center" valignment="top" width="10page%">
 <column alignment="center" valignment="top" width="10page%">
-<column alignment="center" valignment="top" width="15page%">
-<column alignment="center" valignment="top" width="15page%">
+<column alignment="center" valignment="top" width="20page%">
+<column alignment="center" valignment="top" width="20page%">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -3765,6 +3772,10 @@ Reduce el problema de la recuperación de información a comunicación, el
 
 \begin_layout Plain Layout
 Sólo aproximaciones estadísticas o modelos híbridos son actualmente factibles.
+\end_layout
+
+\begin_layout Plain Layout
+Dependientes del lenguaje.
 \end_layout
 
 \end_inset
