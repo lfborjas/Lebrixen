@@ -116,7 +116,46 @@ s que se relacionen con la sesión, tanto para referencia propia como para
 \end_layout
 
 \begin_layout Section
-Sistemas de recomendación y sistemas de recuperación de información.
+Propósito 
+\end_layout
+
+\begin_layout Standard
+Desarrollar un servicio web que recomiende al usuario documentos relevantes
+ a un contexto local, en la forma de la documentación de actividades o sesiones
+ de un curso administrado en línea cuya expresión sea una descripción del
+ mismo y, opcionalmente, otros documentos que el usuario proporcione.
+ La recomendación consistirá en la búsqueda de documentos relacionados conceptua
+lmente a la tarea del usuario en un índice de documentos mantenido por el
+ sistema y la consiguiente recomendación de los que se consideren útiles.
+ La retroalimentación implícita del usuario, las tendencias grupales y de
+ los cursos y la consiguiente contribución al conocimiento del sistema sobre
+ los temas permitirá la mejora de futuras recomendaciones.
+\end_layout
+
+\begin_layout Section
+Objetivos
+\end_layout
+
+\begin_layout Enumerate
+Elegir la naturaleza de la colección documental base para la implementación
+ y pruebas.
+ Ya sea en la forma de documentos obtenidos de internet o mediante la interfaz
+ de búsqueda de una librería digital o motor de búsqueda existente.
+\end_layout
+
+\begin_layout Enumerate
+Desarrollar una interfaz para la expresión de los contextos de usuarios,
+ así como la manera en que se recabarán los perfiles de cursos o usuarios.
+\end_layout
+
+\begin_layout Enumerate
+Desarrollar un componente de indización e igualación de documentos y consultas,
+ así como un componente que permita el filtrado de los resultados del primero.
+ 
+\end_layout
+
+\begin_layout Section
+Contexto
 \end_layout
 
 \begin_layout Standard
@@ -135,14 +174,14 @@ www.amazon.com
 : el usuario está interesado en el artículo que está adquiriendo, su propósito
  principal es ese, pero el sitio también le sugiere, cuando el usuario ha
  elegido un producto, otros que podrían intesarle; eso es precisamente un
- sistema de recomendación: un componente 
+ tipo común de sistema de recomendación: un componente 
 \emph on
 secundario
 \emph default
  en otro contexto mayor -como un sitio de compras o de renta de películas-
  que, de manera no intrusiva, exacta y rápida, ofrece al usuario opciones
  que puedan enriquecer su experiencia.
- Un sistema de recomendación por excelencia, entonces, 
+ Un sistema así, entonces, 
 \emph on
 intuye
 \emph default
@@ -177,14 +216,14 @@ contextualización
 adaptación 
 \emph default
 para llevar a cabo su tarea.
- Los sistemas de recomendación son un ejemplo muy bueno de 
+ Estos sistemas son un ejemplo muy bueno de 
 \emph on
 inteligencia colectiva
 \emph default
 , construir conocimiento a partir de información brindada por los usuarios,
- porque se valen de lo que los mismos usuarios dicen, y esto mediante algún
- tipo de retroalimentación o comunicación explícita, de los artículos en
- la colección de artefactos del sistema.
+ porque se valen de lo que los mismos usuarios dicen - mediante algún tipo
+ de retroalimentación o comunicación explícita- de los artículos en la colección
+ de artefactos del sistema.
  En suma, un sistema de recomendación, en base al contexto o al usuario,
  determina qué artículos de la colección de artefactos que maneja podrían
  interesar a quien lo usa 
@@ -214,19 +253,15 @@ documentos desconocidos
 el
 \emph default
  componente principal y la tarea primordial de un usuario en cualquier contexto,
- por lo que pueden darse la licencia de dejar que el usuario examine el
- conjunto de resultados, que puede ser considerablemente grande; además
- del hecho que es común que un usuario refine o reformule las consultas.
+ por lo que pueden darse la licencia de dejar que el usuario examine un
+ conjunto relativamente grande de resultados y que refine o reformule las
+ consultas.
  Se concluye que un sistema de recuperación de información extrae documentos
  en base a consultas que 
 \emph on
 no están en su colección explícitamente
 \emph default
 .
-\end_layout
-
-\begin_layout Section
-Ni lo uno ni lo otro: Sistemas de recuperación oportuna de la información
 \end_layout
 
 \begin_layout Standard
@@ -239,281 +274,67 @@ El sistema que se pretende construir en este proyecto puede ser visto como
  otros resultados; y de los sistemas de recuperación de información toma
  el hecho de búsquedas de consultas y documentos no necesariamente existentes
  en la colección.
-\end_layout
-
-\begin_layout Standard
-Relativamente poca investigación se ha hecho respecto a sistemas que asistan
- a la tarea del usuario sin obstruirle.
- Pero poco no es ninguno, y, así, podemos encontrar la definición de un
- sistema del tipo que este proyecto se propone desarrollar en la tesis que
- sentó las bases de este campo, la de 
+ Este enfoque no es nuevo, y la investigación en sistemas de este tipo en
+ especial -iniciada por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Rhodes2000"
 
 \end_inset
 
-:
-\end_layout
-
-\begin_layout Quotation
-\begin_inset Quotes eld
-\end_inset
-
-Un agente de recuperación oportuna de información es un programa que proactivame
-nte encuentra y presenta información basada en el contexto local de una
- persona de una manera fácilmente accesible y a la vez no intrusiva.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Los agentes descritos en la tesis antes mencionada reciben ya un nombre
- propio: sistemas de recuperación oportuna de información (en inglés, 
+- se ha valido de servicios ya existentes de recuperación de información,
+ lo cual podría probarse contraproducente: los sistemas de recuperación
+ de información tradicionales asumen que la relevancia de un documento es
+ equivalente a su similitud a la consulta del usuario, y están en lo correcto,
+ para aplicaciones orientadas a la búsqueda activa.
+ Pero, en un sistema que pretenda apoyar una tarea realizada por el usuario
+ ¿sería verdaderamente 
 \emph on
-JITIRS: Just-in-time Information Retrieval Systems).
- 
+útil
 \emph default
-Nótese que, como se había establecido antes, la principal utilidad de un
- sistema de esta especie es encontrar la necesidad latente de información:
- presentarle información al usuario cuando éste ni siquiera haya pensado
- en buscarla, o ni supiese que ésta existía.
- 
-\end_layout
-
-\begin_layout Standard
-Un agente de recuperación oportuna de información difiere de un sistema
- de recuperación de información tradicional en que la búsqueda no es la
- tarea principal, las consultas son potencialmente más largas -el contexto
- local del usuario, por el cual entiéndase cualquier contexto, desde lo
- que está escribiendo en un procesador de texto hasta el lugar geográfico
- donde está; y que la principal medida de evaluación de un sistema así es
- la 
+ proporcionarle documentos que probablemente ya buscó o está buscando fuera
+ del sistema? En realidad, el sistema debería traer a la atención del usuario
+ artefactos que habría pasado por alto por no saber cómo buscar o ni siquiera
+ estar al tanto de su existencia o relación con su contexto local.
+ Para ello, la medida por la cual se debería regir un sistema como el propuesto
+ debería ser la 
 \emph on
 utilidad
 \emph default
- que tienen los documentos -contrario a los sistemas de recuperación de
- información, que se miden por la precisión y exhaustividad de sus resultados.
+: qué artefactos pueden traerle una ganancia al usuario mediante la reducción
+ de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
+ o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Herlocker2004,Rhodes2000"
+
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-Asimismo, 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Rhodes2000"
-
-\end_inset
-
-, establece tres criterios a tener en cuenta a la hora de desarrollar un
- 
-\emph on
-JITIR:
-\emph default
+En este trabajo se tratará de probar qué tanto aportan los modelos de recuperaci
+ón de información semánticamente orientados a la utilidad, por sobre la
+ relevancia, de los resultados.
+ Esto mediante una comparación entre modelos basados en palabras claves
+ y modelos orientados a conceptos.
+ De igual manera, se explorará el uso de técnicas de filtrado colaborativo
+ y basado en contenido para la recomendación final, partiendo de la premisa
+ de que documentos útiles pueden haber sido utilizados en cursos relacionados.
  
 \end_layout
 
-\begin_layout Description
-¿Cómo
-\begin_inset space ~
-\end_inset
-
-afecta
-\begin_inset space ~
-\end_inset
-
-el
-\begin_inset space ~
-\end_inset
-
-sistema
-\begin_inset space ~
-\end_inset
-
-la
-\begin_inset space ~
-\end_inset
-
-manera
-\begin_inset space ~
-\end_inset
-
-en
-\begin_inset space ~
-\end_inset
-
-la
-\begin_inset space ~
-\end_inset
-
-cual
-\begin_inset space ~
-\end_inset
-
-una
-\begin_inset space ~
-\end_inset
-
-persona
-\begin_inset space ~
-\end_inset
-
-busca
-\begin_inset space ~
-\end_inset
-
-y
-\begin_inset space ~
-\end_inset
-
-usa
-\begin_inset space ~
-\end_inset
-
-información? Tomando la teoría de la ciencia cognitiva, se establece que
- el sistema debería poder permitir la serendipia :encontrar información
- que resulta útil y de la cual no se sabía; y poder reducir el costo: encontrar
- información de la cual se sabía, pero se consideraba demasiado el esfuerzo
- que hubiera implicado buscarla por cuenta propia.
-\end_layout
-
-\begin_layout Description
-¿Cómo
-\begin_inset space ~
-\end_inset
-
-puede
-\begin_inset space ~
-\end_inset
-
-el
-\begin_inset space ~
-\end_inset
-
-sistema
-\begin_inset space ~
-\end_inset
-
-encontrar
-\begin_inset space ~
-\end_inset
-
-información
-\begin_inset space ~
-\end_inset
-
-que
-\begin_inset space ~
-\end_inset
-
-resultaría
-\begin_inset space ~
-\end_inset
-
-útil
-\begin_inset space ~
-\end_inset
-
-en
-\begin_inset space ~
-\end_inset
-
-base
-\begin_inset space ~
-\end_inset
-
-al
-\begin_inset space ~
-\end_inset
-
-contexto? Es en este punto donde entra en juego la recuperación de información:
- se ha de elegir un modelo que trascienda la mera relevancia para poder
- ofrecer documentos que sean de utilidad -lo cual se puede aproximar utilizando
- técnicas de alta precisión y trayendo a colación el filtrado: basarse en
- el contenido del contexto actual aunado a las preferencias del usuario
- o de un grupo de usuarios para eliminar documentos que se consideren, aunque
- relevantes, inútiles.
- Enfoques orientados al conocimiento del dominio específico pueden ser de
- utilidad, por ejemplo, en el sistema 
-\emph on
-FIXIT
-\emph default
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Hart1997"
-
-\end_inset
-
- se valieron de la existencia de una red de inferencia para el sistema principal
- -un sistema experto de reparación de artículos de oficina- para poder usar
- esas mismas reglas en la recuperación de documentación útil a la tarea.
-\end_layout
-
-\begin_layout Description
-¿Cómo
-\begin_inset space ~
-\end_inset
-
-debería
-\begin_inset space ~
-\end_inset
-
-el
-\begin_inset space ~
-\end_inset
-
-sistema
-\begin_inset space ~
-\end_inset
-
-presentar
-\begin_inset space ~
-\end_inset
-
-los
-\begin_inset space ~
-\end_inset
-
-resultados? El diseño de la interfaz debería ser tal que los resultados
- sean fácilmente accesibles y evaluables, pero que no interfiera con la
- tarea principal; así, no debería distraer de ésta pero la atención debería
- poder dividirse entre ambas interfaces.
- Es práctica común en el diseño de sitios web el ubicar los elementos más
- importantes a la izquierda, por lo que, en principio, se podrían ubicar
- los resultados más a la derecha del lugar donde se realice la tarea principal,
- práctica adoptada por el sistema 
-\emph on
-PIRA
-\emph default
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Gruzd2006"
-
-\end_inset
-
-.
- Asimismo, se ha probado útil ofrecer un sumario del documento o una vista
- previa en caso de que el artefacto consista de multimedia 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "HinrichSchutze2009"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
+\begin_layout Section
 Proyectos relacionados
 \end_layout
 
 \begin_layout Standard
-A partir de la definición dada, se pueden encontrar algunos sistemas surgidos
- de la investigación en este campo:
+Se pueden encontrar algunos sistemas surgidos de la investigación en el
+ campo de sistemas recomendadores orientados a la recuperación oportuna
+ de información:
 \end_layout
 
 \begin_layout Enumerate
@@ -753,48 +574,6 @@ A la luz de estos nuevos conceptos, se puede considerar el presente proyecto
  como un sistema de recuperación idónea de la información que utiliza un
  filtrado híbrido colaborativo y basado en contenido para hacer sugerencias
  de recursos útiles a una sesión de clase en preparación.
-\end_layout
-
-\begin_layout Paragraph
-Relevancia Vs.
- Utilidad
-\end_layout
-
-\begin_layout Standard
-Los sistemas de recuperación de información tradicionales asumen que la
- relevancia de un documento es equivalente a su similitud con la consulta
- del usuario, y están en lo correcto, para aplicaciones orientadas a la
- búsqueda activa.
- Pero, en un sistema que pretenda apoyar una tarea realizada por el usuario
- ¿sería verdaderamente 
-\emph on
-útil
-\emph default
- proporcionarle documentos que probablemente ya buscó o está buscando fuera
- del sistema? En realidad, el sistema debería traer a la atención del usuario
- artefactos que habría pasado por alto por no saber cómo buscar o ni siquiera
- estar al tanto de su existencia o relación con su contexto local.
- Para ello, la medida por la cual se debería regir un sistema como el propuesto
- debería ser la 
-\emph on
-utilidad
-\emph default
-: qué artefactos pueden traerle una ganancia al usuario mediante la reducción
- de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
- o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Herlocker2004,Rhodes2000"
-
-\end_inset
-
-.
- En este trabajo se tratará de probar qué tanto aportan los modelos de recuperac
-ión de información semánticamente orientados a la utilidad, por sobre la
- relevancia, de los resultados.
- Esto mediante una comparación entre modelos basados en palabras claves
- y modelos orientados a conceptos.
 \end_layout
 
 \begin_layout Chapter
@@ -7768,56 +7547,281 @@ Por ello, se deben elegir las medidas y experimentos de evaluación acordes
 \end_layout
 
 \begin_layout Section
-Sistemas de recuperación de información proactivos
-\end_layout
-
-\begin_layout Subsection
-Introducción
+Sistemas de recuperación oportuna de la información
 \end_layout
 
 \begin_layout Standard
-En el presente capítulo se explora la aplicabilidad de distintas técnicas
- de recuperación de información en el contexto de un sistema de recomendación.
- En primer lugar, se introducen conceptos específicos a esta tarea, como
- ser la IR orientada a conceptos o contextos y el uso de agentes inteligentes.
- Luego, se exploran y evalúan modelos de representación del conocimiento,
- búsqueda de documentos y filtrado que se consideran pertinentes.
+Relativamente poca investigación se ha hecho respecto a sistemas de recomendació
+n que asistan recuperando información útil a la tarea del usuario sin obstruirle.
+ Pero poco no es ninguno, y, así, podemos encontrar la definición de un
+ sistema del tipo que este proyecto se propone desarrollar en la tesis que
+ sentó las bases de este campo, la de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Un agente de recuperación oportuna de información es un programa que proactivame
+nte encuentra y presenta información basada en el contexto local de una
+ persona de una manera fácilmente accesible y a la vez no intrusiva.
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Para implementar un sistema de recomendación se debe tener en mente qué
- elementos lo conformarán; según lo mencionado en los capítulos anteriores,
- se puede esbozar una macro-arquitectura del sistema la cual consistirá
- de los siguientes elementos:
-\end_layout
-
-\begin_layout Enumerate
-Una colección de documentos.
-\end_layout
-
-\begin_layout Enumerate
-Un componente de recuperación de información.
- El cual incluirá sus respectivos sub-componentes de indización, igualación
- y obtención de consultas.
-\end_layout
-
-\begin_layout Enumerate
-Un componente de filtrado de información.
- El cual contempla los aspectos de elección de resultados a mostrar, interfaz
- de presentación y obtención de retroalimentación.
-\end_layout
-
-\begin_layout Standard
-En el resto del capítulo, se discutirán los distintos aspectos que atañen
- a la arquitectura esbozada, así como las técnicas que permitirán su implementac
-ión.
+Los agentes descritos en la tesis antes mencionada reciben ya un nombre
+ propio: sistemas de recuperación oportuna de información (en inglés, 
+\emph on
+JITIRS: Just-in-time Information Retrieval Systems).
+ 
+\emph default
+Nótese que, como se había establecido antes, la principal utilidad de un
+ sistema de esta especie es encontrar la necesidad latente de información:
+ presentarle información al usuario cuando éste ni siquiera haya pensado
+ en buscarla, o ni supiese que ésta existía.
  
 \end_layout
 
 \begin_layout Standard
+Un agente de recuperación oportuna de información difiere de un sistema
+ de recuperación de información tradicional en que la búsqueda no es la
+ tarea principal, las consultas son potencialmente más largas -el contexto
+ local del usuario, por el cual entiéndase cualquier contexto, desde lo
+ que está escribiendo en un procesador de texto hasta el lugar geográfico
+ donde está; y que la principal medida de evaluación de un sistema así es
+ la 
+\emph on
+utilidad
+\emph default
+ que tienen los documentos -contrario a los sistemas de recuperación de
+ información, que se miden por la relevancia, expresada en la precisión
+ y exhaustividad, de sus resultados.
+ 
+\end_layout
+
+\begin_layout Standard
+Asimismo, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+, establece tres criterios a tener en cuenta a la hora de desarrollar un
+ 
+\emph on
+JITIR:
+\emph default
+ 
+\end_layout
+
+\begin_layout Description
+¿Cómo
+\begin_inset space ~
+\end_inset
+
+afecta
+\begin_inset space ~
+\end_inset
+
+el
+\begin_inset space ~
+\end_inset
+
+sistema
+\begin_inset space ~
+\end_inset
+
+la
+\begin_inset space ~
+\end_inset
+
+manera
+\begin_inset space ~
+\end_inset
+
+en
+\begin_inset space ~
+\end_inset
+
+la
+\begin_inset space ~
+\end_inset
+
+cual
+\begin_inset space ~
+\end_inset
+
+una
+\begin_inset space ~
+\end_inset
+
+persona
+\begin_inset space ~
+\end_inset
+
+busca
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+usa
+\begin_inset space ~
+\end_inset
+
+información? Tomando la teoría de la ciencia cognitiva, se establece que
+ el sistema debería poder permitir la serendipia :encontrar información
+ que resulta útil y de la cual no se sabía; y poder reducir el costo: encontrar
+ información de la cual se sabía, pero se consideraba demasiado el esfuerzo
+ que hubiera implicado buscarla por cuenta propia.
+\end_layout
+
+\begin_layout Description
+¿Cómo
+\begin_inset space ~
+\end_inset
+
+puede
+\begin_inset space ~
+\end_inset
+
+el
+\begin_inset space ~
+\end_inset
+
+sistema
+\begin_inset space ~
+\end_inset
+
+encontrar
+\begin_inset space ~
+\end_inset
+
+información
+\begin_inset space ~
+\end_inset
+
+que
+\begin_inset space ~
+\end_inset
+
+resultaría
+\begin_inset space ~
+\end_inset
+
+útil
+\begin_inset space ~
+\end_inset
+
+en
+\begin_inset space ~
+\end_inset
+
+base
+\begin_inset space ~
+\end_inset
+
+al
+\begin_inset space ~
+\end_inset
+
+contexto? Es en este punto donde entra en juego la recuperación de información:
+ se ha de elegir un modelo que trascienda la mera relevancia para poder
+ ofrecer documentos que sean de utilidad -lo cual se puede aproximar utilizando
+ técnicas de alta precisión y trayendo a colación el filtrado: basarse en
+ el contenido del contexto actual aunado a las preferencias del usuario
+ o de un grupo de usuarios para eliminar documentos que se consideren, aunque
+ relevantes, inútiles.
+ Enfoques orientados al conocimiento del dominio específico pueden ser de
+ utilidad, por ejemplo, en el sistema 
+\emph on
+FIXIT
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hart1997"
+
+\end_inset
+
+ se valieron de la existencia de una red de inferencia para el sistema principal
+ -un sistema experto de reparación de artículos de oficina- para poder usar
+ esas mismas reglas en la recuperación de documentación útil a la tarea.
+\end_layout
+
+\begin_layout Description
+¿Cómo
+\begin_inset space ~
+\end_inset
+
+debería
+\begin_inset space ~
+\end_inset
+
+el
+\begin_inset space ~
+\end_inset
+
+sistema
+\begin_inset space ~
+\end_inset
+
+presentar
+\begin_inset space ~
+\end_inset
+
+los
+\begin_inset space ~
+\end_inset
+
+resultados? El diseño de la interfaz debería ser tal que los resultados
+ sean fácilmente accesibles y evaluables, pero que no interfiera con la
+ tarea principal; así, no debería distraer completamente de ésta pero la
+ atención debería poder dividirse entre ambas interfaces.
+ Es práctica común en el diseño de sitios web el ubicar los elementos más
+ importantes a la izquierda, por lo que, en principio, se podrían ubicar
+ los resultados más a la derecha del lugar donde se realice la tarea principal,
+ práctica adoptada por el sistema 
+\emph on
+PIRA
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gruzd2006"
+
+\end_inset
+
+.
+ Asimismo, se ha probado útil ofrecer un sumario del documento o una vista
+ previa en caso de que el artefacto consista de multimedia 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Nótese que un sistema de recomendación proactivo no es más que un sistema
- de recomendación que se adapta al contexto del usuario y ofrece sugerencias
- sin que éste haya elegido antes otros artículos de la colección.
+ de recomendación fuertemente orientado al contenido que se adapta al contexto
+ del usuario y ofrece sugerencias sin que éste haya elegido antes otros
+ artículos de la colección.
  El proyecto 
 \emph on
 À propos 
@@ -7845,6 +7849,17 @@ key "Gipp2009"
 otro sistema que se puede considerar de este tipo, se vale también de las
  citas que el autor ha hecho para recomendar materiales relacionados, además
  de incorporar técnicas de filtrado de información para presentar los resultados.
+\end_layout
+
+\begin_layout Standard
+Como se sugirió en la introducción, el presente proyecto busca ir más allá
+ en los sistemas 
+\emph on
+JITIR
+\emph default
+: valerse del comportamiento contextual histórico de los usuarios en los
+ cursos y el saber colectivo obtenido de cursos y usuarios relacionados
+ para la recuperación y filtrado de información.
 \end_layout
 
 \begin_layout Chapter
@@ -7944,20 +7959,104 @@ En esta etapa se definirán la motivación, alcance, audiencia y contribución
 
 \begin_layout Enumerate
 ¿Quién utilizará la aplicación? Cualquier usuario del sistema anfitrión
- (
+ 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-www.escolarea.com
+escolarea.com
 \end_layout
 
 \end_inset
 
-) que haya creado un curso y se encuentre realizando actividades de documentació
-n en el mismo.
+
+\end_layout
+
+\end_inset
+
+ que haya creado un curso y se encuentre realizando actividades de documentación
+ en el mismo.
  
+\end_layout
+
+\begin_layout Subsection
+Análisis de contenido
+\end_layout
+
+\begin_layout Subsection
+Análisis de interacción
+\end_layout
+
+\begin_layout Subsection
+Análisis funcional
+\end_layout
+
+\begin_layout Subsection
+Análisis de configuración
+\end_layout
+
+\begin_layout Subsection
+Sumario de requerimientos funcionales y no funcionales
+\end_layout
+
+\begin_layout Section
+Diseño
+\end_layout
+
+\begin_layout Standard
+Siguiendo la pauta sentada en la fase de análisis, se muestra aquí el diseño
+ ordenado según las distintas facetas del mismo propuestas por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Diseño de la interfaz, diseño estético y diseño de contenido
+\end_layout
+
+\begin_layout Subsection
+Diseño de arquitectura
+\end_layout
+
+\begin_layout Subsection
+Diseño de navegación
+\end_layout
+
+\begin_layout Subsection
+Diseño de componentes
+\end_layout
+
+\begin_layout Standard
+Para implementar un sistema de recomendación se debe tener en mente qué
+ elementos lo conformarán; según lo mencionado en los capítulos anteriores,
+ se puede esbozar una macro-arquitectura del sistema la cual consistirá
+ de los siguientes elementos:
+\end_layout
+
+\begin_layout Enumerate
+Una colección de documentos.
+\end_layout
+
+\begin_layout Enumerate
+Un componente de recuperación de información.
+ El cual incluirá sus respectivos sub-componentes de indización, igualación
+ y obtención de consultas.
+\end_layout
+
+\begin_layout Enumerate
+Un componente de filtrado de información.
+ El cual contempla los aspectos de elección de resultados a mostrar, interfaz
+ de presentación y obtención de retroalimentación.
 \end_layout
 
 \begin_layout Standard
