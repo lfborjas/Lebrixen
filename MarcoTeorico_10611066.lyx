@@ -7767,11 +7767,11 @@ Por ello, se deben elegir las medidas y experimentos de evaluación acordes
  al propósito del sistema.
 \end_layout
 
-\begin_layout Subsection
-Implementación de un sistema de recomendación proactivo
+\begin_layout Section
+Sistemas de recuperación de información proactivos
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Introducción
 \end_layout
 
@@ -7845,6 +7845,119 @@ key "Gipp2009"
 otro sistema que se puede considerar de este tipo, se vale también de las
  citas que el autor ha hecho para recomendar materiales relacionados, además
  de incorporar técnicas de filtrado de información para presentar los resultados.
+\end_layout
+
+\begin_layout Chapter
+Análisis y Diseño
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+En este capítulo se documentan los distintos artefactos producidos a la
+ hora de analizar y diseñar el sistema propuesto en este proyecto.
+ Por cuestiones cronológicas, ambas etapas se han agrupado aquí, mereciendo
+ la etapa de implementación y evaluación un capítulo aparte.
+ Como se imaginará, el sistema no consiste en un sistema de información
+ a gran escala, con una larga lista de requerimientos, casos de uso y escenarios
+ de interacción; sin embargo, ninguna empresa de ingeniería debe hacerse
+ sin ningun tipo de definición previa del derrotero a seguir.
+\end_layout
+
+\begin_layout Standard
+El desarrollo clásico de sistemas de información es un proceso lineal que
+ incluye seis etapas: compilación de requisitos, análisis, diseño, implementació
+n, mantenimiento y retiro.
+ Sin embargo, este proceso ideal ha sido desplazado en los últimos años
+ por un enfoque iterativo: 
+\emph on
+el proceso unificado
+\emph default
+.
+ Éste consiste en cuatro fases: iniciación, elaboración, construcción y
+ transición.
+ En cada fase se llevan a cabo, en mayor o menor medida, los flujos de trabajo
+ de revisión de requisitos, análisis, diseño, implementación y pruebas 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Schach2004"
+
+\end_inset
+
+.
+ Este enfoque iterativo es mucho más realista y efectivo que el enfoque
+ tradicional, pero requiere de una gran cantidad de tiempo y una organización
+ tales que se puede probar demasiado costoso para proyectos pequeños o de
+ corta duración, características típicas del desarrollo web, que es la clase
+ de desarrollo a llevar a cabo en este proyecto.
+ Por ello, una metodología adaptada al desarrollo de aplicaciones web de
+ este modelo iterativo, como la propuesta en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+ se utilizará en el presente proyecto.
+ 
+\end_layout
+
+\begin_layout Section
+Análisis
+\end_layout
+
+\begin_layout Standard
+En esta etapa se definirán la motivación, alcance, audiencia y contribución
+ del sistema desarrollado.
+ El producto final de esta fase será un resumen de los requisitos funcionales
+ y no funcionales, en la metodología elegida, la identificación de estos
+ se hace en cuatro etapas: los análisis de contenido, de interacción, de
+ función y de configuración.
+ Por mor del orden, y para fundamentar sólidamente las etapas subsiguientes,
+ cada análisis se discutirá brevemente en los apartados siguientes, finalizando
+ con el listado de requerimientos.
+ Antes de proseguir, sin embargo, se contestarán tres preguntas que servirán
+ de trasfondo a estos análisis:
+\end_layout
+
+\begin_layout Enumerate
+¿Cuál es la principal motivación para la aplicación? Siendo la aplicación
+ la implementación de un proyecto académico, la principal fuerza tras el
+ desarrollo de la misma es determinar si un sistema que pueda recomendar
+ recursos útiles a un usuario que lleva a cabo una tarea de planificación
+ o documentación pedagógica es verdaderamente una ganancia para los usuarios,
+ tanto los docentes que lo utilicen directamente como los estudiantes que
+ se beneficien de los recursos aportados.
+\end_layout
+
+\begin_layout Enumerate
+¿Cuáles son los objetivos que debe satisfacer la aplicación? En suma, la
+ aplicación debe trascender los sistemas de recuperación oportuna de la
+ información equivalentes al basarse en una representación más fidedigna
+ del contexto local del usuario, así como en la inteligencia colectiva y
+ las contribuciones activas de los usuarios para determinar los mejores
+ recursos a presentar.
+ 
+\end_layout
+
+\begin_layout Enumerate
+¿Quién utilizará la aplicación? Cualquier usuario del sistema anfitrión
+ (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.escolarea.com
+\end_layout
+
+\end_inset
+
+) que haya creado un curso y se encuentre realizando actividades de documentació
+n en el mismo.
+ 
 \end_layout
 
 \begin_layout Standard
