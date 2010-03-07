@@ -7959,7 +7959,7 @@ En esta etapa se definirán la motivación, alcance, audiencia y contribución
 
 \begin_layout Enumerate
 ¿Quién utilizará la aplicación? Cualquier usuario del sistema anfitrión
- 
+ - el cual será, para la implementación primera, 
 \begin_inset Foot
 status collapsed
 
@@ -7979,8 +7979,227 @@ escolarea.com
 
 \end_inset
 
- que haya creado un curso y se encuentre realizando actividades de documentación
- en el mismo.
+- que haya creado un curso y se encuentre realizando actividades de documentació
+n en el mismo.
+ 
+\end_layout
+
+\begin_layout Subsection
+Sumario de requisitos
+\end_layout
+
+\begin_layout Standard
+En base al objetivo y la audiencia del proyecto, se resumen a continuación
+ los requisitos a tener en las siguientes etapas del análisis y diseño,
+ redactados y organizados siguiendo las pautas propuestas en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Arlow2005"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Requisitos funcionales
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá tratar lo que el usuario escriba en la interfaz de documentaci
+ón como el contexto local, representándolo como los demás documentos de
+ la colección, con el fin de realizar una búsqueda.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá tomar los documentos que el usuario aporte como parte
+ de su actividad de planificación y los deberá procesar y representar como
+ los demás documentos, con el fin de agregarlos a la colección y realizar
+ la búsqueda.
+ Los documentos y lo escrito por el usuario en su sesión de planificación
+ consistirán en el 
+\emph on
+contexto inmediato
+\emph default
+.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá mantener un perfil de curso y del usuario con el fin de
+ tener éste como base contextual para las recomendaciones.
+ 
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá determinar cuándo es el momento idóneo de iniciar la recomenda
+ción o de hacer una nueva, ya sea en base al tiempo pasado desde el inicio
+ de la sesión, la cantidad de información aportada por el usuario o la diferenci
+a entre el último contexto inmediato que creó una búsqueda y el actual.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá realizar una búsqueda y filtrado de documentos en base
+ a las representaciones que haya hecho del contexto del usuario, entendiéndose
+ por contexto tanto la base contextual como el contexto inmediato.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá determinar cuándo se utiliza un documento recomendado,
+ con el fin de tomar esta acción como retroalimentación y así enriquecer
+ el perfil de la base contextual.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá indizar y organizar los documentos que obtenga, ya sea
+ mediante los aportes de los usuarios o una búsqueda periódica de nueva
+ información.
+\end_layout
+
+\begin_layout Subsubsection
+Requisitos no funcionales
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá reflejar la separación entre el sistema anfitrión, el
+ que extrae los datos de entrada y presenta los de salida y el componente
+ principal, el que realiza las búsquedas y filtrado e indiza y mantiene
+ la colección documental.
+ Tal separación se logrará mediante el uso de una interfaz independiente
+ del sistema anfitrión que reciba y devuelva los datos en un formato serializado
+ (json, de preferencia, o xml).
+\end_layout
+
+\begin_layout Enumerate
+El sistema, en el lado del servidor, estará escrito en el lenguaje de programaci
+ón python.
+ En específico, se utilizará el 
+\emph on
+framework
+\emph default
+ de desarrollo web django
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.djangoproject.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+El sistema, en el lado del cliente, estará escrito en el lenguaje de programació
+n javascript, con la librería jquery
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://jquery.com/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá apegarse a los estándares de diseño de w3
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.w3.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, utilizando (x)html y css válidos.
+\end_layout
+
+\begin_layout Enumerate
+El sistema utilizará, para el almacenamiento, el servidor de bases de datos
+ postgresql
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.postgresql.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+El sistema funcionará en un servidor linux.
+\end_layout
+
+\begin_layout Enumerate
+El sistema deberá devolver los primeros resultados de las recomendaciones
+ en menos de diez segundos, tal cantidad de tiempo es aceptable, dada la
+ naturaleza secundaria y no intrusiva del sistema 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Nielsen1994"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Casos de uso
+\end_layout
+
+\begin_layout Standard
+Se resumen a continuación los distintos casos de uso del sistema.
+ Nótese que la escasez de éstos se debe a que la mayor funcionalidad del
+ sistema radica en el trasfondo algorítmico de la indización, búsqueda y
+ filtrado.
+ Un diagrama UML que los ilustra se presenta en la figura <fig>.
  
 \end_layout
 
@@ -7998,10 +8217,6 @@ Análisis funcional
 
 \begin_layout Subsection
 Análisis de configuración
-\end_layout
-
-\begin_layout Subsection
-Sumario de requerimientos funcionales y no funcionales
 \end_layout
 
 \begin_layout Section
