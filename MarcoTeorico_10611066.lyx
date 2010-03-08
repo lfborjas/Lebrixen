@@ -7862,6 +7862,72 @@ JITIR
  para la recuperación y filtrado de información.
 \end_layout
 
+\begin_layout Subsection
+Recuperación y filtrado vs.
+ recuperación adaptativa
+\end_layout
+
+\begin_layout Standard
+Considerando la naturaleza de los 
+\emph on
+JITIRs
+\emph default
+, se pueden determinar dos enfoques en la recuperación y presentación de
+ la información.
+ En primer lugar, se puede decir que el proceso de recomendación ocurre
+ en dos etapas: primero, se construye una consulta con el contexto local
+ del usuario, utilizando ésta en un motor de búsqueda -o cualquier otro
+ agente externo de recuperación de información- y luego, de los resultados
+ obtenidos en la etapa de búsqueda, filtrar los documentos mediante el perfil
+ a largo plazo del usuario o las preferencias grupales, este enfoque en
+ dos pasos ha sido implementado por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Basu1998"
+
+\end_inset
+
+ y teorizado por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Daoud2008"
+
+\end_inset
+
+.
+ La ventaja de este modelo radica en poder valerse de servicios externos
+ o implementaciones de algoritmos de recuperación de información, concentrándose
+ más bien en la etapa de filtrado; la desventaja estriba en el costo computacion
+al: para contextos complejos, la determinación de la consulta podría volverse
+ computacionalmente costosa y ésto, aunado al tiempo que toma la búsqueda
+ en sí, podría tornarse indeseable.
+\end_layout
+
+\begin_layout Standard
+Por otro lado, el perfil del usuario -o usuarios- se podría agregar al espacio
+ documental, aprovechando así los algoritmos de similitud de los modelos
+ de recuperación de información para la recomendación.
+ Este enfoque es en realidad, equivalente a un sistema de recomendación
+ orientado al contenido 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Pazzani2007"
+
+\end_inset
+
+.
+ Con este enfoque se gana en costo computacional, pero se requiere la implementa
+ción completa del componente de búsqueda e indización.
+\end_layout
+
+\begin_layout Standard
+Por cuestiones de tiempo, se ha decidido optar por la primera alternativa
+ en este proyecto: concentrarse en desarrollar el componente que construya
+ perfiles de usuarios y consultas y dejar que la recuperación de los documentos
+ candidatos a recomendación sea hecha con una implementación pre-existente
+ de algoritmos de búsqueda.
+\end_layout
+
 \begin_layout Chapter
 Análisis y Diseño
 \end_layout
@@ -8096,7 +8162,8 @@ www.djangoproject.com
 
 \end_inset
 
-
+.
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -8199,8 +8266,120 @@ Se resumen a continuación los distintos casos de uso del sistema.
  Nótese que la escasez de éstos se debe a que la mayor funcionalidad del
  sistema radica en el trasfondo algorítmico de la indización, búsqueda y
  filtrado.
- Un diagrama UML que los ilustra se presenta en la figura <fig>.
+ Un diagrama UML que los ilustra se presenta en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:use_cases_diagram"
+
+\end_inset
+
+.
  
+\end_layout
+
+\begin_layout Description
+Inicia
+\begin_inset space ~
+\end_inset
+
+sesión: este caso de uso se refiere al comienzo de la sesión de documentación.
+ En este momento, se conoce el curso para el cual se planifica y las sesiones
+ previas, el usuario ha comenzado a escribir los detalles principales de
+ la sesión.
+ El sistema debe tener en cuenta que el usuario quizá se arrepienta y abandone
+ la página o reformule completamente el contexto local.
+\end_layout
+
+\begin_layout Description
+Documenta: el usuario ha iniciado sesión y el contexto local ha sido determinado
+ por el sistema.El sistema se vale del componente de búsqueda y filtrado
+ para obtener recomendaciones y mostrarlas.
+ El sistema debe saber cuándo el contexto local difiere significativamente
+ del último al cual se hicieron recomendaciones para volver a iniciar el
+ proceso.
+ 
+\end_layout
+
+\begin_layout Description
+Agrega
+\begin_inset space ~
+\end_inset
+
+Documentos: el usuario elige incluir documentos a su sesión.
+ El sistema debe incluirlos como parte del contexto local y realizar nuevas
+ recomendaciones.
+\end_layout
+
+\begin_layout Description
+Usa
+\begin_inset space ~
+\end_inset
+
+Recomendación: el usuario decide incluir un documento de los recomendados
+ a su sesión, el sistema habrá de tener esto en cuenta a la hora de construir
+ el perfil.
+ Dado que en cualquier momento el usuario puede descartar un documento,
+ el sistema debería agregar tal retroalimentación al perfil solamente cuando
+ se considere idóneo (a la hora de cerrar la sesión, por ejemplo).
+\end_layout
+
+\begin_layout Description
+Cierra
+\begin_inset space ~
+\end_inset
+
+sesión: en este momento, el usuario se prepara para abandonar la sesión,
+ por lo que el sistema puede proceder a tomar el contexto de la misma y
+ agregarlo a su conocimiento del perfil del curso.
+ Asimismo, el sistema agregará los documentos que el usuario haya incluido
+ en esta sesión a la colección documental, con la consiguiente indización
+ de los mismo.
+\end_layout
+
+\begin_layout Description
+Actualiza
+\begin_inset space ~
+\end_inset
+
+Colección: tanto el administrador como el sub-sistema que obtiene documentos
+ externos pueden agregar una cantidad significativa de ésto a la colección,
+ lo que implica la indización de los mismos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/7_Use_cases.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:use_cases_diagram"
+
+\end_inset
+
+Diagrama de casos de uso
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
