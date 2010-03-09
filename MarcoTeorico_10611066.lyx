@@ -8259,6 +8259,13 @@ key "Nielsen1994"
 
 \begin_layout Subsection
 Casos de uso
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:use_cases"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8521,14 +8528,15 @@ Agente
 \end_inset
 
 recolector: el sub-sistema que se encarga de obtener automáticamente nuevos
- documentos a la colección.
+ documentos y agregarlos a la colección.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -8564,6 +8572,91 @@ Diagrama de clases UML para las clases del análisis
 
 \begin_layout Subsection
 Análisis de interacción
+\end_layout
+
+\begin_layout Standard
+En esta etapa del análisis, se pretenden estudiar más a fondo las distintas
+ interacciones entre el usuario y el sistema.
+ Éstas ya fueron definidas a grandes rasgos en los casos de uso 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "sub:use_cases"
+
+\end_inset
+
+.
+ Aquí se presentan diagramas de interacción profundizando en los casos de
+ uso, un diagrama de estado y un prototipo
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Creado con 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+gomockingbird.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ de la interfaz de usuario (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:interface_prototype"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/10_Home.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:interface_prototype"
+
+\end_inset
+
+Prototipo de interfaz de usuario
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
