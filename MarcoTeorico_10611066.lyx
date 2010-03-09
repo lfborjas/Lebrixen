@@ -8287,14 +8287,19 @@ sesión: este caso de uso se refiere al comienzo de la sesión de documentación
  previas, el usuario ha comenzado a escribir los detalles principales de
  la sesión.
  El sistema debe tener en cuenta que el usuario quizá se arrepienta y abandone
- la página o reformule completamente el contexto local.
+ la página o reformule completamente el contexto inmediato.
 \end_layout
 
 \begin_layout Description
-Documenta: el usuario ha iniciado sesión y el contexto local ha sido determinado
- por el sistema.El sistema se vale del componente de búsqueda y filtrado
- para obtener recomendaciones y mostrarlas.
- El sistema debe saber cuándo el contexto local difiere significativamente
+Documenta: el usuario ha iniciado sesión, se ha creado o recuperado el perfil
+ y el contexto inmediato ha sido determinado por el sistema para formular
+ consultas a partir de la conjunción de éstos (el 
+\emph on
+contexto local
+\emph default
+).El sistema se vale del componente de búsqueda y filtrado para obtener recomenda
+ciones y mostrarlas.
+ El sistema debe saber cuándo el contexto inmediato difiere significativamente
  del último al cual se hicieron recomendaciones para volver a iniciar el
  proceso.
  
@@ -8306,8 +8311,8 @@ Agrega
 \end_inset
 
 Documentos: el usuario elige incluir documentos a su sesión.
- El sistema debe incluirlos como parte del contexto local y realizar nuevas
- recomendaciones.
+ El sistema debe incluirlos como parte del contexto inmediato y realizar
+ nuevas recomendaciones.
 \end_layout
 
 \begin_layout Description
@@ -8333,7 +8338,7 @@ sesión: en este momento, el usuario se prepara para abandonar la sesión,
  agregarlo a su conocimiento del perfil del curso.
  Asimismo, el sistema agregará los documentos que el usuario haya incluido
  en esta sesión a la colección documental, con la consiguiente indización
- de los mismo.
+ de los mismos.
 \end_layout
 
 \begin_layout Description
@@ -8342,8 +8347,12 @@ Actualiza
 \end_inset
 
 Colección: tanto el administrador como el sub-sistema que obtiene documentos
- externos pueden agregar una cantidad significativa de ésto a la colección,
- lo que implica la indización de los mismos.
+ externos -el 
+\emph on
+agente recolector-
+\emph default
+ pueden agregar una cantidad significativa de éstos a la colección, lo que
+ implica la indización de los mismos.
 \end_layout
 
 \begin_layout Standard
@@ -8384,6 +8393,173 @@ Diagrama de casos de uso
 
 \begin_layout Subsection
 Análisis de contenido
+\end_layout
+
+\begin_layout Subsubsection
+Objetos del contenido
+\end_layout
+
+\begin_layout Standard
+Como se puede deducir, el único contenido que el sistema mostrará al usuario
+ son las representaciones de los documentos (en inglés, 
+\emph on
+code snippets
+\emph default
+).
+ Éstas consistirán en el título del documento, un sumario -de ser posible-
+ y un enlace para visitar la localización original del documento (o descargarlo).
+\end_layout
+
+\begin_layout Subsubsection
+Clases del análisis
+\end_layout
+
+\begin_layout Standard
+Al analizar gramaticalmente los casos de uso, se pueden encontrar los siguientes
+ objetos, cuyas relaciones se ilustran en el diagrama UML de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:analysis_class_diagram"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Description
+Sesión: consiste en cada uso para documentación del sistema, contendrá una
+ representación del contexto local a la hora de terminarla, los documentos
+ utilizados, el usuario y el curso en cuestión.
+\end_layout
+
+\begin_layout Description
+Contexto
+\begin_inset space ~
+\end_inset
+
+inmediato: es una representación de la tarea del usuario.
+ Representa el estado que ésta tiene hasta la última recomendación hecha.
+ 
+\end_layout
+
+\begin_layout Description
+Perfil: una representación del conocimiento que se tiene de las sesiones
+ anteriores en el curso, a partir de éste y el contexto inmediato se construye
+ el 
+\emph on
+contexto local
+\emph default
+.
+\end_layout
+
+\begin_layout Description
+Contexto
+\begin_inset space ~
+\end_inset
+
+local: una conjunción del contexto inmediato y el contexto base de un curso.
+\end_layout
+
+\begin_layout Description
+Componente
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+búsqueda
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+filtrado: es con el que se comunica el sistema anfitrión para realizar las
+ búsquedas y obtener los resultados de las mismas.
+ 
+\end_layout
+
+\begin_layout Description
+Recomendación: el resultado de la búsqueda y filtrado.
+ Contiene una colección de documentos y una referencia al contexto que la
+ suscitó para que el sistema pueda ser capaz de comparar entre el contexto
+ actual y el de la última recomendación.
+\end_layout
+
+\begin_layout Description
+Documento: una referencia a documento propiamente dicho, puede consistir
+ en un 
+\emph on
+documento en crudo
+\emph default
+, que es el documento que el usuario provee antes de que éste se agregue
+ a la colección documental o un 
+\emph on
+sustituto documental
+\emph default
+, que es un documento que ya forma parte de la colección.
+ Nótese que las recomendaciones contienen colecciones de éste último tipo.
+\end_layout
+
+\begin_layout Description
+Usuario: una referencia a la representación de usuarios del sistema anfitrión;
+ deberían poder identificarse únicamente.
+\end_layout
+
+\begin_layout Description
+Curso: una referencia a la representación de cursos del sistema anfitrión;
+ ademaś de tener un identificador único, sería deseable contar con una descripci
+ón y un nombre, para la construcción del perfil.
+\end_layout
+
+\begin_layout Description
+Agente
+\begin_inset space ~
+\end_inset
+
+recolector: el sub-sistema que se encarga de obtener automáticamente nuevos
+ documentos a la colección.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/9_classDiagram.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:analysis_class_diagram"
+
+\end_inset
+
+Diagrama de clases UML para las clases del análisis
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
