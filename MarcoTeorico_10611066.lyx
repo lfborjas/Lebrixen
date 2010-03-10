@@ -820,7 +820,7 @@ ciclo de la recuperación de la información
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1375,6 +1375,216 @@ retroalimentación
  de resultados a partir de éste, buscando aquellos documentos que se aproximen
  a los preferidos por el usuario -es importante resaltar que esta es una
  característica básica de los sistemas de recomendación.
+\end_layout
+
+\begin_layout Subsubsection
+Obtención de la colección documental
+\end_layout
+
+\begin_layout Standard
+Aunque la existencia de la colección se da por sentado al hablar de la implement
+ación de sistemas de recuperación de información, la obtención de ésta es
+ indiscutiblemente fundamental para el sistema.
+ Aunque existen colecciones en internet que se construyen exclusivamente
+ mediante la colaboración de los usuarios, como wikipedia
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.wikipedia.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ o el 
+\emph on
+open directory project
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.dmoz.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, y aún cuando esta tendencia es cada vez más común, dado el auge de la
+ 
+\emph on
+web 2.0 
+\emph default
+y la 
+\emph on
+web semántica, 
+\emph default
+un sistema de IR a gran escala deberá contar con un conjunto de documentos
+ suficientemente grande como para satisfacer la mayor parte de las necesidades
+ de información de sus usuarios, y, para ello, deberá disponer de algún
+ método de obtención automática de nuevos documentos.
+\end_layout
+
+\begin_layout Standard
+Las 
+\emph on
+arañas web
+\emph default
+ son tales mecanismos: son programas que, partiendo de un conjunto inicial
+ de páginas web, encuentran en éstas nuevos vínculos a otros documentos,
+ los cuales agregan a su conjunto y exploran para encontrar nuevos vínculos
+ y así sucesivamente.
+ Este enfoque simple de las arañas web se puede encontrar implementado en
+ el lenguaje de programación python por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Segaran2007"
+
+\end_inset
+
+.
+ Las dificultades del uso de una araña web en un ambiente comercial, como
+ la privacidad y el volumen de datos procesados, se pueden encontrar someramente
+ relatadas en las experiencias de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Brin1998"
+
+\end_inset
+
+ al desarrollar google
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.google.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Por su parte, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "HinrichSchutze2009"
+
+\end_inset
+
+ menciona las características más importantes que una araña web debería
+ tener: 
+\emph on
+robustez,
+\emph default
+ para no caer en trampas de navegación que lo hagan quedarse demasiado tiempo
+ en un solo dominio; 
+\emph on
+cortesía
+\emph default
+, para respetar las políticas de sitios que tienen un límite de visitas
+ automáticas o no desean ser agregados a un índice -téngase presente que
+ existe un estándar
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+definido en 
+\lang spanish
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.robotstxt.org/wc/exclusion.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ para determinar, en un archivo de texto llamado usualmente 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+robots.txt
+\end_layout
+
+\end_inset
+
+, las direcciones de un sitio que las arañas web no tienen permitido agregar
+ a los índices de sus sistemas anfitriones; 
+\emph on
+escalabilidad, desempeño, eficiencia y posibilidad de distribución
+\emph default
+, para usar óptimamente los recursos de los que dispone; 
+\emph on
+frescura
+\emph default
+, obtener siempre copias nuevas de las páginas; 
+\emph on
+un estándar de calidad
+\emph default
+, para explorar sólo aquellas páginas que podrían verdaderamente ser relevantes,
+ ya sea por su riqueza de contenido, su 
+\emph on
+fama
+\emph default
+ entre otras páginas o su apego a estándares y 
+\emph on
+extensibilidad
+\emph default
+, una araña se debería poder adaptar a nuevos formatos, protocolos y estándares.
+\end_layout
+
+\begin_layout Standard
+Un caso interesante de implementación de arañas web es cuando no se desea
+ obtener cualquier página para agregarla a la colección, sino que sólo aquellas
+ que se refieran a cierto tópico; en este caso, las arañas deben tomar decisione
+s sobre la relevancia a un tópico y hasta aprender de recolecciones anteriores
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Menczer2001,Rungsawang2005"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -2082,8 +2292,14 @@ key "Lewis1998"
 \end_layout
 
 \begin_layout Itemize
-Frecuencia local multiplicada por la frecuencia global inversa: conocida
- en la literatura como 
+Frecuencia local multiplicada por la frecuencia global inversa
+\begin_inset CommandInset label
+LatexCommand label
+name "ite:tf_idf"
+
+\end_inset
+
+: conocida en la literatura como 
 \emph on
 tf*idf
 \emph default
@@ -7860,6 +8076,159 @@ JITIR
 : valerse del comportamiento contextual histórico de los usuarios en los
  cursos y el saber colectivo obtenido de cursos y usuarios relacionados
  para la recuperación y filtrado de información.
+\end_layout
+
+\begin_layout Subsection
+Determinación del contexto para sistemas basados en texto
+\end_layout
+
+\begin_layout Standard
+Según parece, la capacidad del sistema para determinar el contexto local
+ del usuario es fundamental para que un agente 
+\emph on
+JITIR
+\emph default
+ sea de verdadera utilidad.
+ Aunque para sistemas basados en contextos extraordinarios, como aquellos
+ que se pudieran basar en información geográfica, la información va más
+ allá de lo que se introduzca en una aplicación, para sistemas como el propuesto
+ en este proyecto, asumir que todo el contexto necesario se encuentra en
+ el texto introducido por el usuario es suficiente.
+\end_layout
+
+\begin_layout Standard
+Pero ¿cómo determinar, de lo que el usuario escribe, qué se puede considerar
+ importante en la identificación del contexto y la construcción de las consultas
+ para la búsqueda de documentos a recomendar? Esta pregunta parece encontrar
+ su respuesta en un área que, aunque poco conocida, es vital 
+\end_layout
+
+\begin_layout Standard
+En primer lugar uno podría argumentar que, dado algún saber previo respecto
+ del usuario o del dominio del conocimiento en el que se desenvuelve, se
+ podrían extraer términos discriminantes del contexto local y con éstos
+ realizar las consultas, ya sea con técnicas de aprendizaje de máquina -por
+ ejemplo, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Uzun2006"
+
+\end_inset
+
+, propone el uso de un clasificador bayesiano- o, si se dispone de una colección
+ de documentos en el contexto local o el perfil del usuario, se pueden tomar
+ prestadas técnicas de la recuperación de información: el modelo de vector
+ espacial 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Renz2003"
+
+\end_inset
+
+, ontologías construidas con el análisis formal de conceptos 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Cimiano2005"
+
+\end_inset
+
+ o la aplicación del modelo de análisis de semántica latente para determinar
+ los términos más definitivos y hasta se puede disponer de la lingüística
+ computacional, relacionando la importancia de una palabra con su rol gramatical.
+ Una comparación entre los enfoques estadísticos y lingüísticos para la
+ extracción de términos clave se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kageura1996"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Y cuando el conocimiento previo es nulo o escaso, un enfoque lingüístico
+ parece cobrar más importancia, según el trabajo de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Matsuo2003"
+
+\end_inset
+
+, quienes demuestran un algoritmo que determina palabras clave con un rendimient
+o comparable al de la ponderación 
+\emph on
+tf*idf
+\emph default
+ (véase 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "ite:tf_idf"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Existen servicios basados en web para la extracción de términos clave, entre
+ los cuales, uno de los más populares es el 
+\emph on
+Term Extraction Web Service
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://developer.yahoo.com/search/content/V1/termExtraction.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\emph default
+utilizado por el sistema 
+\emph on
+PIRA
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gruzd2006"
+
+\end_inset
+
+
+\emph on
+.
+ 
+\emph default
+Asimismo, existen librerías que implementan esta funcionalidad mediante
+ la identificación de roles gramaticales (una implementación en el lenguaje
+ de programación python se encuentra disponible en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://pypi.python.org/pypi/topia.termextract/
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
