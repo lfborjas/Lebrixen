@@ -8489,6 +8489,13 @@ El sistema deberá indizar y organizar los documentos que obtenga, ya sea
 
 \begin_layout Subsubsection
 Requisitos no funcionales
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:nf-requirements"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -8950,7 +8957,7 @@ Diagrama de clases UML para las clases del análisis
 \end_layout
 
 \begin_layout Subsection
-Análisis de interacción
+Análisis de interacción y funcional
 \end_layout
 
 \begin_layout Standard
@@ -8979,7 +8986,14 @@ reference "fig:interaction_diagrams-4-6"
 
 \end_inset
 
- ), un diagrama de estado (figura <>) y un prototipo
+ ), diagramas de estado (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:state-diagrams"
+
+\end_inset
+
+) y un prototipo
 \begin_inset Foot
 status collapsed
 
@@ -9009,6 +9023,39 @@ reference "fig:interface_prototype"
 
 ).
  
+\end_layout
+
+\begin_layout Standard
+Se consideran aquí dos enfoques posibles para la implementación del sistema:
+ el primero (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:pre-filtering-approach"
+
+\end_inset
+
+) utiliza la información del perfil del curso y la obtenida del contexto
+ inmediato para construir la consulta -aquí se podría utilizar, por ejemplo,
+ una ontología de dominio derivada del mismo perfil para la extracción de
+ términos clave y la expansión con sinónimos.
+ Por otro lado, el segundo enfoque (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:post-filtering-approach"
+
+\end_inset
+
+) utiliza la información del perfil para filtrar y ordenar los resultados
+ según su adecuación a éste, mientras que construye la consulta sólo en
+ base al contexto inmediato, extrayendo términos clave con algoritmos heurístico
+s.
+\end_layout
+
+\begin_layout Standard
+Aunque el análisis funcional merece un apartado aparte, aquí se ha obviado
+ porque esta etapa de análisis ya ha presentado ciertos detalles de la funcional
+idad interna y respecto al usuario y una profundización mayor correspondería
+ ya a la etapa de implementación.
 \end_layout
 
 \begin_layout Standard
@@ -9361,12 +9408,274 @@ Prototipo de interfaz de usuario
 
 \end_layout
 
-\begin_layout Subsection
-Análisis funcional
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/UML/SD_domain_knowledge_approach.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:pre-filtering-approach"
+
+\end_inset
+
+Enfoque con 
+\emph on
+pre-filtrado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/UML/SD_filtering_approach.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:post-filtering-approach"
+
+\end_inset
+
+Enfoque de 
+\emph on
+post-filtrado
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:state-diagrams"
+
+\end_inset
+
+Diagramas de estado para la interacción con el sistema
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 Análisis de configuración
+\end_layout
+
+\begin_layout Standard
+Aunque los requerimientos de configuración ya fueron mostrados en el apartado
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:nf-requirements"
+
+\end_inset
+
+, las razones que los suscitaron se resumirán aquí.
+\end_layout
+
+\begin_layout Standard
+El sistema se ha pensado como un componente independiente del sistema anfitrión.
+ Por ello, aunque ciertos requisitos de compatibilidad son inevitables (como
+ la existencia en la base de datos de entidades que representen a los usuarios
+ y los cursos), la comunicación entre ambos debería ser tan independiente
+ de las implementaciones como sea posible, para ello, se proponen dos notaciones
+ de intercambio de datos ampliamente utilizadas en las aplicaciones web:
+ 
+\emph on
+json
+\emph default
+ y 
+\emph on
+xml
+\emph default
+.
+ Se ha favorecido el primero por la facilidad de generación y análisis.
+\end_layout
+
+\begin_layout Standard
+El lenguaje de programación python se ha elegido por su fácil sintaxis,
+ extensa colección de librerías y eficiencia.
+ El marco de desarrollo django se ha favorecido por la experiencia previa
+ del autor con el mismo y por su adhesión a filosofías de desarrollo efectivas,
+ como el uso del modelo de arquitectura MVC y la orientación al desarrollo
+ modular.
+\end_layout
+
+\begin_layout Standard
+Puesto que se desea una interfaz de usuario dinámica e intuitiva, se hizo
+ evidente que se necesitaría agregar funcionalidad al lado del cliente con
+ javascript.
+ Puesto que se desea que el sistema funcione en todos los navegadores web
+ populares, se ha optado por la librería jquery, que se encarga de la compatibil
+idad y permite al desarrollador preocuparse por escribir código funcional.
+ A pesar de la existencia de diversas librerías javascript que comparten
+ el mismo propósito (como prototype
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.prototypejs.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ o mootools
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://mootools.net/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+), jquery tiene una sintaxis más sencilla, mayor uso en aplicaciones comerciales
+ y eficiencia en la manipulación de (x)html
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Según la prueba comparativa de selectores css en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://mootools.net/slickspeed/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+PostgreSQL es un motor de bases de datos eficiente en la manipulación de
+ consultas y sin costo.
+ 
+\end_layout
+
+\begin_layout Standard
+Siguiendo la tradición del uso de servidores Linux para aplicaciones que
+ pretendan escalar y ofrecer el mayor rendimiento, y, dado que el sistema
+ anfitrión de prueba
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+escolarea.com
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ está actualmente siendo servido desde un servidor con el sistema operativo
+ ubuntu, se ha optado por éste sistema operativo para el almacenamiento
+ y servicio.
 \end_layout
 
 \begin_layout Section
