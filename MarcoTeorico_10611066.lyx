@@ -7896,7 +7896,7 @@ usa
 \end_inset
 
 información? Tomando la teoría de la ciencia cognitiva, se establece que
- el sistema debería poder permitir la serendipia :encontrar información
+ el sistema debería poder permitir la serendipia: encontrar información
  que resulta útil y de la cual no se sabía; y poder reducir el costo: encontrar
  información de la cual se sabía, pero se consideraba demasiado el esfuerzo
  que hubiera implicado buscarla por cuenta propia.
@@ -9691,19 +9691,333 @@ key "Pressman2006"
 
 \end_inset
 
-.
+, téngase en cuenta que la tercera etapa de ese flujo de diseño, el 
+\emph on
+diseño de navegación
+\emph default
+, se obvia aquí porque el sistema carece de distintas interfaces a las cuales
+ el usuario pudiese navegar; el usuario sólo verá la interfaz de recomendaciones.
 \end_layout
 
 \begin_layout Subsection
-Diseño de la interfaz, diseño estético y diseño de contenido
+Diseño de la interfaz y diseño estético
+\end_layout
+
+\begin_layout Standard
+En esta etapa se deben considerar los aspectos de la interacción con el
+ usuario que afecten su apreciación, y consecuente juicio de utilidad, del
+ sistema.
+ 
+\end_layout
+
+\begin_layout Standard
+La investigación en el diseño de interfaces se ha convertido en todo un
+ campo de estudio, trascendiendo lineamientos empíricos y subjetivos, y
+ tomando elementos de la psicología cognitiva para estudiar las experiencias
+ de usuario.
+ En el caso concreto de los sistemas del tipo propuesto por este proyecto
+ (sistemas de recuperación oportuna de información), la tesis de doctorado
+ de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+ estudia a fondo la experiencia del usuario y cómo el diseño de la interfaz
+ la afecta, y asegura que:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Los 
+\emph on
+JITIRs
+\emph default
+ deben permitir a una persona concentrar su atención en su tarea primaria
+ y a la vez dejar que la atención pueda ser dividida entre la tarea primaria
+ y las recomendaciones.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para que esta aseveración sea realizable, se debe encontrar un equilibrio
+ entre la 
+\emph on
+concentración de la atención
+\emph default
+ del usuario y no presentar la interfaz de recomendaciones de una manera
+ que no permita distinguirla del ambiente de la tarea primaria o ignorarla
+ cuando el usuario ya no desea o necesita información; y, a la vez, la interfaz
+ no debe ser demasiado disímil como para exigir un cambio mental de contexto
+ tan grande que la tarea principal sea dejada de lado.
+ 
+\end_layout
+
+\begin_layout Standard
+Para que este equilibrio sea conseguido, la transición entre la tarea de
+ documentación del docente y la revisión y uso de recomendaciones debe ser
+ lo menos brusca posible, el mismo autor 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Rhodes2000"
+
+\end_inset
+
+ sugiere el uso de 
+\emph on
+interfaces incrementales
+\emph default
+.
+ En las cuales:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Cada etapa provee un poco más de información, al costo de requerir un poco
+ más de atención para leerla y entenderla
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La idea de una interfaz de esta naturaleza es que permita al usuario decidir
+ si vale la pena dividir su atención entre su tarea principal y las recomendacio
+nes, reduciendo así el riesgo de afectar la concentración del usuario en
+ vano.
+ El mismo autor 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Rhodes2000"
+
+\end_inset
+
+ muestra el ejemplo de seis etapas en una interfaz incremental en su sistema
+ 
+\emph on
+Margin notes
+\emph default
+.
+ Una adaptación de éstas al proyecto actual se describe a continuación:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+No hay interfaz visible
+\emph default
+.
+ En este momento el agente de recomendación está o recuperando información
+ del perfil del curso o decidiendo si la información en el contexto actual
+ es suficiente como para llevar a cabo una búsqueda o realizando la búsqueda
+ en sí.
+ Puesto que no existen recomendaciones que mostrar, sería del todo contraproduce
+nte distraer al usuario con cualquier especie de contenido visual.
+ El autor se había sentido tentado a utilizar una barra de progreso o una
+ animación que mostrasen que el sistema estaba trabajando en las recomendaciones
+, pero esta decisión hubiera sido mal diseño, porque, como asegura 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+la interfaz [sólo] debe comunicar el estado de cualquier actividad que 
+\emph on
+el usuario haya iniciado
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph on
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Énfasis del autor
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Existen recomendaciones
+\emph default
+.
+ Cuando ya existan recomendaciones, se lo hará saber al usuario mediante
+ una discreta pestaña a la izquierda de la pantalla, de manera que sea notable
+ en la visión periférica del usuario.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Gráfico de relevancia
+\emph default
+.
+ Una vez que el usuario decida que es hora de evaluar las recomendaciones,
+ dará clic en la pestaña de la interfaz.
+ Esto dará paso a la ventana de recomendaciones, con un gráfico mostrando
+ qué tan relacionadas están éstas, en promedio, al contexto inmediato actual.
+ Así el usuario puede decidir regresar a su tarea sin continuar viendo el
+ resto de la interfaz de recomendaciones.
+ En todo momento el usuario debe poder esconder las recomendaciones.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Muestras documentales ordenadas por relevancia
+\emph default
+.
+ Bajo el gráfico de relevancia se encontrarán las representaciones de los
+ documentos encontrados, éstas estarán ordenadas por relevancia con el título
+ resaltado y un corto sumario.
+ Así el usuario puede juzgarlas someramente.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Palabras clave en un dialogo flotante.
+
+\emph default
+ Si el usuario decide pasar el mouse por encima de alguna recomendación,
+ una pequeña ventana flotante mostrará los conceptos (o palabras clave)
+ del contexto local que causaron la sugerencia de ese recurso específico,
+ esto permite que el usuario haga juicios más detallados sobre los elementos
+ individuales.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Visualizar el recurso
+\emph default
+.
+ Una vez que el usuario ha decidido que un recurso puede serle útil, puede
+ agregarlo a sus documentos de la sesión actual o visualizarlo en una ventana
+ aparte.
+ Nótese que en esta etapa el usuario ha pasado completamente de su tarea
+ principal a la secundaria.
+\end_layout
+
+\begin_layout Standard
+Además de las etapas de interfaz incremental antes discutidas, la interfaz
+ de recomendación en sí debe obedecer lineamientos de diseño que aseguren
+ una alta eficiencia cuando el usuario se decida a dividir su atención hacia
+ ella.
+ Los siguientes han sido tenidos en cuenta:
+\end_layout
+
+\begin_layout Enumerate
+La ley de Fitt
+\end_layout
+
+\begin_layout Enumerate
+Facilidad de aprendizaje.
+ La interfaz de recomendaciones debe ser similar a lo que usuarios hayan
+ usado antes, por ello, las muestras documentales se parecen a resultados
+ de un motor de búsqueda y están acompañadas de cajas de selección que establece
+n explícitamente que pueden elegirse varias sugerencias a la vez.
+\end_layout
+
+\begin_layout Enumerate
+Reducción de latencia.
+ Mediante el uso de solicitudes asíncronas al servidor (gracias a la técnica
+ 
+\emph on
+ajax
+\emph default
+).
+\end_layout
+
+\begin_layout Enumerate
+Mantener la integridad del producto de trabajo.
+ Los contextos y recomendaciones se guardarán automáticamente en una 
+\emph on
+sesión
+\emph default
+ del servidor: el sistema de sesiones
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.djangoproject.com/en/dev/topics/http/sessions/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ de 
+\emph on
+django
+\emph default
+ permite asociar una visita de usuario con un objeto que persiste hasta
+ dos semanas en el lado del servidor, evitando así que errores de comunicación
+ con éste afecten la tarea del usuario.
+ Aunque no está dentro del alcance del sistema, esta misma persistencia
+ se aplicará a la tarea principal en el sistema anfitrión de prueba.
+\end_layout
+
+\begin_layout Enumerate
+Legibilidad y accesibilidad para personas con discapacidades.
+ Mediante el uso de html apegado a los estándares de la w3, así como el
+ 
+\emph on
+minimalismo
+\emph default
+ a la hora de mostrar los resultados: fuentes de tamaño y color legibles,
+ y sumarios lo suficientemente cortos como para ser comprendidos pero no
+ incurrir en una distracción.
+\end_layout
+
+\begin_layout Enumerate
+Comunicación: Hacer saber al usuario cuándo se han determinado nuevas sugerencia
+s en base a un cambio de contexto.
+ Se parte del supuesto que, una vez que el usuario vuelva a su tarea primaria,
+ la interfaz podría esconderse de su vista.
+ En caso de que siempre permaneciese abierta, quizá sería mejor, en vez
+ de actualizarla automáticamente, comunicar explícitamente la situación.
+\end_layout
+
+\begin_layout Subsection
+Diseño estético y diseño de contenido
 \end_layout
 
 \begin_layout Subsection
 Diseño de arquitectura
-\end_layout
-
-\begin_layout Subsection
-Diseño de navegación
 \end_layout
 
 \begin_layout Subsection
