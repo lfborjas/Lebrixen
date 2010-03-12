@@ -9700,14 +9700,21 @@ diseño de navegación
 \end_layout
 
 \begin_layout Subsection
-Diseño de la interfaz y diseño estético
+Diseño de la interfaz, estético y de contenido
 \end_layout
 
 \begin_layout Standard
 En esta etapa se deben considerar los aspectos de la interacción con el
  usuario que afecten su apreciación, y consecuente juicio de utilidad, del
  sistema.
- 
+ Esta interacción se puede considerar mediante los siguientes aspectos:
+ la interfaz en sí, cómo está ésta diseñada estéticamente y qué contenido
+ presenta.
+ Éstos aspectos, aunque íntimamente relacionados, pueden, en el caso de
+ aplicacion web a gran escala, considerarse en etapas independientes y quizá
+ hasta por personas diferentes; en este proyecto, sin embargo, dado el relativam
+ente poco porcentaje de interacción con el usuario final, se abordarán en
+ un solo apartado.
 \end_layout
 
 \begin_layout Standard
@@ -9751,20 +9758,48 @@ Para que esta aseveración sea realizable, se debe encontrar un equilibrio
 \emph on
 concentración de la atención
 \emph default
- del usuario y no presentar la interfaz de recomendaciones de una manera
- que no permita distinguirla del ambiente de la tarea primaria o ignorarla
- cuando el usuario ya no desea o necesita información; y, a la vez, la interfaz
- no debe ser demasiado disímil como para exigir un cambio mental de contexto
- tan grande que la tarea principal sea dejada de lado.
+ del usuario y presentar la interfaz de recomendaciones de una manera que
+ permita distinguirla del ambiente de la tarea primaria o ignorarla cuando
+ ya no se desee o necesite información; y, a la vez, la interfaz no debe
+ ser demasiado disímil como para exigir un cambio mental de contexto tan
+ grande que la tarea principal sea dejada de lado.
  
 \end_layout
 
 \begin_layout Standard
 Para que este equilibrio sea conseguido, la transición entre la tarea de
  documentación del docente y la revisión y uso de recomendaciones debe ser
- lo menos brusca posible, el mismo autor 
+ lo menos brusca posible.
+ 
+\end_layout
+
+\begin_layout Standard
+Desde un punto de vista estético, esto se puede conseguir aprovechando el
+ hecho de que 
+\emph on
+los usuarios exploran las páginas web desde arriba a la izquierda hasta
+ abajo a la derecha
+\emph default
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
+key "Pressman2006"
+
+\end_inset
+
+.
+ Así, teniendo en cuenta que la interfaz de recomendación debe ser tanto
+ accesible como no intrusiva, se ubicará a la derecha del área de trabajo
+ principal.
+ También, se elegirán colores en el rango cromático de la interfaz principal,
+ de manera que se sepa que está relacionada pero que no distraiga la atención
+ al ser demasiado distinta.
+\end_layout
+
+\begin_layout Standard
+Y desde el punto de vista funcional, 
+\begin_inset CommandInset citation
+LatexCommand citet
 key "Rhodes2000"
 
 \end_inset
@@ -9824,7 +9859,7 @@ No hay interfaz visible
 nte distraer al usuario con cualquier especie de contenido visual.
  El autor se había sentido tentado a utilizar una barra de progreso o una
  animación que mostrasen que el sistema estaba trabajando en las recomendaciones
-, pero esta decisión hubiera sido mal diseño, porque, como asegura 
+, pero esta decisión hubiera sido de mal diseño, porque, como asegura 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Pressman2006"
@@ -9857,6 +9892,15 @@ status collapsed
 
 .
  
+\emph default
+Véase la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:stage2_hint"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -9866,7 +9910,7 @@ Existen recomendaciones
 \emph default
 .
  Cuando ya existan recomendaciones, se lo hará saber al usuario mediante
- una discreta pestaña a la izquierda de la pantalla, de manera que sea notable
+ una discreta pestaña a la derecha de la pantalla, de manera que sea notable
  en la visión periférica del usuario.
 \end_layout
 
@@ -9925,37 +9969,103 @@ Visualizar el recurso
 \end_layout
 
 \begin_layout Standard
-Además de las etapas de interfaz incremental antes discutidas, la interfaz
- de recomendación en sí debe obedecer lineamientos de diseño que aseguren
- una alta eficiencia cuando el usuario se decida a dividir su atención hacia
- ella.
+Además de las etapas de interfaz incremental, en relación a la tarea principal,
+ antes discutidas, la interfaz de recomendación en sí debe obedecer lineamientos
+ de diseño que aseguren una alta eficiencia cuando el usuario se decida
+ a dividir su atención hacia ella.
  Los siguientes han sido tenidos en cuenta:
 \end_layout
 
 \begin_layout Enumerate
-La ley de Fitt
+
+\emph on
+Reducir el esfuerzo
+\emph default
+.
+ La ley de Fitt, citada por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+, establece que: 
+\begin_inset Quotes eld
+\end_inset
+
+El tiempo para adquirir un objetivo es una función de la distancia a la
+ que se halla y de su tamaño
+\begin_inset Quotes erd
+\end_inset
+
+, ésta, aunada a la 
+\emph on
+ley de los dos segundos
+\emph default
+, establecida por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+, que establece que el umbral aceptable para llevar a cabo una sub-tarea
+ -esto es, cualquier tarea que no forme parte de la tarea principal - es
+ de dos segundos, puesto que 
+\begin_inset Quotes eld
+\end_inset
+
+incrementar el esfuerzo involucrado en llevar a cabo una tarea, causará
+ un decremento proporcional en el numero de veces que ésta se lleva a cabo
+\begin_inset Quotes erd
+\end_inset
+
+, la interfaz de recomendación permitirá seleccionar fácilmente las recomendacio
+nes y agregarlas con un botón que se encuentre en la muestra documental
+ -o agregar varias con un botón cercano a la lista de sugerencias.
+ Como alternativa, el usuario podrá elegir una recomendación y 
+\emph on
+arrastrarla
+\emph default
+ al área de trabajo principal.
+ 
 \end_layout
 
 \begin_layout Enumerate
-Facilidad de aprendizaje.
+
+\emph on
+Facilidad de aprendizaje
+\emph default
+.
  La interfaz de recomendaciones debe ser similar a lo que usuarios hayan
  usado antes, por ello, las muestras documentales se parecen a resultados
  de un motor de búsqueda y están acompañadas de cajas de selección que establece
 n explícitamente que pueden elegirse varias sugerencias a la vez.
+ Además,claro, de lo discutido en el primer punto: las alternativas de uso
+ permiten que tanto usuarios acostumbrados a interfaces dinámicas como neófitos
+ puedan intuir sin mayor esfuerzo cómo usar las recomendaciones.
 \end_layout
 
 \begin_layout Enumerate
-Reducción de latencia.
+
+\emph on
+Reducción de latencia
+\emph default
+.
  Mediante el uso de solicitudes asíncronas al servidor (gracias a la técnica
  
 \emph on
 ajax
 \emph default
-).
+) a la hora de hacer las búsquedas de recursos a recomendar.
 \end_layout
 
 \begin_layout Enumerate
-Mantener la integridad del producto de trabajo.
+
+\emph on
+Mantener la integridad del producto de trabajo
+\emph default
+.
  Los contextos y recomendaciones se guardarán automáticamente en una 
 \emph on
 sesión
@@ -9992,32 +10102,204 @@ django
 \end_layout
 
 \begin_layout Enumerate
-Legibilidad y accesibilidad para personas con discapacidades.
+
+\emph on
+Legibilidad y accesibilidad
+\emph default
+.
  Mediante el uso de html apegado a los estándares de la w3, así como el
  
 \emph on
 minimalismo
 \emph default
- a la hora de mostrar los resultados: fuentes de tamaño y color legibles,
- y sumarios lo suficientemente cortos como para ser comprendidos pero no
- incurrir en una distracción.
+ a la hora de mostrar los resultados: sólo lo necesario, sin elementos distrayen
+tes, con fuentes de tamaño y color legibles, y sumarios lo suficientemente
+ cortos como para ser comprendidos pero no incurrir en una distracción.
+ Asimismo, otra motivación para un diseño minimalista es lo poco deseable
+ que, dada alguna configuración de pantalla relativamente estándar, el contenido
+ tenga tan poco espacio que una barra de desplazamiento deba ser agregada
+ por el navegador.
+ Esto porque los usuarios encuentran indeseable este tipo de comportamiento
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Pressman2006"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
-Comunicación: Hacer saber al usuario cuándo se han determinado nuevas sugerencia
-s en base a un cambio de contexto.
+
+\emph on
+Comunicación
+\emph default
+: Hacer saber al usuario cuándo se han determinado nuevas sugerencias en
+ base a un cambio de contexto.
  Se parte del supuesto que, una vez que el usuario vuelva a su tarea primaria,
- la interfaz podría esconderse de su vista.
+ la interfaz se esconderá de su vista.
  En caso de que siempre permaneciese abierta, quizá sería mejor, en vez
  de actualizarla automáticamente, comunicar explícitamente la situación.
+ Asimismo, la interfaz debe permitir al usuario ver recomendaciones anteriores
+ de una manera fácilmente navegable.
 \end_layout
 
-\begin_layout Subsection
-Diseño estético y diseño de contenido
+\begin_layout Enumerate
+
+\emph on
+Eficiencia y anticipación
+\emph default
+: puesto que la tarea principal de la aplicación es incrementar la productividad
+ del usuario, y éste podría estar interesado en recursos que no hay manera
+ de recomendar automáticamente, se ha decidido permitir una búsqueda directa,
+ dispuesta hacia abajo a la derecha de la interfaz para resaltar su naturaleza
+ de último recurso.
+ No obstante, los resultados de una búsqueda directa serán también filtrados
+ según el perfil del curso.
+ Por las mismas razones, se le permitirá al usuario navegar entre las recomendac
+iones hechas en otros contextos de la sesión.
+\end_layout
+
+\begin_layout Standard
+Para un prototipo de la interfaz de recomendación véase la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:recomm-prototype"
+
+\end_inset
+
+ , téngase presente que ésta estará a la derecha del área principal de trabajo
+ (como en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:interface_prototype"
+
+\end_inset
+
+), por lo que algunos detalles quizá sean distintos.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/1. Stage2_Hint.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:stage2_hint"
+
+\end_inset
+
+Estado oculto de la interfaz de recomendación
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/2. Recommendations_Interface.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:recomm-prototype"
+
+\end_inset
+
+Detalle del prototipo de la interfaz de recomendación
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 Diseño de arquitectura
+\end_layout
+
+\begin_layout Standard
+Aunque 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+ identifica dos partes en esta etapa, a saber, la identificación y modelado
+ de una 
+\emph on
+arquitectura de contenido
+\emph default
+ que refleje cómo las distintas páginas de una aplicación web están relacionadas
+ en términos de navegación y una 
+\emph on
+arquitectura de aplicación
+\emph default
+ que se refiere al sistema en su totalidad, dada la inexistencia de la primera
+ arquitectura en el sistema propuesto, se hablará aquí solamente de la postrera.
+\end_layout
+
+\begin_layout Standard
+La arquitectura de la aplicación adoptará la propuesta por el marco de desarroll
+o 
+\emph on
+django
+\emph default
+: una similar a la clásica modelo-vista-controlador: la arquitectura 
+\emph on
+modelo-plantilla-vista 
+\emph default
+(MTV, por sus siglas en inglés).
+ [definirla y dibujarla]
 \end_layout
 
 \begin_layout Subsection
