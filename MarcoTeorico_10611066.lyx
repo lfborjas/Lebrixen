@@ -10184,7 +10184,7 @@ reference "fig:interface_prototype"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -10223,7 +10223,7 @@ Estado oculto de la interfaz de recomendación
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -10296,10 +10296,215 @@ django
 \emph default
 : una similar a la clásica modelo-vista-controlador: la arquitectura 
 \emph on
-modelo-plantilla-vista 
+modelo-plantilla-vista
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Comparada con la MVC en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.djangoproject.com/en/dev/faq/general/#django-appears-to-be-a-mvc-frame
+work-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you
+-don-t-use-the-standard-names
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \emph default
 (MTV, por sus siglas en inglés).
- [definirla y dibujarla]
+ Todas las definiciones y descripciones que siguen están fundamentadas en
+ la documentación oficial de django, que se puede encontrar -en inglés-
+ en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.djangoproject.com/
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Los componentes de esta arquitectura se describen someramente a continuación:
+\end_layout
+
+\begin_layout Description
+Modelo: un modelo en la arquitectura MTV es una clase que extiende a una
+ súper-clase definida en el 
+\emph on
+framework 
+\emph default
+que abstrae tanto los atributos como la funcionalidad relacionadas a un
+ objeto.
+ Esta clase es independiente del sistema administrador de bases de datos
+ que se utilice.
+ Toda operación que se realice con el almacenamiento se hará a través de
+ métodos implementados en la súper-clase.
+\end_layout
+
+\begin_layout Description
+Plantilla: (en inglés, 
+\emph on
+template
+\emph default
+) representa la presentación de la aplicación, escrita en una combinación
+ de html y un lenguaje para crear páginas dinámicas definido en el 
+\emph on
+framework
+\emph default
+ permite que desarrolladores y diseñadores puedan trabajar en la presentación
+ y el comportamiento de la aplicación de manera separada y ordenada.
+ Corresponde en parte a la 
+\emph on
+vista
+\emph default
+ del modelo MVC tradicional, porque define 
+\emph on
+cómo
+\emph default
+ se mostrará el contenido.
+\end_layout
+
+\begin_layout Description
+Vista: Corresponde en parte al controlador y la vista del modelo MVC tradicional
+; define 
+\emph on
+qué
+\emph default
+ contenido se presentará y es donde las interacciones del usuario con los
+ datos almacenados se manejan.
+ Cuando una URL
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+del inglés, 
+\size normal
+\emph on
+\color none
+uniform resource locator
+\end_layout
+
+\end_inset
+
+ se solicita, django crea una instancia de una clase especial definida en
+ el 
+\emph on
+framework
+\emph default
+: la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+HttpRequest
+\end_layout
+
+\end_inset
+
+, que contiene meta-datos de la solicitud (como la ruta de la url que se
+ llamó y los encabezados) y la envía de parámetro a la vista, que es una
+ función.
+ La vista siempre devuelve una instancia de la clase 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+HttpResponse
+\end_layout
+
+\end_inset
+
+ que encapsula los datos que se mostrarán en una plantilla o se enviarán
+ directamente al solicitante (como datos serializados en los formatos xml
+ o json, una respuesta de error o una redirección a una página externa).
+\end_layout
+
+\begin_layout Standard
+La interacción entre las distintas partes de esta arquitectura se puede
+ ver así: el usuario solicita una página, identificada por una URL, el 
+\emph on
+framework
+\emph default
+ encuentra la 
+\emph on
+vista
+\emph default
+ correspondiente y la llama mediante una solicitud http, la vista puede
+ o no interactuar con los 
+\emph on
+modelos
+\emph default
+ -creándolos, modificándolos o sencillamente obteniendo un conjunto de diversas
+ instancias de éstos- y devuelve una respuesta que es mostrada en alguna
+ 
+\emph on
+plantilla
+\emph default
+ o devuelta directamente al solicitante.
+ Esta interacción está representada en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MTV-architecture"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/11_MTV_architecture.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MTV-architecture"
+
+\end_inset
+
+La arquitectura MTV
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
