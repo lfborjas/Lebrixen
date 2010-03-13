@@ -8310,7 +8310,7 @@ En este capítulo se documentan los distintos artefactos producidos a la
  Como se imaginará, el sistema no consiste en un sistema de información
  a gran escala, con una larga lista de requerimientos, casos de uso y escenarios
  de interacción; sin embargo, ninguna empresa de ingeniería debe hacerse
- sin ningun tipo de definición previa del derrotero a seguir.
+ sin ningún tipo de definición previa del derrotero a seguir.
 \end_layout
 
 \begin_layout Standard
@@ -8482,7 +8482,7 @@ El sistema deberá determinar cuándo se utiliza un documento recomendado,
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá indizar y organizar los documentos que obtenga, ya sea
+El sistema deberá indexar y organizar los documentos que obtenga, ya sea
  mediante los aportes de los usuarios o una búsqueda periódica de nueva
  información.
 \end_layout
@@ -8501,7 +8501,7 @@ name "sub:nf-requirements"
 \begin_layout Enumerate
 El sistema deberá reflejar la separación entre el sistema anfitrión, el
  que extrae los datos de entrada y presenta los de salida y el componente
- principal, el que realiza las búsquedas y filtrado e indiza y mantiene
+ principal, el que realiza las búsquedas y filtrado e indexa y mantiene
  la colección documental.
  Tal separación se logrará mediante el uso de una interfaz independiente
  del sistema anfitrión que reciba y devuelva los datos en un formato serializado
@@ -8903,7 +8903,7 @@ Usuario: una referencia a la representación de usuarios del sistema anfitrión;
 
 \begin_layout Description
 Curso: una referencia a la representación de cursos del sistema anfitrión;
- ademaś de tener un identificador único, sería deseable contar con una descripci
+ además de tener un identificador único, sería deseable contar con una descripci
 ón y un nombre, para la construcción del perfil.
 \end_layout
 
@@ -9711,17 +9711,17 @@ En esta etapa se deben considerar los aspectos de la interacción con el
  la interfaz en sí, cómo está ésta diseñada estéticamente y qué contenido
  presenta.
  Éstos aspectos, aunque íntimamente relacionados, pueden, en el caso de
- aplicacion web a gran escala, considerarse en etapas independientes y quizá
- hasta por personas diferentes; en este proyecto, sin embargo, dado el relativam
-ente poco porcentaje de interacción con el usuario final, se abordarán en
- un solo apartado.
+ una aplicación web a gran escala, considerarse en etapas independientes
+ y quizá hasta por personas diferentes; en este proyecto, sin embargo, dado
+ el relativamente poco porcentaje de interacción con el usuario final, se
+ abordarán en un solo apartado.
 \end_layout
 
 \begin_layout Standard
 La investigación en el diseño de interfaces se ha convertido en todo un
- campo de estudio, trascendiendo lineamientos empíricos y subjetivos, y
- tomando elementos de la psicología cognitiva para estudiar las experiencias
- de usuario.
+ campo de estudio, trascendiendo lineamientos empíricos y subjetivos y tomando
+ elementos de la psicología cognitiva para estudiar las experiencias de
+ usuario.
  En el caso concreto de los sistemas del tipo propuesto por este proyecto
  (sistemas de recuperación oportuna de información), la tesis de doctorado
  de 
@@ -9761,8 +9761,8 @@ concentración de la atención
  del usuario y presentar la interfaz de recomendaciones de una manera que
  permita distinguirla del ambiente de la tarea primaria o ignorarla cuando
  ya no se desee o necesite información; y, a la vez, la interfaz no debe
- ser demasiado disímil como para exigir un cambio mental de contexto tan
- grande que la tarea principal sea dejada de lado.
+ ser tan disímil como para exigir un cambio mental de contexto tan grande
+ que la tarea principal sea dejada de lado.
  
 \end_layout
 
@@ -9792,8 +9792,8 @@ key "Pressman2006"
  accesible como no intrusiva, se ubicará a la derecha del área de trabajo
  principal.
  También, se elegirán colores en el rango cromático de la interfaz principal,
- de manera que se sepa que está relacionada pero que no distraiga la atención
- al ser demasiado distinta.
+ de manera que se sepa que está relacionada y que, al mismo tiempo, no se
+ distraiga la atención por ser demasiado distinta.
 \end_layout
 
 \begin_layout Standard
@@ -9852,7 +9852,7 @@ No hay interfaz visible
 \emph default
 .
  En este momento el agente de recomendación está o recuperando información
- del perfil del curso o decidiendo si la información en el contexto actual
+ del perfil del curso, decidiendo si la información en el contexto actual
  es suficiente como para llevar a cabo una búsqueda o realizando la búsqueda
  en sí.
  Puesto que no existen recomendaciones que mostrar, sería del todo contraproduce
@@ -9892,15 +9892,6 @@ status collapsed
 
 .
  
-\emph default
-Véase la figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:stage2_hint"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Enumerate
@@ -9912,6 +9903,14 @@ Existen recomendaciones
  Cuando ya existan recomendaciones, se lo hará saber al usuario mediante
  una discreta pestaña a la derecha de la pantalla, de manera que sea notable
  en la visión periférica del usuario.
+ Véase la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:stage2_hint"
+
+\end_inset
+
+ para un prototipo de cómo se vería la interfaz en este estado.
 \end_layout
 
 \begin_layout Enumerate
@@ -9962,17 +9961,17 @@ Visualizar el recurso
 \emph default
 .
  Una vez que el usuario ha decidido que un recurso puede serle útil, puede
- agregarlo a sus documentos de la sesión actual o visualizarlo en una ventana
- aparte.
+ agregarlo inmediatamente a sus documentos de la sesión actual o visualizarlo
+ en una ventana aparte.
  Nótese que en esta etapa el usuario ha pasado completamente de su tarea
  principal a la secundaria.
 \end_layout
 
 \begin_layout Standard
-Además de las etapas de interfaz incremental, en relación a la tarea principal,
- antes discutidas, la interfaz de recomendación en sí debe obedecer lineamientos
- de diseño que aseguren una alta eficiencia cuando el usuario se decida
- a dividir su atención hacia ella.
+Además de las etapas de interfaz incremental de las recomendaciones en relación
+ a la tarea principal antes discutidas, la interfaz de recomendación en
+ sí debe obedecer lineamientos de diseño que aseguren una alta eficiencia
+ cuando el usuario se decida a dividir su atención hacia ella.
  Los siguientes han sido tenidos en cuenta:
 \end_layout
 
@@ -10002,7 +10001,7 @@ El tiempo para adquirir un objetivo es una función de la distancia a la
 \emph on
 ley de los dos segundos
 \emph default
-, establecida por 
+, hecha notar por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Rhodes2000"
@@ -10041,9 +10040,9 @@ Facilidad de aprendizaje
  usado antes, por ello, las muestras documentales se parecen a resultados
  de un motor de búsqueda y están acompañadas de cajas de selección que establece
 n explícitamente que pueden elegirse varias sugerencias a la vez.
- Además,claro, de lo discutido en el primer punto: las alternativas de uso
- permiten que tanto usuarios acostumbrados a interfaces dinámicas como neófitos
- puedan intuir sin mayor esfuerzo cómo usar las recomendaciones.
+ Además, claro, de lo discutido en el primer punto: las alternativas de
+ uso permiten que tanto usuarios acostumbrados a interfaces dinámicas como
+ neófitos puedan intuir sin mayor esfuerzo cómo usar las recomendaciones.
 \end_layout
 
 \begin_layout Enumerate
@@ -10057,6 +10056,22 @@ Reducción de latencia
 \emph on
 ajax
 \emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Del inglés 
+\emph on
+asynchronous javascript and xml
+\emph default
+ es una técnica que permite realizar solicitudes asíncronas al servidor
+ sin necesidad de volver a cargar las páginas por completo a la hora de
+ procesar la respuesta.
+\end_layout
+
+\end_inset
+
 ) a la hora de hacer las búsquedas de recursos a recomendar.
 \end_layout
 
@@ -10112,9 +10127,10 @@ Legibilidad y accesibilidad
 \emph on
 minimalismo
 \emph default
- a la hora de mostrar los resultados: sólo lo necesario, sin elementos distrayen
-tes, con fuentes de tamaño y color legibles, y sumarios lo suficientemente
- cortos como para ser comprendidos pero no incurrir en una distracción.
+ a la hora de mostrar los resultados: sólo lo necesario, sin elementos de
+ distracción, con fuentes de tamaño y color legibles, y sumarios lo suficienteme
+nte cortos como para ser comprendidos pero no incurrir en una sobrecarga
+ de información.
  Asimismo, otra motivación para un diseño minimalista es lo poco deseable
  que, dada alguna configuración de pantalla relativamente estándar, el contenido
  tenga tan poco espacio que una barra de desplazamiento deba ser agregada
@@ -10135,12 +10151,13 @@ key "Pressman2006"
 \emph on
 Comunicación
 \emph default
-: Hacer saber al usuario cuándo se han determinado nuevas sugerencias en
- base a un cambio de contexto.
+: Hacer saber al usuario cuándo, en base a un cambio de contexto, se han
+ determinado nuevas sugerencias.
  Se parte del supuesto que, una vez que el usuario vuelva a su tarea primaria,
  la interfaz se esconderá de su vista.
- En caso de que siempre permaneciese abierta, quizá sería mejor, en vez
- de actualizarla automáticamente, comunicar explícitamente la situación.
+ En caso de que siempre permaneciese abierta quizá sería mejor, en vez de
+ actualizarla automáticamente, comunicar explícitamente la situación mediante
+ un aviso conspicuo.
  Asimismo, la interfaz debe permitir al usuario ver recomendaciones anteriores
  de una manera fácilmente navegable.
 \end_layout
@@ -10177,19 +10194,20 @@ reference "fig:interface_prototype"
 
 \end_inset
 
-), por lo que algunos detalles quizá sean distintos.
+), por lo que algunos detalles quizá sean distintos, dada la relativamente
+ poca cantidad de espacio de la cual se dispone.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/1. Stage2_Hint.png
-	scale 30
+	scale 45
 
 \end_inset
 
@@ -10228,7 +10246,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/2. Recommendations_Interface.png
-	scale 30
+	scale 45
 
 \end_inset
 
@@ -10284,8 +10302,9 @@ arquitectura de contenido
 \emph on
 arquitectura de aplicación
 \emph default
- que se refiere al sistema en su totalidad, dada la inexistencia de la primera
- arquitectura en el sistema propuesto, se hablará aquí solamente de la postrera.
+ que se refiere al sistema en su totalidad.
+ Dada la inexistencia de la primera arquitectura en el sistema propuesto,
+ se hablará aquí solamente de la postrera.
 \end_layout
 
 \begin_layout Standard
@@ -10294,7 +10313,7 @@ o
 \emph on
 django
 \emph default
-: una similar a la clásica modelo-vista-controlador: la arquitectura 
+, una similar a la clásica modelo-vista-controlador: la arquitectura 
 \emph on
 modelo-plantilla-vista
 \begin_inset Foot
@@ -10303,13 +10322,14 @@ status collapsed
 \begin_layout Plain Layout
 Comparada con la MVC en 
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
-http://docs.djangoproject.com/en/dev/faq/general/#django-appears-to-be-a-mvc-frame
-work-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you
--don-t-use-the-standard-names
+http://docs.djangoproject.com/en/dev/faq/general/
+\backslash
+#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-t
+he-view-the-template-how-come-you-don-t-use-the-standard-names
 \end_layout
 
 \end_inset
@@ -10319,9 +10339,9 @@ work-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you
 
 \end_inset
 
- 
+
 \emph default
-(MTV, por sus siglas en inglés).
+ (MTV, por sus siglas en inglés).
  Todas las definiciones y descripciones que siguen están fundamentadas en
  la documentación oficial de django, que se puede encontrar -en inglés-
  en 
@@ -10532,6 +10552,11 @@ Un componente de recuperación de información.
 Un componente de filtrado de información.
  El cual contempla los aspectos de elección de resultados a mostrar, interfaz
  de presentación y obtención de retroalimentación.
+\end_layout
+
+\begin_layout Standard
+En este apartado se refinan las clases identificadas en el análisis y se
+ adaptan a la arquitectura del sistema.
 \end_layout
 
 \begin_layout Standard
