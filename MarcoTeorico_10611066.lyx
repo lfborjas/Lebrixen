@@ -1188,7 +1188,7 @@ Como se ve, el sistema debe tratar de entender la consulta del usuario antes
  En el capítulo siguiente técnicas relacionadas al procesamiento de la consulta
  se presentarán más a detalle; cabe notar que, vista como un problema de
  comunicación, la IR se podría valer de los avances en lingüística computacional
-, pero, como bien apunta 
+, pero, como bien apuntan 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "ThorstenBrants"
@@ -1994,7 +1994,7 @@ reference "tab:VSM-examples"
 \begin_inset Float table
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -2547,7 +2547,7 @@ Lo cual, llevado al espacio simplificado, implica que los documentos más
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Float figure
@@ -2723,13 +2723,6 @@ key "Rungsawang1988"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Estos modelos probarían ser más útiles para un sistema como el propuesto
- para el presente proyecto, porque, a diferencia del modelo de espacio vectorial
- clásico, orientado a palabras clave -similitud léxica- y relevancia; podrían
- probar ser más útiles a la hora de encontrar documentos útiles.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2958,7 +2951,7 @@ key "Schonhofen2001"
 \end_inset
 
 : la idea básica es mejorar la ponderación de los términos mediante la determina
-ción de clases de sinónimos y reducción de la polisemia, esto es, la asignación
+ción de clases de sinónimos y reducción de la polisemia -o la identificación
  de dimensiones en el caso de los modelos generalizados de espacio vectorial.
 \end_layout
 
@@ -3319,7 +3312,7 @@ reference "tab:IR-comparison"
 \begin_inset Float table
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -4323,13 +4316,8 @@ conjunto
  a la hora de presentar los resultados en un orden específico, por rango
  de relevancia, por ejemplo, ya que otros asuntos como la efectividad del
  algoritmo de asignación de rango vienen a consideración.
- Para un sistema como el que se desarrolla en este proyecto, donde el orden
- no es tan relevante ya que se apunta a obtener una pequeña cantidad de
- documentos y presentarlos como un conjunto -esto es, se pretende que la
- recomendación consista en una búsqueda de alta precisión- no se ahondará
- en los detalles de evaluación de sistemas con rangos de relevancia.
- Sin embargo, si el lector está interesado, puede consultar la sección 8.5
- de 
+ Si el lector está interesado, en profundizar en estas medidas puede consultar
+ la sección 8.5 de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "HinrichSchutze2009"
@@ -4352,18 +4340,13 @@ key "Russell1995"
 rango reciproco
 \emph default
 , para denotar cuáles de los resultados relevantes para el usuario se encuentran
- entre los primeros y 
+ entre los primeros de la lista devuelta por el sistema y 
 \emph on
 tiempo de respuesta, 
 \emph default
 refiriéndose al tiempo total en el cual el usuario satisface su necesidad
  de información.
- Ambos conceptos son irrelevantes para el sistema a desarrollar en este
- proyecto precisamente por la cualidad de la no interferencia: respecto
- al primero, como ya se mencionó, los resultados se presentarán como un
- conjunto, así que no aplica; y para el segundo, sería indeseable que el
- usuario suspendiese y recomenzase su labor sólo para ver si obtiene otros
- documentos más relevantes.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -4950,13 +4933,12 @@ www.bibtex.org
 \end_inset
 
  ) o documentos en xml.
- Pero la mayor parte de documentos, los cuales serán los artefactos a manejar
- en este proyecto, tienen una estructura arbitraria o carecen de cualquier
- tipo de estructura; como se mencionó antes, técnicas de la recuperación
- de información se pueden aplicar a este tipo de entradas para indizarlas;
- aunque se puede también valer de técnicas de extracción de información
- para tratar de llenar los atributos -por ejemplo, cierto nivel de extracción
- de información se utilizó en el sistema de 
+ Pero la mayor parte de documentos de texto tienen una estructura arbitraria
+ o carecen de cualquier tipo de estructura; como se mencionó antes, técnicas
+ de la recuperación de información se pueden aplicar a este tipo de entradas
+ para indizarlas; aunque se puede también valer de técnicas de extracción
+ de información para tratar de llenar los atributos -por ejemplo, cierto
+ nivel de extracción de información se utilizó en el sistema de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Kitamura2002"
@@ -5219,9 +5201,6 @@ www.delicious.com
  vínculo y 0 para el caso contrario; para sitios de películas, se podrían
  usar valores entre uno y cinco para indicar qué tanto disfrutó el usuario
  cierta película.
- Se podría incluso pensar en un modelo simple para el sistema a desarrollar
- en este proyecto: 1 para denotar que cierto usuario utilizó un recurso
- y cero para lo contrario.
  
 \end_layout
 
@@ -7749,9 +7728,8 @@ Sistemas de recuperación oportuna de la información
 \begin_layout Standard
 Relativamente poca investigación se ha hecho respecto a sistemas de recomendació
 n que asistan recuperando información útil a la tarea del usuario sin obstruirle.
- Pero poco no es ninguno, y, así, podemos encontrar la definición de un
- sistema del tipo que este proyecto se propone desarrollar en la tesis que
- sentó las bases de este campo, la de 
+ Pero poco no es ninguno, y, así, podemos encontrar una definición de este
+ tipo de sistemas en la tesis que sentó las bases de este campo, la de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Rhodes2000"
@@ -8047,17 +8025,6 @@ otro sistema que se puede considerar de este tipo, se vale también de las
  de incorporar técnicas de filtrado de información para presentar los resultados.
 \end_layout
 
-\begin_layout Standard
-Como se sugirió en la introducción, el presente proyecto busca ir más allá
- en los sistemas 
-\emph on
-JITIR
-\emph default
-: valerse del comportamiento contextual histórico de los usuarios en los
- cursos y el saber colectivo obtenido de cursos y usuarios relacionados
- para la recuperación y filtrado de información.
-\end_layout
-
 \begin_layout Subsection
 Determinación del contexto para sistemas basados en texto
 \end_layout
@@ -8071,9 +8038,9 @@ JITIR
  sea de verdadera utilidad.
  Aunque para sistemas basados en contextos extraordinarios, como aquellos
  que se pudieran basar en información geográfica, la información va más
- allá de lo que se introduzca en una aplicación, para sistemas como el propuesto
- en este proyecto, asumir que todo el contexto necesario se encuentra en
- el texto introducido por el usuario es suficiente.
+ allá de lo que se introduzca en una aplicación, para sistemas orientados
+ a tareas puramente documentales, asumir que todo el contexto necesario
+ se encuentra en el texto introducido por el usuario es suficiente.
 \end_layout
 
 \begin_layout Standard
@@ -8267,14 +8234,6 @@ key "Pazzani2007"
 .
  Con este enfoque se gana en costo computacional, pero se requiere la implementa
 ción completa del componente de búsqueda e indización.
-\end_layout
-
-\begin_layout Standard
-Por cuestiones de tiempo, se ha decidido optar por la primera alternativa
- en este proyecto: concentrarse en desarrollar el componente que construya
- perfiles de usuarios y consultas y dejar que la recuperación de los documentos
- candidatos a recomendación sea hecha con una implementación pre-existente
- de algoritmos de búsqueda.
 \end_layout
 
 \begin_layout Chapter
