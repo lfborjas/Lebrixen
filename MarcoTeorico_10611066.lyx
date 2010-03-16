@@ -590,11 +590,11 @@ Introducción
 
 \begin_layout Standard
 Se comienza con una puesta al día en el área de la recuperación de información
- (IR, por sus siglas en inglés) , ya que, a pesar de ser los sistemas de
- recomendación ya toda un área de investigación por mérito propio, es necesario
- clarificar que lo que subyace a un sistema como el que se presenta en este
- proyecto es, en mayor medida, una tarea de recuperación de documentos.
- Se presentan los componentes de un sistema computacional de IR y sus métodos
+ (RI) , ya que, a pesar de ser los sistemas de recomendación ya toda un
+ área de investigación por mérito propio, es necesario clarificar que lo
+ que subyace a un sistema como el que se presenta en este proyecto es, en
+ mayor medida, una tarea de recuperación de documentos.
+ Se presentan los componentes de un sistema computacional de RI y sus métodos
  de implementación, además del proceso genérico que sigue un usuario a la
  hora de utilizar un sistema de esta índole.
  Para terminar, se determina cómo se podría evaluar un sistema de recuperación
@@ -742,7 +742,7 @@ información
 \emph on
 útil
 \emph default
-, pero, como se puede observar, los sistemas de IR no aspiran a tanto: sencillam
+, pero, como se puede observar, los sistemas de RI no aspiran a tanto: sencillam
 ente dan al usuario documentos que puedan suplir su necesidad, pero es la
  responsabilidad última del usuario determinar que en efecto es así.
  Como nota marginal, sin embargo, recuérdese que otra área de las ciencias
@@ -798,7 +798,7 @@ Un sistema de recuperación de la información de documentos en grandes coleccio
 s, como los entendemos actualmente, desde bibliotecas hasta motores de búsqueda,
  a pesar de las grandes diferencias de implementación y arquitectura, tienen
  algo en común: todos tienen ciertos componentes que, si bien pueden variar
- en importancia o discernibilidad de otros, definen a un sistema de IR.
+ en importancia o discernibilidad de otros, definen a un sistema de RI.
  Antes de discutirlos más a fondo, véase en la figura
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -885,7 +885,7 @@ de
 
 documentos: Es el conjunto de todos aquellos documentos que el sistema conoce
  y puede brindar como resultados a sus usuarios.
- Constituye el componente central de un sistema de IR, pero sería de poco
+ Constituye el componente central de un sistema de RI, pero sería de poco
  valor
 \begin_inset Foot
 status collapsed
@@ -1012,7 +1012,7 @@ La necesidad de un
 índice
 \emph default
  de la colección documental no es algo nuevo ni propio de sistemas computacional
-es de IR; más bien, como hace notar 
+es de RI; más bien, como hace notar 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Safran2005"
@@ -1025,7 +1025,7 @@ key "Safran2005"
  Y es de esta necesidad, tanto en documentos de extensión considerable como
  en colecciones grandes, que se crean los índices en los libros y los sistemas
  de clasificación bibliotecarios.
- Así, todo sistema de IR que se precie de ser útil deberá proveer alguna
+ Así, todo sistema de RI que se precie de ser útil deberá proveer alguna
  manera de acceder a la información contenida en los documentos; de cualquier
  manera, los documentos han de ser representados de forma que la técnica
  elegida pueda valerse de ellos, y en esto radica la importancia de la elaboraci
@@ -1038,7 +1038,7 @@ sustitutos documentales
 \end_layout
 
 \begin_layout Standard
-En cualquier sistema de IR, ya sea mediante la ayuda de un profesional en
+En cualquier sistema de RI, ya sea mediante la ayuda de un profesional en
  una biblioteca o en un motor de búsqueda, el usuario debe ser capaz de
  expresar su necesidad de información, es decir, como bien señala 
 \begin_inset CommandInset citation
@@ -1047,7 +1047,7 @@ key "Russell1995"
 
 \end_inset
 
-, que la IR es, en el fondo, un asunto de 
+, que la RI es, en el fondo, un asunto de 
 \emph on
 comunicación.
 
@@ -1187,7 +1187,7 @@ Como se ve, el sistema debe tratar de entender la consulta del usuario antes
  de buscar coincidencias.
  En el capítulo siguiente técnicas relacionadas al procesamiento de la consulta
  se presentarán más a detalle; cabe notar que, vista como un problema de
- comunicación, la IR se podría valer de los avances en lingüística computacional
+ comunicación, la RI se podría valer de los avances en lingüística computacional
 , pero, como bien apuntan 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1197,7 +1197,7 @@ key "ThorstenBrants"
 
 , debido a la naturaleza de corta extensión de muchas consultas en sistemas
  basados en internet, el uso del procesamiento de lenguaje natural en un
- sistema de IR debería usar herramientas especialmente confeccionadas para
+ sistema de RI debería usar herramientas especialmente confeccionadas para
  el mismo y no adaptadas de otras áreas de investigación.
 \end_layout
 
@@ -1273,7 +1273,7 @@ Física
 \end_inset
 
  con documentos relacionados al fenómenos físico del eco, etc.
- Un sistema computacional de IR que desee utilizar clasificación debería
+ Un sistema computacional de RI que desee utilizar clasificación debería
  utilizar algún tipo de aprendizaje de máquina supervisado: en primera,
  la categorías se deben decidir de alguna manera (ya sea a criterio de quien
  compila la colección o mediante otras técnicas de inteligencia artificial),
@@ -1429,7 +1429,7 @@ y la
 \emph on
 web semántica, 
 \emph default
-un sistema de IR a gran escala deberá contar con un conjunto de documentos
+un sistema de RI a gran escala deberá contar con un conjunto de documentos
  suficientemente grande como para satisfacer la mayor parte de las necesidades
  de información de sus usuarios, y, para ello, deberá disponer de algún
  método de obtención automática de nuevos documentos.
@@ -1579,7 +1579,7 @@ Modelos de recuperación de información
 \end_layout
 
 \begin_layout Standard
-El componente más importante de un sistema de IR, como se vio anteriormente,
+El componente más importante de un sistema de RI, como se vio anteriormente,
  es el tratamiento de la consulta del usuario en el componente de igualación;
  para que éste devuelva objetos verdaderamente relevantes o útiles, la indizació
 n debe haber construido una representación óptima de los mismos, y es en
@@ -3177,7 +3177,7 @@ agente inteligente
 \emph default
 , se puede aducir que, si el agente ha aprendido lo suficiente de la colección
  documental o el dominio del conocimiento como para poder procesar preguntas
- y contestarlas, un sistema de IR se reduce a la 
+ y contestarlas, un sistema de RI se reduce a la 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3802,7 +3802,7 @@ key "Voorhees2002a"
  el sistema, es decir en base al desempeño del mismo en términos estrictamente
  computacionales o en base a cómo se ordenan los documentos por relevancia;
  o se pueden medir según el usuario: el usuario considera que un sistema
- de IR es útil si los resultados suplen su necesidad de información.
+ de RI es útil si los resultados suplen su necesidad de información.
  
 \end_layout
 
@@ -4129,7 +4129,7 @@ key "Walker1999"
 
 \end_inset
 
-: imagínese a dos usuarios de un sistema de IR, uno, buscando sobre teatros
+: imagínese a dos usuarios de un sistema de RI, uno, buscando sobre teatros
  famosos en el mundo para una asignación escolar: este usuario querrá obtener
  pocos documentos de buena calidad, para terminar su tarea con rapidez;
  este tipo de búsqueda se conoce como una 
@@ -4427,7 +4427,7 @@ Como es evidente, en la tarea de evaluación de un sistema desde el punto
 \emph on
 k
 \emph default
- de documentos obtenidos con algún sistema de IR, posiblemente del que se
+ de documentos obtenidos con algún sistema de RI, posiblemente del que se
  evaluará, como subconjunto de evaluación.
  De este subconjunto, entonces, se obtendrán los juicios de relevancia de
  los usuarios.
@@ -4832,7 +4832,7 @@ perfil de usuario
 \emph on
 consulta
 \emph default
- de un sistema de IR (nótese que esto refuerza lo antes mencionado como
+ de un sistema de RI (nótese que esto refuerza lo antes mencionado como
  diferencia fundamental entre ambos sistemas: mientras que la consulta contiene
  todo lo necesario para la búsqueda, en un sistema de recomendación muchos
  detalles sobre la necesidad de información se deben inferir del perfil
@@ -4854,7 +4854,7 @@ Representación de los artículos:
 \end_layout
 
 \begin_layout Standard
-Al igual que un sistema de IR, se debe elegir la representación de los artefacto
+Al igual que un sistema de RI, se debe elegir la representación de los artefacto
 s que sea más idónea para la labor de recomendación; puesto que los usuarios
  evalúan los artículos, lo más natural sería contar con un resumen de los
  
