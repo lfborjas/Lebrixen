@@ -594,9 +594,9 @@ Se comienza con una puesta al día en el área de la recuperación de informaci�
  recomendación ya toda un área de investigación por mérito propio, es necesario
  clarificar que lo que subyace a un sistema como el que se presenta en este
  proyecto es, en mayor medida, una tarea de recuperación de documentos.
- Se presentan los componentes de un sistema computacional de IR, además
- del proceso genérico que sigue un usuario a la hora de utilizar un sistema
- de esta índole.
+ Se presentan los componentes de un sistema computacional de IR y sus métodos
+ de implementación, además del proceso genérico que sigue un usuario a la
+ hora de utilizar un sistema de esta índole.
  Para terminar, se determina cómo se podría evaluar un sistema de recuperación
  de información.
 \end_layout
@@ -696,8 +696,8 @@ salida
  palabras clave, etc; o bien en formatos electrónicos estándar, como xhtml
  o xml; pero la mayor parte de los documentos no tienen una estructura reconocib
 le (lo cual no excluye que puedan tener alguna de naturaleza arbitraria)
- y esta situación se agrava aún más cuando la colección en uso no es más
- ni menos que la 
+ y esta situación se agrava aún más cuando la colección en uso no es ni
+ más ni menos que la 
 \emph on
 world wide web.
 \end_layout
@@ -717,12 +717,11 @@ información: Se puede considerar como la
 \emph default
  del sistema.
  Un usuario del sistema (una persona u otro sistema) expresa de alguna manera
- una carencia de información, y se trata de procesar ésta de manera que
- se le puedan proveer recursos relevantes.
+ una carencia de información y se trata de procesar ésta de manera que se
+ le puedan proveer recursos relevantes.
  Es importante notar que la necesidad de información puede ser explícita
  -en forma de consulta- o implícita -que se puede inferir del contexto o
- de las preferencias del usuario-, y es en esta segunda naturaleza en la
- que se basa el proyecto a desarrollar.
+ de las preferencias del usuario.
 \end_layout
 
 \begin_layout Standard
@@ -811,8 +810,7 @@ reference "fig:IR-cycle"
 \emph on
 ciclo de la recuperación de la información 
 \emph default
--- para tener una idea de los roles que juegan los componentes de estos
- sistemas.
+para tener una idea de los roles que juegan los componentes de estos sistemas.
 \end_layout
 
 \begin_layout Standard
@@ -861,16 +859,15 @@ key "Walker1999"
 \end_layout
 
 \begin_layout Standard
-Aunque de la figura se pueden determinar más, los componentes y actividades
- más notables de un sistema de recuperación de información pueden considerarse,
- según han determinado 
+Los componentes y actividades más notables de un sistema de recuperación
+ de información pueden considerarse, según han determinado 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Russell1995,Walker1999"
 
 \end_inset
 
- , las siguientes:
+ , los siguientes:
 \end_layout
 
 \begin_layout Description
@@ -911,28 +908,17 @@ ia:
 \emph on
 la indización
 \emph default
-; aunque es una actividad, es también, en muchos de los casos, un componente
- bien definido del sistema.
+; la cual, aunque es una actividad, es también, en muchos de los casos,
+ un componente bien definido del sistema.
  El propósito de la indización es crear los sustitutos documentales que
  se almacenarán en la colección y servirán de entrada al componente de igualació
 n.
  Cada nuevo documento que es agregado al almacenamiento del sistema precisa
  ser indizado; y esta actividad puede ser tan compleja como se quiera: puede
- ir desde la simple actualización del índice inverso con el documento, como
- puede también consistir en la clasificación o abstracción del mismo.
- En cualquier caso, dos etapas tienen lugar.
- En primera el documento se analiza: ya sea mediante un conteo de palabras,
- ponderación, análisis estadístico, etc.
- Y luego, el documento se traduce a cual sea la representación de sustitutos
- documentales que se haya elegido: un índice inverso, una jerarquía conceptual,
- una clasificación con vocabulario controlado, etc.
- Es importante notar que esta segunda etapa corresponde a la adaptación
- del documento a la 
-\emph on
-representación del conocimiento
-\emph default
- interna del sistema, concepto básico del campo de la ingeniería del conocimient
-o.
+ ir desde la simple actualización del índice inverso con el documento, la
+ representación como vector de palabras, o la clasificación del mismo en
+ una taxonomía.
+ 
 \end_layout
 
 \begin_layout Description
@@ -956,8 +942,11 @@ igualación: Es la parte que sirve de intermediario entre el almacenamiento
 \emph on
 lenguaje interno
 \emph default
- del sistema, que es, en última instancia, la representación del conocimiento
- elegida.
+ del sistema, que es, en última instancia, una 
+\emph on
+representación del conocimiento
+\emph default
+.
  Una vez en poder de la consulta, este componente trata de asimilar ésta
  con los sustitutos documentales y luego, si hay coincidencias, solicita
  al almacenamiento los documentos.
@@ -1135,7 +1124,7 @@ Reducir las palabras a sus raíces: -en inglés
 stemming
 \emph default
 - que consiste en eliminar terminaciones de plural/singular, femenino/masculino
- o las conjugaciones en verbos regulares.
+ o los sufijos de conjugaciones en verbos regulares.
  Aunque algoritmos de buena utilidad existen para ello, en muchos de los
  casos se tiene menor ganancia de la que se podría esperar -sólo de un 2%
  en inglés según 
@@ -1197,9 +1186,9 @@ s o construidos en formatos organizados como xml pueden ser candidatos a
 Como se ve, el sistema debe tratar de entender la consulta del usuario antes
  de buscar coincidencias.
  En el capítulo siguiente técnicas relacionadas al procesamiento de la consulta
- se presentarán más a detalle, pero cabe notar que, visto como un problema
- de comunicación, la IR se podría valer de los avances en lingüística computacio
-nal, pero, como bien apunta 
+ se presentarán más a detalle; cabe notar que, vista como un problema de
+ comunicación, la IR se podría valer de los avances en lingüística computacional
+, pero, como bien apunta 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "ThorstenBrants"
@@ -1209,7 +1198,7 @@ key "ThorstenBrants"
 , debido a la naturaleza de corta extensión de muchas consultas en sistemas
  basados en internet, el uso del procesamiento de lenguaje natural en un
  sistema de IR debería usar herramientas especialmente confeccionadas para
- el mismo, y no adaptadas de otras áreas de investigación.
+ el mismo y no adaptadas de otras áreas de investigación.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1232,8 +1221,9 @@ ado.
 \end_layout
 
 \begin_layout Standard
-Una manera es mostrar las relaciones entre documentos, por ejemplo, si uno
- cita a otro o conceptos aparecen de maneras similares en distintos documentos.
+Una manera es mostrar gráficamente las relaciones entre documentos, entendiéndos
+e éstas, por ejemplo, como que uno cite a otro o conceptos aparecen de maneras
+ similares en los documentos.
  Un enfoque así se puede encontrar en 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1242,7 +1232,7 @@ key "Gipp2009"
 \end_inset
 
 , donde el sistema muestra de manera gráfica los documentos y sus relaciones
- (los documentos más relevantes se muestran de mayor tamaño, por ejemplo).
+ (y los documentos más relevantes se muestran de mayor tamaño).
  
 \end_layout
 
@@ -1368,9 +1358,9 @@ Además, el sistema podría valerse de la
 \emph on
 retroalimentación
 \emph default
- del usuario, ya sea implícita, mediante el acceso a documentos, la estancia
- en ellos -si éstos consisten en hipervínculos o la impresión; o explícita,
- mediante evaluación de relevancia.
+ del usuario, ya sea implícita, mediante el acceso a documentos, el tiempo
+ de estancia en ellos -si éstos consisten en hipervínculos- o la impresión;
+ o explícita, mediante evaluación de relevancia.
  Así, con la retroalimentación, el sistema podría construir un nuevo conjunto
  de resultados a partir de éste, buscando aquellos documentos que se aproximen
  a los preferidos por el usuario -es importante resaltar que esta es una
@@ -1562,7 +1552,7 @@ un estándar de calidad
 \emph on
 fama
 \emph default
- entre otras páginas o su apego a estándares y 
+ entre otras páginas o su apego a convenciones estándar y 
 \emph on
 extensibilidad
 \emph default
@@ -1604,9 +1594,7 @@ reference "fig:IR_model_taxonomy"
 
  se presenta una taxonomía de algunos de los modelos de recuperación de
  información utilizados comercialmente y en investigación.
- De éstos, se explorarán someramente unos pocos en este apartado, evaluándolos
- al final desde el punto de vista crítico de la implementación de un sistema
- como el propuesto en este proyecto.
+ De éstos, se explorarán someramente unos pocos en este apartado.
 \end_layout
 
 \begin_layout Standard
@@ -1766,12 +1754,7 @@ Búsqueda orientada a conceptos vs.
 \end_layout
 
 \begin_layout Standard
-En este apartado se presentarán los distintos enfoques de implementación
-\emph on
-.
-
-\emph default
- Como ya se apuntó, los sistemas tradicionales parten de la premisa de que
+Como ya se apuntó, los sistemas tradicionales parten de la premisa de que
  las palabras que están en la consulta son suficientes para la búsqueda,
  sin embargo, como se sabe, la necesidad de información del usuario encierra
  
@@ -1783,7 +1766,7 @@ conceptos
  para la búsqueda y que ésta se puede aumentar (ya sea mediante sinónimos
  aportados por tesauros, búsquedas en ontologías o colecciones indexadas
  por conceptos) o refinar (mediante la desambiguación de términos, por ejemplo).
- Ambos enfoques pueden llamar también 
+ Ambos enfoques se pueden llamar también 
 \emph on
 búsquedas léxicas
 \emph default
