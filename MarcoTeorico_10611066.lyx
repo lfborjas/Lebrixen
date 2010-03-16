@@ -4436,6 +4436,13 @@ k
 
 \begin_layout Section
 Sistemas de Recomendación
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:rec_sys"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -8234,6 +8241,31 @@ key "Pazzani2007"
 .
  Con este enfoque se gana en costo computacional, pero se requiere la implementa
 ción completa del componente de búsqueda e indización.
+\end_layout
+
+\begin_layout Section
+Construcción de perfiles de usuario
+\end_layout
+
+\begin_layout Standard
+De este tema ya se habló cuando se discutieron los sistemas de recomendación
+ (sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:rec_sys"
+
+\end_inset
+
+), pero se considera pertinente ahondar un poco más en el tema, dada la
+ naturaleza de los sistemas que se discuten aquí.
+ En este apartado se discutirá cómo la construcción de un perfil de usuario
+ puede ayudar a la tarea de la recuperación de información, con miras a
+ aportar al área de la recuperación oportuna de la información.
+ 
+\end_layout
+
+\begin_layout Standard
+[lo de los franceses, la tesis, etc]
 \end_layout
 
 \begin_layout Chapter
