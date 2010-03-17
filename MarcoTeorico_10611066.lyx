@@ -8185,64 +8185,6 @@ http://pypi.python.org/pypi/topia.termextract/
 .
 \end_layout
 
-\begin_layout Subsection
-Recuperación y filtrado vs.
- recuperación adaptativa
-\end_layout
-
-\begin_layout Standard
-Considerando la naturaleza de los 
-\emph on
-JITIRs
-\emph default
-, se pueden determinar dos enfoques en la recuperación y presentación de
- la información.
- En primer lugar, se puede decir que el proceso de recomendación ocurre
- en dos etapas: primero, se construye una consulta con el contexto local
- del usuario, utilizando ésta en un motor de búsqueda -o cualquier otro
- agente externo de recuperación de información- y luego, de los resultados
- obtenidos en la etapa de búsqueda, filtrar los documentos mediante el perfil
- a largo plazo del usuario o las preferencias grupales, este enfoque en
- dos pasos ha sido implementado por 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Basu1998"
-
-\end_inset
-
- y teorizado por 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Daoud2008"
-
-\end_inset
-
-.
- La ventaja de este modelo radica en poder valerse de servicios externos
- o implementaciones de algoritmos de recuperación de información, concentrándose
- más bien en la etapa de filtrado; la desventaja estriba en el costo computacion
-al: para contextos complejos, la determinación de la consulta podría volverse
- computacionalmente costosa y ésto, aunado al tiempo que toma la búsqueda
- en sí, podría tornarse indeseable.
-\end_layout
-
-\begin_layout Standard
-Por otro lado, el perfil del usuario -o usuarios- se podría agregar al espacio
- documental, aprovechando así los algoritmos de similitud de los modelos
- de recuperación de información para la recomendación.
- Este enfoque es en realidad, equivalente a un sistema de recomendación
- orientado al contenido 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Pazzani2007"
-
-\end_inset
-
-.
- Con este enfoque se gana en costo computacional, pero se requiere la implementa
-ción completa del componente de búsqueda e indización.
-\end_layout
-
 \begin_layout Section
 Construcción de perfiles de usuario
 \end_layout
@@ -8258,14 +8200,456 @@ reference "sec:rec_sys"
 
 ), pero se considera pertinente ahondar un poco más en el tema, dada la
  naturaleza de los sistemas que se discuten aquí.
- En este apartado se discutirá cómo la construcción de un perfil de usuario
+ En este apartado se mostrará cómo la construcción de un perfil de usuario
  puede ayudar a la tarea de la recuperación de información, con miras a
  aportar al área de la recuperación oportuna de la información.
  
 \end_layout
 
 \begin_layout Standard
-[lo de los franceses, la tesis, etc]
+El área de investigación de modelado de perfiles de usuario no es nueva,
+ de hecho, cualquier sistema se crea con un tipo de usuario en mente.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "McGowan2003"
+
+\end_inset
+
+ distingue tres maneras de tratar el problema del perfil de usuario: 
+\end_layout
+
+\begin_layout Enumerate
+El enfoque 
+\emph on
+canónico
+\emph default
+.
+ En el cual el diseñador del sistema crea el mismo para un solo tipo de
+ usuario estándar, este prototipo se puede definir arbitrariamente o mediante
+ estudios de grupos de usuarios reales.
+\end_layout
+
+\begin_layout Enumerate
+El enfoque 
+\emph on
+explícito.
+ 
+\emph default
+En el cual el usuario tiene la responsabilidad de responder preguntas o
+ ajustar parámetros para definir su perfil, en base a esto, el sistema se
+ adaptará a él.
+ Este enfoque es famoso en sistemas de recomendación comerciales o redes
+ sociales.
+\end_layout
+
+\begin_layout Enumerate
+El enfoque 
+\emph on
+automático
+\emph default
+.
+ En el cual el sistema se basa en las interacciones con el usuario para
+ inferir el perfil.
+ Una primera manera de implementar este enfoque es tener categorías de usuarios
+ preexistentes (como novato, intermedio, y experto, por ejemplo) y luego
+ utilizar tales interacciones para 
+\emph on
+clasificar
+\emph default
+ al usuario en la taxonomía dada.
+ Otra manera, la que es relativamente nueva en la investigación, es la de
+ considerar el perfil individual como una base de conocimiento que puede
+ evolucionar y que regirá la interfaz entre usuario y sistema.
+ Es este último enfoque, el de considerar al perfil en sí como la directriz
+ principal para el comportamiento del sistema el que se definirá y evaluará
+ en el resto de esta sección.
+\end_layout
+
+\begin_layout Subsection
+Definiciones preliminares
+\end_layout
+
+\begin_layout Standard
+Antes de entrar en materia, es necesario definir ciertos conceptos:
+\end_layout
+
+\begin_layout Description
+Perfil: de manera general, el 
+\emph on
+perfil
+\emph default
+ de un usuario se define como las circunstancias que tienen influencia en
+ su necesidad de información a la hora de utilizar un sistema de RI y en
+ el consiguiente juicio de los resultados de búsquedas.
+ En la literatura, los términos 
+\emph on
+perfil, contexto y situación
+\emph default
+ se pueden utilizar indistintamente; sin embargo, en este trabajo se entenderá
+ el perfil como la representación de los intereses a largo y mediano plazo
+ del usuario.
+ El perfil puede consistir de múltiples 
+\emph on
+dimensiones,
+\emph default
+ las principales, identificadas por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bouzeghoub2005"
+
+\end_inset
+
+, son:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Información Personal: la parte estática del perfil, aquí se encontrarán
+ datos tales como país, lenguaje de preferencia, edad, etc.
+\end_layout
+
+\begin_layout Enumerate
+Dominio de interés: es la dimensión más explorada en la investigación; consiste
+ en una representación de los intereses del usuario, por consiguiente, esta
+ dimensión es dinámica.
+\end_layout
+
+\begin_layout Enumerate
+Preferencias de presentación: los atributos que el usuario favorece en la
+ interfaz (como los colores en los perfiles de algunas redes sociales) o
+ los menús que se muestran, en el caso de muchas aplicaciones de escritorio.
+\end_layout
+
+\begin_layout Enumerate
+Historial de interacciones: toda información recolectada a través de la
+ retroalimentación del usuario, podría utilizarse para construir el dominio
+ de interés.
+\end_layout
+
+\begin_layout Enumerate
+Calidad esperada: alguna medida cuantitativa de la relevancia intrínseca
+ de los resultados; un usuario profesional podría preferir sólo documentos
+ debidamente publicados y revisados mientras que otro prefiera actualizaciones
+ de 
+\emph on
+blogs
+\emph default
+ y redes sociales.
+\end_layout
+
+\begin_layout Enumerate
+Seguridad: o las preferencias de privacidad respecto a las otras dimensiones.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Contexto: igual que el perfil, el contexto engloba las circunstancias de
+ la 
+\begin_inset Quotes eld
+\end_inset
+
+intención del usuario para búsqueda de información
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Sieg2007"
+
+\end_inset
+
+.
+ Pero a diferencia del perfil, el contexto solamente se refiere a la 
+\emph on
+sesión actual
+\emph default
+ de uso del sistema, por lo que representa los intereses a corto plazo.
+\end_layout
+
+\begin_layout Description
+Sesión: se refiere a cada vez que el usuario utilice el sistema para satisfacer
+ una necesidad de información, puede incluir cualquier cantidad de reformulacion
+es de la consulta, siempre y cuando la tarea tenga siempre la misma finalidad.
+\end_layout
+
+\begin_layout Description
+Ontología: 
+\begin_inset Quotes eld
+\end_inset
+
+es una especificación explícita de conceptos y las relaciones que puedan
+ existir entre ellos
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sieg2007"
+
+\end_inset
+
+.
+ En muchas implementaciones prácticas, esto se modela mediante una relación
+ jerárquica en forma de un grafo dirigido acíclico o un árbol, de manera
+ que los conceptos puedan ser sub-conceptos de otros -mediante al relación
+ de herencia 
+\begin_inset Quotes eld
+\end_inset
+
+es un
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+La definición del perfil
+\end_layout
+
+\begin_layout Standard
+Como se ha notado, los intereses a largo plazo de un usuario son los que
+ permitirán a un sistema de recuperación de información adaptarse a éste
+ y retornar resultados cuya medida de relevancia sea cada vez menos genérica.
+ De ahí que la manera en que el perfil se represente y manipule sea fundamental.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Tamine-lechani2007"
+
+\end_inset
+
+ identifican tres etapas para la consecución de esta tarea:
+\end_layout
+
+\begin_layout Description
+Representación la manera en que se representen internamente las preferencias
+ a largo plazo del usuario tendrá un impacto directo en el sistema, puesto
+ que es la base de cualquier otra operación.
+ La manera más difundida de representación es la vectorial, heredada el
+ modelo de espacio vectorial.
+ Ahora bien, esta representación puede consistir en un solo vector con cada
+ término clave ponderado en base a las interacciones del usuario o en varios
+ vectores (o 
+\emph on
+clases de vectores
+\emph default
+) no relacionadas u organizadas jerárquicamente que representen los distintos
+ dominios de interés del usuario.
+ La representación vectorial es utilizada por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Tamine2006"
+
+\end_inset
+
+ y las clases de vectores se implementan en el sistema de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "McGowan2003"
+
+\end_inset
+
+.
+ Otra manera de representar un perfil es semánticamente: con el uso de ontología
+s, para así modelar las relaciones entre los distintos conceptos -y ya no
+ palabras clave.
+ Las ontologías se pueden construir a partir de la colección documental,
+ pero los sistemas que han implementado este enfoque se valen de taxonomías
+ de conceptos ya existentes, como el 
+\emph on
+open directory project
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Daoud2008,Sieg2007"
+
+\end_inset
+
+, wikipedia 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ramanathan2008"
+
+\end_inset
+
+ o wordnet 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Semeraro2005a"
+
+\end_inset
+
+.
+ Un último enfoque utiliza varias dimensiones del perfil, como el modelo
+ de seis dimensiones propuesto por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bouzeghoub2005"
+
+\end_inset
+
+ o el de dos dimensiones -los intereses y el historial de interacciones-
+ implementado por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Tamine-lechani2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Construcción esta etapa se ocupa de la instanciación del perfil en una sesión
+ y de cómo se obtendrá la información que servirá para actualizarlo.
+ En prácticamente todas los sistemas que utilizan modelos de perfil, estos
+ datos se obtienen de la retroalimentación del usuario (en la mayoría de
+ los casos, implícita).
+ Esta retroalimentación se puede tratar mediante el algoritmo de Rocchio
+ o usarse de entrada para un algoritmo de clasificación, con el fin de mejorar
+ los resultados en la sesión actual 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HinrichSchutze2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Evolución esta etapa es la que utiliza la información obtenida de sesiones
+ de uso para adaptar el perfil a los intereses cambiantes del usuario; y
+ es esta misma etapa la más íntimamente ligada a la representación elegida.
+ En los enfoques semánticos, los conceptos se pueden ponderar mediante 
+\emph on
+puntajes de preferencia
+\emph default
+, actualizando éstos después de cada sesión, como en el trabajo de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sieg2007"
+
+\end_inset
+
+ o con el uso de ponderaciones que 
+\begin_inset Quotes eld
+\end_inset
+
+envejecen
+\begin_inset Quotes erd
+\end_inset
+
+, como lo proponen 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Daoud2008"
+
+\end_inset
+
+.
+ En el caso de representaciones vectoriales, se puede utilizar un enfoque
+ estadístico y actualizar las probabilidades de relevancia de los documentos
+ en relación a los términos y los intereses que éstos representan, como
+ en el enfoque orientado a diagramas de influencia de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Tamine-Lechani2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+La utilización del perfil
+\end_layout
+
+\begin_layout Standard
+Se pueden determinar tres enfoques en la recuperación y presentación de
+ la información utilizando los perfiles de usuario.
+ El primero, requiere dos etapas: primero, se obtienen los resultados de
+ un agente externo de recuperación de información con la consulta que el
+ usuario mismo ha construido y luego, los documentos se filtran (o reordenan).
+ Este enfoque en dos pasos ha sido implementado por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sieg2007"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Daoud2008"
+
+\end_inset
+
+.
+ La ventaja de este modelo radica en poder valerse de servicios externos
+ o implementaciones de algoritmos de recuperación de información, concentrándose
+ más bien en la etapa de filtrado; la desventaja estriba en el costo computacion
+al: para contextos complejos, la determinación de la consulta podría volverse
+ computacionalmente costosa y ésto, aunado al tiempo que toma la búsqueda
+ en sí, podría tornarse indeseable.
+ Para resolver este obstáculo, se puede optar por sólo considerar una cantidad
+ fija de los resultados más relevantes devueltos y de éstos sólo tomar en
+ cuenta los resúmenes que el agente devuelve, y no todo el documento.
+\end_layout
+
+\begin_layout Standard
+Por otro lado, se puede hacer la recuperación de información en una sola
+ etapa: reescribir la consulta del usuario, como en el sistema propuesto
+ por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Koutrika2005"
+
+\end_inset
+
+ o agregar el perfil al espacio documental, construyendo así el sistema
+ de RI con la personalización incluida desde un principio, como propone
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Semeraro2005a"
+
+\end_inset
+
+ al representar los documentos como clases sinonímicas y no como términos
+ individuales, o se puede seguir lo establecido por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Tamine-Lechani2007"
+
+\end_inset
+
+ e incluir las probabilidades entre términos, preferencias y documentos
+ en la evaluación de relevancia.
+ Este enfoque es en realidad, equivalente a un sistema de recomendación
+ orientado al contenido.
+ Con este enfoque se gana en costo computacional, pero se requiere la implementa
+ción completa del componente de búsqueda e indización.
+\end_layout
+
+\begin_layout Standard
+Por último, se puede sencillamente utilizar el perfil para encontrar usuarios
+ similares al presente y evaluar los resultados en base a los perfiles de
+ éstos, como se encuentra documentado en el trabajo de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Ahn2005"
+
+\end_inset
+
+.
+ Como es evidente, este enfoque equivale a los sistemas de recomendación
+ colaborativos.
 \end_layout
 
 \begin_layout Chapter
