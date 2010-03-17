@@ -82,37 +82,36 @@ Introducción General
 \begin_layout Standard
 El presente proyecto explora el concepto de un sistema de
 \emph on
- recomendación
+ recomendación oportuna
 \emph default
- de documentos, es decir, un sistema que permita la recuperación de documentos
- relevantes a una necesidad de información 
+ de documentos: un sistema que permita la recuperación de documentos relevantes
+ a una necesidad de información 
 \emph on
 implícita
 \emph default
-; a diferencia de los sistemas tradicionales de recuperación de información,
- como los motores de búsqueda, que responden -en propósito y diseño- a una
- necesidad de información explícitamente proveída por el usuario.
- Pero, ¿qué se puede entender como necesidad de información implícita? Sencillam
-ente, a aquella que se infiere del contexto en el cual el usuario está actuando.
- Se puede pensar que el sistema estaría recomendando documentos en base
- a los 
-\emph on
-conceptos
-\emph default
- que se encuentran en el contexto.
- Por ejemplo, y este será el caso en el cual se aplicará concretamente el
- software desarrollado, cuando un docente está planificando una sesión (lección
- magistral, proyecto, exposiciones, etc.) puede tener una descripción de
- la misma y documentos que piense usar de referencia, la necesidad latente
- de información radica en que quizá el docente se podría beneficiar de documento
-s que se relacionen con la sesión, tanto para referencia propia como para
- ofrecer como lecturas o recursos suplementarios a los alumnos; y, sin embargo,
+ en una tarea que el usuario está llevando a cabo.
+ Se distingue de un sistema tradicional de recuperación de información,
+ como los motores de búsqueda, en que éstos responden -en propósito y diseño-
+ a una necesidad de información explícitamente proveída por el usuario.
+ Y se puede diferenciar de los sistemas de recomendación convencionales
+ en que éstos se basan en artículos que ya conocen, mientras que la tarea
+ del usuario, en el caso del sistema propuesto, es desconocida para el sistema.
+ 
+\end_layout
+
+\begin_layout Standard
+Cuando un docente está planificando una sesión (lección magistral, proyecto,
+ exposición, etc.) la necesidad latente de información se deriva de que quizá
+ el docente se podría beneficiar de documentos que se relacionen con la
+ sesión y con el curso en sí, tanto para referencia propia como para ofrecer
+ como lecturas o recursos suplementarios a los alumnos; y, sin embargo,
  muchos docentes abdican de ampliar su cátedra de esta manera por varias
  razones, muchas de las cuales se pueden resumir en desánimo ante el prospecto
- de buscar tales recursos o desconocimiento de la existencia de los mismo.
+ de buscar tales recursos o el desconocimiento de la existencia de los mismos.
  Pero ¿qué tal si, en el uso de un sistema en el que administran sus clases,
- estos documentos útiles les fueran recomendados sin necesidad de una búsqueda
- activa?
+ estos documentos útiles les fueran facilitados a los docentes sin necesidad
+ de una búsqueda activa? Es ésta la necesidad que el presente proyecto busca
+ suplir.
 \end_layout
 
 \begin_layout Section
@@ -121,15 +120,15 @@ Propósito
 
 \begin_layout Standard
 Desarrollar un servicio web que recomiende al usuario documentos relevantes
- a un contexto local, en la forma de la documentación de actividades o sesiones
- de un curso administrado en línea cuya expresión sea una descripción del
- mismo y, opcionalmente, otros documentos que el usuario proporcione.
+ a un contexto local, formado éste por la documentación de actividades o
+ sesiones de un curso administrado en línea, expresando esta documentación
+ mediante una descripción de la sesión actual y, opcionalmente, documentos
+ que el usuario proporcione.
  La recomendación consistirá en la búsqueda de documentos relacionados conceptua
 lmente a la tarea del usuario en un índice de documentos mantenido por el
- sistema y la consiguiente recomendación de los que se consideren útiles.
- La retroalimentación implícita del usuario, las tendencias grupales y de
- los cursos y la consiguiente contribución al conocimiento del sistema sobre
- los temas permitirá la mejora de futuras recomendaciones.
+ sistema y la consiguiente recomendación de los que se consideren útiles,
+ evaluando la utilidad a partir de un perfil del curso construido y actualizado
+ automáticamente y el contexto inmediato de la sesión actual.
 \end_layout
 
 \begin_layout Section
@@ -145,12 +144,14 @@ Elegir la naturaleza de la colección documental base para la implementación
 
 \begin_layout Enumerate
 Desarrollar una interfaz para la expresión de los contextos de usuarios,
- así como la manera en que se recabarán los perfiles de cursos o usuarios.
+ así como la elección e implementación de la manera en la que se expresarán,
+ construirán y actualizarán los perfiles de los cursos.
 \end_layout
 
 \begin_layout Enumerate
-Desarrollar un componente de indización e igualación de documentos y consultas,
- así como un componente que permita el filtrado de los resultados del primero.
+Implementar un componente de indización e igualación de documentos y consultas;
+ y desarrollar un componente que permita el filtrado de los resultados del
+ primero en base a los perfiles y contextos.
  
 \end_layout
 
@@ -159,8 +160,8 @@ Contexto
 \end_layout
 
 \begin_layout Standard
-Se puede comparar la tarea descrita a la que realiza una persona que compra
- un artículo en 
+Se puede comparar la tarea que este proyecto llevará a cabo con la que realiza
+ una persona que compra un artículo en 
 \begin_inset Flex URL
 status collapsed
 
@@ -171,10 +172,11 @@ www.amazon.com
 
 \end_inset
 
-: el usuario está interesado en el artículo que está adquiriendo, su propósito
- principal es ese, pero el sitio también le sugiere, cuando el usuario ha
- elegido un producto, otros que podrían intesarle; eso es precisamente un
- tipo común de sistema de recomendación: un componente 
+: el usuario está interesado en el artículo que está adquiriendo, después
+ de todo, ese es su propósito principal al utilizar el sistema, pero el
+ sitio también le sugiere, cuando el usuario ha elegido un producto, otros
+ que podrían intesarle; eso es precisamente un tipo común de sistema de
+ recomendación: un componente 
 \emph on
 secundario
 \emph default
@@ -186,8 +188,8 @@ secundario
 intuye
 \emph default
  qué podría ser de interés a un usuario en base al contexto en el que está
- actuando o al perfil que ya ha construido del usuario (en sitios de recomendaci
-ón de música -por ejemplo, 
+ actuando o al perfil que ya ha construido de él (en sitios de recomendación
+ de música -por ejemplo, 
 \begin_inset Flex URL
 status collapsed
 
@@ -199,8 +201,7 @@ www.last.fm
 \end_inset
 
 , - se mantiene un perfil de los usuarios para predecir qué podría interesarles
- después de un tiempo de uso); un sistema de recomendación, entonces y como
- aclara 
+ después de un tiempo de uso); un sistema así, entonces y como aclara 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Safran2005"
@@ -216,14 +217,14 @@ contextualización
 adaptación 
 \emph default
 para llevar a cabo su tarea.
- Estos sistemas son un ejemplo muy bueno de 
+ De ahí que estos sistemas se consideren un buen ejemplo de 
 \emph on
 inteligencia colectiva
 \emph default
 , construir conocimiento a partir de información brindada por los usuarios,
- porque se valen de lo que los mismos usuarios dicen - mediante algún tipo
- de retroalimentación o comunicación explícita- de los artículos en la colección
- de artefactos del sistema.
+ porque se valen de lo que los mismos usuarios opinan - mediante algún tipo
+ de retroalimentación implícita o comunicación explícita- acercan los artículos
+ en la colección de artefactos del sistema.
  En suma, un sistema de recomendación, en base al contexto o al usuario,
  determina qué artículos de la colección de artefactos que maneja podrían
  interesar a quien lo usa 
@@ -231,8 +232,8 @@ inteligencia colectiva
 dado que haya elegido algún artefacto de la colección
 \emph default
 .
- Un sistema de recomendación convencional no puede, ni debería, por definición,
- recomendar algo en relación a un artículo que no conoce.
+ Un sistema de este tipo no puede, ni debería, por definición, recomendar
+ algo en relación a un artículo que no conoce.
  
 \end_layout
 
@@ -312,18 +313,6 @@ key "Herlocker2004,Rhodes2000"
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-En este trabajo se tratará de probar qué tanto aportan los modelos de recuperaci
-ón de información semánticamente orientados a la utilidad, por sobre la
- relevancia, de los resultados.
- Esto mediante una comparación entre modelos basados en palabras claves
- y modelos orientados a conceptos.
- De igual manera, se explorará el uso de técnicas de filtrado colaborativo
- y basado en contenido para la recomendación final, partiendo de la premisa
- de que documentos útiles pueden haber sido utilizados en cursos relacionados.
  
 \end_layout
 
@@ -552,28 +541,15 @@ key "Gipp2009"
 Los sistemas anteriores tienen en común el uso de servicios de terceros
  para la búsqueda de información, así como basar las consultas en palabras
  clave extraídas del contexto local.
- Se ha explorado poco la posibilidad de utilizar la recuperación de información
- orientada a conceptos: en lugar de utilizar palabras clave -el contexto
- léxico, basarse en la semántica subyacente para obtener artefactos que
- se relacionen sin tener necesariamente una relación léxica.
-\end_layout
-
-\begin_layout Standard
-Se pueden considerar sistemas de recomendación basados en contenido.
- Sin embargo, puesto que se han orientado al uso de un único usuario para
- tareas individuales, ninguno hace uso de la 
-\emph on
-inteligencia colectiva
-\emph default
-: las preferencias sociales y las tendencias a utilizar ciertos recursos,
- la cual sería útil en un contexto educativo.
-\end_layout
-
-\begin_layout Standard
-A la luz de estos nuevos conceptos, se puede considerar el presente proyecto
- como un sistema de recuperación idónea de la información que utiliza un
- filtrado híbrido colaborativo y basado en contenido para hacer sugerencias
- de recursos útiles a una sesión de clase en preparación.
+ Sin embargo, el filtrado de los resultados en este tipo de sistemas es
+ poco o nulo: el conjunto de documentos que se presentan al usuario está
+ ordenado de acuerdo a la relevancia que tienen éstos en relación a una
+ consulta que el sistema ha construido.
+ En este proyecto se pretende echar mano del conocimiento que se pueda obtener
+ de cursos y usuarios para implementar un filtrado que reporte resultados
+ más útiles, partiendo de la premisa de que un curso se puede modelar en
+ un perfil y que éste puede ser útil para saber qué documentos mostrar en
+ sesiones individuales de documentación.
 \end_layout
 
 \begin_layout Chapter
@@ -2547,13 +2523,23 @@ Lo cual, llevado al espacio simplificado, implica que los documentos más
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
 
 \begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -2589,11 +2575,16 @@ Representación en vectores
 
 \end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
 \begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -2627,6 +2618,19 @@ Representación en un espacio plano
 \end_inset
 
 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -3312,12 +3316,12 @@ reference "tab:IR-comparison"
 \begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="10" columns="4">
-<features>
+<features islongtable="true">
 <column alignment="center" valignment="top" width="10page%">
 <column alignment="center" valignment="top" width="10page%">
 <column alignment="center" valignment="top" width="20page%">
@@ -3336,7 +3340,7 @@ Modelo
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tipo/orientación
+Orientación
 \end_layout
 
 \end_inset
@@ -3487,10 +3491,6 @@ Representación óptima de los documentos.
 
 \begin_layout Plain Layout
 Basado en coincidencias léxicas.
-\end_layout
-
-\begin_layout Plain Layout
-Puede llegar a ser computacionalmente costoso.
 \end_layout
 
 \end_inset
@@ -3661,18 +3661,18 @@ La búsqueda se hace en tiempo constante.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Depende demasiado de la función de hash seleccionada.
+Depende de la función de hash seleccionada.
 \end_layout
 
 \begin_layout Plain Layout
-Sin posibilidad de consideraciones lingüísticas o de conocimiento, como
- el VSM.
+Sin posibilidad de consideraciones lingüísticas.
+ 
 \end_layout
 
 \end_inset
 </cell>
 </row>
-<row>
+<row newpage="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -3705,12 +3705,7 @@ Puede integrar consideraciones expertas para las probabilidades.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Implica procesamiento matemático intensivo.
-\end_layout
-
-\begin_layout Plain Layout
-Asume un modelo de estricta coincidencia léxica y sobre-simplificación lingüísti
-ca.
+Asume estricta coincidencia léxica y sobre-simplificación lingüística.
 \end_layout
 
 \end_inset
@@ -3730,7 +3725,7 @@ Lingüístico
 \begin_inset Text
 
 \begin_layout Plain Layout
-Contextualización semántica.
+Contexto semántico.
 \end_layout
 
 \end_inset
@@ -3749,11 +3744,11 @@ Reduce el problema de la recuperación de información a comunicación, el
 \begin_inset Text
 
 \begin_layout Plain Layout
-Sólo aproximaciones estadísticas o modelos híbridos son actualmente factibles.
+Modelos puros no son actualmente factibles
 \end_layout
 
 \begin_layout Plain Layout
-Dependientes del lenguaje.
+Dependiente del lenguaje.
 \end_layout
 
 \end_inset
@@ -6559,14 +6554,14 @@ status open
 <features>
 <column alignment="center" valignment="top" width="10text%">
 <column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="10page%">
 <column alignment="center" valignment="top" width="0">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Entradas/Salidas
+E/S
 \end_layout
 
 \end_inset
@@ -6663,7 +6658,7 @@ Indización
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="1">
 <features>
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="10page%">
 <row>
 <cell alignment="center" valignment="top" usebox="none">
 \begin_inset Text
@@ -6795,6 +6790,15 @@ Aplicaciones de un sistema híbrido de recomendación, adaptada de
 LatexCommand citet
 key "Baudisch1999"
 
+\end_inset
+
+.
+ E/S equivale a 
+\begin_inset Quotes eld
+\end_inset
+
+Entradas/Salidas
+\begin_inset Quotes erd
 \end_inset
 
 
