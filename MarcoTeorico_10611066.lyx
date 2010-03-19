@@ -56,10 +56,53 @@ Sistema de recomendación de documentos aplicado a un contexto académico
 \end_layout
 
 \begin_layout Author
-Luis Felipe Borjas Reyes 10611066
+Luis Felipe Borjas Reyes
+\begin_inset Newline newline
+\end_inset
+
+ 10611066
 \end_layout
 
-\begin_layout Standard
+\begin_layout Publishers
+\begin_inset Graphics
+	filename images/logo.png
+	scale 50
+	clip
+
+\end_inset
+
+
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{
+\backslash
+baselineskip}
+\end_layout
+
+\end_inset
+
+
+\lang spanish
+
+\begin_inset Newline newline
+\end_inset
+
+Universidad Tecnológica Centroamericana
+\begin_inset Newline newline
+\end_inset
+
+(UNITEC)
+\begin_inset Newline newline
+\end_inset
+
+Escuela de Ingenierías
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
@@ -322,7 +365,7 @@ Proyectos relacionados
 
 \begin_layout Standard
 Se pueden encontrar algunos sistemas surgidos de la investigación en el
- campo de sistemas recomendadores orientados a la recuperación oportuna
+ campo de sistemas de recomendación orientados a la recuperación oportuna
  de información:
 \end_layout
 
@@ -403,7 +446,7 @@ key "Rhodes2000a"
 \begin_layout Enumerate
 Jimminy: desarrollado para una computadora que se porta en el hombro con
  una terminal en un casco, recaba datos del contexto físico y social de
- la parsona mediante sensores (GPS, infrarrojos, etc) y permite tomar notas
+ la persona mediante sensores (GPS, infrarrojos, etc) y permite tomar notas
  mediante un teclado que se porta en el brazo.
  A partir del contexto local, sugiere notas que podrían ser de utilidad.
  También introducido por 
@@ -890,7 +933,7 @@ la indización
  se almacenarán en la colección y servirán de entrada al componente de igualació
 n.
  Cada nuevo documento que es agregado al almacenamiento del sistema precisa
- ser indizado; y esta actividad puede ser tan compleja como se quiera: puede
+ ser indexado; y esta actividad puede ser tan compleja como se quiera: puede
  ir desde la simple actualización del índice inverso con el documento, la
  representación como vector de palabras, o la clasificación del mismo en
  una taxonomía.
@@ -2523,7 +2566,7 @@ Lo cual, llevado al espacio simplificado, implica que los documentos más
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -3213,7 +3256,7 @@ Sin embargo, poder representar de manera satisfactoria y utilizable la colecció
 colocaciones
 \emph default
  (frases que son más relevantes como tales que sus componentes individuales)
- a la hora de indizar, desambiguación de palabras según conocimiento previo
+ a la hora de indexar, desambiguación de palabras según conocimiento previo
  del dominio, para eliminar la polisemia, entre otras.
  Sin embargo, el estudio de 
 \begin_inset CommandInset citation
@@ -4441,7 +4484,7 @@ name "sec:rec_sys"
 \end_layout
 
 \begin_layout Subsection
-Introducción
+Introducción 
 \end_layout
 
 \begin_layout Standard
@@ -4450,14 +4493,10 @@ Se introducirá el concepto general de sistemas de recomendación, las técnicas
  
 \end_layout
 
-\begin_layout Subsection
-Definiciones
-\end_layout
-
 \begin_layout Standard
-Como se dijo en el capítulo anterior, un sistema de recomendación se puede
- ver como un caso especial de un sistema de recuperación de información
- de alta precisión; el quid es, sin embargo, la 
+Un sistema de recomendación se puede ver como un caso especial de un sistema
+ de recuperación de información de alta precisión; el quid es, sin embargo,
+ la 
 \emph on
 recomendación
 \emph default
@@ -4473,8 +4512,8 @@ En este punto es idónea una analogía con una situación cotidiana -la cual,
  y elige como opciones unas cuantas que tienen muy buena publicidad en la
  televisión; indeciso, llama a un amigo que usted sabe que tiene un gusto
  similar al suyo y le pide que le recomiende una película, su amigo, que
- le conoce, trata de darle un par que se adecúe más a sus preferencias;
- aún indeciso, cuando está en la taquilla decide preguntarle a la persona
+ le conoce, trata de darle un par de opciones que se adecuen más a sus preferenc
+ias; aún indeciso, cuando está en la taquilla decide preguntarle a la persona
  que vende los boletos por una y esta persona le recomienda la que más se
  ha vendido en esa tanda, la cual no está entre las que su amigo le recomendó.
  Al final, usted sopesa las recomendaciones y decide ver una de las que
@@ -4482,36 +4521,26 @@ En este punto es idónea una analogía con una situación cotidiana -la cual,
 \end_layout
 
 \begin_layout Standard
-El funcionamiento de un sistema de recomendación es similar: de una cantidad
- considerable de opciones que responden a su necesidad original de información,
- qué película ver, el sistema 
+Del ejemplo podemos establecer que, de una cantidad considerable de opciones
+ que responden a su necesidad original de información, qué película ver,
+ el sistema 
 \emph on
 filtra
 \emph default
  aquellas que, de alguna manera, considere pueden interesarle más.
  El amigo y el vendedor de taquilla se pueden ver como dos enfoques distintos
- de recomendación: el primero filtra la información en base a un 
-\emph on
-perfil
-\emph default
- que ha construido de usted y sus preferencias, además de los gustos similares;
- esto tiene su contraparte en sistemas de recomendación en la técnica conocida
- como 
+ de recomendación: el primero filtra la información en base a lo que ya
+ sabe de usted y sus preferencias, además de los gustos que ambos tienen
+ en común, esto tiene su contraparte en sistemas de recomendación en la
+ técnica conocida como 
 \emph on
 filtrado colaborativo
 \emph default
-, en el cual, se vale de la inteligencia colectiva para construir recomendacione
-s 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Segaran2007"
-
-\end_inset
-
-, el segundo también se vale del saber colectivo, pero de una manera más
- general, a saber, en la 
+, donde se recomiendan objetos preferidos por usuarios similares entre sí;
+ el segundo caso también se vale del saber colectivo, pero de una manera
+ más general, a saber, en la 
 \emph on
-popularidad
+popularidad general
 \emph default
  de un artefacto.
 \end_layout
@@ -4519,7 +4548,7 @@ popularidad
 \begin_layout Standard
 En suma, los sistemas de recomendación se pueden ver como 
 \emph on
-sistemas de filtración de información
+sistemas de filtrado de información
 \emph default
  en base a cierto perfil, ya sea construido con las preferencias del usuario
  y el contexto en el que el usuario se desenvuelve o infiriéndolo del comportami
@@ -4552,10 +4581,10 @@ name "sub:Filtrado-contenido"
 
 \begin_layout Standard
 Los sistemas de recomendación basados en contenido se centran en el artefacto
- que el usuario provea en el momento: ya sea un documento propio en el que
- está trabajando o en un artículo de la colección que haya elegido; además,
- un sistema de este tipo puede haber construido con el tiempo un perfil
- del usuario y los artículos por los cuales se ha decidido antes.
+ en el cual el usuario muestre interés en el momento: ya sea un documento
+ propio en el que está trabajando o en un artículo de una colección.
+ Un sistema de este tipo puede construir con el tiempo un perfil del usuario
+ en base los artículos por los cuales se ha decidido antes.
  O, como se define en 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -4613,7 +4642,7 @@ reference "fig:E-R-content-RC"
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -4670,7 +4699,7 @@ reference "tab:contentRc_app"
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -4858,14 +4887,13 @@ Representación de los artículos:
 \begin_layout Standard
 Al igual que un sistema de RI, se debe elegir la representación de los artefacto
 s que sea más idónea para la labor de recomendación; puesto que los usuarios
- evalúan los artículos, lo más natural sería contar con un resumen de los
- 
+ evalúan los artículos, lo más natural sería elegir los
 \emph on
-atributos
+ atributos
 \emph default
- más conspicuos de los elementos, haciendo así sencillo el almacenamiento
- porque se pueden ver los atributos como las columnas y cada componente
- como una fila.
+ más conspicuos que todos los elementos tienen en común, haciendo así sencillo
+ el almacenamiento porque se pueden ver los atributos como las columnas
+ y cada componente como filas en una tabla.
  Pero para tener verdadera utilidad para el sistema, los valores de estos
  atributos deberían estar en un 
 \emph on
@@ -4893,27 +4921,27 @@ película que da ganas de que no termine nunca
 \begin_inset Quotes erd
 \end_inset
 
-.
- Como se ve en el ejemplo anterior, tener demasiados atributos de texto
- libre vuelve inútil al sistema, o innecesariamente complicado, pues todas
- las ambigüedades inherentes al lenguaje natural se presentan.
+, porque tener demasiados atributos de texto libre vuelve inútil al sistema,
+ o innecesariamente complicado, pues todas las ambigüedades inherentes al
+ lenguaje natural se presentan y los análisis de similitud, fundamentales
+ para el sistema, se vuelven difíciles de realizar.
  Una solución al problema de campos de texto libre es el uso de técnicas
  de asignación de relevancia y conversión de los términos a otras representacion
-es más manejables por un sistema computacional -por ejemplo, el uso del
- famoso modelo de espacio vectorial 
+es más manejables por un sistema computacional -como usar, por ejemplo,
+ el modelo de espacio vectorial propuesto por 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Salton1975a"
 
 \end_inset
 
-.
+ y representar los campos de texto libre como vectores de términos.
 \end_layout
 
 \begin_layout Standard
 Definidos los atributos a considerar y los dominios de éstos, resta el no
- menos importante problema de obtenerlos.
- Esta tarea es sencilla para cuando los elementos tienen una naturaleza
+ menos importante problema de obtenerlos de los artefactos.
+ Esta tarea es sencilla para cuando los dichos artefactos tienen una naturaleza
  estructurada (por ejemplo, recursos bibliográficos en formato bibtex
 \begin_inset Foot
 status collapsed
@@ -4937,10 +4965,11 @@ www.bibtex.org
  ) o documentos en xml.
  Pero la mayor parte de documentos de texto tienen una estructura arbitraria
  o carecen de cualquier tipo de estructura; como se mencionó antes, técnicas
- de la recuperación de información se pueden aplicar a este tipo de entradas
- para indizarlas; aunque se puede también valer de técnicas de extracción
- de información para tratar de llenar los atributos -por ejemplo, cierto
- nivel de extracción de información se utilizó en el sistema de 
+ de la indización en la recuperación de información se pueden aplicar a
+ este tipo de entradas para indexarlas; aunque se puede también valer de
+ técnicas de extracción de información para tratar de llenar una tabla de
+ atributos predefinida -por ejemplo, cierto nivel de extracción de información
+ se utilizó en el sistema de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Kitamura2002"
@@ -4972,12 +5001,12 @@ conocer
 preferencias 
 \emph default
 del usuario y el historial de las interacciones de con el sistema.
- Como se puede apreciar, la construcción del perfil se puede tratar desde
- el punto de vista de la clasificación: partiendo del historial de interacciones
- con el sistema, llevando un control de qué artículos le interesaron al
- usuario ya sea mediante retroalimentación explícita (asignar un juicio
- cualitativo de valor, por ejemplo) o implícita (comprar o utilizar un artefacto
-) se etiquetan los elementos -por ejemplo, como 
+ La construcción del perfil se puede tratar desde el punto de vista de la
+ clasificación: partiendo del historial de interacciones con el sistema,
+ llevar un control de qué artículos le interesaron al usuario ya sea mediante
+ retroalimentación explícita (asignar un juicio cualitativo de valor, por
+ ejemplo) o implícita (comprar o utilizar un artefacto); se etiquetan los
+ elementos -por ejemplo, como 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4993,13 +5022,14 @@ no interesantes
 \begin_inset Quotes erd
 \end_inset
 
-- y se usan estos datos para entrenar al algoritmo.
- De esta manera, se construye una hipótesis de los gustos de éste para predecir
- cuáles otros podrían interesarle.
+- y se usan estos datos para entrenar a un algoritmo clasificador.
+ De esta manera, se construye una hipótesis de los gustos del usuario para
+ predecir cuáles otros objetos podrían ser de interés.
  Métodos como Naïve-Bayes, exitosos en otras tareas de clasificación, se
- podrían aplicar en este tipo de sistemas de recomendación 
+ podrían aplicar en este tipo de sistemas de recomendación, como proponen
+ 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Mooney1999"
 
 \end_inset
@@ -5015,16 +5045,16 @@ key "Cohen1999"
 , árboles de decisión y k-vecinos más cercanos, clasificación en base al
  algoritmo de Rocchio para el modelo de espacio vectorial, el uso de clasificado
 res lineales -Widrow-Hoff, gradiente exponencial o máquinas de vectores
- de soporte- 
+ de soporte- todos presentados someramente por
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Pazzani2007"
 
 \end_inset
 
 .
- Ahora bien, también se puede pedir al usuario que llene formularios sobre
- sus preferencias (por ejemplo, 
+ Ahora bien, en vez de aprender el perfil, se puede pedir al usuario que
+ llene formularios sobre sus preferencias (por ejemplo, 
 \begin_inset Flex URL
 status collapsed
 
@@ -5037,11 +5067,15 @@ www.mendeley.com
 
 , pide al usuario recién registrado que elija su área de investigación y
  temas de interés para recomendarle lecturas), lo cual, en la práctica,
- se hace poco o pobremente; o bien, el sistema puede tener un conjunto de
- reglas, las cuales, aunadas al historial del usuario, se usan para inferir
- las preferencias (por ejemplo, un sitio de venta de computadoras puede
- recomendar productos de cierta marca a usuarios que han comprado varios
- artículos de ella).
+ se hace poco o pobremente.
+\end_layout
+
+\begin_layout Standard
+O bien, el sistema puede tener un conjunto de reglas específicas al dominio
+ en el que funciona, las cuales, aunadas al historial del usuario, se usan
+ para inferir las preferencias (por ejemplo, un sitio de venta de computadoras
+ puede recomendar productos de cierta marca a usuarios que han comprado
+ varios artículos de ella).
 \end_layout
 
 \begin_layout Subparagraph
@@ -5053,14 +5087,14 @@ Dado el perfil del usuario y la representación de los elementos, se puede
  ver a este componente como uno que lleva a cabo una tarea de recuperación
  de información.
  Técnicas avanzadas de recuperación de información en un sistema de recomendació
-n orientado al contenido se pueden ver en 
+n orientado al contenido se pueden ver en el trabajo 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Chen2008"
 
 \end_inset
 
-; técnicas de clasificación para recomendación, en 
+; técnicas de clasificación para recomendación, utilizadas por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Basu1998"
@@ -5069,7 +5103,7 @@ key "Basu1998"
 
  y el uso del procesamiento del lenguaje natural para obtener recomendaciones
  donde las preferencias del usuario son escasas, mas el contenido es rico
- en detalles útiles, en 
+ en detalles útiles, en el sistema de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Fleischman2003"
@@ -5090,9 +5124,10 @@ Para ciertos tipos de artefactos, este tipo de filtrado puede mostrarse
 es en tópicos de interés para el usuario.
  Sin embargo, para datos escasos, poco estructurados o de valoraciones más
  subjetivas, como música o sitios web, estos sistemas se quedan atrás, al
- necesitar suficiente información como para categorizar y requerir del usuario
- el uso del sistema por un tiempo considerable o llenar un perfil detallado
- para refinar la recomendación.
+ necesitar suficiente información para construir un clasificador preciso,
+ requiriendo del usuario el uso del sistema por un tiempo considerable o
+ llenar explícitamente un perfil detallado, cosa no factible en ciertos
+ sistemas donde el componente de recomendación es secundario.
 \end_layout
 
 \begin_layout Subsection
@@ -5142,7 +5177,7 @@ Busca en un grupo grande de personas y encuentra un conjunto más pequeño
 \begin_layout Standard
 O, más sencillamente, 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Fox2010"
 
 \end_inset
@@ -5155,7 +5190,7 @@ key "Fox2010"
 \end_inset
 
 Es un método basado en el ambiente social, usado para proponer artículos
- que usuarios que piensan de manera similar favorecen.
+ que usuarios que piensan de manera similar prefieren.
 \begin_inset Quotes erd
 \end_inset
 
@@ -5167,16 +5202,16 @@ En consecuencia, los sistemas que utilizan filtrado colaborativo trascienden
  las limitaciones de los basados en contenido: se valen de la inteligencia
  colectiva para hacer recomendaciones y no tanto en un extenso perfil del
  usuario, puesto que pueden inferir en menos tiempo de uso del sistema,
- o con un perfil más reducido, qué otros usuarios opinan de manera similar
+ o con un perfil más reducido, cuáles otros usuarios opinan de manera similar
  al actual; las recomendaciones dependen de las evaluaciones más que del
  contenido de los artefactos, por lo se puede omitir la fase de análisis
  de contenido, la cual es computacionalmente costosa, y particularmente
  difícil para artefactos con multimedia y, por último, un sistema de filtrado
  colaborativo se orienta a la comunidad, lo cual permite que los elementos
  subjetivos y complejos encontrados en cualquier sociedad humana puedan
- tener cabida en el sistema
+ tener cabida en el sistema, como asegura
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Mortensen2007"
 
 \end_inset
@@ -5187,7 +5222,7 @@ key "Mortensen2007"
 
 \begin_layout Standard
 Evidentemente, debe haber alguna manera de expresar los gustos de las personas
- cuantitativamente, lo cual se hace usualmente mediante valores numéricos,
+ cuantitativamente, lo cual se hace usualmente mediante valores numéricos;
  para sitios como 
 \begin_inset Flex URL
 status collapsed
@@ -5889,14 +5924,14 @@ Filtrado colaborativo basado en memoria
 
 \begin_layout Standard
 El filtrado basado en memoria trata de simular la situación cotidiana de
- buscar una opinión: las personas se vuelven a aquellos otros que sepan
+ buscar una opinión: las personas se vuelven a aquellos otros que saben
  que tienen gustos similares a los propios, pues encuentran de más valor
- en esas opiniones.
+ esas opiniones.
  Para realizarlo computacionalmente, una vez existente la matriz de usuarios-art
 ículos, se debe buscar en toda la base de datos todas aquellas filas que
  sean similares a la del usuario -es decir, se buscan aquellos perfiles
  que sean más parecidos al del usuario- y luego, en función de esto, se
- puede predecir la preferencia respecto a los elementos a recomendar -lo
+ puede predecir la preferencia respecto a los elementos a recomendar; lo
  cual tiene también su ejemplo en la vida cotidiana: si sabemos que a los
  amigos cercanos de una persona les gusta cierto género musical, es probable
  que a esta persona también.
@@ -5915,7 +5950,7 @@ cálculo del vecino (o k-vecinos) más cercano(s)
 Las diferencias en implementaciones radican en la función que se use para
  calcular la similitud entre los distintos perfiles.
  A continuación se definen algunas de las funciones más comunes para calcular
- qué tan similares son dos vectores de perfiles:
+ qué tan similares son dos vectores de usuario (las filas en la matriz):
 \end_layout
 
 \begin_layout Paragraph
@@ -5944,7 +5979,7 @@ d=\sqrt{(x_{2}-x_{1})^{2}-(y_{2}-y_{1})^{2}}\end{equation}
 Sin embargo, la fórmula, tal como está, lo que hace es dar valores inversamente
  proporcionales a la similitud (esto es evidente ya que entre más similares
  son dos personas, más corta es la distancia).
- Lo que se espera, claro, es una función que de valores 
+ Lo que se espera, claro, es una función que dé valores 
 \emph on
 mayores
 \emph default
@@ -6106,8 +6141,8 @@ regresión
 
 \begin_layout Standard
 En el método de suma ponderada, se suman los valores que los usuarios similares
- han dado al elemento actual, ponderándolos por la similitud que exista
- entre el usuario actual y los demás.
+ han dado al elemento actual, ponderándolos, usualmente, con una multiplicación,
+ con la similitud que exista entre el usuario actual y los demás.
  
 \end_layout
 
@@ -6206,7 +6241,6 @@ name "sub:Limitaciones"
 La orientación a la comunidad es un arma de doble filo: si bien la mayor
  parte de las recomendaciones son exactas, el sistema se basa en datos que
  son intrínsecamente inexactos: las opiniones de personas.
- [arranque en frío...]
 \end_layout
 
 \begin_layout Standard
@@ -6331,14 +6365,13 @@ Pero, a diferencia de los otros, estos sistemas requieren una interacción
  más valor a un atributo o ignorar otro, para poder así construir un modelo
  de conocimiento a medida que se navega entre las sugerencias, convirtiéndose
  también en agentes de navegación asistida.
- La intromisión, sin embargo, está orientada a recabar datos cada vez más
- precisos del usuario a la vez que ofrece mejores opciones a éste, por lo
- que se compensa la frecuente intrusión con el aporte de cada vez mejores
- sugerencias.
+ Como la intromisión está orientada a recabar datos cada vez más precisos
+ del usuario a la vez que ofrece mejores opciones a éste, se compensa con
+ el aporte de cada vez mejores sugerencias.
 \end_layout
 
 \begin_layout Standard
-La desventaja de estos sistemas es que requieren del uso de técnicas avanzadas
+Otra desventaja de estos sistemas es que requieren del uso de técnicas avanzadas
  de ingeniería del conocimiento, convirtiéndolos en una opción arquitecturalment
 e costosa, además de exigir un uso exclusivo, lo cual es indeseable para
  implementaciones que requieran de poca intrusión en la actividad principal
@@ -6398,9 +6431,13 @@ Agregar características colaborativas al enfoque orientado a contenido:
 \begin_layout Enumerate
 Unificar en un solo sistema: esto incluye las dos técnicas anteriores en
  una implementación diseñada desde un inicio para este efecto, un ejemplo
- de un sistema unificado se puede encontrar en 
+ de un sistema unificado se puede encontrar en el sistema 
 \emph on
 Fab 
+\emph default
+de
+\emph on
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Balabanovic1997"
@@ -6413,21 +6450,22 @@ key "Balabanovic1997"
 \end_layout
 
 \begin_layout Standard
-Tradicionalmente, la unión de ambos enfoques, en concreto, de agregar caracterís
-ticas de orientación al contenido a un sistema colaborativo se hace tradicionalm
-ente agregando reglas relacionadas con el contenido del dominio a la matriz
- de usuarios-artículos -por ejemplo, si un artículo tiene mala ortografía,
- la regla puede decidir darle una puntuación desfavorable; aunque esto resuelve
- el problema de la dispersión y el arranque en frío -que artículos nuevos
- no son evaluados, ni recomendados, por carecer de evaluación- al hacer
- que las reglas sean los primeros evaluadores de los elementos; 
+Agregar características de orientación al contenido a un sistema colaborativo
+ se hace tradicionalmente agregando reglas relacionadas con el contenido
+ del dominio a la matriz de usuarios-artículos -por ejemplo, si un artículo
+ tiene mala ortografía, la regla puede decidir darle una puntuación desfavorable
+; aunque esto resuelve el problema de la dispersión y el arranque en frío
+ -que artículos nuevos no son evaluados, ni recomendados, por carecer de
+ evaluación- al hacer que las reglas sean los primeros evaluadores de los
+ elementos.
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Baudisch1999"
 
 \end_inset
 
-, ofrece una alternativa: en vez de 
+, sin embargo, ofrece una alternativa: en vez de 
 \emph on
 combinar 
 \emph default
@@ -6435,8 +6473,7 @@ las técnicas, propone
 \emph on
 unirlas
 \emph default
- -en jerga de bases de datos, en vez de agregar una a la otra, propone unirlas
- en una nueva
+ , en vez de agregar una a la otra
 \begin_inset Foot
 status collapsed
 
@@ -6445,7 +6482,7 @@ status collapsed
 \emph on
 Join
 \emph default
-, el término en inglés para este concepto de b.d.
+, el término en inglés para el concepto de unión en b.d.
  relacionales quizá clarifique el sentido de la frase
 \end_layout
 
@@ -6488,8 +6525,8 @@ reference "tab:Hybrid"
 ; en ésta, al contar con todos los datos de ambos enfoques en un sistema
  unificado, se puede ir más allá del filtrado de información, pero la columna
  pertinente al tópico de la recomendación es la central: nótese que resulta
- en poder un filtrado colaborativo orientado a objetos y a usuarios a la
- vez que permite contar con recuperación de información en base a perfiles.
+ en un filtrado colaborativo orientado a objetos y a usuarios a la vez que
+ permite contar con recuperación de información en base a perfiles.
 \end_layout
 
 \begin_layout Standard
@@ -6546,7 +6583,7 @@ key "Baudisch1999"
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -7266,7 +7303,7 @@ k
 \emph default
  mejores sugerencias.
  Un sistema donde se ha introducido tal restricción se puede medir con una
- curva CROC (curva ROC de cliente), medida sugerida por 
+ curva CROC (curva ROC de cliente), como sugiere 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Schein"
@@ -7355,18 +7392,18 @@ e de información como para empezar a dar recomendaciones significativas.
 \begin_layout Standard
 Una de las mayores limitaciones de este tipo de análisis de desempeño es
  el sesgo en el conjunto de resultados a evaluar: usualmente, los usuarios
- sólo han calificado lo que ellos favorecen, y no se toman la importancia
- de dar retroalimentación explícita a aquellos artefactos que no encuentren
- útiles, y se puede mencionar también en contra de las métricas puramente
- estadísticas que ignoran la 
+ sólo han calificado lo que ellos favorecen, y no dan retroalimentación
+ explícita a aquellos artefactos que no encuentran útiles.
+ Se puede mencionar también en contra de las métricas puramente estadísticas
+ que ignoran la 
 \emph on
 utilidad
 \emph default
- de los resultados: aunque ciertos artefactos puedan significar alta precisión
+ de los resultados: aunque ciertos conjuntos puedan significar alta precisión
  o exactitud, quizá no sean -por ser muy obvios- de gran aporte al usuario
- 
+ como observan
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citealt
 key "Adomavicius2005"
 
 \end_inset
@@ -7394,7 +7431,7 @@ en línea
 Además de las limitaciones mencionadas, y aunque el análisis puramente sistemáti
 co del desempeño de un sistema de recomendación pueda ser suficiente en
  ciertos casos, el papel del usuario no puede ser dejado de lado del todo,
- por ello, en la evaluación de su sistema, 
+ por ello, en la evaluación de su sistema 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Chen2008"
@@ -7525,7 +7562,7 @@ key "Hayes"
 En primera, la evaluación se ha de llevar a cabo en una aplicación en línea
  utilizada por usuarios reales, en la cual los dos motores de recomendación
  distintos se utilizan mediante la misma interfaz de usuario, de manera
- que la satisfacción del usuario respecto al sistema sea mantenga constante
+ que la satisfacción del usuario respecto al sistema se mantenga constante
  -ya que el usuario final ignora cuál de los sistemas está utilizando- puesto
  que, en última instancia, se desea medir solamente el desempeño de las
  recomendaciones.
@@ -7651,9 +7688,9 @@ comparación: mediante la cual analiza la retroalimentación y determinar
 Téngase en cuenta que, las condiciones en una evaluación de dos métodos
  debe ser lo más justa posible: técnicas que requieran una sola interacción,
  como los sistemas colaborativos convencionales, deberían ser comparadas
- con otras que también requieran una sola interacción, así como otros enfoques,
- como ciertas implementaciones de recomendaciones basadas en el conocimiento
- -las cuales son más 
+ con otras que también requieran una sola interacción; mientras que otros
+ enfoques, como ciertas implementaciones de recomendaciones basadas en el
+ conocimiento -las cuales son más 
 \emph on
 conversacionales
 \emph default
@@ -7668,7 +7705,7 @@ conversacionales
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -7723,12 +7760,19 @@ key "Herlocker2004"
 \end_layout
 
 \begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
 Un sistema [de recomendación] es útil en la medida en que ayude a un usuario
  a llevar a cabo sus tareas.
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Por ello, se deben elegir las medidas y experimentos de evaluación acordes
+Por ello, se deben elegir las medidas y experimentos de evaluación más acordes
  al propósito del sistema.
 \end_layout
 
@@ -8976,7 +9020,7 @@ http://www.postgresql.org/
 \end_layout
 
 \begin_layout Enumerate
-El sistema funcionará en un servidor linux.
+El sistema funcionará en un servidor Linux.
 \end_layout
 
 \begin_layout Enumerate
@@ -9511,7 +9555,7 @@ Caso de Uso 2: Documenta
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -9963,7 +10007,7 @@ http://www.prototypejs.org/
 
  o mootools
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
@@ -10799,7 +10843,7 @@ HttpRequest
 
 \end_inset
 
-, que contiene meta-datos de la solicitud (como la ruta de la url que se
+, que contiene meta-datos de la solicitud (como la ruta de la URL que se
  llamó y los encabezados) y la envía de parámetro a la vista, que es una
  función.
  La vista siempre devuelve una instancia de la clase 
@@ -10917,8 +10961,7 @@ Un componente de filtrado de información.
 \end_layout
 
 \begin_layout Standard
-En este apartado se refinan las clases identificadas en el análisis y se
- adaptan a la arquitectura del sistema.
+Esta sección se ampliará cuando se discuta la implementación del sistema
 \end_layout
 
 \begin_layout Standard
