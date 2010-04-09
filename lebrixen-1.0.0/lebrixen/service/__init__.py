@@ -1,7 +1,7 @@
 import simplejson as json
 from django.http import HttpResponse
 
-def json_view()
+def json_view():
 	"""
 		Decorator for web-service views: takes the request and json-izes it, and
 		also takes any response that is not a direct HttpResponse and json-izes it
