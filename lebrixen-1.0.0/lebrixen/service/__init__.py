@@ -6,9 +6,11 @@ from django.utils.html import strip_tags
 from urllib2 import urlopen
 from django.utils.http import urlencode
 from django.conf import settings
-from xml.dom.minidom import parse
+from xml.dom.minidom import parseString
 import re
 import logging
+from django.utils.encoding import smart_unicode
+import re, htmlentitydefs
 
 #some more listed here: http://en.wikipedia.org/wiki/Term_extraction
 #and here: http://maui-indexer.blogspot.com/2009/07/useful-web-resources-related-to.html
@@ -55,13 +57,49 @@ def json_view(func):
 
 def _sanitize_text(raw_text):
     """
-        Does whatever is needed to get just text from the input
+        Does whatever is needed to get just unicode text from the input
     """
-    return strip_tags(raw_text)
+    return smart_unicode(strip_tags(raw_text.strip()))
 
-def web_extract_terms(text, service='yahoo'):
+def unescape(text):
     """
-        Given a text, extract keyword terms with the selected web_service
+
+    Removes HTML or XML character references and entities from a text string.
+    retrieved from: http://effbot.org/zone/re-sub.htm#unescape-html
+
+     @param text The HTML (or XML) source text.
+     @return The plain text, as a Unicode string, if necessary.
+    """
+    def fixup(m):
+        text = m.group(0)
+        if text[:2] == "&#":
+            # character reference
+            try:
+                if text[:3] == "&#x":
+                    return unichr(int(text[3:-1], 16))
+                else:
+                    return unichr(int(text[2:-1]))
+            except ValueError:
+                pass
+        else:
+            # named entity
+            try:
+                text = unichr(htmlentitydefs.name2codepoint[text[1:-1]])
+            except KeyError:
+                pass
+        return text # leave as is
+    return unicode(re.sub("&#?\w+;", fixup, text))
+
+def web_extract_terms(text, raw_query='',service='yahoo'):
+    """
+        Given a text, extract keyword terms with the selected web_service.
+        Args:
+            text: raw text from where to extract terms
+            query: a query which may contextualize the extraction (only used by yahoo)
+            service: which web service to use
+        Returns:
+            query: a sequence of query terms
+
     """
     service = service.lower().strip()
 
@@ -75,20 +113,22 @@ def web_extract_terms(text, service='yahoo'):
     if service == 'wordsfinder':
         query = {
             'apikey' : apikey,
-            'context': text
+            'context': text + raw_query,
         }
     elif service == 'alchemy':
         query = {
             'apikey' : apikey,
-            'text' : text,
+            'text' : text + raw_query,
             'outputMode' : 'json'
         }
     elif service == 'yahoo':
         query = {
             'appid': apikey,
             'context': text,
-            'output': 'json'
+            'output': 'json',
         }
+        if raw_query:
+            query.update({'query': raw_query})
 
     #2. Try to call the service:
     resp = None
@@ -104,51 +144,55 @@ def web_extract_terms(text, service='yahoo'):
 
     #3. Process the response:    
     if resp:
+        result = ''
         if service == 'alchemy':
             data = json.loads(resp)
             if data['status'] == 'ERROR':
                 raise WebServiceException(service, 'call returned error status')
-            return [re.sub('-[^ ] ', '', e['text']) for e in data['keywords']]
+            result = [re.sub('-[^ ] ', '', e['text']) for e in data['keywords']]
             
         elif service == 'yahoo':
             data = json.loads(resp)
-            return data['ResultSet']['Result']
+            result = data['ResultSet']['Result']
 
         elif service == 'wordsfinder':
-            parsed_response = parse(resp)
+            parsed_response = parseString(resp)
             e = parsed_response.getElementsByTagName('error')
             if e:
-                raise WebServiceException(service, 'error code %s' % e)
+                raise WebServiceException(service, 'error code %s' % e.firstChild.datad)
             else:
-                return parsed_response.getElementsByTagName('keyword')
+                result = [node.firstChild.data for node in parsed_response.getElementsByTagName('keyword')]
+
+        return [unescape(w) for w in result]
+
 
     # TODO: maybe find a way to call 'em all and have a super-set of kws?
     else:
         return ''
 
-def build_query(text, language='', use_web_service = False, web_service='yahoo'):
+def build_query(text, extra_query='', language='', use_web_service = False, web_service='yahoo'):
     """
         Given raw text and a language, build a query to submit to the search engine.
         The use of a web service is optional only for english. For other languages,
         a web service will be used regardless of the use_web_service param.
     """
     query_terms = []
+    #sanitize the text (remove html tags and convert it to unicode)
+    text = _sanitize_text(text)
+    extra_query = _sanitize_text(extra_query)
+    
     #process english language queries, use the topia.termextract utility
     if 'en' in language.lower() and not use_web_service:
         #currently, there's a bug in the topia software which initializes incorrectly if
         #another tagger is passed in the constructor
         extractor = extract.TermExtractor()
-
-        #sanitize the text (remove html tags)
-        text = _sanitize_text(text)
-
         #extract terms from the text:
         query_terms = extractor(text)
     else:
         #if not in english, use a webservice to get the terms:
-        query_terms = web_extract_terms(text, service=web_service)
+        query_terms = web_extract_terms(text, extra_query, service=web_service)
 
-    return u' '.join(query_terms)
+    return extra_query + u' '.join(query_terms) 
 
 
         

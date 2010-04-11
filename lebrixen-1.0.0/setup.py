@@ -2,4 +2,5 @@
 requires =[ 'django>=1.1.1',
 	    'celery',
 	    'topia.termextract>=1.1.0',
+	    'BeautifulSoup>=3.0.8',	
 ]
