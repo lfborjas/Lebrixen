@@ -126,11 +126,11 @@ def web_extract_terms(text, service='yahoo'):
     else:
         return ''
 
-def build_query(text, language='', use_web_service = False, web_service=''):
+def build_query(text, language='', use_web_service = False, web_service='yahoo'):
     """
-        Given raw text and a language, build a query to submit to the search engine
-
-        If no language is provided, a web service will be used to extract terms
+        Given raw text and a language, build a query to submit to the search engine.
+        The use of a web service is optional only for english. For other languages,
+        a web service will be used regardless of the use_web_service param.
     """
     query_terms = []
     #process english language queries, use the topia.termextract utility
