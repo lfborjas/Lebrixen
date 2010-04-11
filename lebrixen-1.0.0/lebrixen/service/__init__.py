@@ -8,6 +8,7 @@ from django.utils.http import urlencode
 from django.conf import settings
 from xml.dom.minidom import parse
 import re
+import logging
 
 #some more listed here: http://en.wikipedia.org/wiki/Term_extraction
 #and here: http://maui-indexer.blogspot.com/2009/07/useful-web-resources-related-to.html
@@ -92,13 +93,13 @@ def web_extract_terms(text, service='yahoo'):
     #2. Try to call the service:
     resp = None
     try:
-        if settings.DEBUG: print 'requesting %s' % WEB_SERVICES[service]+'?%s'%urlencode(query)
+        logging.debug('requesting %s' % WEB_SERVICES[service]+'?%s'%urlencode(query))
         resp_url = urlopen(WEB_SERVICES[service], urlencode(query))
         resp = resp_url.read()
-        if settings.DEBUG: print "%s returned %s" % (service, resp)
+        logging.debug( "%s returned %s" % (service, resp))
     except Exception as e:
         #TODO: retry in timeouts and stuff
-        if settings.DEBUG: print e
+        logging.debug('Error in request: %s' % e)
         pass
 
     #3. Process the response:    
