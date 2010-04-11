@@ -1,5 +1,6 @@
 #encoding=UTF-8
 import os
+import logging
 #import socket
 # Django settings for lebrixen project.
 DEBUG = True
@@ -107,6 +108,21 @@ WEB_SERVICES_KEYS = {
     'alchemy': '622775ee9f8813c72e44522f4dcdd11c8da53ee1',
     'yahoo': 'w90Ugc3V34GwIC1p4HZcO53uQJ2YNWDjjLMvpLxa34ewJYbsuhkY4.VSOrh_APM-'
 }
+
+#set up the logging facility:
+if DEBUG:
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+    )
+else:
+    logging.basicConfig(
+        level = logging.INFO,
+        format = '%(asctime)s %(levelname)s %(message)s',
+        filename = '/tmp/lebrixen.log',
+        filemode = 'w'
+    )
+
 
 try:
     from local_settings import *
