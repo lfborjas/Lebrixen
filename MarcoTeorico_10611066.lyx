@@ -10964,6 +10964,139 @@ Un componente de filtrado de información.
 Esta sección se ampliará cuando se discuta la implementación del sistema
 \end_layout
 
+\begin_layout Chapter
+Implementación
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Standard
+En este capítulo se discuten los aspectos teóricos y técnicos que cubren
+ la implementación del sistema, el capítulo se organiza en base a los objetivos
+ propuestos en la introducción general.
+\end_layout
+
+\begin_layout Section
+El componente de búsqueda
+\end_layout
+
+\begin_layout Subsection
+El sub-componente de búsqueda automática
+\end_layout
+
+\begin_layout Standard
+Aunque la búsqueda directa se permite en el sistema, un componente fundamental
+ es uno que, dado el contexto inmediato de la sesión, pueda determinar qué
+ subconjunto de términos se considerarán para construir una consulta que
+ se hará al componente de búsqueda y para agregación al perfil.
+ Siguiendo el camino marcado por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gruzd2006"
+
+\end_inset
+
+, se optó por un componente que extraiga términos clave del texto.
+ Se implementó un método que recibe el susodicho texto y el lenguaje en
+ el que está escrito, para los lenguajes que lo soporte (actualmente, inglés)
+ éste método utiliza una librería del lenguaje de programación python para
+ extraer palabras clave
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+la librería en cuestión es topia.termextract: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://pypi.python.org/pypi/topia.termextract/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, para los demás lenguajes (y opcionalmente para los que se pueden analizar
+ con la librería previamente mencionada) se utiliza, por elección de quien
+ utilice el sub-componente, uno de los siguientes servicios web: alchemy
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.alchemyapi.com/api/keyword/textc.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, yahoo term extraction
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://developer.yahoo.com/search/content/V1/termExtraction.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ o wordsfinder
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+wordsfinder.com/api_Keyword_Extractor.php
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ El sub-componente está abierto a la inclusión de más servicios web o librerías
+ del lado del servidor a utilizar.
+\end_layout
+
+\begin_layout Standard
+En la presente implementación, para construir una consulta se utiliza el
+ método de extracción de términos clave previamente mencionado para obtener
+ una lista que luego se une en una sola frase.
+ 
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
