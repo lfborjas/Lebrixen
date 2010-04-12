@@ -106,7 +106,8 @@ STATIC_DOC_ROOT = os.path.join(ROOT_PATH, 'static')
 WEB_SERVICES_KEYS = {
     'wordsfinder' : 'c34f27a46cd4464528ffacdf24e350c5',
     'alchemy': '622775ee9f8813c72e44522f4dcdd11c8da53ee1',
-    'yahoo': 'w90Ugc3V34GwIC1p4HZcO53uQJ2YNWDjjLMvpLxa34ewJYbsuhkY4.VSOrh_APM-'
+    'yahoo': 'w90Ugc3V34GwIC1p4HZcO53uQJ2YNWDjjLMvpLxa34ewJYbsuhkY4.VSOrh_APM-',
+    'opencalais': 'vnccvbw7z4bm4845qcztrtyr'
 }
 
 #set up the logging facility:

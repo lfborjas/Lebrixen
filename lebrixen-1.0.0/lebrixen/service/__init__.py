@@ -11,11 +11,13 @@ import re
 import logging
 from django.utils.encoding import smart_unicode
 import re, htmlentitydefs
+from calais import Calais
 
 #some more listed here: http://en.wikipedia.org/wiki/Term_extraction
 #and here: http://maui-indexer.blogspot.com/2009/07/useful-web-resources-related-to.html
 #and here: http://stackoverflow.com/questions/1100549/term-extraction-generatings-tags-out-of-text
 #also here: http://faganm.com/blog/2010/01/02/1009/
+#and here!: http://fivefilters.org/term-extraction/
 WEB_SERVICES = {
     #http://www.alchemyapi.com/api/keyword/textc.html
     'alchemy': 'http://access.alchemyapi.com/calls/text/TextGetRankedKeywords',
@@ -23,6 +25,10 @@ WEB_SERVICES = {
     'wordsfinder': 'http://www.wordsfinder.com/extraction/api1.php',
     #http://developer.yahoo.com/search/content/V1/termExtraction.html
     'yahoo': 'http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction',
+    #http://tagthe.net/fordevelopers
+    'tagthe': 'http://tagthe.net/api/',
+    #http://www.opencalais.com/documentation/calais-web-service-api/
+    'opencalais': 'http://api.opencalais.com/enlighten/rest/',
 }
 
 class WebServiceException(Exception):
@@ -129,6 +135,24 @@ def web_extract_terms(text, raw_query='',service='yahoo'):
         }
         if raw_query:
             query.update({'query': raw_query})
+    elif service == 'tagthe':
+        query = {
+            'text': text + raw_query,
+            'view': 'json',
+        }
+    elif service == 'opencalais':
+        #use the python interface, obtained from:
+        #http://www.opencalais.com/applications/python-calais-python-interface-opencalais-api
+        logging.debug('Using the opencalais interface with key %s' % apikey)
+        s = Calais(apikey)
+        res = s.analyze(text + raw_query)
+        logging.debug('The raw response: %s'  % res.raw_response)
+        if hasattr(res, 'topics') or hasattr(res, 'entities'):
+            retval = [t['categoryName'] for t in res.topics] if hasattr(res, 'topics') else []
+            retval += [t['name'] for t in res.entities] if hasattr(res, 'entities') else []
+            return retval
+        else:
+            raise WebServiceException(service, 'No topics or entities found')
 
     #2. Try to call the service:
     resp = None
@@ -162,6 +186,13 @@ def web_extract_terms(text, raw_query='',service='yahoo'):
                 raise WebServiceException(service, 'error code %s' % e.firstChild.datad)
             else:
                 result = [node.firstChild.data for node in parsed_response.getElementsByTagName('keyword')]
+        elif service == 'tagthe':
+            data = json.loads(resp)
+            if 'memes' in data and 'dimensions' in data['memes'][0] and 'topic' in data['memes'][0]['dimensions']:
+                result = data['memes'][0]['dimensions']['topic']
+            else:
+                raise WebServiceException(service, "The data didn't contain the topics!")
+            
 
         return [unescape(w) for w in result]
 

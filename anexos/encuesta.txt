@@ -1,0 +1,133 @@
+Encuesta: abierta el 11/Abril/2010 a las 23:27
+cerrada el 25/Abril/2010 a las 23:00
+en http://surveys.polldaddy.com/s/C1D9234CB48363C8/
+Preámbulo:
+---------
+¡Hola Mundo!
+
+Si llegaste acá es porque, o no tenés mucho que hacer, sos alguien filantrópico o es parte de tus planes que las computadoras conquisten el mundo. 
+
+INSTRUCCIONES:
+Vas a encontrar algunos fragmentos de texto, deliberadamente cortos y rebuscados; después de leerlos, escribí -separados por comas- los términos *contenidos* en el texto que considerés que lo definen (es decir, los que te parezcan clave para entenderlo). 
+Términos compuestos por una o más palabras, tipo "inteligencia artificial" y "drogas alucinógenas" son totalmente válidos.
+Ojo que en la respuesta no se valen ni sinónimos ni nada, sólo palabras que estén en el texto. 
+La encuesta tiene dos páginas después de esta: en cada una hay un conjunto de textos, cada uno con cinco fragmentos. Elegí cuál conjunto querés examinar y andate a esa página, aunque es posible también resolver tooodas las preguntas, ninguna o sólo algunas, pero para no andar eligiendo al azar o llenando todo (aunque esto sería genial, eh), te sugiero elegir uno de los dos conjuntos y concentrarte en ese.
+
+Tus respuestas ayudarán a una pequeña investigación de procesamiento de lenguaje natural, una rama de la inteligencia artifical ¡COOL, VERDAD?
+
+Divulgada en twitter/blipea y facebook con:
+--------------------------------------------
+[11/abril/2010 23:27]¡Es hora de una encuesta sexy para mi proyecto de graduación!, llenala y saldrás en mi tesis (aunque es anónima XD) http://bit.ly/dmqJdP  
+
+
+
+Método:
+Dos ramas con cinco textos cada una:
+Conjunto A: 1,3,5,7,9
+Conjunto B: 2,4,6,8,10
+
+En cada página:
+Determiná los términos clave y separalos con comas.
+Leé cada texto y anotá los términos que a tu parecer lo definan o sean claves para entenderlo. Términos compuestos como "inteligencia artificial", "lenguaje natural", etc. también son válidos.
+
+Textos
+------
+
+1.
+Origen: http://www.dmoz.org/World/Espa%C3%B1ol/Computadoras/Inteligencia_artificial/Vida_artificial/
+	http://darwin.50webs.com/Espanol/DefiVida.htm
+Título:
+	Definición de Vida Artificial
+Texto: 
+Es la implementación en sistemas computacionales de las leyes que rigen y dieron origen a los seres vivos. ¿Que se busca con esto? Si usted observa un documental o lee un libro sobre la naturaleza se sorprenderá de la enorme cantidad de especies de seres vivos (hoy se cuentan por millones), muchas con comportamientos y formas que superan nuestra imaginación. Las diversas estrategias de adaptación a los diferentes ambientes han generado seres vivos de lo mas variado.
+Una aplicación práctica de la vida artificial seria el caso cuando nos enfrentásemos a un problema complejo, ¿Cómo solucionarlo? Podríamos plantear dicho problema como un ambiente, luego usaríamos los algoritmos de vida artificial y solo seria cuestión de esperar, las soluciones a dicho problema la plantearían las diferentes especies virtuales que se han originado tratando de adaptarse a ese ambiente (problema). 
+
+
+2. 
+Origen: http://www.dmoz.org/World/Espa%C3%B1ol/Artes/Fotograf%C3%ADa/Gu%C3%ADas_y_tutoriales/
+	http://www.textoscientificos.com/fotografia/fotoquimica
+Título:
+	Fotoquímica
+Texto:
+La fotoquímica es el estudio de las transformaciones químicas provocadas o catalizadas por la emisión o absorción de luz visible o radiación ultravioleta. Una molécula en su estado fundamental (no excitada) puede absorber un quantum de energía lumínica, esto produce una transición electrónica y la molécula pasa a un estado de mayor energía o estado excitado. Una molécula excitada es más reactiva que una molécula en su estado fundamental.
+
+3. 
+Origen: http://www.relatividad.org/bhole/sagnac.html
+	http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/F%C3%ADsica/Relatividad/
+Título: El efecto Sagnac 
+
+Texto:
+Si enviamos a la vez dos rayos de luz en
+sentidos opuestos a través de una circunferencia de fibra
+óptica (puede hacerse con espejos en vez de fibra óptica, pero
+la fibra es más instructiva) desde un punto determinado de dicha
+fibra, es evidente que si dicha circunferencia gira durante el
+viaje de la luz, un rayo llegará antes que el otro al punto en
+que se emitieron ambos. Se puede detectar mediante un
+interferómetro ese desfase y calcular a partir de aquí la
+velocidad angular a la que gira el aparato.
+
+4.
+Origen: http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/Ciencias_Sociales/Ling%C3%BC%C3%ADstica/Lenguas_artificiales/
+	http://lambenor.free.fr/ardalambion/quenya.html
+
+Título: Quenya
+
+Texto:
+El quenya o alto élfico es la lengua más notable de la rama amanya (N. del T.: "de Aman") de la familia de lenguas élficas. En Aman había dos dialectos del quenya: vanyarin y noldorin. Por razones históricas, en la Tierra Media sólo se usó este último. La única otra lengua eldarin hablada en Aman, el telerin, podría considerarse también un dialecto del quenya, pero normalmente se la consideraba un idioma separado, y no se discute aquí. 
+
+5.
+Origen: http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/Ciencia_alternativa/
+	http://sites.google.com/site/apuntesdecriptozoologia/criptozoologia
+Título: ¿qué es la criptozoología?
+
+Texto:
+La criptozoología es, etimológicamente, el tratado de los animales ocultos, de los términos griegos "kryptos", oculto, "Zoon", animal, y "Logia", tratado, ciencia. Es el estudio objetivo de los animales que únicamente son conocidos por indicios considerados insuficientes por la mayoría (testimonios, fotografías, rastros o piezas anatómicas), y que por consiguiente no han sido catalogados oficialmente. Estos animales, que se denominan críptidos, son desconocidos sólamente para la ciencia oficial, puesto que en general no lo son para las poblaciones locales; de hecho, las informaciones proporcionadas por éstas, sea en forma de descripciones directas, de tradiciones o de leyendas, forman la base de muchas investigaciones criptozoológicas.
+
+6.
+Origen: http://rufasto.250free.com/juegos.html#definicion
+	http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/Ciencias_Sociales/Econom%C3%ADa/Teor%C3%ADa_de_juegos/
+
+Título: ¿qué es la teoría de juegos?
+
+Texto:
+Un Juego es un problema de competencia o interacción incierta entre dos o más agentes. La Teoría de Juegos es una fascinante aplicación que combina matemática pura y psicología para desarrollar modelos matemáticos simplificadores de problemas complejos de competencia o forma similar de interacción incierta entre dos o más agentes; a tales problemas les ponemos la etiqueta de "juegos". Resultado de la utilización de estos modelos de simplificación son los criterios de decisión que optimizan la posición de un agente en un juego, e.g., elevan la probabilidad de éxito (disminuyen el riesgo de fracaso) del agente respecto al logro de sus intereses.
+
+7.
+Origen: http://personal.redestb.es/azpiroz/
+	http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/F%C3%ADsica/Ac%C3%BAstica/
+
+Título : ¿qué es el ruido blanco?
+
+Texto:
+El ruido blanco es un ruido cuyo nivel es constante en todas las frecuencias. Si lo visualizamos con un analizador con filtros de octava, veremos que el espectro mostrado no es lineal como hemos dicho que es el ruido blanco, si no que aumenta 3 dB por octava. Esto se debe al mismo fenómeno que con el ruido rosa, al doblar la octava se dobla el ancho de banda y si se tenemos el mismo nivel sonoro en todas las frecuencias, el nivel sonoro por octava se doblara y aumentara 3 dB con respecto al anterior.
+
+8.
+Origen: http://www.zenkan.com/text/text16.html
+	http://www.dmoz.org/World/Espa%C3%B1ol/Sociedad/Religi%C3%B3n/Budismo/Zen/Ense%C3%B1anzas/
+
+Título: ¿qué es el kusen?
+
+Texto:
+Ku, la boca. Sen, la enseñanza. El kusen es la enseñanza del maestro a sus discípulos, en el dojo, durante zazen. El kusen es un lenguaje secreto, una técnica zen de la palabra, reservada a los discípulos del Zen Soto en zazen.
+Es el secreto entre maestro y discípulo que las personas del exterior no pueden comprender. El kusen es del maestro al discípulo y del discípulo al maestro
+
+9.
+Origen: http://www.psiconautica.org/
+	http://www.dmoz.org/World/Espa%C3%B1ol/Sociedad/Drogas/
+	
+Título: ¿Qué es el PCP?
+
+Texto:
+ Es quizás la más peligrosa de todas las drogas. En un principio se usó como anestésico veterinario llamado Sernil. El PCP se puede fumar, comer, inyectar o inhalar. Entre sus efectos más moderados se cita una desorientación general. Entre los peores, figuran tremendas alucinaciones, psicosis de tipo esquizofrénico, violencia, convulsiones, coma y muerte.
+
+Surgida en 1967 en San Francisco en cuanto droga, no alcanzó auge hasta 1975. Conocida como polvo de Angel, es una droga que mata e induce a matar.
+
+10.
+Origen: http://webs.ono.com/trlipe/quees.html
+	http://www.dmoz.org/World/Espa%C3%B1ol/Salud/Enfermedades/Mentales/Trastornos_de_personalidad/L%C3%ADmite/
+
+Título: Trastorno límite de la personalidad
+
+Texto:
+"Trastorno límite de la personalidad" (borderline personality disorder) es, con toda seguridad, el concepto más desafortunado para denominar este trastorno. La denominación "limite" (borderline) es secuela histórica de cuando este trastorno se consideraba fronterizo entre las psicosis y las neurosis. En la clasificación CIE 10 se le denomina trastorno de inestabilidad emocional de la personalidad. Se trata de un trastorno en el que aparece una marcada predisposición a actuar de un modo impulsivo sin tener en cuenta las consecuencias, junto a un animo inestable y caprichoso. Consiste en una inestabilidad respecto a la vivencia de la propia imagen, de las relaciones interpersonales y del estado de ánimo.

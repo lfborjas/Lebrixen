@@ -10999,12 +10999,12 @@ key "Gruzd2006"
 \end_inset
 
 , se optó por un componente que extraiga términos clave del texto.
- Se implementó un método que recibe el susodicho texto y el lenguaje en
- el que está escrito, para los lenguajes que lo soporte (actualmente, inglés)
- éste método utiliza una librería del lenguaje de programación python para
- extraer palabras clave
+ Se implementó un método que recibe el susodicho texto, un título opcional
+ y el lenguaje en el que está escrito, para los lenguajes que lo soporte
+ (actualmente, inglés) éste método utiliza una librería del lenguaje de
+ programación python para extraer palabras clave
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 la librería en cuestión es topia.termextract: 
@@ -11025,9 +11025,13 @@ http://pypi.python.org/pypi/topia.termextract/
 
 , para los demás lenguajes (y opcionalmente para los que se pueden analizar
  con la librería previamente mencionada) se utiliza, por elección de quien
- utilice el sub-componente, uno de los siguientes servicios web: alchemy
+ utilice el sub-componente, uno de los siguientes servicios web:
+\end_layout
+
+\begin_layout Enumerate
+Alchemy
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
@@ -11045,7 +11049,11 @@ www.alchemyapi.com/api/keyword/textc.html
 
 \end_inset
 
-, yahoo term extraction
+,
+\end_layout
+
+\begin_layout Enumerate
+Yahoo term extraction
 \begin_inset Foot
 status collapsed
 
@@ -11065,7 +11073,11 @@ http://developer.yahoo.com/search/content/V1/termExtraction.html
 
 \end_inset
 
- o wordsfinder
+
+\end_layout
+
+\begin_layout Enumerate
+Wordsfinder
 \begin_inset Foot
 status collapsed
 
@@ -11086,7 +11098,35 @@ wordsfinder.com/api_Keyword_Extractor.php
 \end_inset
 
 .
- El sub-componente está abierto a la inclusión de más servicios web o librerías
+ 
+\end_layout
+
+\begin_layout Enumerate
+Tagthe 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://tagthe.net/fordevelopers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El sub-componente está abierto a la inclusión de más servicios web o librerías
  del lado del servidor a utilizar.
 \end_layout
 
@@ -11094,7 +11134,37 @@ wordsfinder.com/api_Keyword_Extractor.php
 En la presente implementación, para construir una consulta se utiliza el
  método de extracción de términos clave previamente mencionado para obtener
  una lista que luego se une en una sola frase.
- 
+ Es importante notar que el estado presente del proyecto no es factible
+ para un ambiente de producción, ya que los servicios web tienen límites
+ de uso y/o pueden bloquear las solicitudes si se excede un umbral.
+\end_layout
+
+\begin_layout Standard
+TODO:
+\end_layout
+
+\begin_layout Itemize
+Cuadro comparativo (lenguajes soportados, límites [tagthe soporta 10, no
+ funciona con tildes y no hace stemming, igual que extractor, p.e.], etc)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+tagthe, opencalais, alchemy y extractor reconocen el lenguaje!
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Hablar de la encuesta
+\end_layout
+
+\begin_layout Itemize
+Hablar de por qué se eligió esto (longitud promedio hipotética y consiguiente
+ futilidad de más NLP)
+\end_layout
+
+\begin_layout Itemize
+Estructurarlo mejor
 \end_layout
 
 \begin_layout Standard
