@@ -12,6 +12,7 @@ import logging
 from django.utils.encoding import smart_unicode
 import re, htmlentitydefs
 from calais import Calais
+from extractor import ExtractorService
 
 #some more listed here: http://en.wikipedia.org/wiki/Term_extraction
 #and here: http://maui-indexer.blogspot.com/2009/07/useful-web-resources-related-to.html
@@ -29,6 +30,8 @@ WEB_SERVICES = {
     'tagthe': 'http://tagthe.net/api/',
     #http://www.opencalais.com/documentation/calais-web-service-api/
     'opencalais': 'http://api.opencalais.com/enlighten/rest/',
+    #http://www.picofocus.com/DemoEngine/dbiExtractorDemoWebService.asmx?op=ProcessXtraction
+    'extractor': 'http://www.picofocus.com/DemoEngine/DBIExtractorDemoWebService.asmx',
 }
 
 class WebServiceException(Exception):
@@ -153,6 +156,21 @@ def web_extract_terms(text, raw_query='',service='yahoo'):
             return retval
         else:
             raise WebServiceException(service, 'No topics or entities found')
+    elif service == 'extractor':
+        #use the python interface
+        logging.debug('using the extractor interface with key %s' % apikey)
+        extractor=ExtractorService(key=apikey, url=WEB_SERVICES[service])
+        raw_response = extractor.extract(text + raw_query)
+        logging.debug('The raw response: %s' % raw_response)
+
+        if raw_response.get('ExtractionStatus') == '-1':
+            print "failure!"
+            raise WebServiceException(service, "Failure in request")
+        else:
+            #TODO: what DOES it return?
+            return raw_response
+
+
 
     #2. Try to call the service:
     resp = None

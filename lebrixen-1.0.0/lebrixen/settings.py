@@ -107,7 +107,8 @@ WEB_SERVICES_KEYS = {
     'wordsfinder' : 'c34f27a46cd4464528ffacdf24e350c5',
     'alchemy': '622775ee9f8813c72e44522f4dcdd11c8da53ee1',
     'yahoo': 'w90Ugc3V34GwIC1p4HZcO53uQJ2YNWDjjLMvpLxa34ewJYbsuhkY4.VSOrh_APM-',
-    'opencalais': 'vnccvbw7z4bm4845qcztrtyr'
+    'opencalais': 'vnccvbw7z4bm4845qcztrtyr',
+    'extractor':  'e840cbe5-2d29-4ab2-b6a9-18746a61c125',
 }
 
 #set up the logging facility:
