@@ -88,8 +88,10 @@ INSTALLED_APPS = (
     #'django.contrib.contenttypes',
     'django.contrib.sessions',
     #'django.contrib.sites',
-    'celery',    
-    #'search',		
+    'celery', 
+    'djapian',   
+    'search',
+    'service',		
     #'profile',
 )
 
@@ -125,6 +127,8 @@ else:
         filemode = 'w'
     )
 
+#settings for djapian:
+DJAPIAN_DATABASE_PATH = os.path.join(ROOT_PATH, 'djapian_spaces')
 
 try:
     from local_settings import *
