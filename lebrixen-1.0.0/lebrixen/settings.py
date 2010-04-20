@@ -130,6 +130,12 @@ else:
 #settings for djapian:
 DJAPIAN_DATABASE_PATH = os.path.join(ROOT_PATH, 'djapian_spaces')
 
+#how much time to wait before the index is rebuilt (in seconds)
+UPDATE_INDEX_INTERVAL = 10*60
+
+#cf: http://code.google.com/p/djapian/wiki/Stemming
+DJAPIAN_STEMMING_LANG = "multi"
+
 try:
     from local_settings import *
 except:

@@ -7,7 +7,11 @@ class DocumentSurrogate(models.Model):
     summary = models.TextField(blank = True)
     text = models.TextField(blank = True)
     added = models.DateTimeField(auto_now_add = True)
+    lang = models.CharField(max_length = 10, default = 'en')
     
     def __unicode__(self):
         return self.title + self.summary
+    
+    def get_stemming_lang(self):
+        return self.lang
      
