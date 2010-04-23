@@ -28,7 +28,7 @@ class DmozSpider(CrawlSpider):
     #link: //ul[2]/li/a/@href	    
 
     rules = (
-        Rule(SgmlLinkExtractor(allow_domains='dmoz.org',deny=r'.*/?Regional/?.*' restrict_xpaths='//table[2]/tr/td/ul/li'), 'parse_item', follow=True),
+        Rule(SgmlLinkExtractor(allow_domains='dmoz.org',deny=r'.*/?Regional/?.*', restrict_xpaths='//table[2]/tr/td/ul/li'), 'parse_item', follow=True),
     )
 
     def parse_item(self, response):
