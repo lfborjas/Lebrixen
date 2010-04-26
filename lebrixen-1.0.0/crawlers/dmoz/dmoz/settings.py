@@ -9,6 +9,7 @@
 # 
 #     scrapy/conf/default_settings.py
 #
+import os
 
 BOT_NAME = 'dmoz'
 BOT_VERSION = '1.0'
@@ -18,9 +19,20 @@ NEWSPIDER_MODULE = 'dmoz.spiders'
 DEFAULT_ITEM_CLASS = 'dmoz.items.DmozItem'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
-ITEM_PIPELINES = ['scrapy.contrib.pipeline.fileexport.FileExportPipeline']
+ITEM_PIPELINES = ['dmoz.pipelines.DmozPipeline',]
+
 
 EXPORT_FORMAT = 'json'
 EXPORT_FILE = 'en_Science-scraped_items.py'
 EXPORT_EMPTY = True
 
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+EXTENSIONS = {'dmoz.extensions.EmailInClosing':0,}
+
+#MAIL_HOST = 'localhost'
+#MAIL_FROM = 'scrapy@localhost.com'
+
+IS_TEST = True
+
+SPIDER_MIDDLEWARES = {'scrapy.contrib.spidermiddleware.offsite.OffsiteMiddleware': None,}

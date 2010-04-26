@@ -1,65 +1,77 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import re
 
 from scrapy.selector import HtmlXPathSelector
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
-from scrapy.contrib.spiders import CrawlSpider, Rule
-from dmoz.items import DmozItem
+#from scrapy.contrib.spiders import CrawlSpider, Rule
+from scrapy.spider import BaseSpider
+from dmoz.items import DmozItem, DmozResource
+from scrapy.conf import settings
+from scrapy.http import Request
+import time
+import os
+ROOT_DOMAIN= "http://www.dmoz.org/"
+ROOT_PATH = os.path.join(settings.get('ROOT_PATH'),'spiders')
+def find_lang(url):
+	m = re.match(r'.*/World/(?P<lang>\S+)/.*', url)
+	if m and m.groups('lang'):
+		return m.groups('lang')[0]
 
-class DmozSpider(CrawlSpider):
+class DmozSpider(BaseSpider):
     domain_name = 'dmoz.org'
-    start_urls = [#'http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/',
-		  'http://www.dmoz.org/Science/']
-    #the sub-categories of a category (names):
-    #//table[2]/tr/td/ul/li/a/b/text()
 
-    #the sub-category links of a category:
-    #//table[2]/tr/td/ul/li/a/@href
-   
-    #the sub-category list: 
-    #//table[2]/tr/td/ul/li
+    if settings.get('IS_TEST'):
+	urls = open(os.path.join(ROOT_PATH, 'test_topic_urls'), 'r')
+    else:
+	urls = open(os.path.join(ROOT_PATH, 'topics_urls'), 'r')
 
-    #(for es)
-    #it appears that in some categories the sub-categories are in table 4, not 3, or 2 :(
-    #(for en) the sub-cats are always in the table 2
-
-    #the resources for a category (uniform for es and en): '//ul[2]/li'
-    #description: //ul[2]/li/text()
-    #title: '//ul[2]/li/a/text()'
-    #link: //ul[2]/li/a/@href	    
-
-    rules = (
-        Rule(SgmlLinkExtractor(allow_domains='dmoz.org',deny=r'.*/?Regional/?.*', restrict_xpaths='//table[2]/tr/td/ul/li'), 'parse_item', follow=True),
-    )
-
-    def parse_item(self, response):
-        xs = HtmlXPathSelector(response)
-        i = DmozItem()
-	route = xs.select('/html/head/title/text()').extract()
-        i['parent_category'], i['title'] = route[0].split(':')[-2:]
-        i['path'] = {'url':str(response.url), 'ontology_path': route[0]}
-	i_resources = []
-        resources = xs.select('//ul[2]/li')
-	try:
-		for resource in resources:
-			description = resource.select('text()').extract()[0]
-			title = resource.select('a/text()').extract()[0]
-			link = resource.select('a/@href').extract()[0]
-			i_resources += [{'title': title, 'description': description, 'link': link},]
-	except:
-		pass
-	i['resources'] = i_resources
-
-	i_subcats= []
-	subcats = xs.select('//table[2]/tr/td/ul/li')
-	try:
-		for subcat in subcats:
-			title = subcat.select('a/b/text()').extract()[0]
-			link = subcat.select('a/@href').extract()[0]
-			i_subcats += [{'title': title, 'link': link},]
-	except:
-		pass
-	i['sub_categories'] = i_subcats
+    def start_requests(self):
+	for url in self.urls:
+		url = url.strip()
+		if url:
+			self.log('returning "%s" as url' % url)
+			yield Request(url.replace('\n', ''), callback=self.parse_starters)
 	
+    def parse_starters(self, response):
+	""" Find the resources and download them, if they exist"""	
+	xs = HtmlXPathSelector(response)
+	resources = xs.select('//ul[2]/li')
+	rlist = []
+	for resource in resources:
+		#desc = resource.select('text()').extract()[0] or ''
+		#title = resource.select('a/text()').extract()[0] or ''
+		link =  resource.select('a/@href').extract()[0] or ''
+		#path = str(response.url).replace(ROOT_DOMAIN, '')i
+		#TODO: make this sensible to any lang
+		lang = 'es' if u'World/Español' in str(response.url) else 'en'
+		if link:
+			#self.log('%s info: %s, %s' % (response.url, title, link))
+			f = lambda r, resource = resource: self.parse_item(r,
+					 name = resource.select('a/text()').extract()[0] or '',
+					 lang = 'es' if u'World/Español' in str(response.url) else 'en', 
+					 category = str(response.url).replace(ROOT_DOMAIN, ''),
+					 desc = resource.select('text()').extract()[0] or '')
+			rlist += [Request(link, callback= f),]
+	
+	return rlist
+				
+
+    def parse_item(self, response, name='',lang='en', category = '', desc = ''):
+	i = DmozResource()
+	i['category'] = category
+	i['name'] = name
+	i['url'] = response.url
+	i['type'] = 'pdf' if 'pdf' in response.url.strip()[-4:].lower() else 'html'
+	i['description'] = desc
+	i['retrieved_on'] = time.asctime()
+	i['lang'] = lang
+	if hasattr(response, 'body_as_unicode'):
+		self.log("%s returned a unicode-able body" % response.url)
+		i['content'] = response.body_as_unicode()
+	else:
+		self.log("%s DID NOT return a unicode-able body" % response.url)
+		i['content'] = response.body
         return i
 
 SPIDER = DmozSpider()
