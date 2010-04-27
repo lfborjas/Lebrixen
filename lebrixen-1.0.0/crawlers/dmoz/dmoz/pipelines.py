@@ -39,14 +39,17 @@ class DmozPipeline(object):
 			os.makedirs(htmldir)
 		#replace evil characters for an underscore 
 		#cf. http://www.linfo.org/file_name.html
-		filename = os.path.join(filedir, re.sub('[ /.$%]+','_',item['name']))
+		rawname = re.sub('[ /.$%]+','_',item['name'])
+		filename = os.path.join(filedir, rawname)
 		#truncate the filename if it exceeds the permitted maximum...
 		filename = filename if len(filename) <= MAX_FILENAME_LENGTH else filename[:MAX_FILENAME_LENGTH]
 		if item['type'] == 'pdf':
-			content_str = "%s.pdf" % filename.replace(filedir, pdfdir)
+			#content_str = "%s.pdf" % filename.replace(filedir, pdfdir)
+			content_str = os.path.join(pdfdir, rawname+".pdf")
 			temp = open(content_str, 'wb')
 		else:
-			content_str = "%s" % filename.replace(filedir, htmldir)
+			#content_str = "%s" % filename.replace(filedir, htmldir)
+			content_str = os.path.join(htmldir, rawname)
 			temp = codecs.open(content_str, 'w', 'utf-8')
 		temp.write(item['content'])
 		temp.close()	

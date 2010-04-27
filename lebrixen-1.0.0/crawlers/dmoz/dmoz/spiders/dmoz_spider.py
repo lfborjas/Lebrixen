@@ -36,25 +36,27 @@ class DmozSpider(BaseSpider):
     def parse_starters(self, response):
 	""" Find the resources and download them, if they exist"""	
 	xs = HtmlXPathSelector(response)
-	resources = xs.select('//ul[2]/li')
-	rlist = []
+	resources = xs.select('//ul[2]/li') + xs.select('//ul[1]/li')
+	#rlist = []
 	for resource in resources:
-		#desc = resource.select('text()').extract()[0] or ''
-		#title = resource.select('a/text()').extract()[0] or ''
-		link =  resource.select('a/@href').extract()[0] or ''
+		description = resource.select('text()').extract()
+		title = resource.select('a/text()').extract()
+		link =  resource.select('a/@href').extract()
 		#path = str(response.url).replace(ROOT_DOMAIN, '')i
 		#TODO: make this sensible to any lang
-		lang = 'es' if u'World/Español' in str(response.url) else 'en'
-		if link:
+		#lang = 'es' if u'World/Español' in str(response.url) else 'en'
+		#only allow outgoing links:
+		if link and title:
 			#self.log('%s info: %s, %s' % (response.url, title, link))
-			f = lambda r, resource = resource: self.parse_item(r,
-					 name = resource.select('a/text()').extract()[0] or '',
+			f = lambda r, desc = description, name = title: self.parse_item(r,
+					 name = name[0],
 					 lang = 'es' if u'World/Español' in str(response.url) else 'en', 
 					 category = str(response.url).replace(ROOT_DOMAIN, ''),
-					 desc = resource.select('text()').extract()[0] or '')
-			rlist += [Request(link, callback= f),]
+					 desc = desc[0] if len(desc) else '')
+			#rlist += [Request(link[0], callback= f),]
+			yield Request(link[0], callback= f)
 	
-	return rlist
+	#return rlist
 				
 
     def parse_item(self, response, name='',lang='en', category = '', desc = ''):
