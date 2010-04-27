@@ -14,6 +14,9 @@ except:
 	import simplejson as json
 
 ROOT_PATH = settings.get("ROOT_PATH")
+MAX_FILENAME_LENGTH = 4096
+import codecs
+
 if not ROOT_PATH:
 	raise NotConfigured('A root path MUST be provided in settings!')
 
@@ -27,15 +30,28 @@ class DmozPipeline(object):
 	        """
         	#the path is of the form: cat/subcat/leaf
 	        filedir = os.path.join(ROOT_PATH,'Top',item['category'])	
+		#Store the contents in files apart (to optimize the json loadings)
+		pdfdir = os.path.join(ROOT_PATH,'PDF')	 
+		htmldir = os.path.join(ROOT_PATH,'HTML')	 
+		if not os.path.isdir(pdfdir):
+			os.makedirs(pdfdir)
+		if not os.path.isdir(htmldir):
+			os.makedirs(htmldir)
 		#replace evil characters for an underscore 
 		#cf. http://www.linfo.org/file_name.html
 		filename = os.path.join(filedir, re.sub('[ /.$%]+','_',item['name']))
+		#truncate the filename if it exceeds the permitted maximum...
+		filename = filename if len(filename) <= MAX_FILENAME_LENGTH else filename[:MAX_FILENAME_LENGTH]
 		if item['type'] == 'pdf':
-			content_str = "%s(pdf).pdf" % filename
-			temp = open( content_str, 'wb')
-			temp.write(item['content'])
-			temp.close()	
-			item['content'] = content_str
+			content_str = "%s.pdf" % filename.replace(filedir, pdfdir)
+			temp = open(content_str, 'wb')
+		else:
+			content_str = "%s" % filename.replace(filedir, htmldir)
+			temp = codecs.open(content_str, 'w', 'utf-8')
+		temp.write(item['content'])
+		temp.close()	
+		item['content'] = content_str
+			
 		if not os.path.isdir(filedir):
 			os.makedirs(filedir)
 		file = open(filename, 'w')
