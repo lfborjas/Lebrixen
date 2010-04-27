@@ -8,8 +8,6 @@ from scrapy.contrib.exporter import jsonlines
 import re
 import os
 from scrapy.contrib.exporter import BaseItemExporter
-import cStringIO
-import pyPdf
 try:
 	import json
 except:
