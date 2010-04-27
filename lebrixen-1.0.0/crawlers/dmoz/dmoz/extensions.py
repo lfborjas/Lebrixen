@@ -3,6 +3,7 @@ from scrapy.core import signals
 import os
 from scrapy.mail import MailSender
 from scrapy.conf import settings
+import time
 
 class EmailInClosing(object):
 	def __init__(self):
@@ -14,10 +15,17 @@ class EmailInClosing(object):
 		dirtree = os.path.join(settings.get('ROOT_PATH'), 'Top')
 		os.system("%s -f %s > %s" % (script, dirtree, result))
 		attached_file = open(result, 'r')
+		#get the total size of the corpus (could take a while...)
+		stats = "ND"
+		try:
+			stats = os.popen('du -sh %s' % dirtree).read()
+		except:
+			pass
 		mailer = MailSender()
-		mailer.send(to = ['lfborjas@unitec.edu'],
-			   subject = "All the docs are downloaded!",
-			   body = "Attached is the directory structure",
+		mailer.send(to = ['lfborjas@unitec.edu', 'luis.borjas@escolarea.com', 'lfborjas@hotmail.com'],
+			   subject = "The training corpus has been downloaded",
+			   body = "Crawling ended at %s, the corpus length is %s Attached is the structure"\
+				   % (time.asctime(), stats),
 			   attachs = [('structure', 'text/plain', attached_file)])
 		attached_file.close()
 
