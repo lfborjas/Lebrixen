@@ -33,16 +33,11 @@ class DmozPipeline(object):
 		#cf. http://www.linfo.org/file_name.html
 		filename = os.path.join(filedir, re.sub('[ /.$%]+','_',item['name']))
 		if item['type'] == 'pdf':
-			temp = cStringIO.StringIO()
-			put = cStringIO.StringIO()
+			content_str = "%s(pdf).pdf" % filename
+			temp = open( content_str, 'wb')
 			temp.write(item['content'])
-			pdf = pyPdf.PdfFileReader(temp)
-			for page in pdf.pages:
-				put.write(page.extractText())
-			temp.close()
-			item['content'] = put.getvalue()
-			put.close()
-				
+			temp.close()	
+			item['content'] = content_str
 		if not os.path.isdir(filedir):
 			os.makedirs(filedir)
 		file = open(filename, 'w')
