@@ -10979,6 +10979,647 @@ En este capítulo se discuten los aspectos teóricos y técnicos que cubren
 \end_layout
 
 \begin_layout Section
+Obtención de la colección documental y creación de la base de conocimiento
+ ontológica
+\end_layout
+
+\begin_layout Standard
+Una colección documental suficientemente grande y bien organizada es fundamental
+ para un sistema de recuperación de información, pues tendrá una mayor probabili
+dad de satisfacer cualquier consulta, no importa qué tan poco frecuente.
+ Asimismo, un repositorio de conocimiento sobre el dominio elegido es crucial
+ para un sistema de recomendación, ya que es mediante éste que se pueden
+ hacer suposiciones acertadas sobre las preferencias del usuario.
+\end_layout
+
+\begin_layout Standard
+Dado el carácter de este proyecto, ambas características son igualmente
+ necesarias, y encuentran su síntesis en la siguiente necesidad concreta:
+ poder, partiendo de suficiente evidencia documental, relacionar conceptos
+ de una ontología (en este caso concreto) a un contexto de usuario, para
+ poder, en última instancia, construir un perfil conceptual de los cursos
+ asistidos por el sistema.
+\end_layout
+
+\begin_layout Standard
+Como primera opción, se podría optar por construir una ontología a partir
+ de una colección de documentos no clasificados, conseguidos de antemano
+ o a medida los usuarios aporten recursos -un método interesante para ello
+ se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Cimiano2005"
+
+\end_inset
+
+.
+ Aunque este enfoque es académicamente interesante e incluso podría resultar
+ 
+\emph on
+a la larga
+\emph default
+ en una base de conocimiento exacta, dentro del contexto de la comunidad
+ que la construya y utilice, no es factible para la implementación actual.
+\end_layout
+
+\begin_layout Standard
+Una alternativa es partir de jerarquías conceptuales ya existentes, como
+ proponen 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "AlexanderGelbukh2005"
+
+\end_inset
+
+.
+ La ventaja, evidentemente, radica en que el esfuerzo de obtener la ontología
+ se minimiza, permitiendo ajustarla -en la mediad de lo posible- a las necesidad
+es propias.
+ Es este enfoque el que se ha adoptado en este proyecto.
+ A continuación, se resumen las fases seguidas en esta etapa de la implementació
+n.
+\end_layout
+
+\begin_layout Subsection
+Elección de una ontología
+\end_layout
+
+\begin_layout Standard
+Con el advenimiento de la 
+\emph on
+web semántica
+\emph default
+, muchos proyectos que tratan de organizar el conocimiento en la red han
+ surgido, y otros que existían desde hacía varios años han encontrado nueva
+ atención.
+ Las necesidades consideradas para la elección de una fuente de ontología
+ y, quizá, la misma colección documental, fueron:
+\end_layout
+
+\begin_layout Itemize
+El fácil acceso a una estructura predefinida
+\end_layout
+
+\begin_layout Itemize
+La posibilidad de actualización y la facilidad de la obtención de un sub-conjunt
+o de la base entera de conocimiento 
+\end_layout
+
+\begin_layout Itemize
+La existencia de la misma en español (e inglés, de ser posible) y la oportunidad
+ de extensión a otros lenguajes en un futuro.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Wikipedia
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+wikipedia.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, por ejemplo, se ha propuesto obtener y organizar el conocimiento humano
+ para consulta.
+ Pero, aunque existe cierta categorización en ésta y ciertamente se podría
+ utilizar para crear jerarquías conceptuales (como lo han demostrado 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Ramanathan2008"
+
+\end_inset
+
+) la elección de un sub-conjunto del compendio de wikipedia, la coerción
+ a una ontología jerárquica y la relativamente poca investigación académica
+ realizada en ese respecto lograron que, aunque tentador, se optara por
+ no utilizarla como fuente de la ontología y la colección documental.
+ Una estructuración orientada a hacer más fácil para las aplicaciones obtener
+ información estructurada de 
+\emph on
+Wikipedia
+\emph default
+ se propone en el trabajo de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Denoyer2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Otros proyectos, en la web, orientados a estructuras ontológicas (no necesariame
+nte jerárquicas) o semánticas como 
+\emph on
+freebase.com 
+\emph default
+y 
+\emph on
+DBpedia.org 
+\emph default
+que se perfilan más acordes a las necesidades de este proyecto, mas lamentableme
+nte éstas sólo están disponibles en inglés (aún cuando ambas aseveran la
+ existencia de datos en varios idiomas, las ontologías sólo se encuentran
+ en inglés).
+\end_layout
+
+\begin_layout Standard
+Proyectos como CyC
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://researchcyc.cyc.com/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ y YAGO 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.mpi-inf.mpg.de/yago-naga/yago/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, además de sólo estar disponibles en inglés, no ofrecen fácil acceso web.
+\end_layout
+
+\begin_layout Standard
+La alternativa más sencilla de tomar -siendo la sencillez de implementación
+ una necesidad informal, dada la poca cantidad de tiempo del que se dispone
+ para el desarrollo de este proyecto- es la encontrada en el 
+\emph on
+Open Directory Project
+\emph default
+ (ODP)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+dmoz.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+: un proyecto relativamente más antiguo que los anteriores que pretende
+ organizar en categorías los aportes de editores humanos, un enfoque similar
+ al de 
+\emph on
+wikipedia y freebase.com
+\emph default
+, pero con una estructura más rígida para organizar los conceptos.
+ Las ventajas del uso del 
+\emph on
+ODP
+\emph default
+ son varias: la estructura jerárquica, la disponibilidad en varios idiomas,
+ las opciones de obtención de la ontología (por exploración directa de un
+ web crawler o mediante la descarga de un documento estructurado, un 
+\emph on
+RDF
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.w3.org/RDF/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\emph default
+), la posibilidad de obtener de una sola vez la colección documental y el
+ hecho de haber sido sujeto de investigaciones académicas relacionadas a
+ la presente 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Daoud2008,Sieg2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Obtención de la ontología 
+\end_layout
+
+\begin_layout Standard
+Una vez elegida la ontología, se debe evaluar si se usará toda ésta o sólo
+ un sub-conjunto de ésta.
+ Como el 
+\emph on
+ODP
+\emph default
+ organiza a un nivel de especificidad varios tópicos de interés correspondientes
+ a una gran cantidad de dominios del conocimiento, para fines de implementación,
+ se decidió optar por el sub-árbol del tópico 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Science
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.dmoz.org/Science/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+(ciencia) del ODP y los nodos paralelos a éste en español
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+En un principio se había considerado el uso de una araña web (
+\emph on
+web crawler
+\emph default
+) para obtener los árboles de ambas ontologías paralelas y luego los documentos
+ que están listados en cada una.
+ Esta consideración partió de un rápido vistazo a algunas páginas del sitio,
+ que parecían dar un lugar específico a las sub-categorías y a los documentos
+ que los usuarios han considerado relacionados con cada concepto.
+ Pero la escritura de una pequeña araña
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Basada en el ejemplo sencillo propuesto en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://doc.scrapy.org/intro/tutorial.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ que pusiera este concepto a prueba solamente extrayendo la información
+ de recursos y sub-categorías -sin la descarga de los documentos listados
+ entre los recursos- reveló que no sólo las páginas no son consistentes
+ en el formato del html, sino que esta inconsistencia llevaría a un resultado
+ inútil: muchos de los elementos extraídos eran información espuria o vínculos
+ a otras categorías no necesariamente relacionadas.
+\end_layout
+
+\begin_layout Standard
+Afortunadamente, el 
+\emph on
+ODP
+\emph default
+ ofrece su ontología entera en un archivo estructurado disponible para descarga
+ en 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://rdf.dmoz.org/rdf/
+\end_layout
+
+\end_inset
+
+ (en concreto, en un archivo titulado 
+\emph on
+structure.rfd.tar.gz) 
+\emph default
+el cual es actualizado cada semana
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.dmoz.org/help/getdata.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Se prosiguió entonces, a obtener el archivo, el cual, para el 23 de abril
+ de 2010 tenía una magnitud de 76 megabytes compreso (con 
+\emph on
+gzip
+\emph default
+), y de aproximadamente 1.1 Gigabytes una vez extraído.
+ Como se explicó antes, este archivo consiste en un xml que sigue el formato
+ RDF, un formato creado con el fin de facilitar el acceso a información
+ semántica sobre recursos.
+ 
+\end_layout
+
+\begin_layout Standard
+Obtenido el 
+\emph on
+rdf
+\emph default
+ de la ontología del 
+\emph on
+ODP
+\emph default
+, el siguiente paso consistió en la obtención de aquellos tópicos que se
+ referían al sub-árbol elegido (el referente a ciencia y tecnología).
+ Los pasos para la completación de esta tarea fueron:
+\end_layout
+
+\begin_layout Enumerate
+La consulta a la documentación del 
+\emph on
+ODP 
+\emph default
+de las etiquetas para la construcción de este archivo: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://rdf.dmoz.org/rdf/tags.html
+\end_layout
+
+\end_inset
+
+.
+ Y la inspección visual del mismo para determinar el orden de escritura
+ de los tópicos: se descubrió que se parte del tópico más general y lo siguen
+ inmediatamente sus categorías (encerradas en las etiquetas 
+\emph on
+narrow, narrow1 y narrow2)
+\emph default
+ y los nodos equivalentes al mismo en los árboles ontológicos de idiomas
+ alternos (en las etiquetas 
+\emph on
+altlang
+\emph default
+).
+\end_layout
+
+\begin_layout Enumerate
+La búsqueda del rango entre el cual se encontraban los tópicos referentes
+ a la sub-ontología elegida, esto mediante el uso de expresiones regulares
+ mediante el comando 
+\emph on
+egrep
+\emph default
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://unixhelp.ed.ac.uk/CGI/man-cgi?egrep
+\end_layout
+
+\end_inset
+
+.
+ Encontrado el rango de líneas en el archivo donde se encontraban los tópicos
+ deseados, se procedió a extraer éstas a un archivo 
+\emph on
+rdf
+\emph default
+ aparte mediante el comando 
+\emph on
+sed 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://unixhelp.ed.ac.uk/CGI/man-cgi?sed
+\end_layout
+
+\end_inset
+
+.
+ 
+\emph default
+El archivo de la sub-ontología de ciencia medía apenas 10 megabytes, cien
+ veces menos que el original.
+\end_layout
+
+\begin_layout Enumerate
+Del xml generado, se requirió obtener las urls de cada tópico (junto a la
+ url del mismo en español, si existía), y esto se logró mediante un 
+\emph on
+script
+\emph default
+ escrito en 
+\emph on
+python
+\emph default
+ que se valía de la esctructura el xml para encontrar las mismas y escribirlas
+ en un archivo.
+ Se encontraron 13,407 urls correspondientes a todos los tópicos en el sub-árbol
+ de ciencia, y de éstas sólo 402 forman la sub-ontología paralela en español.
+ 
+\end_layout
+
+\begin_layout Standard
+Así, una vez obtenidos los 
+\emph on
+url
+\emph default
+ que se refiriesen a los tópicos, se pudo proceder a obtener la colección
+ documental.
+\end_layout
+
+\begin_layout Subsection
+Obtención de la colección documental
+\end_layout
+
+\begin_layout Standard
+El archivo con los 
+\emph on
+url
+\emph default
+ referentes a los tópicos de la sub-ontología sirvió como una entrada ideal
+ para una araña web que pudiera visitar cada una de esas páginas y obtener
+ los recursos listados en ellas, obteniendo a la vez, para cada recurso,
+ información relevante para las siguientes etapas, como ser: el origen del
+ mismo, la categoría donde se encontró, el lenguaje, un título descriptivo
+ y una descripción.
+ 
+\end_layout
+
+\begin_layout Standard
+La araña web se implementó en 
+\emph on
+Scrapy
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+scrapy.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, un 
+\emph on
+framework
+\emph default
+ dedicado precisamente a la escritura de arañas web y aplicaciones de extracción
+ de información en páginas web.
+ Dada la cantidad de almacenamiento, tiempo y ancho de banda requeridos
+ para la ejecución de una aplicación de esta naturaleza, se utilizó una
+ máquina virtual instalada en uno de los servidores del laboratorio de sistemas
+ de UNITEC
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Para ver una copia de la requisición del mismo, véase el apéndice 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:resources-requirement"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+TODO: poner cuánto se tardó y cuánto midió lo bajado.
+\end_layout
+
+\begin_layout Section
 El componente de búsqueda
 \end_layout
 
@@ -11176,6 +11817,98 @@ options "bibtotoc,/home/lfborjas/Aplicaciones/apa-good"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Chapter
+\start_of_appendix
+Requisición de recursos de laboratorio
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:resources-requirement"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A continuación, una copia 
+\emph on
+verbatim
+\emph default
+ del correo enviado a la facultad y el administador del laboratorio para
+ el uso del mismo durante el proyecto:
+\end_layout
+
+\begin_layout Quote
+De: Luis Felipe Borjas <lfborjas@unitec.edu> para Jorge Garcia <jorge.garcia@unite
+c.edu>, Daniel Martínez <dmartinezh@unitec.edu>
+\end_layout
+
+\begin_layout Quote
+Fecha: 27 de abril de 2010 03:11
+\end_layout
+
+\begin_layout Quote
+Asunto: Requisición de recursos de laboratorio enviado por unitec.edu ocultar
+ detalles 03:11 (0 minutos antes) 
+\end_layout
+
+\begin_layout Quote
+Estimados, 
+\end_layout
+
+\begin_layout Quote
+Para mi proyecto de graduación necesito un cuerpo relativamente grande de
+ documentos, los cuales pienso obtener de dmoz.org, un directorio abierto
+ que categoriza sus recursos.
+ Para ello, es necesario que ejecute una araña web y procesos que tomen
+ lo que ésta obtenga, lo analicen y almacenen en una base de datos.
+ Como es evidente, ésto requiere una cantidad de procesamiento, memoria
+ y almacenamiento tales que sería poco factible ejecutarlo en mi propia
+ computadora sin retrasarme considerablemente en mis actividades laborales
+ y académicas, por lo que solicito a ustedes el uso de uno de los servidores
+ del laboratorio que está disponible para los alumnos de ingeniería en sistemas
+ computacionales.
+\end_layout
+
+\begin_layout Quote
+En dicho servidor, necesitaría de los siguientes aspectos: 
+\end_layout
+
+\begin_layout Itemize
+Un sistema operativo basado en unix (de preferencia ubuntu linux).
+ 
+\end_layout
+
+\begin_layout Itemize
+Python 2.6 y permisos de escritura y ejecución en la carpeta que éste use
+ para la instalación de librerías y acceso a ésta como super-usuario (quizá
+ con la presencia del administrador de laboratorio), o, en su defecto, el
+ punto siguiente.
+ 
+\end_layout
+
+\begin_layout Itemize
+Un usuario que tenga la potestad de leer, escribir y ejecutar archivos en
+ una carpeta donde almacenaría todos los resultados del proceso de obtención
+ de recursos y obtendría y ejecutaría los "scripts" que habrían de llevar
+ a cabo el proceso.
+\end_layout
+
+\begin_layout Itemize
+Garantía razonable de tiempo, flujo eléctrico y ancho de banda suficientes
+ como para poder culminar la ejecución de los procesos sin demasiados inconvenie
+ntes.
+ 
+\end_layout
+
+\begin_layout Quote
+Agradeciendo de antemano su asistencia en este asunto, 
+\end_layout
+
+\begin_layout Quote
+Luis Felipe Borjas
 \end_layout
 
 \end_body
