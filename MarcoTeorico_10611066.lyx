@@ -902,8 +902,15 @@ de
 \begin_inset space ~
 \end_inset
 
-documentos: Es el conjunto de todos aquellos documentos que el sistema conoce
- y puede brindar como resultados a sus usuarios.
+documentos
+\begin_inset CommandInset label
+LatexCommand label
+name "des:doc-collection"
+
+\end_inset
+
+: Es el conjunto de todos aquellos documentos que el sistema conoce y puede
+ brindar como resultados a sus usuarios.
  Constituye el componente central de un sistema de RI, pero sería de poco
  valor
 \begin_inset Foot
@@ -11527,7 +11534,7 @@ script
 \emph on
 python
 \emph default
- que se valía de la esctructura el xml para encontrar las mismas y escribirlas
+ que se valió de la estructura el xml para encontrar las mismas y escribirlas
  en un archivo.
  Se encontraron 13,407 urls correspondientes a todos los tópicos en el sub-árbol
  de ciencia, y de éstas sólo 402 forman la sub-ontología paralela en español.
@@ -11597,7 +11604,7 @@ framework
  máquina virtual instalada en uno de los servidores del laboratorio de sistemas
  de UNITEC
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Para ver una copia de la requisición del mismo, véase el apéndice 
@@ -11616,11 +11623,276 @@ reference "cha:resources-requirement"
 \end_layout
 
 \begin_layout Standard
-TODO: poner cuánto se tardó y cuánto midió lo bajado.
+Como nota marginal, es importante notar que una araña web debe tener en
+ cuenta los límites de los recursos que utiliza: una araña puede tomar dos
+ caminos a la hora de hacer la exploración del sitio designado: un recorrido
+ en anchura o en profundidad.
+ Interesantemente, el árbol de exploración, en este caso, era conspicuamente
+ ancho (13,407 
+\emph on
+urls
+\emph default
+ iniciales) y poco profundo (por cada url, sólo se iba un nivel más abajo,
+ el de los recursos, los cuales son en promedio 30 por cada url de la sub-ontolo
+gía elegida).
+ La primera vez que se ejecutó el proceso la memoria se vió tan sobrecogida
+ por la cantidad de objetos en memoria (un objeto por cada url inicial)
+ que, cuatro horas después del inicio, el sistema operativo se vió obligado
+ a detener el proceso.
+ Y esto porque la estrategia por defecto para una araña web en 
+\emph on
+scrapy
+\emph default
+ es el recorrido en anchura.
+ Tomado esto en consideración, se optó por el recorrido en profunidad, con
+ efectos dramáticos: cuatro horas después, la araña había logrado bajar
+ varios cientos de documentos, cuando con la estrategia anterior, no logró
+ bajar 
+\emph on
+ninguno
+\emph default
+.
 \end_layout
 
 \begin_layout Section
-El componente de búsqueda
+Implementación del componente de búsqueda
+\end_layout
+
+\begin_layout Standard
+Una vez en poder de la colección documental, restaban dos cuestiones: el
+ almacenamiento estructurado de ésta y la elección de un módulo para buscar
+ en la misma.
+\end_layout
+
+\begin_layout Subsection
+Elección de sustitutos documentales
+\end_layout
+
+\begin_layout Standard
+Como se explicó antes
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+consúltese 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "des:doc-collection"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, es importante representar de manera informativa y compacta cada documento
+ en la colección.
+ En esta implementación, se optó por seguir el patrón sentado por el 
+\emph on
+ODP
+\emph default
+: almacenar un título, una descripción, la categoría del directorio donde
+ se encontró (expresada como una ruta desde la raíz hasta el nodo donde
+ se encuentra listado como recurso el sitio), una descripción, el 
+\emph on
+url
+\emph default
+ original, la fecha en que se obtuvo el documento y el contenido en sí.
+ 
+\end_layout
+
+\begin_layout Standard
+La araña web que obtuvo los documentos se escribió de manera que preservase
+ toda esta información serializada en archivos, de manera que facilitase
+ el llenado de la base de datos de sustitutos documentales.
+\end_layout
+
+\begin_layout Subsection
+Elección de una implementación de recuperación de información
+\end_layout
+
+\begin_layout Standard
+Puesto que el alcance del proyecto no incluye el demostrar la idoneidad
+ de uno u otro modelo de IR ni mucho menos se centra en la implementación
+ de alguno, se optó por elegir una implementación existente que pudiera
+ ser integrada a un proyecto en 
+\emph on
+django
+\emph default
+ sin mayor problema y que pudiera obtener su colección documental de una
+ base de datos relacional.
+ 
+\end_layout
+
+\begin_layout Standard
+Se determinaron dos alternativas: 
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Haystack
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://haystacksearch.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+: 
+\emph default
+un proyecto que permite al desarrollador desentenderse de la implementación
+ de búsqueda subyacente, mediante el uso de una interfaz de programación
+ de aplicaciones.
+ Actualmente, permite el uso de tres motores de recuperación de información:
+ 
+\emph on
+solr
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://lucene.apache.org/solr/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, que implementa -en java- la indexación semántica latente; 
+\emph on
+whoosh
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://bitbucket.org/mchaput/whoosh/wiki/Home
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, que implementa en python una versión extendida del modelo de espacio vectorial
+ y 
+\emph on
+xapian
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://xapian.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\emph default
+una implementación en C++ de un modelo probabilístico de recuperación de
+ información.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Aunque 
+\emph on
+Haystack
+\emph default
+ es una solución idónea para proyectos comerciales, donde se requiere poca
+ interacción, y a muy alto nivel, con la implementación de búsqueda, se
+ consideró demasiado complejo para el proyecto actual por lo que se descartó,
+ aunque los otros módulos del proyecto están escritos de manera que respeten
+ el principio de bajo acoplamiento de modo que la posibilidad de uso de
+ esta alternativa queda abierta.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Djapian
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://code.google.com/p/djapian/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\emph default
+Una interfaz entre django y 
+\emph on
+xapian.
+ 
+\emph default
+Aunque es un proyecto menos flexible y maduro que 
+\emph on
+haystack
+\emph default
+, djapian ofrece más control sobre los particulares de búsqueda, en especial
+ la sensibilidad al idioma de las consultas y documentos, característica
+ decisiva para su elección, ya que inicialmente el proyecto cuenta con una
+ colección documental bilingüe.
 \end_layout
 
 \begin_layout Subsection
