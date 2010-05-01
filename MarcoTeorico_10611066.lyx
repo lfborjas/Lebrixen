@@ -11320,15 +11320,15 @@ http://www.dmoz.org/Science/
 \emph default
 (ciencia) del ODP y los nodos paralelos a éste en español
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
-http://www.dmoz.org/World/Espa%C3%B1ol/Ciencia_y_tecnolog%C3%ADa/
+http://www.dmoz.org/World/Español/Ciencia_y_tecnología/
 \end_layout
 
 \end_inset
@@ -11424,7 +11424,7 @@ http://www.dmoz.org/help/getdata.html
 
 .
  Se prosiguió entonces, a obtener el archivo, el cual, para el 23 de abril
- de 2010 tenía una magnitud de 76 megabytes compreso (con 
+ de 2010 tenía una magnitud de 76 megabytes comprimido (con 
 \emph on
 gzip
 \emph default
@@ -11551,6 +11551,119 @@ url
 \end_layout
 
 \begin_layout Subsection
+Almacenamiento de la ontología
+\end_layout
+
+\begin_layout Standard
+Por cuestiones de rendimiento, se optó por almacenar la ontología en la
+ base de datos, como punto de partida para la creación de los perfiles de
+ los cursos (ya que éstos, una vez almacenados, se referirían a categorías
+ de la ontología), dado que, si se conservase solamente el RDF como referencia
+ ontológica, se tendría que interpretar éste en memoria cada vez que se
+ actualizase un perfil, incurriendo en gastos innecesarios de memoria y
+ procesamiento.
+ 
+\end_layout
+
+\begin_layout Standard
+Como primer paso, se expresó la ontología como un árbol de categorías, siendo
+ cada nodo modelado una tupla relacional cuyos atributos, basados en los
+ atributos establecidos en el 
+\emph on
+RDF
+\emph default
+ eran, para cada tópico: 
+\end_layout
+
+\begin_layout Description
+Título: el título que el 
+\emph on
+ODP
+\emph default
+ asigna.
+ 
+\end_layout
+
+\begin_layout Description
+ID
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+tópico: la ruta única de la raíz de la ontología al presente tópico.
+\end_layout
+
+\begin_layout Description
+Código
+\begin_inset space ~
+\end_inset
+
+dmoz: el código numérico que el 
+\emph on
+ODP
+\emph default
+ asigna.
+\end_layout
+
+\begin_layout Description
+Última
+\begin_inset space ~
+\end_inset
+
+actualización: la última vez que el tópico fue editado en el 
+\emph on
+ODP.
+\end_layout
+
+\begin_layout Description
+Descripción: un breve sumario
+\end_layout
+
+\begin_layout Description
+Padre: el tópico predecesor inmediato
+\end_layout
+
+\begin_layout Description
+Vínculos
+\begin_inset space ~
+\end_inset
+
+alternos: vínculos a los tópicos paralelos en otros idiomas (por ahora,
+ sólo se almacena el vínculo al tópico en español).
+\end_layout
+
+\begin_layout Standard
+Con el fin de facilitar el llenado y mantenimiento de la tabla, se creó
+ un comando
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Un comando de django es un script de python que tiene acceso a las variables
+ de entorno y los módulos definidos en el proyecto
+\end_layout
+
+\end_inset
+
+ de 
+\emph on
+django 
+\emph default
+que permitiese, dado un 
+\emph on
+RDF
+\emph default
+ del 
+\emph on
+ODP 
+\emph default
+bien formado, crear o actualizar la representación relacional del mismo.
+\end_layout
+
+\begin_layout Subsection
 Obtención de la colección documental
 \end_layout
 
@@ -11635,9 +11748,9 @@ urls
  iniciales) y poco profundo (por cada url, sólo se iba un nivel más abajo,
  el de los recursos, los cuales son en promedio 30 por cada url de la sub-ontolo
 gía elegida).
- La primera vez que se ejecutó el proceso la memoria se vió tan sobrecogida
+ La primera vez que se ejecutó el proceso la memoria se vio tan sobrecogida
  por la cantidad de objetos en memoria (un objeto por cada url inicial)
- que, cuatro horas después del inicio, el sistema operativo se vió obligado
+ que, cuatro horas después del inicio, el sistema operativo se vio obligado
  a detener el proceso.
  Y esto porque la estrategia por defecto para una araña web en 
 \emph on
@@ -11652,6 +11765,13 @@ scrapy
 ninguno
 \emph default
 .
+\end_layout
+
+\begin_layout Standard
+Para la colección documental a usar en la etapa de desarrollo y primera
+ presentación en UNITEC, la araña web obtuvo una colección documental de
+ 3.7 Gb, requiriendo aproximadamente quince horas-procesador (y veintitrés
+ horas físicas) para ello.
 \end_layout
 
 \begin_layout Section
@@ -12053,31 +12173,7 @@ En la presente implementación, para construir una consulta se utiliza el
 \end_layout
 
 \begin_layout Standard
-TODO:
-\end_layout
 
-\begin_layout Itemize
-Cuadro comparativo (lenguajes soportados, límites [tagthe soporta 10, no
- funciona con tildes y no hace stemming, igual que extractor, p.e.], etc)
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-tagthe, opencalais, alchemy y extractor reconocen el lenguaje!
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Hablar de la encuesta
-\end_layout
-
-\begin_layout Itemize
-Hablar de por qué se eligió esto (longitud promedio hipotética y consiguiente
- futilidad de más NLP)
-\end_layout
-
-\begin_layout Itemize
-Estructurarlo mejor
 \end_layout
 
 \begin_layout Standard
@@ -12108,12 +12204,12 @@ A continuación, una copia
 \emph on
 verbatim
 \emph default
- del correo enviado a la facultad y el administador del laboratorio para
+ del correo enviado a la facultad y el administrador del laboratorio para
  el uso del mismo durante el proyecto:
 \end_layout
 
 \begin_layout Quote
-De: Luis Felipe Borjas <lfborjas@unitec.edu> para Jorge Garcia <jorge.garcia@unite
+De: Luis Felipe Borjas <lfborjas@unitec.edu> para Jorge García <jorge.garcia@unite
 c.edu>, Daniel Martínez <dmartinezh@unitec.edu>
 \end_layout
 
@@ -12155,7 +12251,7 @@ Un sistema operativo basado en unix (de preferencia ubuntu linux).
 
 \begin_layout Itemize
 Python 2.6 y permisos de escritura y ejecución en la carpeta que éste use
- para la instalación de librerías y acceso a ésta como super-usuario (quizá
+ para la instalación de librerías y acceso a ésta como súper-usuario (quizá
  con la presencia del administrador de laboratorio), o, en su defecto, el
  punto siguiente.
  
