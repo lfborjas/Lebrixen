@@ -1,0 +1,663 @@
+#LyX 1.6.4 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass scrartcl
+\use_default_options true
+\language spanish
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Propuesta de proyecto de graduación:
+\begin_inset Newline newline
+\end_inset
+
+Sistema de recomendación de documentos aplicado a un contexto académico
+\end_layout
+
+\begin_layout Author
+Luis Felipe Borjas Reyes
+\begin_inset Newline newline
+\end_inset
+
+10611066
+\end_layout
+
+\begin_layout Section
+Propósito
+\end_layout
+
+\begin_layout Standard
+Desarrollar un servicio web que recomiende al usuario documentos relevantes
+ a un contexto local, formado éste por la documentación de actividades o
+ sesiones de un curso administrado en línea, expresando esta documentación
+ mediante una descripción de la sesión actual y, opcionalmente, documentos
+ que el usuario proporcione.
+ La recomendación consistirá en la búsqueda de documentos relacionados conceptua
+lmente a la tarea del usuario en un índice de documentos mantenido por el
+ sistema y la consiguiente recomendación de los que se consideren útiles,
+ evaluando la utilidad a partir de un perfil del curso construido y actualizado
+ automáticamente y el contexto inmediato de la sesión actual.
+\end_layout
+
+\begin_layout Section
+Objetivos
+\end_layout
+
+\begin_layout Enumerate
+Elegir la naturaleza de la colección documental base para la implementación
+ y pruebas.
+ Ya sea en la forma de documentos obtenidos de internet o mediante la interfaz
+ de búsqueda de una librería digital o motor de búsqueda existente.
+\end_layout
+
+\begin_layout Enumerate
+Desarrollar una interfaz para la expresión de los contextos de usuarios,
+ así como la elección e implementación de la manera en la que se expresarán,
+ construirán y actualizarán los perfiles de los cursos.
+\end_layout
+
+\begin_layout Enumerate
+Implementar un componente de indización e igualación de documentos y consultas;
+ y desarrollar un componente que permita el filtrado de los resultados del
+ primero en base a los perfiles y contextos.
+ 
+\end_layout
+
+\begin_layout Section
+Resultados Esperados
+\end_layout
+
+\begin_layout Enumerate
+Desarrollar una aplicación, ya sea en forma de módulo individuale o servicio
+ web, independiente del sistema anfitrión, orientada recomendación de recursos
+ académicos en base a un perfil construido mediante la información histórica
+ de cursos (o usuarios).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Evaluar la utilidad en aplicaciones de dominios específicos de proyectos
+ de código libre de propósito general de recuperación y análisis de información;
+ asimismo, determinar la utilidad de proyectos de información orientados
+ a la estructuración y enriquecimiento de los datos disponibles en internet.
+\end_layout
+
+\begin_layout Enumerate
+Contribuir a las áreas de investigación de recuperación de información y
+ sistemas de recomendación mediante la implementación de un sistema especializad
+o y, a la vez, flexible.
+\end_layout
+
+\begin_layout Section
+Palabras Clave
+\end_layout
+
+\begin_layout Standard
+recuperación de información, sistemas de recomendación, perfiles ontológicos,
+ web semántica
+\end_layout
+
+\begin_layout Section
+Contexto
+\end_layout
+
+\begin_layout Standard
+Se puede comparar la tarea que este proyecto llevará a cabo con la que realiza
+ una persona que compra un artículo en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.amazon.com
+\end_layout
+
+\end_inset
+
+: el usuario está interesado en el artículo que está adquiriendo, después
+ de todo, ese es su propósito principal al utilizar el sistema, pero el
+ sitio también le sugiere, cuando el usuario ha elegido un producto, otros
+ que podrían intesarle; eso es precisamente un tipo común de sistema de
+ recomendación: un componente 
+\emph on
+secundario
+\emph default
+ en otro contexto mayor -como un sitio de compras o de renta de películas-
+ que, de manera no intrusiva, exacta y rápida, ofrece al usuario opciones
+ que puedan enriquecer su experiencia.
+ Un sistema así, entonces, 
+\emph on
+intuye
+\emph default
+ qué podría ser de interés a un usuario en base al contexto en el que está
+ actuando o al perfil que ya ha construido de él (en sitios de recomendación
+ de música -por ejemplo, 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.last.fm
+\end_layout
+
+\end_inset
+
+, - se mantiene un perfil de los usuarios para predecir qué podría interesarles
+ después de un tiempo de uso); un sistema así, entonces y como aclara 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Safran2005"
+
+\end_inset
+
+, se vale de la 
+\emph on
+contextualización
+\emph default
+ y la 
+\emph on
+adaptación 
+\emph default
+para llevar a cabo su tarea.
+ De ahí que estos sistemas se consideren un buen ejemplo de 
+\emph on
+inteligencia colectiva
+\emph default
+, construir conocimiento a partir de información brindada por los usuarios,
+ porque se valen de lo que los mismos usuarios opinan - mediante algún tipo
+ de retroalimentación implícita o comunicación explícita- acercan los artículos
+ en la colección de artefactos del sistema.
+ En suma, un sistema de recomendación, en base al contexto o al usuario,
+ determina qué artículos de la colección de artefactos que maneja podrían
+ interesar a quien lo usa 
+\emph on
+dado que haya elegido algún artefacto de la colección
+\emph default
+.
+ Un sistema de este tipo no puede, ni debería, por definición, recomendar
+ algo en relación a un artículo que no conoce.
+ 
+\end_layout
+
+\begin_layout Standard
+Por otro lado, la recuperación de información pretende suplir necesidades
+ de información tratando de asimilar consultas de un usuario a documentos
+ en una colección, retornando el subconjunto de aquéllos que considere relevante
+s.
+ Se puede decir que las consultas del usuario son 
+\emph on
+documentos desconocidos
+\emph default
+ -en cuanto que no están presentes íntegra y textualmente en la colección
+ manejada por el sistema y que, en base a éstos, el sistema busca qué documentos
+ en su colección guardan alguna relación de similitud con ellos.
+ Un sistema de recuperación de información, por excelencia, es 
+\emph on
+el
+\emph default
+ componente principal y la tarea primordial de un usuario en cualquier contexto,
+ por lo que pueden darse la licencia de dejar que el usuario examine un
+ conjunto relativamente grande de resultados y que refine o reformule las
+ consultas.
+ Se concluye que un sistema de recuperación de información extrae documentos
+ en base a consultas que 
+\emph on
+no están en su colección explícitamente
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+El sistema que se pretende construir en este proyecto puede ser visto como
+ un híbrido de recomendador y recuperador de información: del primero toma
+ el importante papel de la inteligencia colectiva y la no interferencia
+ con el usuario -lo que incluye presentar conjuntos de resultados que no
+ sean tan grandes que obliguen al usuario a dejar su tarea principal por
+ explorarlos, menos a cambiar drásticamente su trabajo sólo para obtener
+ otros resultados; y de los sistemas de recuperación de información toma
+ el hecho de búsquedas de consultas y documentos no necesariamente existentes
+ en la colección.
+ Este enfoque no es nuevo, y la investigación en sistemas de este tipo en
+ especial -iniciada por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+- se ha valido de servicios ya existentes de recuperación de información,
+ lo cual podría probarse contraproducente: los sistemas de recuperación
+ de información tradicionales asumen que la relevancia de un documento es
+ equivalente a su similitud a la consulta del usuario, y están en lo correcto,
+ para aplicaciones orientadas a la búsqueda activa.
+ Pero, en un sistema que pretenda apoyar una tarea realizada por el usuario
+ ¿sería verdaderamente 
+\emph on
+útil
+\emph default
+ proporcionarle documentos que probablemente ya buscó o está buscando fuera
+ del sistema? En realidad, el sistema debería traer a la atención del usuario
+ artefactos que habría pasado por alto por no saber cómo buscar o ni siquiera
+ estar al tanto de su existencia o relación con su contexto local.
+ Para ello, la medida por la cual se debería regir un sistema como el propuesto
+ debería ser la 
+\emph on
+utilidad
+\emph default
+: qué artefactos pueden traerle una ganancia al usuario mediante la reducción
+ de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
+ o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Herlocker2004,Rhodes2000"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Investigaciones relacionadas
+\end_layout
+
+\begin_layout Standard
+Se pueden encontrar algunos sistemas surgidos de la investigación en el
+ campo de sistemas de recomendación orientados a la recuperación oportuna
+ de información:
+\end_layout
+
+\begin_layout Enumerate
+Remembrance Agent: Un módulo que se utiliza en el editor de textos 
+\emph on
+emacs
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.gnu.org/software/emacs/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\emph default
+y que sirve para realizar búsquedas de información relacionada a lo que
+ se escribe en distintos repositorios, desde el correo electrónico del usuario
+ hasta librerías digitales, mostrando los resultados en un apartado de la
+ ventana de edición.
+ Disponible para descarga en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.remem.org/
+\end_layout
+
+\end_inset
+
+ y descrito en detalle en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+.
+ Utiliza búsqueda mediante palabras clave y permite buscar explícitamente
+ otros documentos relacionados a las sugerencias.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Margin Notes: Un agente que revisa páginas en html y agrega, en un margen
+ derecho, vínculos a documentos locales que podrían ser de interés a las
+ distintas secciones del documento; extrae palabras clave de la página y
+ se basa en la 
+\emph on
+co-ocurrencia
+\emph default
+ de éstas en los documentos locales para sugerir.
+ Presentado en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000a"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Jimminy: desarrollado para una computadora que se porta en el hombro con
+ una terminal en un casco, recaba datos del contexto físico y social de
+ la persona mediante sensores (GPS, infrarrojos, etc) y permite tomar notas
+ mediante un teclado que se porta en el brazo.
+ A partir del contexto local, sugiere notas que podrían ser de utilidad.
+ También introducido por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Rhodes2000"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+FIXIT: aplicado al dominio de la reparación de fotocopiadoras y bienes relaciona
+dos, permite a los asesores de servicio técnico obtener información de los
+ manuales de usuario en base a la consulta que estén atendiendo.
+ Construye las consultas mediante los síntomas y problemas identificados,
+ se vale de una red de inferencia bayesiana para determinar la probabilidad
+ de relevancia de un documento a una consulta.
+ Definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hart1997"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Watson: un sistema que supervisa el entorno del usuario (su uso de procesadores
+ de texto, navegadores de internet y clientes de correo electrónico) para
+ sugerir documentos útiles, utiliza algoritmos heurísticos que encuentran
+ unidades conceptuales en los documentos, a partir de las cuales realiza
+ búsquedas concurrentes en distintas bases de datos y luego elimina duplicados
+ en los resultados mediante algoritmos de agrupamiento.
+ Definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Budzik1999"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+À propos: trata de determinar en qué etapa de la composición de un documento
+ está el usuario para sugerirle lecturas y recursos para ampliar su composición,
+ también se basa en búsquedas basadas en palabras clave en distintas bases
+ de datos.
+ Presentado en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "PuertaMelquizo2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+PIRA: un sistema basado en internet que, a medida que se escribe una investigaci
+ón, sugiere documentos relacionados y términos de búsqueda, a la vez que
+ permite citarlos automáticamente al elegirlos de los resultados, agregándolos
+ también a una bibliografía.
+ Se basa en servicios web de terceros para encontrar los términos clave,
+ ampliar la búsqueda con sinónimos y ofrecer las facilidades de cita automática.
+ Disponible para pruebas en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.writencite.com
+\end_layout
+
+\end_inset
+
+ y propuesto en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gruzd2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Implicit Queries y Stuff I've Seen: sistemas de administración de la información
+ personal que permiten la búsqueda más allá de palabras clave, basándose
+ en tipos de documento, personas y fechas; el sistema Implicit Queries infiere
+ las necesidades de información mientras el usuario escribe un correo electrónic
+o y le sugiere documentos que podrían servirle de apoyo,como correos anteriores,
+ entradas de agendas, etc.
+ Una descripción se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Cutrell2006,Dumais2004"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+AMIDA: supervisa lo que se discute en una reunión de trabajo y recupera
+ textos de reuniones anteriores que puedan servir para fundamentar puntos
+ de la presente.
+ El concepto y la descripción del sistema se pueden encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Popescu-belis1920"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Scienstein: un sistema de recomendación que se basa en lo que se ha escrito
+ y citado para sugerir documentos que puedan ampliar una investigación.
+ Descrito en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gipp2009"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Los sistemas anteriores tienen en común el uso de servicios de terceros
+ para la búsqueda de información, así como basar las consultas en palabras
+ clave extraídas del contexto local.
+ Sin embargo, el filtrado de los resultados en este tipo de sistemas es
+ poco o nulo: el conjunto de documentos que se presentan al usuario está
+ ordenado de acuerdo a la relevancia que tienen éstos en relación a una
+ consulta que el sistema ha construido.
+ En este proyecto se pretende echar mano del conocimiento que se pueda obtener
+ de cursos y usuarios para implementar un filtrado que reporte resultados
+ más útiles, partiendo de la premisa de que un curso se puede modelar en
+ un perfil y que éste puede ser útil para saber qué documentos mostrar en
+ sesiones individuales de documentación.
+\end_layout
+
+\begin_layout Section
+Tipo de Proyecto
+\end_layout
+
+\begin_layout Standard
+De investigación y desarrollo
+\end_layout
+
+\begin_layout Section
+Preguntas de investigación e hipótesis
+\end_layout
+
+\begin_layout Itemize
+¿Cuál es la ganancia del uso de una ontología personalizada para el re-ordenamie
+nto de resultados de búsqueda frente a los algoritmos convencionales de
+ contexto local?
+\end_layout
+
+\begin_layout Itemize
+¿Qué tan efectivo es el enfoque trans-lingüístico para la recuperación y
+ filtrado de información?
+\end_layout
+
+\begin_layout Itemize
+¿Existe una relación causal entre el tamaño de la colección documental -y
+ la ontología básica- y la ganancia de utilidad en las recomendaciones a
+ usuarios?
+\end_layout
+
+\begin_layout Itemize
+¿Es un enfoque heurístico/estadístico suficiente para la construcción automática
+ de consultas de usuarios, o es necesaria la aplicación del procesamiento
+ de lenguaje natural?
+\end_layout
+
+\begin_layout Itemize
+¿Cómo afecta una interfaz incremental la experiencia del usuario (frente
+ a una interfaz más invasiva)?
+\end_layout
+
+\begin_layout Itemize
+¿Existe una ganancia de utilidad en la aplicación de un sistema de recomendación
+ a un contexto académico, frente a enfoques más convencionales, como la
+ provisión de una interfaz de búsqueda?
+\end_layout
+
+\begin_layout Section
+Métodos
+\end_layout
+
+\begin_layout Standard
+El método de investigación consistirá, más que todo, en la recopilación
+ y revisión de bibliografía.
+ Se evaluarán experimentalmente, además, técnicas de clasificación y búsqueda
+ de documentos, para elegir las más adecuadas para el desarrollo del software.
+\end_layout
+
+\begin_layout Standard
+La implementación, aparte del análisis y diseño inicial, por cuestión de
+ tiempo y la naturaleza web de la aplicación, seguirá una metodología ágil
+ de desarrollo.
+\end_layout
+
+\begin_layout Section
+Recursos requeridos
+\end_layout
+
+\begin_layout Standard
+En cuanto a 
+\emph on
+software
+\emph default
+, se usarán herramientas de código libre (python para el desarrollo, postgresql
+ para almacenamiento, apache para el 
+\emph on
+deployment
+\emph default
+ y una plataforma linux).
+\end_layout
+
+\begin_layout Standard
+El 
+\emph on
+hardware
+\emph default
+, en su mayor parte, será la computadora personal del autor, aunque para
+ la obtención, procesamiento y almacenamiento de la colección documental;
+ y, quizá, la ejecución de la aplicación a la hora de la evaluación, sería
+ idóneo contar con un servidor del laboratorio de sistemas computacionales
+ de la universidad.
+\end_layout
+
+\begin_layout Section
+Alcance y restricciones
+\end_layout
+
+\begin_layout Standard
+Aunque una parte de la funcionalidad consiste en un componente de recuperación
+ de información, no se pretende desarrollar ni en parte ni mucho menos en
+ su totalidad uno, sino que se utilizará alguno de código abierto y propósito
+ general.
+ Asimismo, tampoco se pretende crear un nuevo proyecto de organización y
+ clasificación de información, por lo que el sistema se basará en una ontología
+ existente.
+ En cambio, el proyecto se centrará en el desarrollo del componente de recomenda
+ción de documentos y su manera de elaborar perfiles y el filtrado y presentación
+ de los resultados.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibtex_references/ReferenciasFaseI"
+options "bibtotoc,apa-good"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

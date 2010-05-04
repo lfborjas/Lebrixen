@@ -24,8 +24,8 @@
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks false
-\pdf_pdfborder false
-\pdf_colorlinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
 \pdf_backref false
 \pdf_pdfusetitle true
 \papersize default
@@ -12172,8 +12172,117 @@ En la presente implementación, para construir una consulta se utiliza el
  de uso y/o pueden bloquear las solicitudes si se excede un umbral.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Chapter
+Conclusión
+\end_layout
 
+\begin_layout Standard
+En este capítulo se discuten los resultados y aportes del presente proyecto,
+ así como las lecciones aprendidas y las recomendaciones a futuras generaciones
+ de estudiantes de ingeniería en sistemas computacionales
+\end_layout
+
+\begin_layout Section
+Lecciones aprendidas
+\end_layout
+
+\begin_layout Description
+El
+\begin_inset space ~
+\end_inset
+
+análisis
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+diseño
+\begin_inset space ~
+\end_inset
+
+cuidadosos
+\begin_inset space ~
+\end_inset
+
+son
+\begin_inset space ~
+\end_inset
+
+imprescindibles
+\begin_inset space ~
+\end_inset
+
+aún
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+nivel
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+código: Los desarrolladores de software actuales, el autor incluido, están
+ tan acostumbrados a las grandes capacidades de almacenamiento, procesamiento
+ y memoria -ya sea por negligencia o habituación a las capacidades de optimizaci
+ón de los compiladores- que escriben código que, para cantidades manejables
+ de datos, es eficaz.
+ Pero ¿qué pasa para grandes cantidades de datos? Durante el desarrollo
+ de este proyecto, surgieron algunos inconvenientes que sirvieron de lección
+ al autor, y vale, para enriquecimiento profesional, académico, moral o
+ al menos anecdótico del lector, un sucinto relato de los mismos.
+\begin_inset Newline newline
+\end_inset
+
+La primera experiencia fue con la araña web.
+ Una araña web puede tomar dos estrategias de exploración: en anchura y
+ en profundidad, con la primera como la estrategia por defecto.
+ En la primera, descarga todas las urls iniciales y las mantiene en memoria
+ para luego profundizar; para la segunda, se encarga de la exploración total
+ de una dirección inicial antes de pasar a otra.
+ Para una cantidad de urls iniciales relativamente pequeña (28, para ser
+ exactos) y un ancho de banda limitado , el rendimiento fue similar para
+ ambas estrategias.
+ Pero para la obtención de la colección documental, la araña contaba con
+ 13,407 urls 
+\emph on
+iniciales, 
+\emph default
+tal cantidad de objetos en memoria esperando ser procesados causó, luego
+ de tres horas-procesador de haberse iniciado el proceso, que el sistema
+ operativo forzara la terminación del mismo por excesivo consumo de memoria.
+ Al cambiar de estrategia, la araña logró terminar su exploración luego
+ de quince horas-procesador.
+\begin_inset Newline newline
+\end_inset
+
+La segunda se dio a la hora de almacenar los documentos descargados por
+ la araña, los cuales hubo que pre-procesar para extraer el texto plano
+ (eliminar el html, javascript y css, en caso de ser páginas html; o convertir
+ a texto los archivos binarios en formato pdf, con la utilidad del sistema
+ 
+\emph on
+pdftotext
+\emph default
+).
+ Con los 493 documentos de prueba, descargados del mismo sitio que los de
+ producción, no hubo problema alguno; mas con los 101663, la cantidad de
+ errores de conversión a 
+\emph on
+unicode
+\emph default
+ y de documentos en html o pdf mal-formados fue tal que se hubo de reescribir
+ el módulo de almacenamiento de manera que se perdiera la menor cantidad
+ de datos posible.
 \end_layout
 
 \begin_layout Standard
@@ -12395,7 +12504,14 @@ Luis Felipe Borjas
 \end_layout
 
 \begin_layout Subsection
-Copia de la respuesta de la facultad
+Respuesta de la facultad
+\end_layout
+
+\begin_layout Standard
+En respuesta a la solicitud, se procedió a asignar una dirección IP pública
+ al servidor de virtualización del laboratorio de sistemas computacionales,
+ acto seguido, se configuró un enrutador para hacer redirección de puertos
+ hacia la dirección IP asignada al servidor virtual.
 \end_layout
 
 \end_body
