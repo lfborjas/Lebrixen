@@ -163,15 +163,14 @@ Propósito
 
 \begin_layout Standard
 Desarrollar un servicio web que recomiende al usuario documentos relevantes
- a un contexto local, formado éste por la documentación de actividades o
- sesiones de un curso administrado en línea, expresando esta documentación
- mediante una descripción de la sesión actual y, opcionalmente, documentos
- que el usuario proporcione.
+ a un contexto local, entendiéndose por éste cualquier tarea que involucre
+ el ingreso de texto libre en la interfaz del sistema que utilice el servicio.
  La recomendación consistirá en la búsqueda de documentos relacionados conceptua
 lmente a la tarea del usuario en un índice de documentos mantenido por el
  sistema y la consiguiente recomendación de los que se consideren útiles,
- evaluando la utilidad a partir de un perfil del curso construido y actualizado
- automáticamente y el contexto inmediato de la sesión actual.
+ evaluando la utilidad a partir de un perfil construido y actualizado automática
+mente en base al uso histórico del servicio.
+ 
 \end_layout
 
 \begin_layout Section

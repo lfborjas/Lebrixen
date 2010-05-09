@@ -73,15 +73,15 @@ Propósito
 
 \begin_layout Standard
 Desarrollar un servicio web que recomiende al usuario documentos relevantes
- a un contexto local, formado éste por la documentación de actividades o
- sesiones de un curso administrado en línea, expresando esta documentación
- mediante una descripción de la sesión actual y, opcionalmente, documentos
- que el usuario proporcione.
+ a un contexto local, entendiéndose por éste cualquier tarea que involucre
+ el ingreso de texto libre en la interfaz del sistema que utilice el servicio.
  La recomendación consistirá en la búsqueda de documentos relacionados conceptua
 lmente a la tarea del usuario en un índice de documentos mantenido por el
  sistema y la consiguiente recomendación de los que se consideren útiles,
- evaluando la utilidad a partir de un perfil del curso construido y actualizado
- automáticamente y el contexto inmediato de la sesión actual.
+ evaluando la utilidad a partir de un perfil construido y actualizado automática
+mente en base al uso histórico del servicio.
+ Tanto la implementación como la evaluación se llevarán a cabo con un contexto
+ académico como objetivo idóneo para adopción y uso del servicio.
 \end_layout
 
 \begin_layout Section
@@ -98,7 +98,7 @@ Elegir la naturaleza de la colección documental base para la implementación
 \begin_layout Enumerate
 Desarrollar una interfaz para la expresión de los contextos de usuarios,
  así como la elección e implementación de la manera en la que se expresarán,
- construirán y actualizarán los perfiles de los cursos.
+ construirán y actualizarán los perfiles.
 \end_layout
 
 \begin_layout Enumerate
@@ -113,18 +113,18 @@ Resultados Esperados
 \end_layout
 
 \begin_layout Enumerate
-Desarrollar una aplicación, ya sea en forma de módulo individuale o servicio
- web, independiente del sistema anfitrión, orientada recomendación de recursos
- académicos en base a un perfil construido mediante la información histórica
- de cursos (o usuarios).
+Desarrollar una aplicación, ya sea en forma de módulo individual o servicio
+ web, independiente del sistema anfitrión, orientada a recomendación de
+ recursos académicos en base a un perfil construido mediante la información
+ histórica de cursos (o usuarios).
  
 \end_layout
 
 \begin_layout Enumerate
-Evaluar la utilidad en aplicaciones de dominios específicos de proyectos
- de código libre de propósito general de recuperación y análisis de información;
- asimismo, determinar la utilidad de proyectos de información orientados
- a la estructuración y enriquecimiento de los datos disponibles en internet.
+Evaluar la utilidad en dominios específicos de proyectos de código libre
+ de propósito general de recuperación y análisis de información; asimismo,
+ determinar la utilidad de proyectos de información orientados a la estructuraci
+ón y enriquecimiento de los datos disponibles en internet.
 \end_layout
 
 \begin_layout Enumerate
@@ -138,7 +138,7 @@ Palabras Clave
 \end_layout
 
 \begin_layout Standard
-recuperación de información, sistemas de recomendación, perfiles ontológicos,
+Recuperación de información, sistemas de recomendación, perfiles ontológicos,
  web semántica
 \end_layout
 
@@ -582,7 +582,8 @@ nto de resultados de búsqueda frente a los algoritmos convencionales de
 \begin_layout Itemize
 ¿Existe una ganancia de utilidad en la aplicación de un sistema de recomendación
  a un contexto académico, frente a enfoques más convencionales, como la
- provisión de una interfaz de búsqueda?
+ provisión de una interfaz de búsqueda o una búsqueda automática carente
+ de memoria de uso?
 \end_layout
 
 \begin_layout Section
@@ -616,7 +617,7 @@ software
 \emph on
 deployment
 \emph default
- y una plataforma linux).
+ y una plataforma linux para la ejecución en general).
 \end_layout
 
 \begin_layout Standard
