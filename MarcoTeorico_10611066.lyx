@@ -11769,8 +11769,11 @@ ninguno
 \begin_layout Standard
 Para la colección documental a usar en la etapa de desarrollo y primera
  presentación en UNITEC, la araña web obtuvo una colección documental de
- 3.7 Gb, requiriendo aproximadamente quince horas-procesador (y veintitrés
- horas físicas) para ello.
+ 3.7 Gb, (con 100,546 archivos html y 1117 pdf) requiriendo aproximadamente
+ quince horas-procesador (y veintitrés horas físicas) para ello.
+ Para el ambiente de prueba -en la computadora personal del autor- se usó
+ una sub-ontología de 18 categorías, con una colección documental de 17.1
+ Mb, compuesta por 482 documentos en html y 11 en pdf.
 \end_layout
 
 \begin_layout Section
@@ -11778,9 +11781,9 @@ Implementación del componente de búsqueda
 \end_layout
 
 \begin_layout Standard
-Una vez en poder de la colección documental, restaban dos cuestiones: el
- almacenamiento estructurado de ésta y la elección de un módulo para buscar
- en la misma.
+Una vez en poder de la colección documental, restan dos cuestiones: el almacenam
+iento estructurado de ésta y la elección de un módulo para buscar en la
+ misma.
 \end_layout
 
 \begin_layout Subsection
@@ -12032,9 +12035,8 @@ key "Gruzd2006"
 
 , se optó por un componente que extraiga términos clave del texto.
  Se implementó un método que recibe el susodicho texto, un título opcional
- y el lenguaje en el que está escrito, para los lenguajes que lo soporte
- (actualmente, inglés) éste método utiliza una librería del lenguaje de
- programación python para extraer palabras clave
+ y el lenguaje en el que está escrito; éste método utiliza una librería
+ del lenguaje de programación python para extraer palabras clave
 \begin_inset Foot
 status collapsed
 
@@ -12055,9 +12057,10 @@ http://pypi.python.org/pypi/topia.termextract/
 
 \end_inset
 
-, para los demás lenguajes (y opcionalmente para los que se pueden analizar
- con la librería previamente mencionada) se utiliza, por elección de quien
- utilice el sub-componente, uno de los siguientes servicios web:
+ para documentos en inglés, y, para los demás lenguajes, (y opcionalmente
+ para los que se pueden analizar con la librería previamente mencionada)
+ se utiliza, por elección de quien utilice el sub-componente, uno de los
+ siguientes servicios web:
 \end_layout
 
 \begin_layout Enumerate
@@ -12171,6 +12174,133 @@ En la presente implementación, para construir una consulta se utiliza el
  de uso y/o pueden bloquear las solicitudes si se excede un umbral.
 \end_layout
 
+\begin_layout Section
+Implementación del componente de perfilado
+\end_layout
+
+\begin_layout Standard
+En poder de la ontología, indexados los sustitutos documentales e implementado
+ el componente de búsqueda automática, el siguiente paso fue resolver la
+ cuestión de la representación, construcción y evolución del perfil.
+ 
+\end_layout
+
+\begin_layout Subsection
+Entrenamiento del clasificador de categorías
+\end_layout
+
+\begin_layout Standard
+Antes de resolver el quid de esta etapa, húbose de sentar el fundamento
+ para un enfoque ontológico de perfilado: para un documento o contexto local,
+ se debe poder determinar a qué categoría o categorías pertenece.
+ Aunque en un principio se pensó en seguir el ejemplo de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sieg2007"
+
+\end_inset
+
+ y construir vectores acumulativos para cada categoría, siguiendo el modelo
+ de espacio vectorial.
+ Sin embargo, puesto que tal implementación habría trascendido el alcance
+ del proyecto, se decidió hacer uso de una herramienta de propósito general:
+ 
+\emph on
+xappy
+\emph default
+, una interfaz en 
+\emph on
+python
+\emph default
+ para la librería de recuperación de información 
+\emph on
+xapian
+\emph default
+, escrita en C++.
+\end_layout
+
+\begin_layout Standard
+Para cada categoría, se tomaron todos los documentos que pertenecían a la
+ misma, según lo determinado en la etapa anterior, y se usaron para indexarla.
+ En otras palabras, se consideró cada categoría como un gran documento compuesto
+ del texto de todos los sub-documentos pertenecientes a ella, según el 
+\emph on
+ODP; 
+\emph default
+al indexar estos documentos/categorías, se consigue efectivamente que, dada
+ una cadena de texto, se puedan encontrar las categorías a las cuales tiene
+ más probabilidad de pertenecer
+\emph on
+.
+ 
+\emph default
+Aunque este enfoque es, en principio, similar al de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sieg2007"
+
+\end_inset
+
+, la mayor diferencia es el modelo de recuperación de información a usar:
+ en este proyecto se eligió un modelo probabilístico en lugar del de espacio
+ vectorial.
+\end_layout
+
+\begin_layout Standard
+El lector quizá se pregunte por qué, dado que la misma librería subyacente
+ se habría de usar, no se usó la misma interfaz que para el almacenamiento
+ de documentos, 
+\emph on
+djapian
+\emph default
+.
+ La razón es simple: eficiencia de almacenamiento, 
+\emph on
+djapian
+\emph default
+ requiere el almacenamiento de 
+\emph on
+todo
+\emph default
+ el texto de cada documento en una tupla de una base de datos relacional
+ para 
+\emph on
+luego
+\emph default
+ crear un índice de xapian (el cual, en el peor de los casos, es tan grande
+ como la base de datos original), este precio se pagó con los sustitutos
+ documentales porque se requería la integración con django; pero para la
+ clasificación de categorías el almacenamiento redundante de los documentos
+ para las categorías era sencillamente una pérdida.
+ Con 
+\emph on
+xappy
+\emph default
+, se puede obviar el paso intermedio de almacenamiento en una base de datos
+ relacional y agregar los documentos inmediatamente al índice, con lo que
+ se utiliza efectivamente menos espacio, ya que los documentos indexados
+ no contienen todo el texto original, sino sólo lo que resulta luego del
+ procesamiento de la librería: colecciones de-duplicadas de términos clave,
+ libres de palabras vacías y, sobre todo, de redundancia.
+\end_layout
+
+\begin_layout Standard
+Una vez creado el índice de categorías, se implementó una función que recibe
+ una consulta y devuelve las diez categorías con mayor probabilidad de pertenenc
+ia.
+\end_layout
+
+\begin_layout Subsubsection
+Notas sobre rendimiento
+\end_layout
+
+\begin_layout Standard
+Para procesar los 493 documentos de la colección de prueba se requirieron
+ 25 segundos-procesador, siendo cuellos de botella las consultas hechas
+ a la base de datos para obtener el texto de los documentos de cada categoría.
+ 
+\end_layout
+
 \begin_layout Chapter
 Conclusión
 \end_layout
@@ -12282,6 +12412,10 @@ unicode
  y de documentos en html o pdf mal-formados fue tal que se hubo de reescribir
  el módulo de almacenamiento de manera que se perdiera la menor cantidad
  de datos posible.
+ Para la última colección de documentos, se requirieron [más de diez-horas
+ procesador] para almacenarlos, con una pérdida del 1% de documentos que
+ no pudieron ser ingresados en la base de datos por corrupción del formato
+ original.
 \end_layout
 
 \begin_layout Standard
