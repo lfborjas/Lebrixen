@@ -12430,9 +12430,10 @@ prometedora
 \end_layout
 
 \begin_layout Standard
-Por consiguiente, la probabilidad de utilidad se puede expresar como razón
- entre la cantidad de documentos contenidos en una sub-categoría respecto
- a la cantidad de documentos total del sucesor de la misma.
+Por consiguiente, la probabilidad de utilidad se puede expresar como el
+ complemento de la razón entre la cantidad de documentos contenidos en una
+ sub-categoría respecto a la cantidad de documentos total del sucesor de
+ la misma.
  Donde la cantidad de documentos se define por la siguiente fórmula:
 \end_layout
 
@@ -12456,7 +12457,7 @@ Así, la ponderación de una arista entre categorías se puede expresar como:
 
 \begin_layout Standard
 \begin_inset Formula \begin{equation}
-W(C_{i},C_{j})=\gamma*D(C_{j})/D(C_{i})\end{equation}
+W(C_{i},C_{j})=\gamma*(1-D(C_{j})/D(C_{i}))\end{equation}
 
 \end_inset
 
