@@ -12216,7 +12216,7 @@ python
 \emph on
 xapian
 \emph default
-, escrita en C++.
+ escrita en C++.
 \end_layout
 
 \begin_layout Standard
@@ -12286,8 +12286,8 @@ xappy
 
 \begin_layout Standard
 Una vez creado el índice de categorías, se implementó una función que recibe
- una consulta y devuelve las diez categorías con mayor probabilidad de pertenenc
-ia.
+ una consulta y devuelve las diez categorías a las cuales tiene mayor probabilid
+ad de pertenecer.
 \end_layout
 
 \begin_layout Subsubsection
@@ -12296,7 +12296,7 @@ Notas sobre rendimiento
 
 \begin_layout Standard
 Para procesar los 493 documentos de la colección de prueba se requirieron
- 25 segundos-procesador, siendo cuellos de botella las consultas hechas
+ once segundos-procesador, siendo cuellos de botella las consultas hechas
  a la base de datos para obtener el texto de los documentos de cada categoría.
  
 \end_layout
@@ -12306,29 +12306,179 @@ Ponderación de las categorías
 \end_layout
 
 \begin_layout Standard
-Los enfoques de 
+Una de las razones por las cuales elegir el uso de una ontología, frente
+ a la opción de una lista plana de categorías (o conceptos) es la posibilidad
+ de descubrir, mediante las relaciones entre nodos de la ontología, conceptos
+ que podrían ser de interés -aunque indirectamente- al usuario.
+\end_layout
+
+\begin_layout Standard
+Para hacer este tipo de inferencia posible, se debe recurrir a un tipo especial
+ de análisis de grafos llamado 
+\emph on
+análisis de redes ontológicas 
+\emph default
+(las bases teóricas de este tipo de análisis se pueden encontrar en 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "AlexanderGelbukh2005"
+key "Hoser"
 
 \end_inset
 
-, 
+).
+ En específico, como sugiere el trabajo hecho con el sistema 
+\emph on
+ontocopi
+\emph default
+, descrito por 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Daoud2008"
+key "Alani2003"
 
 \end_inset
 
- y 
+, se debe recurrir a un algoritmo de propagación, que permita encontrar
+ otros nodos -o categorías- relacionados al inicial siguiendo las relaciones
+ semánticas representadas como aristas en el grafo de la ontología.
+ Este tipo de algoritmos se han usado en sistemas que utilizan como base
+ de conocimiento una ontología, con distintos enfoques.
+ En el previamente mencionado 
+\emph on
+ontocopi
+\emph default
+, por ejemplo, debido a la existencia de diversas relaciones en la ontología,
+ el algoritmo de propagación es equivalentemente complejo y flexible: puede
+ ajustarse a sólo seguir ciertas relaciones hasta cierta profundidad.
+\end_layout
+
+\begin_layout Standard
+En cambio, la ontología del 
+\emph on
+ODP
+\emph default
+ es un grafo más sencillo: consiste simplemente en una jerarquía, representable
+ en un árbol, donde una categoría puede tener uno o ningún padre y ninguno
+ o varios sucesores; siendo las relaciones de la ontología de un solo tipo:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+es subcategoría de
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Con una ontología tan simple, el algoritmo de propagación se simplifica
+ también.
+ 
+\end_layout
+
+\begin_layout Standard
+El enfoque de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Middleton2001"
+
+\end_inset
+
+, por ejemplo, simplemente propaga un medio del interés de la categoría
+ inicial hacia su ancestro inmediato, luego un medio del interés de éste
+ a su sucesor y así sucesivamente hacia la raíz.
+ Esto permite que, aunque el usuario se haya interesado en una categoría
+ específica, el perfil -y, por tanto, las recomendaciones- pueda tener en
+ cuenta los antecesores más generales de ésta.
+\end_layout
+
+\begin_layout Standard
+Por otro lado, el enfoque de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Sieg2007"
 
 \end_inset
 
- requieren que las categorías en la jerarquía tengan un peso asignado.
+, más fiel al análisis de redes ontológicas, pondera cada arista con el
+ nivel de 
+\emph on
+inclusión
+\emph default
+ que una categoría tiene con su padre, es decir, dado el vector que representa
+ a una categoría, el peso de la arista que une a ésta con su padre es proporcion
+al a qué tantos de los términos del vector de ésta están contenidos en el
+ vector que representa a su sucesor.
  
+\end_layout
+
+\begin_layout Standard
+Siguiendo ese ejemplo, el enfoque de la ponderación de las aristas en este
+ proyecto se hace en base a una medida estadística ligeramente distinta:
+ la probabilidad de utilidad.
+ Esta probabilidad empírica se deriva de la premisa que, entre más documentos
+ tenga una categoría, más 
+\begin_inset Quotes eld
+\end_inset
+
+prometedora
+\begin_inset Quotes erd
+\end_inset
+
+ es en términos de futuras recomendaciones, por lo que su sucesor debería
+ recibir menos atención; y, a la inversa, si una categoría carece de documentos,
+ su sucesor debería tomarse más en cuenta a la hora de hacer recomendaciones,
+ ya que es probable que la categoría no vuelva a producir resultados útiles.
+ 
+\end_layout
+
+\begin_layout Standard
+Por consiguiente, la probabilidad de utilidad se puede expresar como razón
+ entre la cantidad de documentos contenidos en una sub-categoría respecto
+ a la cantidad de documentos total del sucesor de la misma.
+ Donde la cantidad de documentos se define por la siguiente fórmula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+D(C_{i})=|docs(C_{i})|+\sum_{c_{j}\in SubCats(C_{i})}|docs(C_{j})|\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(donde SubCats(C) se refiere al conjunto de sub categorías de un concepto
+ C y docs(C), al conjunto de documentos del mismo).
+\end_layout
+
+\begin_layout Standard
+Así, la ponderación de una arista entre categorías se puede expresar como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+W(C_{i},C_{j})=\gamma*D(C_{j})/D(C_{i})\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En la implementación, la constante 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ se ha establecido en la unidad, de manera que los pesos de las aristas
+ entre categorías se encuentran en el rango 
+\begin_inset Formula $\left[0,1\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La computación de estos pesos sólo se hace una vez para cada actualización
+ de la ontología.
 \end_layout
 
 \begin_layout Chapter
