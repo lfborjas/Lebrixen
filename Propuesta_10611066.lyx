@@ -56,7 +56,7 @@ Propuesta de proyecto de graduación:
 \begin_inset Newline newline
 \end_inset
 
-Sistema de recomendación de documentos aplicado a un contexto académico
+Servicio de recomendación de documentos basado en ontología
 \end_layout
 
 \begin_layout Author
@@ -80,8 +80,7 @@ lmente a la tarea del usuario en un índice de documentos mantenido por el
  sistema y la consiguiente recomendación de los que se consideren útiles,
  evaluando la utilidad a partir de un perfil construido y actualizado automática
 mente en base al uso histórico del servicio.
- Tanto la implementación como la evaluación se llevarán a cabo con un contexto
- académico como objetivo idóneo para adopción y uso del servicio.
+ 
 \end_layout
 
 \begin_layout Section
@@ -93,12 +92,12 @@ Elegir la naturaleza de la colección documental base para la implementación
  y pruebas.
  Ya sea en la forma de documentos obtenidos de internet o mediante la interfaz
  de búsqueda de una librería digital o motor de búsqueda existente.
+ Acto seguido, obtener una muestra significativa de la misma.
 \end_layout
 
 \begin_layout Enumerate
-Desarrollar una interfaz para la expresión de los contextos de usuarios,
- así como la elección e implementación de la manera en la que se expresarán,
- construirán y actualizarán los perfiles.
+Elegir e implementar la manera en la que se expresarán, construirán y actualizar
+án los perfiles.
 \end_layout
 
 \begin_layout Enumerate
@@ -113,11 +112,9 @@ Resultados Esperados
 \end_layout
 
 \begin_layout Enumerate
-Desarrollar una aplicación, ya sea en forma de módulo individual o servicio
- web, independiente del sistema anfitrión, orientada a recomendación de
- recursos académicos en base a un perfil construido mediante la información
- histórica de cursos (o usuarios).
- 
+Desarrollar un servicio web fácil de implementar y utilizar que permita
+ la recomendación personalizada de documentos en base a un contexto local
+ en el sistema implementador.
 \end_layout
 
 \begin_layout Enumerate
@@ -129,8 +126,8 @@ Evaluar la utilidad en dominios específicos de proyectos de código libre
 
 \begin_layout Enumerate
 Contribuir a las áreas de investigación de recuperación de información y
- sistemas de recomendación mediante la implementación de un sistema especializad
-o y, a la vez, flexible.
+ sistemas de recomendación mediante la implementación de un sistema flexible
+ y re-utilizable.
 \end_layout
 
 \begin_layout Section
@@ -255,7 +252,7 @@ no están en su colección explícitamente
 \begin_layout Standard
 El sistema que se pretende construir en este proyecto puede ser visto como
  un híbrido de recomendador y recuperador de información: del primero toma
- el importante papel de la inteligencia colectiva y la no interferencia
+ el importante papel de la sensibilidad contextual y la no interferencia
  con el usuario -lo que incluye presentar conjuntos de resultados que no
  sean tan grandes que obliguen al usuario a dejar su tarea principal por
  explorarlos, menos a cambiar drásticamente su trabajo sólo para obtener
@@ -290,9 +287,9 @@ key "Rhodes2000"
 utilidad
 \emph default
 : qué artefactos pueden traerle una ganancia al usuario mediante la reducción
- de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
- o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
- 
+ de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar
+ o cuyo esfuerzo excedía el beneficio) o la serendipia (al mostrarle elementos
+ que le ayuden a ampliar su tarea 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Herlocker2004,Rhodes2000"
@@ -532,11 +529,11 @@ Los sistemas anteriores tienen en común el uso de servicios de terceros
  poco o nulo: el conjunto de documentos que se presentan al usuario está
  ordenado de acuerdo a la relevancia que tienen éstos en relación a una
  consulta que el sistema ha construido.
- En este proyecto se pretende echar mano del conocimiento que se pueda obtener
- de cursos y usuarios para implementar un filtrado que reporte resultados
- más útiles, partiendo de la premisa de que un curso se puede modelar en
- un perfil y que éste puede ser útil para saber qué documentos mostrar en
- sesiones individuales de documentación.
+ En este proyecto se pretende echar mano del conocimiento histórico que
+ se pueda obtener de los usuarios de los sistemas implementadores para agregar
+ un filtrado que reporte resultados más útiles, partiendo de la premisa
+ de que un usuario se puede modelar en un perfil y que éste puede ser útil
+ para saber qué documentos mostrar en sesiones individuales de documentación.
 \end_layout
 
 \begin_layout Section
@@ -558,8 +555,8 @@ nto de resultados de búsqueda frente a los algoritmos convencionales de
 \end_layout
 
 \begin_layout Itemize
-¿Qué tan efectivo es el enfoque trans-lingüístico para la recuperación y
- filtrado de información?
+¿Qué tan efectivo es el enfoque trans-lingüístico para la evolución de los
+ perfiles?
 \end_layout
 
 \begin_layout Itemize
@@ -581,9 +578,8 @@ nto de resultados de búsqueda frente a los algoritmos convencionales de
 
 \begin_layout Itemize
 ¿Existe una ganancia de utilidad en la aplicación de un sistema de recomendación
- a un contexto académico, frente a enfoques más convencionales, como la
- provisión de una interfaz de búsqueda o una búsqueda automática carente
- de memoria de uso?
+, frente a enfoques más convencionales, como la provisión de una interfaz
+ de búsqueda o una búsqueda automática carente de memoria de uso?
 \end_layout
 
 \begin_layout Section
@@ -645,8 +641,8 @@ Aunque una parte de la funcionalidad consiste en un componente de recuperación
  clasificación de información, por lo que el sistema se basará en una ontología
  existente.
  En cambio, el proyecto se centrará en el desarrollo del componente de recomenda
-ción de documentos y su manera de elaborar perfiles y el filtrado y presentación
- de los resultados.
+ción de documentos , su manera de elaborar perfiles y el filtrado y presentación
+ de los resultados en base al conocimiento proveído por la ontología.
 \end_layout
 
 \begin_layout Standard

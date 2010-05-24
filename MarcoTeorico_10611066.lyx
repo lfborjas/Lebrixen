@@ -63,7 +63,7 @@ Luis Felipe Borjas Reyes
  10611066
 \end_layout
 
-\begin_layout Publishers
+\begin_layout Subject
 \begin_inset Graphics
 	filename images/logo.png
 	scale 50
@@ -102,7 +102,14 @@ Universidad Tecnológica Centroamericana
 \begin_inset Newline newline
 \end_inset
 
-Escuela de Ingenierías
+Facultad de ingeniería en sistemas computacionales
+\begin_inset Newline newline
+\end_inset
+
+Tesis en opción al título de Ingeniero en Sistemas Computacionales
+\end_layout
+
+\begin_layout Publishers
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
