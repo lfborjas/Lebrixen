@@ -52,7 +52,7 @@
 \begin_body
 
 \begin_layout Title
-Sistema de recomendación de documentos aplicado a un contexto académico
+Servicio de recomendación de documentos basado en ontología
 \end_layout
 
 \begin_layout Author
@@ -106,7 +106,7 @@ Facultad de ingeniería en sistemas computacionales
 \begin_inset Newline newline
 \end_inset
 
-Tesis en opción al título de Ingeniero en Sistemas Computacionales
+En opción al título de Ingeniero en Sistemas Computacionales
 \end_layout
 
 \begin_layout Publishers
@@ -150,18 +150,83 @@ implícita
 \end_layout
 
 \begin_layout Standard
-Cuando un docente está planificando una sesión (lección magistral, proyecto,
- exposición, etc.) la necesidad latente de información se deriva de que quizá
- el docente se podría beneficiar de documentos que se relacionen con la
- sesión y con el curso en sí, tanto para referencia propia como para ofrecer
- como lecturas o recursos suplementarios a los alumnos; y, sin embargo,
- muchos docentes abdican de ampliar su cátedra de esta manera por varias
- razones, muchas de las cuales se pueden resumir en desánimo ante el prospecto
- de buscar tales recursos o el desconocimiento de la existencia de los mismos.
- Pero ¿qué tal si, en el uso de un sistema en el que administran sus clases,
- estos documentos útiles les fueran facilitados a los docentes sin necesidad
- de una búsqueda activa? Es ésta la necesidad que el presente proyecto busca
- suplir.
+La actualidad es testigo de dos fenómenos que bien podrían complementarse:
+ el incremento en la cantidad de información fácilmente accesible y el naciente
+ uso de herramientas basadas en la red para llevar a cabo tareas otrora
+ realizadas en 
+\begin_inset Quotes eld
+\end_inset
+
+el escritorio
+\begin_inset Quotes erd
+\end_inset
+
+.
+ De hecho, el internet ha dejado de ser una fuente de información actualizada
+ y mantenida por unos pocos a una comunidad en la que todos somos productores
+ y consumidores a la vez.
+ Pero existe una desventaja: más información no significa mejor información,
+ y, aunque en muchos nichos de consumo de la misma la exactitud y calidad
+ de ésta sea irrelevante, los ambientes profesionales y académicos se están
+ viendo afectados por la irónica dificultad de encontrar información verdaderame
+nte útil, consecuencia de la sobrecarga de datos.
+ En respuesta a esto, las investigaciones académicas y las iniciativas comercial
+es han propuesto una 
+\emph on
+red
+\emph default
+ más inteligente, y con ésta, proyectos que orientan el futuro del internet
+ a una red más semántica y menos sobrecargada de información ambigua.
+ Ejemplo de esto son los sistemas de recomendación y los motores de búsqueda
+ sensibles al contexto y al uso histórico (con ejemplos de alta talla como
+ 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+amazon.com
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+google.com
+\end_layout
+
+\end_inset
+
+, respectivamente).
+ Pero esta red inteligente tiene que ser usada de alguna manera para ventaja
+ del productor de información, y obligar a éste a abdicar de su tarea de
+ producción de información para perder varias horas en búsquedas quizá demasiado
+ prolongadas, es un desperdicio.
+\end_layout
+
+\begin_layout Standard
+Para ello, se han sugerido herramientas que ayuden al usuario a llevar a
+ cabo sus tareas 
+\emph on
+sin abandonarlas
+\emph default
+ y, a la vez, sin perder la calidad.
+ La mayor parte de éstas han sido herramientas de escritorio o aplicaciones
+ web exclusivas, pero aún esa solución sigue dejando qué desear: el usuario
+ debería poder ver su tarea enriquecida con información relevante 
+\emph on
+sin importar dónde la esté llevando a cabo
+\emph default
+.
+ Para este propósito se propone el proyecto actual: permitir a los desarrollador
+es de aplicaciones, ya sean web o de escritorio, valerse de la inteligencia
+ colectiva plasmada en la web semántica en las tareas de producción de informaci
+ón de sus usuarios.
+ 
 \end_layout
 
 \begin_layout Section
@@ -189,12 +254,13 @@ Elegir la naturaleza de la colección documental base para la implementación
  y pruebas.
  Ya sea en la forma de documentos obtenidos de internet o mediante la interfaz
  de búsqueda de una librería digital o motor de búsqueda existente.
+ Acto seguido, obtener una muestra significativa de la colección para efectos
+ de desarrollo y muestra preliminar.
 \end_layout
 
 \begin_layout Enumerate
-Desarrollar una interfaz para la expresión de los contextos de usuarios,
- así como la elección e implementación de la manera en la que se expresarán,
- construirán y actualizarán los perfiles de los cursos.
+Elegir e implementar la manera en la que se expresarán, construirán y actualizar
+án los perfiles de los usuarios.
 \end_layout
 
 \begin_layout Enumerate
@@ -209,8 +275,7 @@ Contexto
 \end_layout
 
 \begin_layout Standard
-Se puede comparar la tarea que este proyecto llevará a cabo con la que realiza
- una persona que compra un artículo en 
+Los sistemas de recomendación, como el utilizado en 
 \begin_inset Flex URL
 status collapsed
 
@@ -221,83 +286,20 @@ www.amazon.com
 
 \end_inset
 
-: el usuario está interesado en el artículo que está adquiriendo, después
- de todo, ese es su propósito principal al utilizar el sistema, pero el
- sitio también le sugiere, cuando el usuario ha elegido un producto, otros
- que podrían intesarle; eso es precisamente un tipo común de sistema de
- recomendación: un componente 
-\emph on
-secundario
-\emph default
- en otro contexto mayor -como un sitio de compras o de renta de películas-
- que, de manera no intrusiva, exacta y rápida, ofrece al usuario opciones
- que puedan enriquecer su experiencia.
- Un sistema así, entonces, 
-\emph on
-intuye
-\emph default
- qué podría ser de interés a un usuario en base al contexto en el que está
- actuando o al perfil que ya ha construido de él (en sitios de recomendación
- de música -por ejemplo, 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-www.last.fm
-\end_layout
-
-\end_inset
-
-, - se mantiene un perfil de los usuarios para predecir qué podría interesarles
- después de un tiempo de uso); un sistema así, entonces y como aclara 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Safran2005"
-
-\end_inset
-
-, se vale de la 
-\emph on
-contextualización
-\emph default
- y la 
-\emph on
-adaptación 
-\emph default
-para llevar a cabo su tarea.
- De ahí que estos sistemas se consideren un buen ejemplo de 
-\emph on
-inteligencia colectiva
-\emph default
-, construir conocimiento a partir de información brindada por los usuarios,
- porque se valen de lo que los mismos usuarios opinan - mediante algún tipo
- de retroalimentación implícita o comunicación explícita- acercan los artículos
- en la colección de artefactos del sistema.
- En suma, un sistema de recomendación, en base al contexto o al usuario,
- determina qué artículos de la colección de artefactos que maneja podrían
- interesar a quien lo usa 
-\emph on
-dado que haya elegido algún artefacto de la colección
-\emph default
-.
- Un sistema de este tipo no puede, ni debería, por definición, recomendar
- algo en relación a un artículo que no conoce.
- 
+ analizan el contexto local de un usuario en base a un perfil de éste o
+ a su similitud con otros usuarios, donde tanto el perfil como la vecindad
+ -en cuanto a preferencias- se decide por los artículos de la colección
+ propia del sistema que se han elegido explícitamente, en este caso, entonces,
+ se trata de una tarea complementaria a lo que el usuario esté haciendo,
+ orientada a llevar a éste a explorar otras opciones dentro de las ofrecidas
+ por el servicio.
 \end_layout
 
 \begin_layout Standard
-Por otro lado, la recuperación de información pretende suplir necesidades
- de información tratando de asimilar consultas de un usuario a documentos
- en una colección, retornando el subconjunto de aquéllos que considere relevante
-s.
- Se puede decir que las consultas del usuario son 
-\emph on
-documentos desconocidos
-\emph default
- -en cuanto que no están presentes íntegra y textualmente en la colección
- manejada por el sistema y que, en base a éstos, el sistema busca qué documentos
- en su colección guardan alguna relación de similitud con ellos.
+Por otro lado, los sistemas de recuperación de información pretenden suplir
+ necesidades de información : el sistema busca qué documentos en su colección
+ guardan alguna relación de similitud con las consultas que los usuarios
+ expresan en un intento de concretar su necesidad.
  Un sistema de recuperación de información, por excelencia, es 
 \emph on
 el
@@ -306,24 +308,24 @@ el
  por lo que pueden darse la licencia de dejar que el usuario examine un
  conjunto relativamente grande de resultados y que refine o reformule las
  consultas.
- Se concluye que un sistema de recuperación de información extrae documentos
- en base a consultas que 
-\emph on
-no están en su colección explícitamente
-\emph default
-.
+ 
+\end_layout
+
+\begin_layout Standard
+Pero en esta era de la información activa, los usuarios se ven sobrecogidos
+ por la masiva cantidad de resultados que los motores de búsqueda ofrecen
+ o las infinitas elecciones de palabras, a veces inasequibles, que pueden
+ resultar en una búsqueda exitosa o en un completo fracaso.
+ Asimismo, pocos sistemas de recomendación tradicionales están orientados
+ a productores de información: en la mayor parte de los casos, es todo lo
+ contrario, están orientados a hacer consumir más a los consumidores.
 \end_layout
 
 \begin_layout Standard
 El sistema que se pretende construir en este proyecto puede ser visto como
- un híbrido de recomendador y recuperador de información: del primero toma
- el importante papel de la inteligencia colectiva y la no interferencia
- con el usuario -lo que incluye presentar conjuntos de resultados que no
- sean tan grandes que obliguen al usuario a dejar su tarea principal por
- explorarlos, menos a cambiar drásticamente su trabajo sólo para obtener
- otros resultados; y de los sistemas de recuperación de información toma
- el hecho de búsquedas de consultas y documentos no necesariamente existentes
- en la colección.
+ un híbrido de recomendador y recuperador de información: satisfacer necesidades
+ de información en contextos productivos en segundo plano, sin obligar al
+ usuario a distraerse pero ofreciendo recomendaciones útiles.
  Este enfoque no es nuevo, y la investigación en sistemas de este tipo en
  especial -iniciada por 
 \begin_inset CommandInset citation
@@ -342,10 +344,11 @@ key "Rhodes2000"
 \emph on
 útil
 \emph default
- proporcionarle documentos que probablemente ya buscó o está buscando fuera
- del sistema? En realidad, el sistema debería traer a la atención del usuario
- artefactos que habría pasado por alto por no saber cómo buscar o ni siquiera
- estar al tanto de su existencia o relación con su contexto local.
+ proporcionarle documentos que probablemente no están relacionados con la
+ tarea actual más allá del nivel léxico? En realidad, el sistema debería
+ traer a la atención del usuario artefactos que habría pasado por alto por
+ no saber cómo buscar o ni siquiera estar al tanto de su existencia o relación
+ con su contexto local.
  Para ello, la medida por la cual se debería regir un sistema como el propuesto
  debería ser la 
 \emph on
@@ -361,7 +364,8 @@ key "Herlocker2004,Rhodes2000"
 
 \end_inset
 
-.
+ y esta utilidad sólo se puede lograr llegando a conocer al usuario, como
+ se hace en los sistemas de recomendación.
  
 \end_layout
 
@@ -373,6 +377,40 @@ Proyectos relacionados
 Se pueden encontrar algunos sistemas surgidos de la investigación en el
  campo de sistemas de recomendación orientados a la recuperación oportuna
  de información:
+\end_layout
+
+\begin_layout Enumerate
+FIXIT: aplicado al dominio de la reparación de fotocopiadoras y bienes relaciona
+dos, permite a los asesores de servicio técnico obtener información de los
+ manuales de usuario en base a la consulta que estén atendiendo.
+ Construye las consultas mediante los síntomas y problemas identificados,
+ se vale de una red de inferencia bayesiana para determinar la probabilidad
+ de relevancia de un documento a una consulta.
+ Definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hart1997"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Watson: un sistema que supervisa el entorno del usuario (su uso de procesadores
+ de texto, navegadores de internet y clientes de correo electrónico) para
+ sugerir documentos útiles, utiliza algoritmos heurísticos que encuentran
+ unidades conceptuales en los documentos, a partir de las cuales realiza
+ búsquedas concurrentes en distintas bases de datos y luego elimina duplicados
+ en los resultados mediante algoritmos de agrupamiento.
+ Definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Budzik1999"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -466,48 +504,16 @@ key "Rhodes2000"
 \end_layout
 
 \begin_layout Enumerate
-FIXIT: aplicado al dominio de la reparación de fotocopiadoras y bienes relaciona
-dos, permite a los asesores de servicio técnico obtener información de los
- manuales de usuario en base a la consulta que estén atendiendo.
- Construye las consultas mediante los síntomas y problemas identificados,
- se vale de una red de inferencia bayesiana para determinar la probabilidad
- de relevancia de un documento a una consulta.
- Definido en 
+Implicit Queries y Stuff I've Seen: sistemas de administración de la información
+ personal que permiten la búsqueda más allá de palabras clave, basándose
+ en tipos de documento, personas y fechas; el sistema Implicit Queries infiere
+ las necesidades de información mientras el usuario escribe un correo electrónic
+o y le sugiere documentos que podrían servirle de apoyo,como correos anteriores,
+ entradas de agendas, etc.
+ Una descripción se puede encontrar en 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Hart1997"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Watson: un sistema que supervisa el entorno del usuario (su uso de procesadores
- de texto, navegadores de internet y clientes de correo electrónico) para
- sugerir documentos útiles, utiliza algoritmos heurísticos que encuentran
- unidades conceptuales en los documentos, a partir de las cuales realiza
- búsquedas concurrentes en distintas bases de datos y luego elimina duplicados
- en los resultados mediante algoritmos de agrupamiento.
- Definido en 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Budzik1999"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-À propos: trata de determinar en qué etapa de la composición de un documento
- está el usuario para sugerirle lecturas y recursos para ampliar su composición,
- también se basa en búsquedas basadas en palabras clave en distintas bases
- de datos.
- Presentado en 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "PuertaMelquizo2007"
+key "Cutrell2006,Dumais2004"
 
 \end_inset
 
@@ -543,16 +549,14 @@ key "Gruzd2006"
 \end_layout
 
 \begin_layout Enumerate
-Implicit Queries y Stuff I've Seen: sistemas de administración de la información
- personal que permiten la búsqueda más allá de palabras clave, basándose
- en tipos de documento, personas y fechas; el sistema Implicit Queries infiere
- las necesidades de información mientras el usuario escribe un correo electrónic
-o y le sugiere documentos que podrían servirle de apoyo,como correos anteriores,
- entradas de agendas, etc.
- Una descripción se puede encontrar en 
+À propos: trata de determinar en qué etapa de la composición de un documento
+ está el usuario para sugerirle lecturas y recursos para ampliar su composición,
+ también se basa en búsquedas basadas en palabras clave en distintas bases
+ de datos.
+ Presentado en 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Cutrell2006,Dumais2004"
+key "PuertaMelquizo2007"
 
 \end_inset
 
@@ -586,19 +590,46 @@ key "Gipp2009"
 .
 \end_layout
 
+\begin_layout Enumerate
+Zemantha: un agente de enriquecimiento del contenido: supervisa lo que un
+ usuario -en concreto, un autor de 
+\emph on
+blogs
+\emph default
+- escribe y le recomienda artículos, imágenes y demás medios para enriquecer
+ su tarea.
+ Se puede agregar a un sitio mediante un widget de javascript o a una aplicación
+ mediante una interfaz de programación de aplicaciones (API, por sus siglas
+ en inglés).
+ Activo desde 2009, más información se encuentra disponible en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.zemanta.com/
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
 \begin_layout Standard
-Los sistemas anteriores tienen en común el uso de servicios de terceros
- para la búsqueda de información, así como basar las consultas en palabras
- clave extraídas del contexto local.
- Sin embargo, el filtrado de los resultados en este tipo de sistemas es
- poco o nulo: el conjunto de documentos que se presentan al usuario está
- ordenado de acuerdo a la relevancia que tienen éstos en relación a una
- consulta que el sistema ha construido.
- En este proyecto se pretende echar mano del conocimiento que se pueda obtener
- de cursos y usuarios para implementar un filtrado que reporte resultados
- más útiles, partiendo de la premisa de que un curso se puede modelar en
- un perfil y que éste puede ser útil para saber qué documentos mostrar en
- sesiones individuales de documentación.
+De los proyectos anteriores, el único que está estrechamente relacionado
+ con el aquí propuesto es 
+\emph on
+zemantha
+\emph default
+, y, aunque funciona de manera similar, lamentablemente, 
+\emph on
+zemantha
+\emph default
+ soporta inglés exclusivamente y la construcción del perfil es explícita
+ -el usuario tiene que establecer sus preferencias a mano.
+ El proyecto descrito aquí, por otra parte, parte de una base multilingüe
+ (y hasta translingüe, a la hora de hacer recomendaciones y evolucionar
+ el perfil) y la evolución del perfil es automática.
 \end_layout
 
 \begin_layout Chapter
@@ -8790,48 +8821,25 @@ En esta etapa se definirán la motivación, alcance, audiencia y contribución
 
 \begin_layout Enumerate
 ¿Cuál es la principal motivación para la aplicación? Siendo la aplicación
- la implementación de un proyecto académico, la principal fuerza tras el
- desarrollo de la misma es determinar si un sistema que pueda recomendar
- recursos útiles a un usuario que lleva a cabo una tarea de planificación
- o documentación pedagógica es verdaderamente una ganancia para los usuarios,
- tanto los docentes que lo utilicen directamente como los estudiantes que
- se beneficien de los recursos aportados.
+ la implementación de un proyecto de apoyo a la producción de información,
+ la principal fuerza tras el desarrollo de la misma es determinar si un
+ sistema que pueda recomendar recursos útiles a un usuario que lleva a cabo
+ una tarea de documentación es verdaderamente una ganancia para los usuarios,
+ tanto los autores de la información, que lo utilizarán directamente, como
+ los consumidores que se beneficiarán de la calidad de la misma.
 \end_layout
 
 \begin_layout Enumerate
 ¿Cuáles son los objetivos que debe satisfacer la aplicación? En suma, la
  aplicación debe trascender los sistemas de recuperación oportuna de la
  información equivalentes al basarse en una representación más fidedigna
- del contexto local del usuario, así como en la inteligencia colectiva y
- las contribuciones activas de los usuarios para determinar los mejores
- recursos a presentar.
- 
+ del contexto local del usuario, así como en la construcción y evolución
+ de perfiles para evitar la ambigüedad en las recomendaciones.
 \end_layout
 
 \begin_layout Enumerate
 ¿Quién utilizará la aplicación? Cualquier usuario del sistema anfitrión
- - el cual será, para la implementación primera, 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-escolarea.com
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-- que haya creado un curso y se encuentre realizando actividades de documentació
-n en el mismo.
+ que emprenda una actividad de producción de información.
  
 \end_layout
 
@@ -8863,27 +8871,14 @@ El sistema deberá tratar lo que el usuario escriba en la interfaz de documentac
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá tomar los documentos que el usuario aporte como parte
- de su actividad de planificación y los deberá procesar y representar como
- los demás documentos, con el fin de agregarlos a la colección y realizar
- la búsqueda.
- Los documentos y lo escrito por el usuario en su sesión de planificación
- consistirán en el 
-\emph on
-contexto inmediato
-\emph default
-.
-\end_layout
-
-\begin_layout Enumerate
-El sistema deberá mantener un perfil de curso y del usuario con el fin de
- tener éste como base contextual para las recomendaciones.
+El sistema deberá mantener un perfil del usuario con el fin de tener éste
+ como base contextual para las recomendaciones.
  
 \end_layout
 
 \begin_layout Enumerate
 El sistema deberá determinar cuándo es el momento idóneo de iniciar la recomenda
-ción o de hacer una nueva, ya sea en base al tiempo pasado desde el inicio
+ción o hacer una nueva, ya sea en base al tiempo pasado desde el inicio
  de la sesión, la cantidad de información aportada por el usuario o la diferenci
 a entre el último contexto inmediato que creó una búsqueda y el actual.
 \end_layout
@@ -8891,7 +8886,8 @@ a entre el último contexto inmediato que creó una búsqueda y el actual.
 \begin_layout Enumerate
 El sistema deberá realizar una búsqueda y filtrado de documentos en base
  a las representaciones que haya hecho del contexto del usuario, entendiéndose
- por contexto tanto la base contextual como el contexto inmediato.
+ por contexto tanto la base contextual provista por el perfil como el contexto
+ inmediato de la tarea presente.
 \end_layout
 
 \begin_layout Enumerate
@@ -8901,9 +8897,9 @@ El sistema deberá determinar cuándo se utiliza un documento recomendado,
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá indexar y organizar los documentos que obtenga, ya sea
- mediante los aportes de los usuarios o una búsqueda periódica de nueva
- información.
+El sistema deberá ser capaz de ofrecer recomendaciones y actualizar perfiles
+ de usuario de la manera más flexible posible, sin obligar al implementador
+ a usar el servicio más allá de su propósito primordial.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8918,13 +8914,13 @@ name "sub:nf-requirements"
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá reflejar la separación entre el sistema anfitrión, el
- que extrae los datos de entrada y presenta los de salida y el componente
+El sistema deberá permitir reflejar la separación entre el sistema anfitrión,
+ el que extrae los datos de entrada y presenta los de salida y el componente
  principal, el que realiza las búsquedas y filtrado e indexa y mantiene
  la colección documental.
- Tal separación se logrará mediante el uso de una interfaz independiente
- del sistema anfitrión que reciba y devuelva los datos en un formato serializado
- (json, de preferencia, o xml).
+ Tal separación se logrará mediante una interfaz de programación de aplicaciones
+ que reciba y devuelva los datos en un formato serializado (json, de preferencia
+, o xml).
 \end_layout
 
 \begin_layout Enumerate
@@ -9049,6 +9045,12 @@ key "Nielsen1994"
 .
 \end_layout
 
+\begin_layout Enumerate
+El uso del sistema deberá estar libre de estado: toda la información necesaria
+ para el uso del servicio deberá estar contenida en la solicitud, permitiendo
+ así la escalabilidad mediante sistemas distribuidos.
+\end_layout
+
 \begin_layout Subsection
 Casos de uso
 \begin_inset CommandInset label
@@ -9077,78 +9079,46 @@ reference "fig:use_cases_diagram"
 \end_layout
 
 \begin_layout Description
-Inicia
+Solicita
 \begin_inset space ~
 \end_inset
 
-sesión: este caso de uso se refiere al comienzo de la sesión de documentación.
- En este momento, se conoce el curso para el cual se planifica y las sesiones
- previas, el usuario ha comenzado a escribir los detalles principales de
- la sesión.
- El sistema debe tener en cuenta que el usuario quizá se arrepienta y abandone
- la página o reformule completamente el contexto inmediato.
+Registro: el implementador llena un formulario de registro para el uso del
+ sistema, donde provee la información de su aplicación y un correo electrónico
+ de contacto válido, a la vez se valida que la solicitud sea hecha por un
+ ser humano.
+ El sistema responderá con un correo electrónico conteniendo la llave única
+ correspondiente a la aplicación solicitante.
 \end_layout
 
 \begin_layout Description
-Documenta: el usuario ha iniciado sesión, se ha creado o recuperado el perfil
- y el contexto inmediato ha sido determinado por el sistema para formular
- consultas a partir de la conjunción de éstos (el 
+Obtiene
+\begin_inset space ~
+\end_inset
+
+interfaz: si el implementador opta por utilizar la interfaz provista por
+ el servicio, se devuelve ésta serializada y configurada con los parámetros
+ adecuados.
+ El solicitante debe ser estar debidamente registrado como usuario del servicio.
+ La interfaz, dado que es un agregado a la interfaz propia del sistema implement
+ador, será conocida indistintamente como 
 \emph on
-contexto local
+widget
 \emph default
-).
- El sistema se vale del componente de búsqueda y filtrado para obtener recomenda
-ciones y mostrarlas.
- El sistema debe saber cuándo el contexto inmediato difiere significativamente
- del último al cual se hicieron recomendaciones para volver a iniciar el
- proceso.
- 
+ en el resto de este documento.
 \end_layout
 
 \begin_layout Description
-Agrega
+Solicita
 \begin_inset space ~
 \end_inset
 
-Documentos: el usuario elige incluir documentos en su sesión.
- El sistema debe incluirlos como parte del contexto inmediato y realizar
- nuevas recomendaciones.
- Dada la posible gran cantidad de texto a procesar aportada por estos documentos
- y las restricciones de tiempo inherentes al propósito del sistema, es posible
- que el sistema deba elegir basarse sólo en los títulos o en la existencia
- previa de los documentos en la colección para la búsqueda y el filtrado
- -nótese, sin embargo, que, al terminar la sesión, los documentos 
-\emph on
-sí
-\emph default
- son considerados para la construcción del perfil.
-\end_layout
-
-\begin_layout Description
-Usa
-\begin_inset space ~
-\end_inset
-
-Recomendación: el usuario decide incluir un documento de los recomendados
- a su sesión, el sistema habrá de tener esto en cuenta a la hora de construir
- el perfil.
- Dado que en cualquier momento el usuario puede descartar un documento,
- el sistema debería agregar tal retroalimentación al perfil solamente cuando
- se considere idóneo (a la hora de cerrar la sesión, por ejemplo).
-\end_layout
-
-\begin_layout Description
-Cierra
-\begin_inset space ~
-\end_inset
-
-sesión: en este momento, el usuario se prepara para abandonar la sesión,
- por lo que el sistema puede proceder a tomar el contexto de la misma y
- agregarlo a su conocimiento del perfil del curso.
- Asimismo, el sistema agregará los documentos que el usuario haya incluido
- en esta sesión a la colección documental, con la consiguiente indización
- de los mismos y el procesamiento necesario para la expansión del perfil
- del curso.
+Recomendaciones: El sistema implementador provee el usuario y el contexto
+ inmediato, el cual se analiza y se sintetiza en una consulta al componente
+ de búsqueda, luego, el componente de filtrado analiza y pondera las recomendaci
+ones en base al perfil del usuario y éstas son devueltas en un formato serializa
+do de hipermedia.
+ Nótese que, si el usuario es nuevo, se habrá de crear su perfil.
 \end_layout
 
 \begin_layout Description
@@ -9156,13 +9126,22 @@ Actualiza
 \begin_inset space ~
 \end_inset
 
-Colección: tanto el administrador como el sub-sistema que obtiene documentos
- externos -el 
-\emph on
-agente recolector-
-\emph default
- pueden agregar una cantidad significativa de éstos a la colección, lo que
- implica la indización de los mismos.
+Perfil: El sistema implementador provee el usuario, el último contexto inmediato
+ y, opcionalmente, los documentos elegidos mediante retroalimentación; en
+ base a esto, el servicio actualiza el perfil del usuario con las categorías/con
+ceptos presentes en el contexto.
+\end_layout
+
+\begin_layout Description
+Provee
+\begin_inset space ~
+\end_inset
+
+Retroalimentación: el usuario final decide utilizar un recurso recomendado.
+ En el caso de la interfaz provista por el servicio, es necesario tomar
+ éste en cuenta a la hora de actualizar el perfil; el implementador también
+ debería tener esto en cuenta, pero ello es responsabilidad exclusiva de
+ él.
 \end_layout
 
 \begin_layout Standard
@@ -9174,7 +9153,7 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/7_Use_cases.png
+	filename images/12_New_UseCaseDiagram.dia
 	scale 50
 
 \end_inset
@@ -9219,6 +9198,8 @@ code snippets
 ).
  Éstas consistirán en el título del documento, un sumario -de ser posible-
  y un enlace para visitar la localización original del documento (o descargarlo).
+ Nótese que este contenido sólo se mostraría si el implementador decide
+ utilizar la interfaz provista por el sistema.
 \end_layout
 
 \begin_layout Subsubsection
@@ -9238,101 +9219,38 @@ reference "fig:analysis_class_diagram"
 \end_layout
 
 \begin_layout Description
-Sesión: consiste en cada uso para documentación del sistema, contendrá una
- representación del contexto local a la hora de terminarla, los documentos
- utilizados, el usuario y el curso en cuestión.
-\end_layout
-
-\begin_layout Description
-Contexto
-\begin_inset space ~
-\end_inset
-
-inmediato: es una representación de la tarea del usuario.
- Representa el estado que ésta tiene hasta la última recomendación hecha.
- 
-\end_layout
-
-\begin_layout Description
-Perfil: una representación del conocimiento que se tiene de las sesiones
- anteriores en el curso, a partir de éste y el contexto inmediato se construye
- el 
+Preferencia: El grado de interés que un determinado usuario tiene en un
+ concepto específico.
+ Las preferencias de un usuario específico conforman su 
 \emph on
-contexto local
-\emph default
-.
+perfil.
 \end_layout
 
 \begin_layout Description
-Contexto
+Implementador: para efectos de almacenamiento, una aplicación que hace uso
+ del servicio.
+\end_layout
+
+\begin_layout Description
+Usuario
 \begin_inset space ~
 \end_inset
 
-local: una conjunción del contexto inmediato y el contexto base de un curso.
+Final: individuos que utilizan las aplicaciones que se valen del servicio.
 \end_layout
 
 \begin_layout Description
-Componente
-\begin_inset space ~
-\end_inset
-
-de
-\begin_inset space ~
-\end_inset
-
-búsqueda
-\begin_inset space ~
-\end_inset
-
-y
-\begin_inset space ~
-\end_inset
-
-filtrado: es con el que se comunica el sistema anfitrión para realizar las
- búsquedas y obtener los resultados de las mismas.
- 
+Recomendación: un resultado de la búsqueda y filtrado en la colección documental.
+ Puesto que una recomendación apunta a un documento, se descarta como clase
+ independiente.
 \end_layout
 
 \begin_layout Description
-Recomendación: el resultado de la búsqueda y filtrado.
- Contiene una colección de documentos y una referencia al contexto que la
- suscitó para que el sistema pueda ser capaz de comparar entre el contexto
- actual y el de la última recomendación.
+Categoría: un concepto en la base de conocimiento del sistema.
 \end_layout
 
 \begin_layout Description
-Documento: una referencia a documento propiamente dicho, puede consistir
- en un 
-\emph on
-documento en crudo
-\emph default
-, que es el documento que el usuario provee antes de que éste se agregue
- a la colección documental o un 
-\emph on
-sustituto documental
-\emph default
-, que es un documento que ya forma parte de la colección.
- Nótese que las recomendaciones contienen colecciones de éste último tipo.
-\end_layout
-
-\begin_layout Description
-Usuario: una referencia a la representación de usuarios del sistema anfitrión;
- deberían poder identificarse únicamente.
-\end_layout
-
-\begin_layout Description
-Curso: una referencia a la representación de cursos del sistema anfitrión;
- además de tener un identificador único, sería deseable contar con una descripci
-ón y un nombre, para la construcción del perfil.
-\end_layout
-
-\begin_layout Description
-Agente
-\begin_inset space ~
-\end_inset
-
-recolector: el sub-sistema que se encarga de obtener automáticamente nuevos
- documentos y agregarlos a la colección.
+Documento: una instancia de elemento de la colección documental.
 \end_layout
 
 \begin_layout Standard
@@ -9344,7 +9262,7 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/9_classDiagram.png
+	filename images/13_New_ClassDiagram.dia
 	scale 50
 
 \end_inset
@@ -9445,15 +9363,16 @@ reference "fig:interface_prototype"
 \end_layout
 
 \begin_layout Standard
-Se consideran aquí dos enfoques posibles para la implementación del sistema:
- el primero (figura 
+Se consideran aquí dos enfoques posibles para la implementación del sistema
+ -asumiendo el uso de la interfaz provista por el servicio: el primero (figura
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:pre-filtering-approach"
 
 \end_inset
 
-) utiliza la información del perfil del curso y la obtenida del contexto
+) utiliza la información del perfil del usuario y la obtenida del contexto
  inmediato para construir la consulta -aquí se podría utilizar, por ejemplo,
  una ontología de dominio derivada del mismo perfil para la extracción de
  términos clave y la expansión con sinónimos.
@@ -9467,23 +9386,56 @@ reference "fig:post-filtering-approach"
 ) utiliza la información del perfil para filtrar y ordenar los resultados
  según su adecuación a éste, mientras que construye la consulta sólo en
  base al contexto inmediato, extrayendo términos clave con algoritmos heurístico
-s.
+s, estadísticos o de procesamiento de lenguaje natural.
 \end_layout
 
 \begin_layout Standard
 Aunque el análisis funcional merece un apartado aparte, aquí se ha obviado
  porque esta etapa de análisis ya ha presentado ciertos detalles de la funcional
-idad interna y respecto al usuario y una profundización mayor correspondería
- ya a la etapa de implementación.
+idad interna y respecto al usuario; a la vez que una profundización mayor
+ correspondería a la etapa de implementación.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/14_Register.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Caso de uso 1: Solicitar Registro
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 
 \lyxline
 
@@ -9509,7 +9461,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Caso de Uso 1: IniciarSesión
+Caso de Uso 2: Solicitar Widget
 \end_layout
 
 \end_inset
@@ -9545,7 +9497,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Caso de Uso 2: Documenta
+Caso de Uso 3: Solicitar Recomendaciones
 \end_layout
 
 \end_inset
@@ -9561,39 +9513,6 @@ Caso de Uso 2: Documenta
 \begin_layout Plain Layout
 
 \lyxline
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename images/UML/UC3_add_document.dia
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Caso de uso 3: AgregaDocumento
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
@@ -9624,7 +9543,7 @@ Diagramas de interacción para los casos de uso 1 al 3
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -9636,7 +9555,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -9652,53 +9571,7 @@ status collapsed
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Caso de uso 4: UsaRecomendación
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lyxline
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset VSpace vfill
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename images/UML/UC5_close_session.dia
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Caso de uso 5: CierraSesión
+Caso de uso 4: Usar Recomendaciones
 \end_layout
 
 \end_inset
@@ -9732,7 +9605,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/UML/UC6_update_collection.dia
+	filename images/UML/UC5_close_session.dia
 	scale 30
 
 \end_inset
@@ -9744,7 +9617,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Caso de uso 6: ActualizaColección
+Caso de uso 5: Actualizar Perfil
 \end_layout
 
 \end_inset
@@ -9752,6 +9625,19 @@ Caso de uso 6: ActualizaColección
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lyxline
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace vfill
 \end_inset
 
 
@@ -9767,7 +9653,7 @@ name "fig:interaction_diagrams-4-6"
 
 \end_inset
 
-Diagramas de interacción para los casos de uso 4 al 6
+Diagramas de interacción para los casos de uso 4 y 5
 \end_layout
 
 \end_inset
@@ -9837,7 +9723,7 @@ status open
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -9882,7 +9768,7 @@ pre-filtrado
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -9963,10 +9849,8 @@ reference "sub:nf-requirements"
 \end_layout
 
 \begin_layout Standard
-El sistema se ha pensado como un componente independiente del sistema anfitrión.
- Por ello, aunque ciertos requisitos de compatibilidad son inevitables (como
- la existencia en la base de datos de entidades que representen a los usuarios
- y los cursos), la comunicación entre ambos debería ser tan independiente
+Puesto que se ofrece la funcionalida del sistema como un servicio solicitado
+ por un implementador, la comunicación entre ambos debería ser tan independiente
  de las implementaciones como sea posible, para ello, se proponen dos notaciones
  de intercambio de datos ampliamente utilizadas en las aplicaciones web:
  
@@ -9985,9 +9869,9 @@ xml
 El lenguaje de programación python se ha elegido por su fácil sintaxis,
  extensa colección de librerías y eficiencia.
  El marco de desarrollo django se ha favorecido por la experiencia previa
- del autor con el mismo y por su adhesión a filosofías de desarrollo efectivas,
- como el uso del modelo de arquitectura MVC y la orientación al desarrollo
- modular.
+ del autor con el mismo, su adhesión a filosofías de desarrollo efectivas,
+ como el uso del modelo de arquitectura MVC, la orientación al desarrollo
+ modular y la posibilidad de escalabilidad.
 \end_layout
 
 \begin_layout Standard
@@ -10046,7 +9930,7 @@ status collapsed
 \begin_layout Plain Layout
 Según la prueba comparativa de selectores css en 
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -10065,36 +9949,19 @@ http://mootools.net/slickspeed/
 
 \begin_layout Standard
 PostgreSQL es un motor de bases de datos eficiente en la manipulación de
- consultas y sin costo.
+ consultas, almacenamiento y procesamiento y es software libre.
  
 \end_layout
 
 \begin_layout Standard
 Siguiendo la tradición del uso de servidores Linux para aplicaciones que
- pretendan escalar y ofrecer el mayor rendimiento, y, dado que el sistema
- anfitrión de prueba
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-escolarea.com
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- está actualmente siendo servido desde un servidor con el sistema operativo
- ubuntu, se ha optado por éste sistema operativo para el almacenamiento
- y servicio.
+ pretendan escalar y ofrecer el mayor rendimiento y la compatibilidad óptima
+ del 
+\emph on
+framework 
+\emph default
+de desarrollo con esta plataforma se ha optado un sistema operativo ubuntu
+ linux para el almacenamiento y servicio.
 \end_layout
 
 \begin_layout Section
@@ -10125,7 +9992,7 @@ Diseño de la interfaz, estético y de contenido
 \begin_layout Standard
 En esta etapa se deben considerar los aspectos de la interacción con el
  usuario que afecten su apreciación, y consecuente juicio de utilidad, del
- sistema.
+ sistema -asumiendo el uso de la interfaz provista por el servicio.
  Esta interacción se puede considerar mediante los siguientes aspectos:
  la interfaz en sí, cómo está ésta diseñada estéticamente y qué contenido
  presenta.
@@ -10350,6 +10217,16 @@ Gráfico de relevancia
 \begin_layout Enumerate
 
 \emph on
+Palabras clave.
+
+\emph default
+ El usuario debe ser capaz de ver qué términos se extrajeron de su contexto
+ local, y así juzgar si vale la pena seguir examinando los resultados.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
 Muestras documentales ordenadas por relevancia
 \emph default
 .
@@ -10357,20 +10234,6 @@ Muestras documentales ordenadas por relevancia
  documentos encontrados, éstas estarán ordenadas por relevancia con el título
  resaltado y un corto sumario.
  Así el usuario puede juzgarlas someramente.
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Palabras clave en un dialogo flotante.
-
-\emph default
- Si el usuario decide pasar el mouse por encima de alguna recomendación,
- una pequeña ventana flotante mostrará los conceptos (o palabras clave)
- del contexto local que causaron la sugerencia de ese recurso específico,
- esto permite que el usuario haga juicios más detallados sobre los elementos
- individuales.
- 
 \end_layout
 
 \begin_layout Enumerate
@@ -10412,7 +10275,8 @@ key "Pressman2006"
 \end_inset
 
 El tiempo para adquirir un objetivo es una función de la distancia a la
- que se halla y de su tamaño
+ que se halla y de su tamaño [donde los elementos en los bordes se pueden
+ considerar de tamaño infinito hacia el lado del borde]
 \begin_inset Quotes erd
 \end_inset
 
@@ -10440,8 +10304,8 @@ incrementar el esfuerzo involucrado en llevar a cabo una tarea, causará
 
 , la interfaz de recomendación permitirá seleccionar fácilmente las recomendacio
 nes y agregarlas con un botón que se encuentre en la muestra documental
- -o agregar varias con un botón cercano a la lista de sugerencias.
- Como alternativa, el usuario podrá elegir una recomendación y 
+ -o quizá agregar varias con un botón cercano a la lista de sugerencias.
+ Como alternativa, el usuario podría elegir una recomendación y 
 \emph on
 arrastrarla
 \emph default
@@ -10457,8 +10321,7 @@ Facilidad de aprendizaje
 .
  La interfaz de recomendaciones debe ser similar a lo que usuarios hayan
  usado antes, por ello, las muestras documentales se parecen a resultados
- de un motor de búsqueda y están acompañadas de cajas de selección que establece
-n explícitamente que pueden elegirse varias sugerencias a la vez.
+ de un motor de búsqueda .
  Además, claro, de lo discutido en el primer punto: las alternativas de
  uso permiten que tanto usuarios acostumbrados a interfaces dinámicas como
  neófitos puedan intuir sin mayor esfuerzo cómo usar las recomendaciones.
@@ -10492,47 +10355,6 @@ asynchronous javascript and xml
 \end_inset
 
 ) a la hora de hacer las búsquedas de recursos a recomendar.
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Mantener la integridad del producto de trabajo
-\emph default
-.
- Los contextos y recomendaciones se guardarán automáticamente en una 
-\emph on
-sesión
-\emph default
- del servidor: el sistema de sesiones
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://docs.djangoproject.com/en/dev/topics/http/sessions/
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- de 
-\emph on
-django
-\emph default
- permite asociar una visita de usuario con un objeto que persiste hasta
- dos semanas en el lado del servidor, evitando así que errores de comunicación
- con éste afecten la tarea del usuario.
- Aunque no está dentro del alcance del sistema, esta misma persistencia
- se aplicará a la tarea principal en el sistema anfitrión de prueba.
 \end_layout
 
 \begin_layout Enumerate
@@ -10581,22 +10403,6 @@ Comunicación
  de una manera fácilmente navegable.
 \end_layout
 
-\begin_layout Enumerate
-
-\emph on
-Eficiencia y anticipación
-\emph default
-: puesto que la tarea principal de la aplicación es incrementar la productividad
- del usuario, y éste podría estar interesado en recursos que no hay manera
- de recomendar automáticamente, se ha decidido permitir una búsqueda directa,
- dispuesta hacia abajo a la derecha de la interfaz para resaltar su naturaleza
- de último recurso.
- No obstante, los resultados de una búsqueda directa serán también filtrados
- según el perfil del curso.
- Por las mismas razones, se le permitirá al usuario navegar entre las recomendac
-iones hechas en otros contextos de la sesión.
-\end_layout
-
 \begin_layout Standard
 Para un prototipo de la interfaz de recomendación véase la figura 
 \begin_inset CommandInset ref
@@ -10621,7 +10427,7 @@ reference "fig:interface_prototype"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
