@@ -12000,6 +12000,13 @@ En poder de la ontología, indexados los sustitutos documentales e implementado
 
 \begin_layout Subsection
 Entrenamiento del clasificador de categorías
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:category-classifier"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -12293,6 +12300,220 @@ En la implementación, la constante
 \begin_layout Standard
 La computación de estos pesos sólo se hace una vez para cada actualización
  de la ontología.
+ Una representación gráfica de una ontología ponderada como la recién descrita
+ se puede observar en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:weighted-ontology"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/15_WeightedOntology.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:weighted-ontology"
+
+\end_inset
+
+Ejemplo de ontología ponderada
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Evolución del perfil
+\end_layout
+
+\begin_layout Standard
+Una vez construida y ponderada la ontología, la creación y evolución de
+ los perfiles se convierten en tareas relativamente sencillas.
+ El perfil del usuario se representa como un conjunto de tuplas, donde cada
+ una es de la forma 
+\begin_inset Formula $(C,IS(C))$
+\end_inset
+
+ donde 
+\emph on
+C
+\emph default
+ es un concepto (o categoría) de la ontología e 
+\emph on
+IS(C) 
+\emph default
+es el 
+\emph on
+puntaje
+\emph default
+ 
+\emph on
+de preferencia
+\emph default
+ asignado a la categoría, este puntaje es un valor en el rango 
+\begin_inset Formula $[0,\infty]$
+\end_inset
+
+, de manera que la preferencia demostrada por el usuario a una categoría
+ en un momento de tiempo es proporcional a este puntaje.
+\end_layout
+
+\begin_layout Standard
+Una vez que un usuario termina una sesión de uso del servicio, se utiliza
+ el clasificador probabilístico entrenado con el 
+\emph on
+corpus
+\emph default
+ documental descrito en la sub-sección
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:category-classifier"
+
+\end_inset
+
+ para obtener las categorías a las cuales el contexto tenga mayor probabilidad
+ de pertenecer, asignando a éstas un puntaje de preferencia equivalente
+ a la similitud calculada por el clasificador entre cada categoría y el
+ contexto, estando éste en el rango 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ Asimismo, los conceptos bajo los cuales están clasificados los documentos
+ que el usuario pueda haber elegido como retroalimentación reciben un puntaje
+ inicial de 1.
+ Con los conceptos en este conjunto, los devueltos por el clasificador y
+ los de los documentos, se tiene el 
+\emph on
+conjunto de conceptos base
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Acto seguido, se utiliza un algoritmo de propagación (basado en el trabajo
+ de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sieg2007"
+
+\end_inset
+
+) para agregar al conjunto de conceptos base los antecesores de éstos en
+ la jerarquía ontológica, asignándoles una puntaje de preferencia calculado
+ con la siguiente fórmula: 
+\begin_inset Formula \begin{equation}
+IS(C_{i})=IS(C_{j})*W(C_{i},C_{j})\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+partiendo de la premisa que, si un usuario muestra interés en un concepto,
+ está mostrando un interés indirecto en los conceptos más generales que
+ el mismo.
+ Nótese que este interés está atenuado por la relación de pertenencia, previamen
+te explicada, entre los conceptos; asignando más interés a los antecesores
+ de conceptos cuyo cuerpo documental es pequeño en relación a otros al mismo
+ nivel de la jerarquía.
+\end_layout
+
+\begin_layout Standard
+Construido el conjunto expandido de conceptos, se procede al paso más crucial:
+ la evolución propia del perfil.
+ En esta etapa se hace una partición del conjunto de conceptos en base a
+ la existencia previa de un puntaje de preferencia en el perfil: en este
+ siguiente paso sólo se toman en cuenta los conceptos que tenían un puntaje
+ previo, los otros no reciben más procesamiento y se agregan al perfil.
+ De esta manera, para cada concepto previamente existente en el perfil,
+ se calcula un nuevo puntaje de preferencia, utilizando la siguiente fórmula,
+ adaptada de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Daoud2008"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+IS(C_{k})\begin{cases}
+\beta*IS(C_{k}) & si\, C_{k}\notin CON\\
+\beta*IS(C_{k})+(1-\beta)*IS(C_{k}) & si\, C_{k}\in CON\end{cases}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde 
+\begin_inset Formula $CON$
+\end_inset
+
+ es el conjunto de conceptos encontrados en la sesión actual y 
+\begin_inset Formula $\beta$
+\end_inset
+
+ es un factor de deterioro con un valor en el rango 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ Así, si un concepto anterior no vuelve a aparecer en la sesión actual,
+ el interés es disminuido (se puede decir que el concepto envejece).
+ En cambio, si el concepto vuelve a aparecer, aunque es deteriorado -para
+ favorecer conceptos más nuevos- es aumentado mediante el inverso del factor
+ de decadencia.
+ En suma, el interés de los conceptos va decayendo y este deterioro sólo
+ es contrarrestado si un concepto vuelve a ser favorecido.
+ Para acelerar el proceso de deterioro y poder favorecer los conceptos más
+ recientes, se ha elegido un valor de 0.2 para el factor 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+ El proceso de evolución se puede ver resumido en el algoritmo.
+\end_layout
+
+\begin_layout Section
+Implementación del servicio
 \end_layout
 
 \begin_layout Chapter
