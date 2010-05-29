@@ -12563,14 +12563,7 @@ REQUIRE contexto (en forma de texto libre o lista de términos), el perfil
 
 
 \backslash
-ENSURE perfil de usuario actualizado
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE CON = categorizar(contexto) + categorizar(documentos) 
+ENSURE perfil de usuario actualizado 
 \backslash
 
 \backslash
@@ -12582,6 +12575,13 @@ STATE CON = categorizar(contexto) + categorizar(documentos)
 
 \backslash
 COMMENT categorizar devuelve un mapa <categoría:preferencia>
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE CON = categorizar(contexto) + categorizar(documentos) 
 \end_layout
 
 \begin_layout Plain Layout
@@ -12623,17 +12623,6 @@ WHILE p
 
 \backslash
 STATE CON.agregar(<p:max(CON.obtener(p), CON.obtener(c)*W(p,c))>) 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-COMMENT agregar() se encarga de los duplicados
 \end_layout
 
 \begin_layout Plain Layout
@@ -12828,8 +12817,377 @@ end{algorithm}
 Implementación del servicio
 \end_layout
 
+\begin_layout Subsection
+Detección de cambios en el contexto local
+\end_layout
+
+\begin_layout Standard
+Para la interfaz opcional, el 
+\emph on
+widget
+\emph default
+, se agregó un componente de detección de cambios en el componente de interfaz
+ gráfica que el implementador elija (véase el manual de implementación para
+ más detalles al respecto).
+ Los cambios en el texto se monitorean cada
+\begin_inset Formula $\delta$
+\end_inset
+
+ palabras -este factor se ha establecido en 5- y son analizados con un algoritmo
+ de diferencia textual, en especifico, el propuesto en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Myers1986"
+
+\end_inset
+
+.
+ Acto seguido, se toman estas diferencias para calcular la distancia de
+ levenshtein
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+La cantidad de cambios -adiciones, borrados y sustituciones de caracteres
+ individuales- que debe sufrir una cadena de texto para convertirse en otra,
+ métrica propuesta en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Levenshtein1966"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ entre el nuevo contenido y el anterior, y si esta distancia es mayor que
+ un umbral aceptable (establecido para las pruebas preliminares en un 60%),
+ se considera que el texto ha cambiado lo suficiente como para contener
+ nuevos conceptos que podrían resultar en nuevas recomendaciones.
+ El algoritmo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{alg:context-changes}
+\end_layout
+
+\end_inset
+
+ resume este procedimiento.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Detección de cambios en el contexto local}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{alg:context-changes}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+REQUIRE contenido nuevo, contenido anterior, 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENSURE si es necesario o no obtener nuevas recomendaciones 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+COMMENT eliminar espacios sobrantes y urls
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE contenidoNuevo = limpiarCadena(contenidoNuevo) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+IF{abs(numPalabras(contenidoNuevo) - numPalabras(contenidoAnterior)) < $
+\backslash
+delta$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+RETURN 
+\backslash
+FALSE
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDIF
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE $
+\backslash
+Delta$ = levenshtein(diff(contenidoAnterior, contenidoNuevo))
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+RETURN $(
+\backslash
+Delta/contenidoNuevo.longitud) 
+\backslash
+geq 0.6 $
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Re-ordenamiento de los resultados
+\end_layout
+
+\begin_layout Standard
+El perfil del usuario cumple su papel principal a la hora de re-ordenar
+ los componentes que el componente de búsqueda devuelve en respuesta a la
+ consulta construida por el extractor de términos clave.
+ Para cada resultado, el componente de búsqueda calcula un 
+\emph on
+puntaje de relevancia
+\emph default
+ con valores en el rango 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+ El servicio re-ordena, en orden no-creciente, este conjunto de resultados
+ asignándoles un nuevo puntaje de relevancia según la siguiente fórmula
+ (adaptada de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Daoud2008"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+r.puntaje=\gamma*r.puntaje+(1-\gamma)*IS(r.concepto)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nótese que esta fórmula, de manera similar a la que evoluciona los perfiles,
+ permite que los conceptos que tienen un puntaje de preferencia de parte
+ del usuario logren llegar a posiciones con mayor puntaje de relevancia
+ que aquellos que no, a la vez que todos son atenuados mediante un 
+\emph on
+factor de penalización
+\emph default
+ 
+\begin_inset Formula $\gamma$
+\end_inset
+
+.
+ Este factor se ha establecido en 0.3 .
+ Cabe notar, también, que se presupone la existencia de la función 
+\emph on
+IS(perfil, concepto),
+\emph default
+ que devuelve el puntaje de preferencia dado por el perfil al concepto dado,
+ o un valor de cero si el perfil no tiene un puntaje de preferencia para
+ el concepto.
+ El re-ordenamiento se puede encontrar en el algoritmo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{alg:re-ranking}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+REQUIRE resultados con puntajes de relevancia, perfil de usuario actual
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENSURE resultados con nuevos puntajes de relevancia según las preferencias
+ del perfil
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+FORALL{resultado $
+\backslash
+in$ resultados}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE resultado.puntaje = $
+\backslash
+gamma$*resultado.puntaje + $(1-
+\backslash
+gamma)$ * IS(perfil, resultado.concepto)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDFOR
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE resultados = reverse(sort(resultados))
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Re-ordenación de los resultados de búsqueda según el perfil del
+ usuario}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{alg:re-ranking}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
-Conclusión
+.Conclusión
 \end_layout
 
 \begin_layout Standard
