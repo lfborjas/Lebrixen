@@ -3,6 +3,9 @@
 \begin_document
 \begin_header
 \textclass scrreprt
+\begin_preamble
+\usepackage{hyperref}
+\end_preamble
 \use_default_options true
 \language spanish
 \inputencoding auto
@@ -12513,6 +12516,39 @@ Donde
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Evolución del perfil} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{alg:profile-evolution}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithm}
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
