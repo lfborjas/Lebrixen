@@ -4,7 +4,12 @@
 \begin_header
 \textclass scrreprt
 \begin_preamble
-\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Salida:}}
+\renewcommand{\algorithmiccomment}[1]{// #1}
 \end_preamble
 \use_default_options true
 \language spanish
@@ -12512,7 +12517,20 @@ Donde
 \end_inset
 
 .
- El proceso de evolución se puede ver resumido en el algoritmo.
+ El proceso de evolución se puede ver resumido en el algoritmo 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{alg:profile-evolution}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -12524,6 +12542,260 @@ status open
 
 \backslash
 begin{algorithm}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+REQUIRE contexto (en forma de texto libre o lista de términos), el perfil
+ del usuario y documentos (provistos como retroalimentación)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENSURE perfil de usuario actualizado
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE CON = categorizar(contexto) + categorizar(documentos) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+COMMENT categorizar devuelve un mapa <categoría:preferencia>
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+FORALL{$
+\backslash
+kappa$ $
+\backslash
+in$ CON} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE c = $
+\backslash
+kappa$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE p = c.padre
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+WHILE p
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE CON.agregar(<p:max(CON.obtener(p), CON.obtener(c)*W(p,c))>) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+COMMENT agregar() se encarga de los duplicados
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE c = p
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE p = p.padre
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDWHILE
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDFOR
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE conceptosPreexistentes = []
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+FORALL{preferencia $
+\backslash
+in$ perfil}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+IF{preferencia $
+\backslash
+notin$ CON}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE preferencia.puntaje = $
+\backslash
+beta$ * preferencia.puntaje
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ELSE
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE preferencia.puntaje = $
+\backslash
+beta$ * preferencia.puntaje + ($1-
+\backslash
+beta$) * preferencia.puntaje
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDIF
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE conceptosPreexistentes.agregar(preferencia.concepto)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDFOR
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE nuevosConceptos = Conjuntos.diferencia(CON, conceptosPreexistentes)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+FORALL{$
+\backslash
+nu$ $
+\backslash
+in$ nuevosConceptos}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+IF{CON.obtener($
+\backslash
+nu$) $
+\backslash
+neq$ 0}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE perfil.agregar($
+\backslash
+nu$, CON.obtener($
+\backslash
+nu$))
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDIF
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ENDFOR
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
 \end_layout
 
 \begin_layout Plain Layout
