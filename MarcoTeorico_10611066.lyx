@@ -133,8 +133,8 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Chapter
-Introducción General
+\begin_layout Chapter*
+Introducción
 \end_layout
 
 \begin_layout Standard
@@ -235,6 +235,10 @@ es de aplicaciones, ya sean web o de escritorio, valerse de la inteligencia
  colectiva plasmada en la web semántica en las tareas de producción de informaci
 ón de sus usuarios.
  
+\end_layout
+
+\begin_layout Chapter
+Introducción General
 \end_layout
 
 \begin_layout Section
@@ -378,7 +382,7 @@ key "Herlocker2004,Rhodes2000"
 \end_layout
 
 \begin_layout Section
-Proyectos relacionados
+Proyectos relacionados y estado del arte
 \end_layout
 
 \begin_layout Standard
@@ -599,7 +603,7 @@ key "Gipp2009"
 \end_layout
 
 \begin_layout Enumerate
-Zemantha: un agente de enriquecimiento del contenido: supervisa lo que un
+Zemanta: un agente de enriquecimiento del contenido: supervisa lo que un
  usuario -en concreto, un autor de 
 \emph on
 blogs
@@ -611,7 +615,7 @@ blogs
  en inglés).
  Activo desde 2009, más información se encuentra disponible en 
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -623,21 +627,112 @@ http://www.zemanta.com/
  
 \end_layout
 
+\begin_layout Section
+Identificación del problema
+\end_layout
+
 \begin_layout Standard
-De los proyectos anteriores, el único que está estrechamente relacionado
- con el aquí propuesto es 
+Aunque, como se puede observar en la sección anterior, existen iniciativas
+ que pudieran llevar los avances de la contextualización y la personalización
+ de los sistemas de recomendación tradicionales al ámbito de la producción
+ de la información, es necesaria una solución lo suficientemente flexible
+ como para permitir la expansión a nuevos lenguajes naturales y ser utilizada
+ por los desarrolladores en cualquier ámbito mediante un protocolo popular,
+ como lo es HTTP, sin dejar de lado las ventajas del aprendizaje de máquina
+ y la personalización, relegando estas tareas a un servidor que implemente
+ un sistema de recomendación, dejando solamente a los clientes la responsabilida
+d de iniciar la comunicación e interpretar las respuestas.
+\end_layout
+
+\begin_layout Section
+Descripción de la solución
+\end_layout
+
+\begin_layout Standard
+El proyecto propuesto aquí busca ofrecer a los implementadores una interfaz
+ de programación de aplicaciones que permita que, mediante solicitudes HTTP,
+ se puedan brindar recomendaciones de referencia útiles para tareas de producció
+n de información a los usuarios finales; fundamentándose en los principios
+ de la técnica de arquitectura REST (a su vez basada en las capacidades
+ del protocolo HTTP).
+ Mientras que los implementadores sólo se habrán de preocupar por hacer
+ solicitudes a las URLs definidas en la API e interpretar los datos que
+ el servidor regrese en respuesta, mientas que el lado del servidor utilizará
+ técnicas de recuperación probabilística de la información y aprendizaje
+ heurístico de perfiles de usuario para descubrir conceptos en sesiones
+ de uso y mejorar las respuestas -en forma de recomendaciones de hipermedia-
+ conforme los usuarios finales utilicen progresivamente el sistema que los
+ implementadores de la API ofrezcan.
+ El uso de principios de arquitectura REST, por otro lado, permitirá que
+ la implementación del lado del servidor pueda escalar y refinarse sin afectar
+ ni a los implementadores ni los usuarios finales.
+ Asimismo, el servidor proveerá almacenamiento que hará posible la persistencia
+ de las preferencias de los usuarios de las aplicaciones, así como la posibilida
+d de adiciones de fuentes de conocimiento translingües (al diseñar el almacenami
+ento con la multiplicidad lingüística de contenido en mente).
+\end_layout
+
+\begin_layout Standard
+Las ventajas de una solución basada en una API apegada a ciertos principios
+ REST es la flexibilidad: los implementadores podrán hacer uso de ella desde
+ aplicaciones de escritorio, aplicaciones web tradicionales o aplicaciones
+ web que implementen la técnica AJAX (ofreciendo soporte a la técnica JSONP).
+\end_layout
+
+\begin_layout Standard
+En la actualidad la única solución popular muy similar a la propuesta es
+ 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+zemanta.com
+\end_layout
+
+\end_inset
+
+, pero ésta no soporta la evolución automática de perfiles de usuario (aunque
+ provee opciones de personalización explícita) y solo se ofrece en el idioma
+ inglés.
+ La solución aquí propuesta habrá de soportar, inicialmente, inglés y español,
+ con un diseño abierto a la inclusión de nuevos idiomas, asimismo, la evolución
+ y uso meramente automáticos de perfiles de usuario son fundamentales para
+ este proyecto.
+ 
+\end_layout
+
+\begin_layout Standard
+Sin embargo, se debe aclarar que el servicio -en esta fase de implementación
+ como proyecto de graduación- solamente ofrecerá recomendaciones de hipermedia
+ en forma de texto (HTML y PDF, por ejemplo) y contará con una base documental
+ relativamente pequeña y la funcionalidad de incrementarla ya sea de manera
+ automática o explícita, aunque facilitada y permitida por el diseño, está
+ fuera del alcance del mismo (pues esta funcionalidad incluiría el diseño
+ de arañas web y módulos de aprendizaje de máquina para clasificación de
+ documentos 
 \emph on
-zemantha
+nuevos
 \emph default
-, y, aunque funciona de manera similar, lamentablemente, 
-\emph on
-zemantha
-\emph default
- soporta inglés exclusivamente y la construcción del perfil es explícita
- -el usuario tiene que establecer sus preferencias a mano.
- El proyecto descrito aquí, por otra parte, parte de una base multilingüe
- (y hasta translingüe, a la hora de hacer recomendaciones y evolucionar
- el perfil) y la evolución del perfil es automática.
+, así como de componentes de actualización de la base de conocimiento).
+ Nótese, sin embargo, que muchos de estos componentes (módulos de clasificación,
+ interpretación de bases de conocimiento y arañas web) se habrán de construir,
+ en menor escala, para la obtención de la colección inicial, sentando las
+ bases para trabajo futuro que implemente dicha funcionalidad.
+ De ahí que cabe notar que la alternativa (
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+zemanta.com
+\end_layout
+
+\end_inset
+
+) es mucho más madura en este aspecto, pues ofrece no solo recomendaciones
+ de hipermedia en forma de texto, sino también imágenes; además de contar
+ con una base documental muy extensa y en constante crecimiento.
 \end_layout
 
 \begin_layout Chapter
