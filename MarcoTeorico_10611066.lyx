@@ -8753,11 +8753,39 @@ key "Ahn2005"
 \end_layout
 
 \begin_layout Section
-Servicios web de 
-\emph on
-nueva generación 
-\emph default
-(en la web 2.0)
+Servicios e interfaces de programación de aplicaciones web (API)
+\end_layout
+
+\begin_layout Standard
+Una interfaz de programación de aplicaciones se puede definir como:
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Un conjunto de funciones que el programador de aplicaciones puede usar,
+ indicándose los parámetros que hay que pasar a cada función y los valores
+ de retorno que el programador puede esperar
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Silberschatz2005"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En el ámbito de los sistemas web, sin embargo, el rol de funciones lo juegan
+ URLs y los parámetros son los que se envían en solicitudes POST o GET.
+ De esta manera, una llamada a función en el concepto tradicional de API
+ se convierte en una solicitud HTTP POST o GET.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -8775,7 +8803,7 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -8810,15 +8838,15 @@ Un sistema de software identificado por una URI [identificador uniforme
 \end_layout
 
 \begin_layout Standard
-Esta definición implica que, dada una definición XML arbitraria de un servicio,
- los desarrolladores de aplicaciones podían formar solicitudes conformadas
- a ella y obtener recursos provistos por el mismo.
+Esta definición implica que, dada la definición XML de un servicio, los
+ desarrolladores de aplicaciones pueden formar solicitudes a la misma y
+ realizar acciones sobre datos provistos por el servicio web.
  Una manera muy popular de implementar servicios web siguiendo este concepto
- es el protocolo 
+ es el protocolo estándar 
 \emph on
 SOAP
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Definido en detalle por el w3 en 
@@ -8840,26 +8868,73 @@ http://www.w3.org/TR/soap12-part0/
  
 \emph default
 (Simple Object Access Protocol, o Protocolo Simple de Acceso a Objetos).
- En este protocolo, las operaciones sobre los objetos provistos por el servicio
- son definidas en el XML que define el servicio, llevando a implementaciones
- complicadas para desarrolladores sin experiencia.
- En el caso de un servicio utilizando el protocolo SOAP, entonces, si se
- quisiera, por ejemplo, actualizar una lista de productos, una llamada típica
- de un servicio web sería una solicitud POST del protocolo HTTP, con un
- cuerpo XML con los datos requeridos por el servicio a una url con el nombre
- del método: 
+ Los implementadores de servicio utilizan el formato WDSL
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-http://example.com/addResource
+http://www.w3.org/TR/wsdl
 \end_layout
 
 \end_inset
 
-.
- 
+
+\end_layout
+
+\end_inset
+
+ (
+\emph on
+Web Services Description Language, 
+\emph default
+Lenguaje de descripción de servicios web) para establecer las acciones realizabl
+es en el XML que guía la comunicación.
+ Asimismo, se utiliza el registro UDDI
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://uddi.org/pubs/ProgrammersAPI_v2.htm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (
+\emph on
+Universal Description, Discovery and Integration, 
+\emph default
+Descripción universal, descubrimiento e integración) para poner un servicio
+ web públicamente disponible.
+ Pero, aunque los servicios web más robustos aún se benefician de los estándares
+ de la industria fundamentados en SOAP, WDSL y UDDI, la posible complejidad
+ de la interpretación de documentos XML y la dificultad de desarrollo conformaro
+n un obstáculo para los implementadores de servicios web simples, hasta
+ que la mayor aceptación de la arquitectura REST, el formato de intercambio
+ de datos basado en texto JSON y la aparición del objeto XmlHttpRequest
+ para el lenguaje de programación ECMAScript (con su dialecto más popular,
+ Javascript) permitieron una mayor accesibilidad de desarrollo e implementación.
+ Estos conceptos se definen con mayor detalle en las secciones siguientes,
+ concluyendo con una descripción del estado del arte en la implementación
+ de interfaces de programación de aplicaciones web.
+\end_layout
+
+\begin_layout Subsection
+La técnica de arquitectura REST
 \end_layout
 
 \begin_layout Standard
@@ -8867,7 +8942,7 @@ El estilo de arquitectura REST (de
 \emph on
 Representational-State Transfer, 
 \emph default
-Transferencia de Estado Representacional), definida por 
+Transferencia de Estado Representacional), propuesta por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Fielding2000"
@@ -8875,37 +8950,385 @@ key "Fielding2000"
 \end_inset
 
 , hace uso de las operaciones básicas del protocolo HTTP (PUT, POST, GET
- y DELETE) y las URI de recursos del servicio para actuar sobre los objetos,
- así, el ejemplo anterior sería una solicitud POST a una URI como 
+ y DELETE), las URI de recursos del servicio y la meta-data estándar del
+ protocolo (como los encabezados HTTP) para la comunicación entre un cliente
+ y el servidor.
+ Esta técnica prescribe seis restricciones:
+\end_layout
+
+\begin_layout Description
+Distinción
+\begin_inset space ~
+\end_inset
+
+Cliente-Servidor: permite que el cliente pueda ignorar cómo se almacenan
+ o procesan los datos en el lado del servidor, permitiendo la escalabilidad
+ y la evolución independiente de los componentes.
+\end_layout
+
+\begin_layout Description
+Sin
+\begin_inset space ~
+\end_inset
+
+estado: lo cual quiere decir que cada solicitud de un cliente al servidor
+ debe contener en sí toda la información necesaria para llevarse a cabo,
+ sin depender de datos previos; esto permite que se incrementen la visibilidad,
+ confiabilidad y escalabilidad, mas introduce la desventaja de tener que
+ enviar datos que quizá sean irrelevantes o reduntantes en una serie de
+ solicitudes.
+\end_layout
+
+\begin_layout Description
+Cache: puesto que las comunicaciones entre un cliente y un servidor se basan
+ en las operaciones y los identificadores propios de HTTP, se puede hacer
+ uso de la capacidad del protocolo mismo de almacenar datos devueltos para
+ una solicitud y evitar comunicaciones redundantes; esto, claro, tiene la
+ desventaja de que el cliente pueda quedarse con datos no actualizados.
+\end_layout
+
+\begin_layout Description
+Interfaz
+\begin_inset space ~
+\end_inset
+
+uniforme: permite la simplificación y el bajo acoplamiento en la arquitectura.
+ Esta, a su vez, introduce cuatro restricciones en el diseño de las interfaces:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Identificación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+recursos: los recursos son identificados mediante su URI y transferidos
+ en un formato de hipermedia estándar (JSON, XML o simple HTML).
+\end_layout
+
+\begin_layout Description
+Manipulación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+recursos
+\begin_inset space ~
+\end_inset
+
+mediante
+\begin_inset space ~
+\end_inset
+
+representaciones: los datos en las solicitudes y respuestas HTTP deben ser
+ suficientes para la modificación de los recursos.
+\end_layout
+
+\begin_layout Description
+Hipermedia
+\begin_inset space ~
+\end_inset
+
+como
+\begin_inset space ~
+\end_inset
+
+motor
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+estado
+\begin_inset space ~
+\end_inset
+
+representacional: los recursos relacionados deberían poder descubrirse exclusiva
+mente mediante sus identificadores (URI) en las respuestas del servidor.
+\end_layout
+
+\begin_layout Description
+Mensajes
+\begin_inset space ~
+\end_inset
+
+auto-descriptivos: cada mensaje contiene en sí suficiente
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Sistema
+\begin_inset space ~
+\end_inset
+
+en
+\begin_inset space ~
+\end_inset
+
+capas: requiere que los sistemas se diseñen de manera tal que las funcionalidade
+s de una capa superior sean independientes a la implementación de las inferiores
+, permitiendo que los componentes puedan cambiarse sin problemas.
+ Tiene como desventaja, sin embargo, la adición del costo operativo resultante
+ de la transmisión de datos entre capas.
+\end_layout
+
+\begin_layout Description
+Code-on-demand
+\begin_inset space ~
+\end_inset
+
+(código
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+petición): es una restricción opcional que establece que, mientras un cliente
+ lo soporte, funcionalidad extra podría ser provista por el servidor para
+ ejecución en la forma de 
+\emph on
+applets
+\emph default
+ de Java o 
+\emph on
+scripts
+\emph default
+ de Javascript.
+\end_layout
+
+\begin_layout Subsection
+JSON y AJAX
+\end_layout
+
+\begin_layout Standard
+El lenguaje de programación Javascript se basa en una manera simple de represent
+ación de objetos: mediante mapas.
+ Esta simplicidad llevó a que se propusiera
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.ietf.org/rfc/rfc4627.txt
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ un nuevo formato de intercambio de datos textuales: el 
+\emph on
+JavaScript Object Notation
+\emph default
+ (Notación de objetos de javascript, JSON, por sus siglas en inglés).
+ De esta manera, se introdujo una alternativa de representación y transferencia
+ para datos con estructuras simples donde el beneficio de utilizar una notación
+ más organizada como XML es menor al costo que implica su transferencia
+ e interpretación.
+ 
+\end_layout
+
+\begin_layout Standard
+Por otro lado, con la creciente necesidad de dinamicidad en los sitios web
+ (los cuales, en principio, son simples documentos estáticos), la introducción
+ del objeto estándar XmlHttpRequest
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
 \begin_inset Flex URL
 status collapsed
 
 \begin_layout Plain Layout
 
-http://example.com/resources/
+http://www.w3.org/TR/XMLHttpRequest/
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+ soportado nativamente por los navegadores permitió que solicitudes se pudieran
+ hacer de manera asíncrona, sin tener que re-cargar el documento, dando
+ la impresión de dinamicidad y permitiendo que el concepto de procesos en
+ trasfondo, popular en aplicaciones de escritorio, se popularizase entre
+ las aplicaciones web; esta técnica se conoce como AJAX (
+\emph on
+Asynchronous Javascript and XML)
+\emph default
 .
- El uso de la arquitectura REST en los servicios web, entonces, elimina
- la necesidad de definiciones arbitrarias de acciones y recursos, y descansa
- sobre las acciones, tipos de datos y definiciones intrínsecas del protocolo.
- Los servicios web que utilizan los principios de la arquitectura REST se
- conocen como 
-\begin_inset Quotes eld
-\end_inset
-
-servicios RESTful
-\begin_inset Quotes erd
-\end_inset
-
-, aunque los principios de llamadas a la arquitectura son importantes en...
+ Esta comunicación asíncrona entre clientes y servidores se vio enriquecida,
+ a su vez, por el formato JSON.
 \end_layout
 
 \begin_layout Standard
-[TODO: explicar principios de REST, explicar servicios SOA+REST, explicar
- JSON y JSONP]
+Pero, aunque gracias a la técnica AJAX las aplicaciones pueden comunicarse
+ con el servidor de manera más dinámica, la transferencia de datos en el
+ formato JSON -como cualquier tipo de transferencia de datos a nivel de
+ código de cliente- sólo es permitida por los navegadores web dentro del
+ mismo origen (restricción conocida como 
+\emph on
+same origin policy
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/En/Same_origin_policy_for_JavaScript
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\emph default
+por lo que la manipulación u obtención de datos de terceros a este nivel
+ es, en principio, imposible.
+ Sin embargo, dadas la popularidad y la fácil accesibilidad de cada vez
+ más interfaces de programación de aplicaciones que enriquecen el contenido
+ o funcionalidad de un sitio, se ha propuesto que se haga uso del hecho
+ que la transferencia de 
+\emph on
+scripts
+\emph default
+ entre distintos orígenes sí es posible y que el formato JSON se puede represent
+ar como una cadena de caracteres para introducir una técnica conocida como
+ JSONP
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Propuesta en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/
+\end_layout
+
+\end_inset
+
+ y también utilizada en la API para desarrolladores de yahoo (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://developer.yahoo.com/common/json.html#callbackparam
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+ (
+\emph on
+JSON with padding
+\emph default
+, o JSON con relleno) que consiste en la transferencia de un 
+\emph on
+script
+\emph default
+ que, es, a su vez, la llamada a una función en el lado del cliente con
+ los datos en formato JSON como parámetro.
+\end_layout
+
+\begin_layout Subsection
+Estado del arte de los servicios web
+\end_layout
+
+\begin_layout Standard
+Con la introducción de la arquitectura REST, el formato de intercambio JSON
+ y técnicas como AJAX y JSONP, muchas aplicaciones web actuales están introducie
+ndo interfaces de programación de aplicaciones que permitan a los desarrolladore
+s hacer uso de sus servicios mediante simples solicitudes sobre HTTP (y
+ quizá en este punto aparece la sinonimia contemporánea entre servicios
+ web y APIs web, como se explicó anteriormente).
+ Y las APIs más populares
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Por ejemplo, las interfaces de búsqueda de yahoo (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://developer.yahoo.com/search/
+\end_layout
+
+\end_inset
+
+) y google (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://code.google.com/intl/es/apis/ajaxsearch/
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+ implementan la arquitectura REST en el sentido que los datos se pueden
+ encontrar y manipular exclusivamente mediante solicitudes y respuestas
+ HTTP dejando atrás protocolos como SOAP y, en algunos casos, el manejo
+ de archivos XML al devolver los datos en formato JSON, además del hecho
+ que la implementación de APIs como estas permite también toda la escalabilidad
+ inherente a la arquitectura REST.
+ Cabe notar que estos servicios web conocidos como 
+\begin_inset Quotes eld
+\end_inset
+
+RESTful
+\begin_inset Quotes erd
+\end_inset
+
+ (por implementar la arquitectura REST) no son del todo fieles a la misma,
+ pues pocos fuerzan las implicaciones semánticas del uso de las operaciones
+ POST, GET, PUT o DELETE y, de hecho, POST y GET pueden utilizarse indistintamen
+te (aún cuando GET sólo debería utilizarse para obtener recursos y POST
+ para actualizarlos).
 \end_layout
 
 \begin_layout Chapter
@@ -10087,7 +10510,8 @@ http://mootools.net/
 \end_inset
 
 ), jquery tiene una sintaxis más sencilla, mayor uso en aplicaciones comerciales
- y eficiencia en la manipulación de (x)html
+, soporte nativo a las técnicas JSONP y AJAX y eficiencia en la manipulación
+ de (x)html
 \begin_inset Foot
 status collapsed
 
