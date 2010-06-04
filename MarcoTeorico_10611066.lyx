@@ -646,6 +646,13 @@ d de iniciar la comunicación e interpretar las respuestas.
 
 \begin_layout Section
 Descripción de la solución
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:solution-description"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9292,7 +9299,6 @@ same origin policy
 status collapsed
 
 \begin_layout Plain Layout
-
 \begin_inset Flex URL
 status open
 
@@ -10675,6 +10681,13 @@ diseño de navegación
 
 \begin_layout Subsection
 Diseño de la interfaz, estético y de contenido
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:interface-design"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13329,6 +13342,164 @@ end{algorithm}
 Implementación del servicio
 \end_layout
 
+\begin_layout Standard
+Como se describió anteriormente (sección 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:solution-description"
+
+\end_inset
+
+), el servicio debe ser lo suficientemente flexible como para ser adoptado
+ por cualquier desarrollador en cualquier plataforma.
+ Por ello, se decidió crear una interfaz de programación de aplicaciones
+ que funcione sobre el protocolo HTTP, para que los implementadores sólo
+ se preocupen de hacer las solicitudes correspondientes e interpretar las
+ respuestas.
+ 
+\end_layout
+
+\begin_layout Standard
+Para evitar que personas maliciosas abusen del servicio, se decidió restringirlo
+ hasta cierto punto: en primer lugar se requiere que los implementadores
+ se registren en la página principal del sistema, para así obtener, mediante
+ correo electrónico, una clave única para utilizar el sistema; esta clave
+ es creada a partir de datos únicos del usuario mediante al algoritmo de
+ cifrado RSA.
+ Una segunda medida es limitar el número de usuarios
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Para la implementación actual, se cuentan con 30 Gb de almacenamiento, lo
+ que implica que se pueden guardar aproximadamente 187 perfiles de usuario
+ (teniendo en cuenta que una entrada de preferencia de usuario mide 12 bytes
+ (dos llaves foráneas al concepto y el perfil, mas el puntaje de preferencia
+ que utiliza el tipo 
+\emph on
+real
+\emph default
+ de postgresql; y, que en el peor de los casos, un perfil contendrá puntajes
+ para las 14,000 categorías).
+\end_layout
+
+\end_inset
+
+ que cada aplicación puede utilizar, además de requerir que, para registrar
+ a un usuario, se utilice una solicitud autenticada -con una contraseña
+ provista a la hora de registrar la aplicación- de manera que, si un usuario
+ con malas intenciones decidiera crear usuarios espurios de una aplicación,
+ tendría que obtener 
+\emph on
+dos
+\emph default
+ datos que sólo el implementador que registró la aplicación conoce: su clave
+ única y su contraseña para registro.
+ En un primer esbozo del diseño, se consideró que la clave única era suficiente
+ para considerar auténtica una solicitud, por lo que el registro de usuarios
+ no hubiera sido necesario (para crear un usuario sólo hubiera sido necesario
+ pedir recomendaciones para un perfil aún no registrado), pero esta opción
+ se consideró insegura al tener en cuenta que la clave única es visible
+ por el usuario en el código del cliente si se decide utilizar una interfaz
+ web; y aunque el código estuviese ofuscado, existen herramientas sencillas
+ de obtener y utilizar que permiten ver todos los datos que una solicitud
+ web contiene (como la consola javascript del navegador google chrome
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Disponible en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.google.com/chrome
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ o la extensión 
+\emph on
+firebug
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://getfirebug.com/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, del navegador firefox
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.mozilla-europe.org/es/firefox/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Pero la flexibilidad no debería afectar la facilidad de uso: aunque la solución
+ más conveniente para desarrolladores experimentados sea una API que les
+ permita utilizar el servicio como deseen, registrando los usuarios desde
+ sus propias aplicaciones y luego utilizando los métodos de recomendaciones
+ y actualización de perfil, implementadores menos versados en el desarrollo
+ de aplicaciones deberían tener la oportunidad de aprovechar el servicio.
+ Para este segmento de los usuarios potenciales se idearon dos soluciones:
+ luego de registrarse y obtener las credenciales, se permite al usuario
+ utilizar una interfaz web en el sitio del servicio para registrar usuarios,
+ de manera que no se deben preocupar por crear su propio código para este
+ efecto.
+ La segunda solución, sólo para implementadores en aplicaciones web, es
+ la interfaz opcional (o widget): para poder utilizar el servicio de recomendaci
+ones, sólo deben incluir en la fuente de sus páginas web un pequeño 
+\emph on
+script -
+\emph default
+diseñado para ser tan fácil de personalizar como lo es llenar un formulario-
+ y el servicio les proporcionará el widget y éste hará las llamadas al servicio
+ por ellos.
+\end_layout
+
+\begin_layout Standard
+Ambas soluciones se describen con detalle en el anexo [manual de usuario];
+ en las siguiente secciones se detallan las decisiones de ingeniería que
+ cada una de ellas implicó.
+\end_layout
+
 \begin_layout Subsection
 Interfaz de programación de aplicaciones
 \end_layout
@@ -13337,8 +13508,7 @@ Interfaz de programación de aplicaciones
 Para la implementación de la API se decidió seguir la tendencia actual e
  implementar principios del estilo de arquitectura REST.
  A continuación, se detalla cómo los principios de esta arquitectura se
- ven cumplidos y las decisiones de ingeniería que llevaron a implementar
- un servicio web apegado a REST.
+ ven cumplidos.
 \end_layout
 
 \begin_layout Description
@@ -13366,9 +13536,9 @@ estado: Se decidió que el implementador tendrá que enviar en cada solicitud
  de estado en el servidor, obstaculizando la escalabilidad y la distribución
  de las tareas.
  Por ello, se prefirió hacer búsquedas en la base de datos cada vez que
- se reciba una solicitud, teniendo en cuenta claro, facilidades del administrado
-r de base de datos como el sistema de caché y el uso de índices para reducir
- la latencia.
+ se reciba una solicitud, teniendo en cuenta claro, que existen facilidades
+ del administrador de base de datos como el sistema de caché y el uso de
+ índices para reducir la latencia.
 \end_layout
 
 \begin_layout Description
@@ -13448,35 +13618,7 @@ representaciones: el implementador hace solicitudes utilizando los métodos
  GET o POST y puede leer los recursos recomendados, devueltos en formato
  JSON o modificar el perfil de un usuario mediante una llamada a la URL
  correspondiente.
- En el caso de la lectura de recursos recomendados, se requiere una solicitud
- via GET.
- En el caso de la actualización de un perfil, se requiere una solicitud
- via POST con autenticación http básica
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.w3.org/Protocols/HTTP/1.0/spec.html
-\backslash
-#AA
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
- Cabe notar que se ha decidido prescindir del mecanismo de autenticación
- provisto por el framework django, ya que este depende de sesiones de usuario,
- [TODO: decidirme lo de basic http auth] 
+ 
 \end_layout
 
 \begin_layout Description
@@ -13513,7 +13655,46 @@ auto-descriptivos: otra característica fundamental de las APIs, los mensajes
  de solicitud contienen todos los datos necesarios para que el servidor
  los procese, asimismo, las respuestas del servidor contienen los encabezados
  y códigos de estado estándar de HTTP para indicar cómo debería tratarlos
- el cliente.
+ el cliente: En el caso de la lectura de recursos recomendados, se requiere
+ una solicitud via GET (aunque se permite POST debido a las limitaciones
+ en la longitud de las solicitudes GET impuestas por algunos navegadores).
+ En el caso del registro de nuevos usuarios, se requiere una solicitud via
+ POST con autenticación http básica
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.w3.org/Protocols/HTTP/1.0/spec.html
+\backslash
+#AA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Aunque podría parecer que la semántica de las solicitudes bajo los principios
+ REST requeriría también que la actualización de los perfiles fuese una
+ solicitud POST autenticada, nótese que es una tarea que no puede causar
+ mayor daño a los datos de usuarios de una aplicación: actualizaciones deliberad
+as de preferencias no consisten en sí amenazas a la seguridad, téngase también
+ en cuenta que, si la actualización de perfil requiriese autenticación,
+ la contraseña estaría expuesta en el código del lado del cliente en interfaces
+ web que hagan solicitudes con la técnica AJAX.
+ 
 \end_layout
 
 \begin_layout Description
@@ -13543,12 +13724,36 @@ widget
  de manera que se pueda expandir la funcionalidad.
 \end_layout
 
-\begin_layout Description
-
+\begin_layout Subsection
+Implementación de las interfaces opcionales
 \end_layout
 
 \begin_layout Standard
+Como ya se mencionó, se decidió crear una interfaz que los implementadores
+ de páginas web pueden incluir fácilmente.
+ El diseño de ésta ya fue discutido en la sección de diseño de interfaz
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:interface-design"
 
+\end_inset
+
+).
+ Se decidió que la inclusión del widget se haría mediante un método que
+ recibiese un objeto de javascript con los parámetros que el usuario desee
+ (siendo éstos la clave de aplicación, el identificador único de usuario
+ y las opciones de obtención de datos y retroalimentación descritas en el
+ anexo [manual de implementador].
+\end_layout
+
+\begin_layout Standard
+En cuanto a la opción de registrar usuarios desde el sitio del servicio,
+ se creó una pequeña interfaz que permite -luego de ingresar las credenciales
+ de autenticación- introducir varios usuarios a registrar de una sola vez,
+ así como ver qué usuarios están registrados y eliminar.
+ (Cabe recalcar que toda esta funcionalidad está disponible a través de
+ la API).
 \end_layout
 
 \begin_layout Subsection
@@ -13749,10 +13954,8 @@ Detección de términos clave
 \end_layout
 
 \begin_layout Standard
-Aunque la búsqueda directa se permite en el sistema, un componente fundamental
- es uno que, dado el contexto inmediato de la sesión, pueda determinar qué
- subconjunto de términos se considerarán para construir una consulta que
- se hará al componente de búsqueda y para agregación al perfil.
+Un componente clave de la recomendación es la detección de la necesidad
+ de información latente.
  Siguiendo el camino marcado por 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -13761,8 +13964,8 @@ key "Gruzd2006"
 \end_inset
 
 , se optó por un componente que extraiga términos clave del texto.
- Se implementó un método que recibe el susodicho texto, un título opcional
- y el lenguaje en el que está escrito; éste método utiliza una librería
+ Para este fin, se implementó un método que recibe el susodicho texto y
+ el lenguaje en el que está escrito; luego, éste método utiliza una librería
  del lenguaje de programación python para extraer palabras clave
 \begin_inset Foot
 status collapsed
@@ -13870,11 +14073,60 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
 http://tagthe.net/fordevelopers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+OpenCalais
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.opencalais.com/documentation/calais-web-service-api/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Extractor
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.picofocus.com/DemoEngine/dbiExtractorDemoWebService.asmx?op=ProcessXtrac
+tion
 \end_layout
 
 \end_inset
@@ -13899,6 +14151,39 @@ En la presente implementación, para construir una consulta se utiliza el
  Es importante notar que el estado presente del proyecto no es factible
  para un ambiente de producción, ya que los servicios web tienen límites
  de uso y/o pueden bloquear las solicitudes si se excede un umbral.
+\end_layout
+
+\begin_layout Standard
+Para la implementación final, aunque se crearon módulos para comunicarse
+ con todos los servicios antes mencionados, se decidió utilizar el servicio
+ 
+\emph on
+tagthe
+\emph default
+ por defecto.
+ Esto porque, en primer lugar, la calidad de los términos extraídos con
+ éste es superior a los demás (puede lidiar con caracteres unicode y tiene
+ una orientación al procesamiento de lenguaje natural), asimismo, el servicio
+ no tiene límite de solicitudes.
+ En caso de que una solicitud a este servicio fallase, el sistema tratará
+ de utilizar el servicio de 
+\emph on
+yahoo
+\emph default
+, éste, aunque más robusto que todos, utiliza un enfoque estadístico y no
+ considera caracteres unicode (al menos no en las pruebas de evaluación);
+ en último lugar, se recurre a una llamada al servicio de 
+\emph on
+alchemy
+\emph default
+, que, aunque orientado al lenguaje natural, no presentó la misma calidad
+ que tagthe de resultados en las pruebas de evaluación.
+ Estas pruebas se hicieron comparando los términos que cada servicio extraía
+ de textos en lenguaje natural con los que seres humanos extraían de los
+ mismos.
+ Aunque se diseñó una encuesta para este efecto, el factor tiempo no permitió
+ que ésta se analizase, por lo que el criterio utilizado fue únicamente
+ el del autor.
 \end_layout
 
 \begin_layout Subsection
