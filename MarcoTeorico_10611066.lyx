@@ -11,6 +11,7 @@
 \renewcommand{\algorithmicensure}{\textbf{Salida:}}
 \renewcommand{\algorithmiccomment}[1]{// #1}
 \end_preamble
+\options abstracton
 \use_default_options true
 \language spanish
 \inputencoding auto
@@ -71,7 +72,7 @@ Luis Felipe Borjas Reyes
  10611066
 \end_layout
 
-\begin_layout Subject
+\begin_layout Publishers
 \begin_inset Graphics
 	filename images/logo.png
 	scale 50
@@ -117,9 +118,109 @@ Facultad de ingeniería en sistemas computacionales
 En opción al título de Ingeniero en Sistemas Computacionales
 \end_layout
 
+\begin_layout Abstract
+La 
+\emph on
+world wide web
+\emph default
+ ha evolucionado de tal manera que las personas han pasado de ser consumidoras
+ de información a productoras: desde los 
+\emph on
+blogs, 
+\emph default
+las revistas en línea y las redes sociales hasta las aplicaciones que permiten
+ editar documentos académicos en internet, las personas están dejando paulatinam
+ente atrás los antiguos medios de consumo y producción de datos.
+ Pero este incremento ha traído consigo un efecto secundario: la 
+\emph on
+sobrecarga de información; 
+\emph default
+esto no afecta tanto a quien escribe un blog personal o se expresa en una
+ red social, porque nunca, o casi nunca, tiene que desarrollar o justificar
+ su argumento.
+ Mas aquellos cuya opinión está sujeta al escrutinio de otros deben dedicar
+ parte del tiempo que utilizan en la producción de información a tratar
+ de encontrar fuentes, ideas o fundamentos, muchas veces sin éxito, al no
+ poder expresar la necesidad de información; sin embargo, esta práctica
+ está en contra del proceso natural -e ideal- de escribir, pues las ideas
+ fluyen y evolucionan, y pocas veces termina uno escribiendo exactamente
+ lo que se propuso en un principio.
+ Para ello, en el pasado se han propuesto sistemas que asistan a quien escribe,
+ supervisando en tiempo real el proceso y recomendándole referencias en
+ tanto.
+ Pero la mayor parte de estas soluciones o consisten en un sistema exclusivo
+ -
+\emph on
+otra 
+\emph default
+aplicación que el usuario debe instalar y aprender a usar; no tratan de
+ personalizar las recomendaciones, perdiendo en utilidad, o no son lo suficiente
+mente flexibles como para que los desarrolladores de software las adopten
+ en sus propios productos.
+ En el espíritu de la nueva generación de servicios web y aplicaciones híbridas,
+ se propone aquí un enfoque distinto: un 
+\emph on
+servicio
+\emph default
+ de recomendación que, a través de una 
+\emph on
+interfaz de programación de aplicaciones
+\emph default
+, pueda ser implementado en cualquier producto de software que desee mejorar
+ la experiencia de sus usuarios al crear información y que, con el fin de
+ personalizar las referencias a recomendar, aprenda 
+\emph on
+automáticamente
+\emph default
+ las preferencias de los mismos mediante técnicas estadísticas y conocimiento
+ representado en una ontología.
+ 
+\end_layout
+
+\begin_layout Addchap
+Agradecimientos
+\end_layout
+
+\begin_layout Dedication
+A mis padres y hermanos, por su apoyo durante estos últimos años y por soportar
+ a alguien rondando por la casa a altas horas de la noche.
+\begin_inset Newline newline
+\end_inset
+
+A mis maestros en la universidad por ayudar, con el conocimiento, a establecer
+ los fundamentos de mi porvenir.
+\begin_inset Newline newline
+\end_inset
+
+A mis asesoras, Elena Calidonio y Yanira Rivera, por su consejo y guía.
+\begin_inset Newline newline
+\end_inset
+
+A Jorge García y Fernando Escher, porque durante el desarrollo de escolarea
+ he adquirido experiencia y conocimiento útiles para marcar el derrotero
+ de mi vida profesional.
+\begin_inset Newline newline
+\end_inset
+
+A mis amigos en la facultad, Gerardo Romero y Daniel Martínez, por su apoyo
+ durante el desarrollo de este proyecto.
+\begin_inset Newline newline
+\end_inset
+
+A mis conocidos, colegas y amistades, por escuchar y asentir con cortesía
+ cuando balbuceaba mis ideas.
+ 
+\end_layout
+
 \begin_layout Publishers
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
 
 \end_inset
 
@@ -133,17 +234,18 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Chapter*
+\begin_layout Addchap
 Introducción
 \end_layout
 
 \begin_layout Standard
-El presente proyecto explora el concepto de un sistema de
+El presente proyecto explora el concepto de un servicio de
 \emph on
  recomendación oportuna
 \emph default
- de documentos: un sistema que permita la recuperación de documentos relevantes
- a una necesidad de información 
+ de documentos: un sistema que permita que, en productos de software, se
+ pueda implementar la recuperación de documentos relevantes a una necesidad
+ de información 
 \emph on
 implícita
 \emph default
