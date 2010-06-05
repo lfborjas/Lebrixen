@@ -9939,6 +9939,18 @@ Retroalimentación: el usuario final decide utilizar un recurso recomendado.
  él.
 \end_layout
 
+\begin_layout Description
+Registra/Elimina
+\begin_inset space ~
+\end_inset
+
+Usuarios: el implementador opta por agregar uno o varios usuarios al servicio
+ (o eliminarlos).
+ En cualquier caso, debe proveer el identificador único del usuario y sus
+ credenciales de autenticación.
+ El servicio responderá con un mensaje adecuado de fallo o éxito.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Float figure
 placement H
@@ -10439,6 +10451,16 @@ Caso de uso 5: Actualizar Perfil
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/16_RegisterUsers.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
@@ -10448,15 +10470,11 @@ name "fig:interaction_diagrams-4-6"
 
 \end_inset
 
-Diagramas de interacción para los casos de uso 4 y 5
+Diagramas de interacción para los casos de uso 4 al 6
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
