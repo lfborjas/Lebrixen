@@ -157,7 +157,11 @@ aplicación que el usuario debe instalar y aprender a usar; no tratan de
  personalizar las recomendaciones, perdiendo en utilidad, o no son lo suficiente
 mente flexibles como para que los desarrolladores de software las adopten
  en sus propios productos.
- En el espíritu de la nueva generación de servicios web y aplicaciones híbridas,
+ 
+\end_layout
+
+\begin_layout Abstract
+En el espíritu de la nueva generación de servicios web y aplicaciones híbridas,
  se propone aquí un enfoque distinto: un 
 \emph on
 servicio
@@ -167,12 +171,13 @@ servicio
 interfaz de programación de aplicaciones
 \emph default
 , pueda ser implementado en cualquier producto de software que desee mejorar
- la experiencia de sus usuarios al crear información y que, con el fin de
- personalizar las referencias a recomendar, aprenda 
+ la experiencia de sus usuarios al crear información; asimismo, con el fin
+ de personalizar las referencias a recomendar, el servicio habrá de aprender
+ 
 \emph on
 automáticamente
 \emph default
- las preferencias de los mismos mediante técnicas estadísticas y conocimiento
+ las preferencias de los usuarios mediante técnicas estadísticas y conocimiento
  representado en una ontología.
  
 \end_layout
@@ -239,108 +244,111 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-El presente proyecto explora el concepto de un servicio de
-\emph on
- recomendación oportuna
-\emph default
- de documentos: un sistema que permita que, en productos de software, se
- pueda implementar la recuperación de documentos relevantes a una necesidad
- de información 
-\emph on
-implícita
-\emph default
- en una tarea que el usuario está llevando a cabo.
- Se distingue de un sistema tradicional de recuperación de información,
- como los motores de búsqueda, en que éstos responden -en propósito y diseño-
- a una necesidad de información explícitamente proveída por el usuario.
- Y se puede diferenciar de los sistemas de recomendación convencionales
- en que éstos se basan en artículos que ya conocen, mientras que la tarea
- del usuario, en el caso del sistema propuesto, es desconocida para el sistema.
+En este proyecto se explora el concepto de un servicio de recomendación:
+ proveer una interfaz para que aplicaciones orientadas a la producción de
+ información (sistemas de gestión de contenidos y procesadores de texto,
+ por ejemplo) y desarrolladas para cualquier plataforma puedan ofrecer a
+ sus usuarios una mejora a su experiencia mediante la recomendación oportuna
+ de referencias.
  
 \end_layout
 
 \begin_layout Standard
-La actualidad es testigo de dos fenómenos que bien podrían complementarse:
- el incremento en la cantidad de información fácilmente accesible y el naciente
- uso de herramientas basadas en la red para llevar a cabo tareas otrora
- realizadas en 
-\begin_inset Quotes eld
-\end_inset
-
-el escritorio
-\begin_inset Quotes erd
-\end_inset
-
-.
- De hecho, el internet ha dejado de ser una fuente de información actualizada
- y mantenida por unos pocos a una comunidad en la que todos somos productores
- y consumidores a la vez.
- Pero existe una desventaja: más información no significa mejor información,
- y, aunque en muchos nichos de consumo de la misma la exactitud y calidad
- de ésta sea irrelevante, los ambientes profesionales y académicos se están
- viendo afectados por la irónica dificultad de encontrar información verdaderame
-nte útil, consecuencia de la sobrecarga de datos.
- En respuesta a esto, las investigaciones académicas y las iniciativas comercial
-es han propuesto una 
+La motivación inicial para el desarrollo de este proyecto fue poder experimentar
+ con tecnologías de procesamiento del lenguaje natural, con la idea de desarroll
+ar un sistema que adquiriese el conocimiento suficiente como para recomendar
+ a docentes referencias y lecturas adicionales en sus actividades de documentaci
+ón y planificación.
+ Sin embargo, pronto se encontró que era imposible ignorar la tendencia
+ actual a desarrollar aplicaciones híbridas (mejor conocidas, en el mundo
+ angloparlante, como 
 \emph on
-red
+mashups
 \emph default
- más inteligente, y con ésta, proyectos que orientan el futuro del internet
- a una red más semántica y menos sobrecargada de información ambigua.
- Ejemplo de esto son los sistemas de recomendación y los motores de búsqueda
- sensibles al contexto y al uso histórico (con ejemplos de alta talla como
- 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-amazon.com
-\end_layout
-
-\end_inset
-
- y 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-google.com
-\end_layout
-
-\end_inset
-
-, respectivamente).
- Pero esta red inteligente tiene que ser usada de alguna manera para ventaja
- del productor de información, y obligar a éste a abdicar de su tarea de
- producción de información para perder varias horas en búsquedas quizá demasiado
- prolongadas, es un desperdicio.
+) que, en lugar de recurrir a distintas aplicaciones para resolver problemas
+ relacionados o crear soluciones que sacrifican la calidad y la experiencia
+ del usuario por suplir todas las posibles necesidades del usuario, se está
+ optando por implementar en los sistemas, mediante interfaces web de programació
+n de aplicaciones o librerías re-utilizables, alternativas 
+\emph on
+ya existentes
+\emph default
+ que se dedican a resolver con eficiencia problemas comunes.
+ De esta manera, la orientación cambió del desarrollo de un sistema cerrado
+ a la implementación de un 
+\emph on
+servicio
+\emph default
+ al cual los implementadores -tanto de sistemas híbridos como aplicaciones
+ tradicionales- pudieran acceder mediante el protocolo HTTP, siendo éste
+ ideal para no exigir de quien lo use nada más que conexión a internet,
+ sin restricciones de sistemas operativos o lenguajes de programación.
 \end_layout
 
 \begin_layout Standard
-Para ello, se han sugerido herramientas que ayuden al usuario a llevar a
- cabo sus tareas 
-\emph on
-sin abandonarlas
-\emph default
- y, a la vez, sin perder la calidad.
- La mayor parte de éstas han sido herramientas de escritorio o aplicaciones
- web exclusivas, pero aún esa solución sigue dejando qué desear: el usuario
- debería poder ver su tarea enriquecida con información relevante 
-\emph on
-sin importar dónde la esté llevando a cabo
-\emph default
-.
- Para este propósito se propone el proyecto actual: permitir a los desarrollador
-es de aplicaciones, ya sean web o de escritorio, valerse de la inteligencia
- colectiva plasmada en la web semántica en las tareas de producción de informaci
-ón de sus usuarios.
+El resto de este documento se estructura como sigue:
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+1: Comprende las generalidades del proyecto: se plantean el propósito y
+ los objetivos, se establece el contexto, se exploran proyectos relacionados,
+ se detallan el problema y la solución -incluyendo un diagrama que describe
+ a grandes rasgos el funcionamiento del servicio- y se establece la metodología
+ utilizada para la implementación.
  
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+2: En éste se exploran los conceptos relacionados al proyecto, así como
+ los fundamentos teóricos relacionados con la implementación de un sistema
+ de esta naturaleza.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+3: Aquí se presentan los aspectos de gestión: la metodología de planificación,
+ la estimación y calendarización.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+4: Este capítulo consiste en la memoria descriptiva de la implementación
+ de la solución, aquí se detallan las decisiones de ingeniería tomadas a
+ lo largo de la etapa de desarrollo.
+\end_layout
+
+\begin_layout Description
+Capítulo
+\begin_inset space ~
+\end_inset
+
+5: Comprende las conclusiones y recomendaciones, así como el trabajo futuro,
+ los estándares de uso esperados de los implementadores y las posibles alternati
+vas de comercialización del producto desarrollado.
 \end_layout
 
 \begin_layout Chapter
-Introducción General
+Generalidades
+\end_layout
+
+\begin_layout Standard
+Este capítulo ofrece una visión a grandes rasgos del proyecto, estableciendo
+ un contexto para el mismo y sentando las bases teóricas y técnicas de la
+ comprensión del desarrollo del mismo.
 \end_layout
 
 \begin_layout Section
@@ -436,7 +444,7 @@ Pero en esta era de la información activa, los usuarios se ven sobrecogidos
 \end_layout
 
 \begin_layout Standard
-El sistema que se pretende construir en este proyecto puede ser visto como
+El servicio que se pretende construir en este proyecto puede ser visto como
  un híbrido de recomendador y recuperador de información: satisfacer necesidades
  de información en contextos productivos en segundo plano, sin obligar al
  usuario a distraerse pero ofreciendo recomendaciones útiles.
@@ -459,10 +467,10 @@ key "Rhodes2000"
 útil
 \emph default
  proporcionarle documentos que probablemente no están relacionados con la
- tarea actual más allá del nivel léxico? En realidad, el sistema debería
- traer a la atención del usuario artefactos que habría pasado por alto por
- no saber cómo buscar o ni siquiera estar al tanto de su existencia o relación
- con su contexto local.
+ tarea actual más allá del nivel léxico del contexto inmediato? En realidad,
+ el sistema debería traer a la atención del usuario artefactos que habría
+ pasado por alto por no saber cómo buscar o ni siquiera estar al tanto de
+ su existencia o relación con su contexto local.
  Para ello, la medida por la cual se debería regir un sistema como el propuesto
  debería ser la 
 \emph on
@@ -484,13 +492,17 @@ key "Herlocker2004,Rhodes2000"
 \end_layout
 
 \begin_layout Section
-Proyectos relacionados y estado del arte
+Estado del arte
 \end_layout
 
 \begin_layout Standard
-Se pueden encontrar algunos sistemas surgidos de la investigación en el
- campo de sistemas de recomendación orientados a la recuperación oportuna
- de información:
+Aunque el enfoque elegido es relativamente nuevo, como ya se mencionó, durante
+ los últimos años la necesidad de personalización y adquisición oportuna
+ de información útil se ha tratado de resolver mediante sistemas de personalizac
+ión y recomendación, por lo usual como parte de un producto de software
+ específico o como aplicaciones independientes que monitorean el contexto
+ del usuario.
+ Entre las soluciones más conspicuas, se pueden encontrar las siguientes:
 \end_layout
 
 \begin_layout Enumerate
@@ -737,13 +749,16 @@ Identificación del problema
 Aunque, como se puede observar en la sección anterior, existen iniciativas
  que pudieran llevar los avances de la contextualización y la personalización
  de los sistemas de recomendación tradicionales al ámbito de la producción
- de la información, es necesaria una solución lo suficientemente flexible
- como para permitir la expansión a nuevos lenguajes naturales y ser utilizada
+ de la información, es necesaria una implementación lo suficientemente flexible
+ como para permitir la expansión a varios lenguajes naturales y ser utilizada
  por los desarrolladores en cualquier ámbito mediante un protocolo popular,
  como lo es HTTP, sin dejar de lado las ventajas del aprendizaje de máquina
  y la personalización, relegando estas tareas a un servidor que implemente
- un sistema de recomendación, dejando solamente a los clientes la responsabilida
-d de iniciar la comunicación e interpretar las respuestas.
+ un sistema de recomendación, dejando solamente a los implementadores la
+ responsabilidad de iniciar la comunicación e interpretar las respuestas
+ en las soluciones que creen para sus propias aplicaciones, en lugar de
+ tener que crear ellos mismos otro sistema de recomendación oportuna de
+ información.
 \end_layout
 
 \begin_layout Section
@@ -766,12 +781,12 @@ n de información a los usuarios finales; fundamentándose en los principios
  del protocolo HTTP).
  Mientras que los implementadores sólo se habrán de preocupar por hacer
  solicitudes a las URLs definidas en la API e interpretar los datos que
- el servidor regrese en respuesta, mientas que el lado del servidor utilizará
- técnicas de recuperación probabilística de la información y aprendizaje
- heurístico de perfiles de usuario para descubrir conceptos en sesiones
- de uso y mejorar las respuestas -en forma de recomendaciones de hipermedia-
- conforme los usuarios finales utilicen progresivamente el sistema que los
- implementadores de la API ofrezcan.
+ el servidor regrese en respuesta, el lado del servidor utilizará técnicas
+ de recuperación probabilística de la información y aprendizaje heurístico
+ de perfiles de usuario para descubrir conceptos en sesiones de uso y mejorar
+ las respuestas -en forma de recomendaciones de hipermedia- conforme los
+ usuarios finales utilicen progresivamente el sistema que los implementadores
+ de la API ofrezcan.
  El uso de principios de arquitectura REST, por otro lado, permitirá que
  la implementación del lado del servidor pueda escalar y refinarse sin afectar
  ni a los implementadores ni los usuarios finales.
@@ -804,11 +819,19 @@ zemanta.com
 , pero ésta no soporta la evolución automática de perfiles de usuario (aunque
  provee opciones de personalización explícita) y solo se ofrece en el idioma
  inglés.
- La solución aquí propuesta habrá de soportar, inicialmente, inglés y español,
- con un diseño abierto a la inclusión de nuevos idiomas, asimismo, la evolución
- y uso meramente automáticos de perfiles de usuario son fundamentales para
- este proyecto.
- 
+ La solución aquí propuesta, en cambio, habrá de soportar, inicialmente,
+ inglés y español, con un diseño abierto a la inclusión de nuevos idiomas,
+ asimismo, la evolución y uso meramente automáticos de perfiles de usuario
+ son fundamentales para este proyecto.
+ En la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:service-implementation"
+
+\end_inset
+
+ se puede apreciar un diagrama de actividad que explica cómo un implementador
+ podría utilizar el servicio desarrollado.
 \end_layout
 
 \begin_layout Standard
@@ -844,16 +867,123 @@ zemanta.com
  con una base documental muy extensa y en constante crecimiento.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/17_ServiceImplementation.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:service-implementation"
+
+\end_inset
+
+Implementación del servicio
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Definición de la metodología usada para la solución
+\end_layout
+
+\begin_layout Standard
+En primera instancia, el autor debe confesar que no se utilizó ninguna metodolog
+ía estricta en el desarrollo, esto debido a que se consideró lo siguiente:
+ el poco tiempo disponible -menos de tres meses, y en éstos, sólo unas cuantas
+ horas al día- podría convertir el rigor de una metodología formal en un
+ obstáculo al desarrollo (en ésto, quizá, se tomó una decisión propia del
+ proceso ágil de desarrollo) y el hecho que, siendo un solo desarrollador,
+ un proceso más laxo -mas no totalmente caótico- sería suficiente para mantener
+ el derrotero de la implementación.
+\end_layout
+
+\begin_layout Standard
+Aclarada la situación, se habrá de indicar que la metodología seguida -casi
+ empíricamente- puede encontrar similitudes en lo prescrito por el modelo
+ de 
+\emph on
+desarrollo rápido de aplicaciones
+\emph default
+ (DRA, definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+): en éste, luego de una etapa de planificación, análisis y diseño, se procede
+ a desarrollar el software dando preferencia a implementaciones ya existentes
+ de componentes no fundamentales; sin embargo, el DRA es un modelo no-evolutivo
+ del desarrollo del software, mientras que, dado que la implementación era
+ la primera incursión del autor en el desarrollo de un servicio como este,
+ se requería que el software pudiera evolucionar y construirse incrementalmente,
+ un componente a la vez, probándolos conforme se completaran, en iteraciones
+ rápidas: esto se puede encontrar en metodologías ágiles del desarrollo,
+ en concreto, el 
+\emph on
+Desarrollo conducido por características
+\emph default
+ (DCC), también definido en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+De esta manera, se puede concluir que se utilizó un híbrido de metodologías:
+ del DRA se puede tomar la tendencia a acortar el ciclo de desarrollo al
+ utilizar tecnologías ya existentes y del DCC la preferencia de iteraciones
+ cortas y componentes independientes que puedan ser probados antes de proseguir
+ a utilizarlos para incrementar el producto final.
+ Las iteraciones correspondieron a los objetivos planteados: obtener la
+ colección documental, implementar el componente de búsqueda, el de perfilado,
+ y la consolidación del servicio.
+\end_layout
+
 \begin_layout Chapter
 Marco teórico
 \end_layout
 
-\begin_layout Section
-Recuperación de información.
+\begin_layout Standard
+Se establecen los fundamentos teóricos detrás de la implementación de la
+ solución, con el fin de ubicarla en el contexto científico actual.
 \end_layout
 
-\begin_layout Subsection
-Introducción
+\begin_layout Section
+Recuperación de información.
 \end_layout
 
 \begin_layout Standard
@@ -4737,10 +4867,6 @@ name "sec:rec_sys"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Introducción 
 \end_layout
 
 \begin_layout Standard
@@ -9540,11 +9666,15 @@ te (aún cuando GET sólo debería utilizarse para obtener recursos y POST
 \end_layout
 
 \begin_layout Chapter
-Análisis y Diseño
+Planificación
 \end_layout
 
-\begin_layout Section
-Introducción
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Chapter
+Análisis y Diseño
 \end_layout
 
 \begin_layout Standard
@@ -9592,8 +9722,8 @@ key "Pressman2006"
 
 \end_inset
 
- se utilizará en el presente proyecto.
- 
+ y adaptada a la metodología ágil de orientación a las características se
+ utilizará en el presente proyecto 
 \end_layout
 
 \begin_layout Section
@@ -11608,14 +11738,11 @@ Esta sección se ampliará cuando se discuta la implementación del sistema
 Implementación
 \end_layout
 
-\begin_layout Section
-Introducción
-\end_layout
-
 \begin_layout Standard
-En este capítulo se discuten los aspectos teóricos y técnicos que cubren
- la implementación del sistema, el capítulo se organiza en base a los objetivos
- propuestos en la introducción general.
+En este capítulo se discuten los aspectos teóricos y técnicos que llevaron
+ a las decisiones de ingeniería involucradas en la implementación del sistema;
+ el capítulo se organiza en base a los objetivos propuestos en la introducción
+ general.
 \end_layout
 
 \begin_layout Section
