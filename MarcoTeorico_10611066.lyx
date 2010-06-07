@@ -9358,7 +9358,7 @@ estado: lo cual quiere decir que cada solicitud de un cliente al servidor
  debe contener en sí toda la información necesaria para llevarse a cabo,
  sin depender de datos previos; esto permite que se incrementen la visibilidad,
  confiabilidad y escalabilidad, mas introduce la desventaja de tener que
- enviar datos que quizá sean irrelevantes o reduntantes en una serie de
+ enviar datos que quizá sean irrelevantes o redundantes en una serie de
  solicitudes.
 \end_layout
 
@@ -10272,7 +10272,7 @@ url
  función sólo devuelve que la tarea de actualización fue puesta en la cola
  de prioridad, y no necesariamente garantiza la actualización; esto se debe
  a que el proceso de evolución de perfil es relativamente largo y un procesamien
-do síncrono ralentizaría innecesariamente la aplicación implementadora (dado
+to síncrono ralentizaría innecesariamente la aplicación implementadora (dado
  que es un componente secundario de la misma).
 \end_layout
 
@@ -10616,7 +10616,7 @@ reference "tab:estimation"
 \begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -10624,8 +10624,8 @@ status collapsed
 <features>
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="10page%">
+<column alignment="center" valignment="top" width="10page%">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row>
@@ -11937,7 +11937,7 @@ reference "sub:nf-requirements"
 \end_layout
 
 \begin_layout Standard
-Puesto que se ofrece la funcionalida del sistema como un servicio solicitado
+Puesto que se ofrece la funcionalidad del sistema como un servicio solicitado
  por un implementador, la comunicación entre ambos debería ser tan independiente
  de las implementaciones como sea posible, para ello, se proponen dos notaciones
  de intercambio de datos ampliamente utilizadas en las aplicaciones web:
@@ -12736,12 +12736,12 @@ xapian
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/19_DeploymentDiagram.dia
-	scale 50
+	scale 40
 
 \end_inset
 
@@ -13558,8 +13558,8 @@ gía elegida).
 scrapy
 \emph default
  es el recorrido en anchura.
- Tomado esto en consideración, se optó por el recorrido en profunidad, con
- efectos dramáticos: cuatro horas después, la araña había logrado bajar
+ Tomado esto en consideración, se optó por el recorrido en profundidad,
+ con efectos dramáticos: cuatro horas después, la araña había logrado bajar
  varios cientos de documentos, cuando con la estrategia anterior, no logró
  bajar 
 \emph on
@@ -15656,8 +15656,10 @@ Conclusión
 
 \begin_layout Standard
 En este capítulo se discuten los resultados y aportes del presente proyecto,
- así como las lecciones aprendidas y las recomendaciones a futuras generaciones
- de estudiantes de ingeniería en sistemas computacionales
+ las observaciones durante el desarrollo que se desean recalcar, las posibilidad
+es de trabajo futuro y comercialización, las lecciones aprendidas y las
+ recomendaciones a futuras generaciones de estudiantes de ingeniería en
+ sistemas computacionales
 \end_layout
 
 \begin_layout Section
@@ -15914,7 +15916,7 @@ Jorge.
 \end_layout
 
 \begin_layout Section
-Solicitud de accceso al servidor virtual desde fuera del laboratorio
+Solicitud de acceso al servidor virtual desde fuera del laboratorio
 \end_layout
 
 \begin_layout Standard
