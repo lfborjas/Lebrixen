@@ -831,7 +831,15 @@ reference "fig:service-implementation"
 \end_inset
 
  se puede apreciar un diagrama de actividad que explica cómo un implementador
- podría utilizar el servicio desarrollado.
+ podría utilizar el servicio desarrollado y en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:app-usage"
+
+\end_inset
+
+ se puede ver cómo podría utilizar el usuario final una aplicación con el
+ servicio implementado.
 \end_layout
 
 \begin_layout Standard
@@ -894,6 +902,49 @@ name "fig:service-implementation"
 \end_inset
 
 Implementación del servicio
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/18_ServiceUsage.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:app-usage"
+
+\end_inset
+
+Uso de una aplicación que implemente el servicio
 \end_layout
 
 \end_inset
