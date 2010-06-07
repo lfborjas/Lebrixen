@@ -10148,7 +10148,347 @@ Planificación
 \end_layout
 
 \begin_layout Standard
-[TODO]
+En este capítulo se definen las prácticas de gestión de proyecto aplicadas
+ al presente: se identifican el ámbito y los recursos, se detalla la metodología
+ de administración de proyectos detrás de la calendarización y se concluye
+ con una estimación post-desarrollo.
+ La estimación tardía se debe a la restricción de tiempo impuesta desde
+ un principio: el proyecto sólo contaba con tres meses para el desarrollo,
+ de manera que una estimación previa hubiera sido hasta cierto punto fútil.
+\end_layout
+
+\begin_layout Section
+Definición del ámbito e identificación de los recursos
+\end_layout
+
+\begin_layout Standard
+Como hace notar 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+, el primer paso en la planificación de proyectos de software es la definición
+ del ámbito, el cual: 
+\end_layout
+
+\begin_layout Quotation
+\begin_inset Quotes eld
+\end_inset
+
+Define las funciones y características que se entregarán a los usuarios
+ finales, los datos que son entrada y salida, el 'contenido' que se presenta
+ a los usuarios como consecuencia de emplear el software, así como el desempeño,
+ las restricciones, las interfaces y la confiabilidad que 
+\emph on
+acotan
+\emph default
+ el sistema
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El autor debe recalcar que esta sección se ha escrito luego de completar
+ el ciclo de desarrollo, por lo que a continuación se describe el ámbito
+ actual -y no el inicial-, de ahí el nivel de detalle.
+ Una descripción del ámbito inicial sería redundante.
+ Siguiendo, pues, la práctica de narrar el ámbito de la aplicación, el de
+ este proyecto se puede establecer de la siguiente manera:
+\end_layout
+
+\begin_layout Quotation
+Los implementadores obtienen una clave única de aplicación, así como credenciale
+s de autenticación, al registrarse en el sitio del servicio.
+ Acto seguido, pueden optar por registrar usuarios manualmente en el 
+\emph on
+panel de control
+\emph default
+ ofrecido en el mismo sitio del servicio, o utilizar llamadas a la 
+\emph on
+interfaz de programación de aplicaciones
+\emph default
+ para registrar usuarios individualmente o en grupo.
+ Puesto que una adición múltiple de usuarios puede ser costosa, respecto
+ al tiempo, los implementadores pueden optar por utilizar una llamada asíncrona
+ al servicio, la cual confirmará mediante correo electrónico que los usuarios
+ fueron agregados.
+ En cualquier caso, para estas operaciones, los implementadores deberán
+ autenticarse utilizando las credenciales provistas: clave de aplicación,
+ nombre de usuario y contraseña.
+ El servicio contestará mediante HTTP con una respuesta con código 401 si
+ la autenticación falla o con una respuesta con código 200 y cuerpo codificado
+ en JSON con un mensaje de éxito si la agregación resulta o fracaso si hubo
+ un error interno o se excedió el límite de usuarios permitido: por cuestiones
+ de almacenamiento, el servicio establecerá un límite de usuarios a las
+ aplicaciones que lo utilicen.
+ Asimismo, el servicio ofrece una llamada para eliminar usuarios (que se
+ comporta igual que la de agregación, incluso en cuanto a la necesidad de
+ autenticación) y otra para ver los usuarios que se han registrado, para
+ ésta, sin embargo, sólo la clave de aplicación es necesaria.
+\begin_inset Newline newline
+\end_inset
+
+Los implementadores, a la hora de utilizar el servicio, pueden optar por
+ utilizar el 
+\emph on
+widget
+\emph default
+ de javascript que se ofrece -sólo si la aplicación es web, evidentemente;
+ si deciden utilizar éste, sólo habrán de agregarlo a la página donde aplicarán
+ el servicio y proveer al constructor del 
+\emph on
+widget
+\emph default
+ las opciones que se deseen.
+ Si no desean utilizar el widget -o no pueden, por no ser web la aplicación-
+ deberán implementar métodos que hagan las llamadas al servicio de recomendación
+ y lo interpreten: para obtener recomendaciones, la llamada correspondiente
+ deberá incluir la clave de aplicación y el contexto local en forma de texto;
+ el servidor contestará con una respuesta 404 (página no encontrada) si
+ la clave provista no es válida o con una respuesta 403 (solicitud inválida)
+ si, en caso de ser una llamada 
+\emph on
+AJAX
+\emph default
+, la función de retorno (para utilizar la técnica JSONP) no es un identificador
+ javascript válido.
+ En cualquier otro caso, el servidor contestará con una respuesta con código
+ 200 y un contenido codificado en JSON con un mensaje de error si el usuario
+ no existe o el contenido no se provee o con un conjunto de términos clave
+ encontrados y recomendaciones (incluyendo las 
+\emph on
+url
+\emph default
+ de la hipermedia, un resumen, código para retroalimentación y la relevancia)
+ si la solicitud es correcta.
+ Asimismo, se provee la llamada a actualizar el perfil, que se comporta
+ de manera similar a la de obtener recomendaciones, mas recibe un parámetro
+ más: los códigos de documentos elegidos como retroalimentación.
+ La actualización del perfil es asíncrona, por lo que la llamada a esta
+ función sólo devuelve que la tarea de actualización fue puesta en la cola
+ de prioridad, y no necesariamente garantiza la actualización; esto se debe
+ a que el proceso de evolución de perfil es relativamente largo y un procesamien
+do síncrono ralentizaría innecesariamente la aplicación implementadora (dado
+ que es un componente secundario de la misma).
+\end_layout
+
+\begin_layout Standard
+Establecido el ámbito, se proceden a identificar los recursos, una vez más,
+ siguiendo los lineamientos de gestión de software presentados por 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Description
+Personal: Dada la naturaleza de este proyecto, solamente se cuenta con el
+ autor para el desarrollo de software.
+ Para la configuración inicial de recursos externos (como el servidor web
+ y de base de datos), se habrá de solicitar apoyo a la facultad o el encargado
+ del laboratorio asignado a los estudiantes de ingeniería en sistemas computacio
+nales.
+\end_layout
+
+\begin_layout Description
+Entorno: este se detallará más adelante (entre los requisitos no funcionales
+ de la etapa de análisis), mas se puede establecer que se requerirá de equipos
+ con un sistema operativo linux tanto para desarrollo como para producción;
+ asimismo, se requerirá de al menos 10 Gb de almacenamiento y al menos 1
+ Gb de memoria de acceso aleatorio debido a la cantidad de datos en forma
+ de texto libre a ser procesados.
+ Por último, se requerirá de conexión a internet y suficiente ancho de banda
+ como para procesar con el mínimo de latencia las solicitudes al servicio.
+\end_layout
+
+\begin_layout Description
+Software
+\begin_inset space ~
+\end_inset
+
+reutilizable: para el proyecto se utilizará un 
+\emph on
+framework
+\emph default
+ de desarrollo web que se encargue de tareas de bajo nivel como el direccionamie
+nto de 
+\emph on
+urls
+\emph default
+ y la interpretación y codificación de la comunicación HTTP, luego, se requerirá
+ software pre-existente para las siguientes tareas: indexación y búsqueda
+ de documentos para recomendación, entrenamiento del clasificador de categorías
+ y extracción de términos clave.
+ Se deberá desarrollar software nuevo para el manejo de solicitudes al servicio,
+ la implementación del widget, la obtención de la colección de software
+ documental, el registro de aplicaciones, la creación, evolución y uso de
+ los perfiles y la administración de las tareas de extracción automática,
+ búsqueda, y gestión de los datos.
+\end_layout
+
+\begin_layout Section
+Calendarización
+\end_layout
+
+\begin_layout Standard
+Como ya se apuntó, la restricción de tiempo estaba fija, de modo que lo
+ que se describe a continuación se hizo con el lapso de tres meses en mente.
+ 
+\end_layout
+
+\begin_layout Standard
+La metodología utilizada para la administración del proyecto fue una adaptación
+ ágil a la tradicional (que incluye, como se describe en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Dawson2002"
+
+\end_inset
+
+, las siguientes etapas: definición, planificación, iniciación, control
+ y finalización o cierre).
+ Como ya se explicó, se prefirió seguir un proceso evolutivo asimilable
+ al desarrollo conducido por características, con iteraciones rápidas, cambios
+ de los requerimientos y pruebas a nivel de característica.
+ En cuanto a la etapa de planificación, sin embargo, se siguieron los lineamient
+os establecidos en el ya citado libro de 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Dawson2002"
+
+\end_inset
+
+.
+ No obstante, la planificación, se debe confesar, se hizo a grandes rasgos
+ (a nivel de objetivos e hitos) dejando los detalles 
+\emph on
+sobre la marcha
+\emph default
+, debido a la naturaleza evolutiva de la metodología empírica que se tomó.
+ A continuación, las etapas de la planificación:
+\end_layout
+
+\begin_layout Description
+División
+\begin_inset space ~
+\end_inset
+
+del
+\begin_inset space ~
+\end_inset
+
+trabajo: se consideraron los objetivos y se subdividieron en cuatro grandes
+ 
+\emph on
+características
+\emph default
+ relativamente independientes entre sí y capaces de ser sujetas a pruebas,
+ así como la inclusión de un período de pruebas formales y generales:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Obtención de colección documental y ontología
+\end_layout
+
+\begin_layout Enumerate
+Implementación del componente de búsqueda
+\end_layout
+
+\begin_layout Enumerate
+Implementación del componente de perfilado
+\end_layout
+
+\begin_layout Enumerate
+Implementación del servicio
+\end_layout
+
+\begin_layout Enumerate
+Pruebas generales
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Estimación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+tiempos: esta fue quizá la etapa más liberalmente ejecutada del proyecto:
+ para cada característica se consideró un máximo de dos semanas, de modo
+ que se pudieran cumplir los tres meses (dejando un par de semanas para
+ cualquier contingencia).
+ Tratando de que las tareas incluidas dentro de cada característica no excediese
+n una semana en su ejecución.
+\end_layout
+
+\begin_layout Description
+Identificación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+hitos: la culminación y pruebas superficiales de cada característica se
+ consideraron hitos.
+\end_layout
+
+\begin_layout Description
+Encadenamiento
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+actividades
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+planificación
+\begin_inset space ~
+\end_inset
+
+temporal: una vez identificados los hitos y las tareas necesarias para llevar
+ a cabo cada objetivo, se utilizó un diagrama de Gantt para identificar
+ qué tareas dependían de otras y así distribuir el tiempo de los tres meses
+ de desarrollo.
+\end_layout
+
+\begin_layout Description
+Replanificación
+\begin_inset space ~
+\end_inset
+
+sobre
+\begin_inset space ~
+\end_inset
+
+la
+\begin_inset space ~
+\end_inset
+
+marcha: conforme se avanzó en el desarrollo, el diagrama se fue refinando
+ conforme las tareas se cumplían -dado que muchas se lograron antes de lo
+ estimado y otras después, dando como resultado el diagrama que se presenta
+ en el anexo []
 \end_layout
 
 \begin_layout Chapter
