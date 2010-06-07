@@ -11851,10 +11851,6 @@ pre-filtrado
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -11893,10 +11889,6 @@ post-filtrado
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -12469,9 +12461,13 @@ arquitectura de aplicación
  se hablará aquí solamente de la postrera.
 \end_layout
 
+\begin_layout Subsubsection
+Arquitectura en capas
+\end_layout
+
 \begin_layout Standard
-La arquitectura de la aplicación adoptará la propuesta por el marco de desarroll
-o 
+La arquitectura en capas de la aplicación adoptará la propuesta por el marco
+ de desarrollo 
 \emph on
 django
 \emph default
@@ -12689,35 +12685,94 @@ La arquitectura MTV
 
 \end_layout
 
-\begin_layout Subsection
-Diseño de componentes
+\begin_layout Subsubsection
+Despliegue
 \end_layout
 
 \begin_layout Standard
-Para implementar un sistema de recomendación se debe tener en mente qué
- elementos lo conformarán; según lo mencionado en los capítulos anteriores,
- se puede esbozar una macro-arquitectura del sistema la cual consistirá
- de los siguientes elementos:
-\end_layout
+Entendida la separación en capas del sistema, se puede también considerar
+ cómo se distribuirá físicamente la funcionalidad del servicio, para ello,
+ se provee el diagrama de despliegue de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:deployment-diagram"
 
-\begin_layout Enumerate
-Una colección de documentos.
-\end_layout
+\end_inset
 
-\begin_layout Enumerate
-Un componente de recuperación de información.
- El cual incluirá sus respectivos sub-componentes de indización, igualación
- y obtención de consultas.
-\end_layout
-
-\begin_layout Enumerate
-Un componente de filtrado de información.
- El cual contempla los aspectos de elección de resultados a mostrar, interfaz
- de presentación y obtención de retroalimentación.
+.
+ En ésta se puede observar que, dentro del servidor, se encuentra una instancia
+ del 
+\emph on
+framework
+\emph default
+ django siendo ejecutada mediante la 
+\emph on
+interfaz de puerta de servidor web 
+\emph default
+(WSGI, por 
+\emph on
+web server gateway interface
+\emph default
+) en un servidor apache; asimismo, se encuentra un servidor del administrador
+ de bases de datos PostgreSQL, el cual contiene una base de datos con dos
+ conjuntos semánticamente separados de tablas: las relativas a la información
+ de aplicaciones implementadoras, con información de las mismas y los usuarios
+ que éstas registran, incluidos los perfiles; el otro conjunto consiste
+ en la información relativa a la ontología en uso y la colección documental.
+ En el servidor, finalmente, se encuentra también el clasificador de categorías,
+ un repositorio de datos administrado por 
+\emph on
+xapian 
+\emph default
+(una aplicación de indización y recuperación de información) utilizado por
+ el servicio web para clasificar documentos y consultas.
+ Fuera del nodo del servidor web, se encuentran los servicios web externos
+ utilizados para la extracción de términos clave.
+ Por último, se puede apreciar que no se supone nada del implementador,
+ más que la comunicación con el servicio web mediante el protocolo http.
 \end_layout
 
 \begin_layout Standard
-Esta sección se ampliará cuando se discuta la implementación del sistema
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/19_DeploymentDiagram.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:deployment-diagram"
+
+\end_inset
+
+Diagrama de despliegue del servicio
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
