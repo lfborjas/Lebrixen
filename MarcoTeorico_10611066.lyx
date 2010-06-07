@@ -15606,5 +15606,21 @@ En respuesta a la solicitud, se procedió a asignar una dirección IP pública
  hacia la dirección IP asignada al servidor virtual.
 \end_layout
 
+\begin_layout Chapter
+Plan de proyecto
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename /home/lfborjas/PDF/Java_Printing.pdf
+	display false
+	extra LaTeX "pages=1-6"
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
