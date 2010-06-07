@@ -879,12 +879,12 @@ zemanta.com
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/17_ServiceImplementation.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -10488,11 +10488,346 @@ la
 marcha: conforme se avanzó en el desarrollo, el diagrama se fue refinando
  conforme las tareas se cumplían -dado que muchas se lograron antes de lo
  estimado y otras después, dando como resultado el diagrama que se presenta
- en el anexo []
+ en el anexo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:project-plan"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Estimación
+\end_layout
+
+\begin_layout Standard
+Para estimar el esfuerzo y recursos que se hubieran necesitado, se utilizó
+ el modelo empírico COCOMO II
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://sunset.usc.edu/csse/research/COCOMOII/cocomo_main.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ con un factor y exponente ajustados al perfil de un proyecto 
+\emph on
+orgánico
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Como se define en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.dwheeler.com/sloccount/sloccount.html
+\backslash
+#cocomo
+\end_layout
+
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+un pequeño grupo de programadores experimentados desarrollan software en
+ un entorno familiar.
+ El tamaño del software varía desde unos pocos miles de líneas (tamaño pequeño)
+ a unas decenas de miles (medio)
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ aplicado con la herramienta 
+\emph on
+SLOCcount
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.dwheeler.com/sloccount/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\emph default
+una utilidad de línea de comandos para el sistema operativo linux.
+ Se generaron dos paquetes independientes de software: 
+\emph on
+dmoz_ontology
+\emph default
+, una araña web, utilizada para obtener y organizar la colección documental
+ y 
+\emph on
+lebrixen
+\emph default
+, el servicio en sí.
+ El costo de personal se estableció en 8400 dólares anuales (700 mensuales),
+ en base a entrevistas laborales que el autor tuvo en el año 2009.
+ En la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:estimation"
+
+\end_inset
+
+ se presentan los resultados de la estimación.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="6">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Aplicación
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Líneas de código
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Esfuerzo (persona-meses)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Tiempo (meses)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Desarrolladores
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Costo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Araña Web
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+251
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.56
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.28
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$ 944
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Servicio Web
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2,712
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.84
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.19
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+$ 11, 494
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:estimation"
+
+\end_inset
+
+Estimación post-desarrollo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
-Análisis y Diseño
+Análisis y Diseño.
 \end_layout
 
 \begin_layout Standard
@@ -15608,6 +15943,13 @@ En respuesta a la solicitud, se procedió a asignar una dirección IP pública
 
 \begin_layout Chapter
 Plan de proyecto
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:project-plan"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
