@@ -286,6 +286,101 @@ servicio
 \end_layout
 
 \begin_layout Standard
+Se observó que una gran parte de las personas están utilizando computadoras
+ para crear datos textuales y tienen acceso a internet; además, -dado que
+ existen incontables fuentes alternativas de información- en la actualidad
+ se requiere que, si esta información está dirigida a un auditorio considerable,
+ se necesite conocer otros documentos que justifiquen, expandan, contextualicen
+ o eliciten lo que se está escribiendo.
+ Para este propósito, los escritores promedio contemporáneos (autores de
+ blogs, estudiantes, periodistas informales) han dejado en segundo plano
+ -u olvidado del todo- la consulta a bibliotecas y personas con autoridad
+ en sus respectivos campos y han adoptado como costumbre el utilizar motores
+ de búsqueda para obtener estos documentos.
+ Por lo general, esta búsqueda es previa a la escritura, de modo que las
+ nuevas necesidades de información que surgen 
+\emph on
+durante
+\emph default
+ el proceso de escritura involucran o que el usuario conjeture o que interrumpa
+ su tarea para tratar de encontrar nuevas referencias (muchas veces sin
+ éxito o perdiendo tiempo valioso, pues la necesidad de información apenas
+ se viene formando y seguramente cambiará con la evolución del texto); ambas
+ alternativas tienen como consecuencia que se cree trabajo de baja calidad
+ o se invierta más tiempo del necesario en producirlo.
+ Además, el ser humano trata al trabajo con la 
+\emph on
+ley del mínimo esfuerzo
+\emph default
+ de modo que siempre está dispuesto a elegir alternativas que reduzcan el
+ tiempo total que él estima tomará la realización de una tarea, de modo
+ que esto también pone en riesgo la calidad del trabajo si la investigación
+ por referencias tomará un tiempo considerable y las meras conjeturas son
+ más expeditas.
+\end_layout
+
+\begin_layout Standard
+Ya se han propuesto sistemas de asistencia a la escritura con base en estas
+ dos realidades.
+ El proyecto que se describe aquí supone un avance al proveer una base común
+ para la implementación de esta funcionalidad en software nuevo y ya existente,
+ proveyendo un componente útil para desarrolladores que deseen mejorar la
+ productividad de los usuarios de sus productos a la hora de producir informació
+n.
+\end_layout
+
+\begin_layout Standard
+Para representar el conocimiento que el sistema utilizará para hacer recomendaci
+ones se eligió un enfoque ontológico
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Es decir, se representará mediante ontologías: grafos donde los nodos son
+ conceptos y las aristas, relaciones entre ellos
+\end_layout
+
+\end_inset
+
+: en lugar de aprender lentamente los perfiles, el sistema subyacente al
+ servicio ya 
+\emph on
+sabrá
+\emph default
+ distinguir los conceptos de los documentos, de modo que pueda identificar
+ las preferencias de los usuarios más rápido en tiempo de uso (una sesión,
+ frente a varias sesiones en enfoques tradicionales, que requieren más informaci
+ón para identificar lo que tienen en común las sesiones entre ellas y con
+ otras).
+ En este proyecto, la ontología utilizada es la del 
+\emph on
+Open Directory Project
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.dmoz.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
 El resto de este documento se estructura como sigue:
 \end_layout
 
@@ -363,7 +458,8 @@ Desarrollar un servicio web que recomiende al usuario documentos relevantes
 lmente a la tarea del usuario en un índice de documentos mantenido por el
  sistema y la consiguiente recomendación de los que se consideren útiles,
  evaluando la utilidad a partir de un perfil construido y actualizado automática
-mente en base al uso histórico del servicio.
+mente en base al uso histórico del servicio, basando el conocimiento de
+ las preferencias de usuarios en una ontología jerárquica.
  
 \end_layout
 
@@ -776,9 +872,10 @@ name "sec:solution-description"
 El proyecto propuesto aquí busca ofrecer a los implementadores una interfaz
  de programación de aplicaciones que permita que, mediante solicitudes HTTP,
  se puedan brindar recomendaciones de referencia útiles para tareas de producció
-n de información a los usuarios finales; fundamentándose en los principios
- de la técnica de arquitectura REST (a su vez basada en las capacidades
- del protocolo HTTP).
+n de información a los usuarios finales modelando el conocimiento de las
+ preferencias de los usuarios mediante una ontología jerárquica y fundamentándos
+e en los principios de la técnica de arquitectura REST (a su vez basada
+ en las capacidades del protocolo HTTP).
  Mientras que los implementadores sólo se habrán de preocupar por hacer
  solicitudes a las URLs definidas en la API e interpretar los datos que
  el servidor regrese en respuesta, el lado del servidor utilizará técnicas
@@ -801,6 +898,14 @@ Las ventajas de una solución basada en una API apegada a ciertos principios
  REST es la flexibilidad: los implementadores podrán hacer uso de ella desde
  aplicaciones de escritorio, aplicaciones web tradicionales o aplicaciones
  web que implementen la técnica AJAX (ofreciendo soporte a la técnica JSONP).
+\end_layout
+
+\begin_layout Standard
+El aporte del modelado del conocimiento mediante una ontología permite que
+ las preferencias del usuario se aprendan más rápidamente que en otros enfoques
+ de sistemas de recomendación, evitando así el clásico problema de 
+\emph on
+arranque en frío.
 \end_layout
 
 \begin_layout Standard
@@ -12796,6 +12901,24 @@ Para el desarrollo de este proyecto, dada su naturaleza académica y el poco
  se pudiera dedicar a llevar a cabo los objetivos principales con éxito.
 \end_layout
 
+\begin_layout Standard
+Como lo dice el título, el conocimiento sobre las preferencias de los usuarios
+ se modelará mediante una ontología: una representación de conceptos relacionado
+s mediante un grafo, donde los nodos son conceptos y las aristas las diversas
+ relaciones entre ellos.
+ En este proyecto, como se discutirá más adelante, se utiliza una ontología
+ jerárquica, de modo que las relaciones entre conceptos son de 
+\emph on
+herencia
+\emph default
+: una arista dirigida entre conceptos implica que el concepto de donde parte
+ la arista es un 
+\emph on
+sub-concepto
+\emph default
+ del otro.
+\end_layout
+
 \begin_layout Section
 Obtención de la colección documental y creación de la base de conocimiento
  ontológica
@@ -15772,6 +15895,10 @@ Se considera que el presente proyecto contribuye a las áreas de investigación
  de los sistemas de recuperación de información oportuna y de recomendación
  al proveer un servicio sobre el cual nuevas soluciones de software se puedan
  fundamentar.
+ Asimismo, es una implementación donde se prueba el concepto de recomendación
+ orientada al conocimiento, donde éste se modela mediante ontologías y los
+ perfiles del usuario evolucionan heurísticamente, de modo que los investigadore
+s pueden utilizarlo para evaluar la utilidad práctica de este enfoque.
 \end_layout
 
 \begin_layout Section
