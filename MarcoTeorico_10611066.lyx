@@ -16724,5 +16724,21 @@ name "cha:project-plan"
 
 \end_layout
 
+\begin_layout Chapter
+Manual del implementador
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename DeveloperManual.pdf
+	display false
+	extra LaTeX "pages={1-28}"
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document

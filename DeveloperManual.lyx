@@ -411,10 +411,7 @@ scripts
 status collapsed
 
 \begin_layout Plain Layout
-
 Para más detalles, consúltense 
-\lang spanish
-
 \begin_inset Flex URL
 status collapsed
 
@@ -782,7 +779,7 @@ Administración mediante el panel de control
 \begin_layout Standard
 Esta alternativa se recomienda sólo para aplicaciones con un número pequeño
  y limitado de usuarios o donde la membresía se determina manualmente.
- Para acceder al panel de control, dirígase a 
+ Para acceder al panel de control, diríjase a 
 \begin_inset Flex URL
 status collapsed
 
@@ -962,7 +959,7 @@ Para acceder al panel de control o hacer llamadas de gestión de usuarios
  el registro- y una contraseña aleatoria son incluidas en el correo electrónico
  de confirmación de registro.
  Si por alguna razón el implementador pierde su contraseña o tiene razones
- para sospechar que ha sido robada, puede reestablecerla accediendo a 
+ para sospechar que ha sido robada, puede restablecerla accediendo a 
 \begin_inset Flex URL
 status collapsed
 
@@ -984,12 +981,12 @@ reference "fig:pwd-reset"
 
 ).
  Acto seguido, el sistema enviará al correo provisto un mensaje conteniendo
- una URL única para el acto de reestablecimiento.
- Siguiendo la dirección ahí provista, el implementador puede reestablecer
+ una URL única para el acto de restablecimiento.
+ Siguiendo la dirección ahí provista, el implementador puede restablecer
  la contraseña para su aplicación (refiérase a la figura).
  Lamentablemente, si la dirección de correo electrónico de registro tuviese
- la seguridad comprometida, no existe aún un mecanismo alterno de reestablecimie
-nto de contraseña.
+ la seguridad comprometida, no existe aún un mecanismo alterno de restablecimien
+to de contraseña.
 \end_layout
 
 \begin_layout Standard
@@ -1018,7 +1015,7 @@ name "fig:pwd-reset"
 
 \end_inset
 
-Formulario de solicitud de reestablecimiento de contraseña
+Formulario de solicitud de restablecimiento de contraseña
 \end_layout
 
 \end_inset
@@ -1061,7 +1058,7 @@ name "fig:pwd-reset-confirm"
 
 \end_inset
 
-Formulario de reestablecimiento de contraseña
+Formulario de restablecimiento de contraseña
 \end_layout
 
 \end_inset
@@ -1970,10 +1967,7 @@ Nótese el uso de la notación de selectores
 status collapsed
 
 \begin_layout Plain Layout
-
 Si no se es familiar con esta sintaxis, refiérase a 
-\lang spanish
-
 \begin_inset Flex URL
 status open
 
@@ -2132,7 +2126,7 @@ envolverán
 \end_layout
 
 \begin_layout Standard
-Ua configuración como esta, siguiendo el documento de la figura 
+Una configuración como esta, siguiendo el documento de la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:html-src"
@@ -2412,7 +2406,7 @@ reference "fig:html-doc"
 \end_inset
 
 ).
- Nótese que a la derecha de la pantalla se encuentra un ícono de color negro:
+ Nótese que a la derecha de la pantalla se encuentra un icono de color negro:
  en este lugar no estorba la tarea principal del usuario y, puesto que no
  hay recomendaciones, el color es lo más inconspicuo posible (tiene incluso
  cierta transparencia).
@@ -2441,7 +2435,7 @@ reference "fig:active-widget"
 Nótese que la pestaña de recomendaciones se encuentra en el borde de la
  pantalla, esto permite una navegación más fácil hacia ella cuando el usuario
  decida revisar las recomendaciones.
- Dar click en esta pestaña abre la interfaz de recomendaciones ilustrada
+ Dar clic en esta pestaña abre la interfaz de recomendaciones ilustrada
  en la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
