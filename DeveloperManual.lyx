@@ -54,10 +54,17 @@ T-Recs: un servicio de recomendación basado en ontologías
 Versión 0.0.1
 \end_layout
 
-\begin_layout Title
+\begin_layout Standard
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -68,7 +75,52 @@ Introducción
 \end_layout
 
 \begin_layout Standard
-lorem ipsum
+En la actualidad, la gente que produce información para ser consumida por
+ un auditorio considerable se ha multiplicado gracias a la emergencia del
+ internet, las redes sociales y generaciones cada vez más acostumbradas
+ a herramientas informáticas.
+ La costumbre más común de los escritores de contenido contemporáneos, para
+ encontrar ideas o fundamento para lo que escriben es utilizar motores de
+ búsqueda para investigar hasta donde el tiempo o la motivación lo permitan
+ y 
+\emph on
+luego
+\emph default
+ dedicarse a escribir su propio trabajo.
+ Esta costumbre, sin embargo, tiende a producir trabajos de baja calidad
+ o alto riesgo de plagio y contradicciones, debido a que las ideas evolucionan
+ y se desarrollan sólo cuando se está escribiendo.
+ 
+\end_layout
+
+\begin_layout Standard
+Para ello, se han propuesto sistemas que asistan al proceso de escritura
+ haciendo recomendaciones de referencias en tiempo real, de modo que, si
+ los escritores lo desean, las pueden consultar cuando lo necesiten, ahorrándose
+ el esfuerzo de formular consultas en motores de búsqueda y desperdiciar
+ tiempo valioso en refinarlas hasta dar con material útil.
+\end_layout
+
+\begin_layout Standard
+T-Recs es un servicio que permite agregar esta funcionalidad a cualquier
+ sistema, ya sea una aplicación web o de escritorio, ahorrando a los implementad
+ores la tarea de desarrollarla por su cuenta.
+ 
+\end_layout
+
+\begin_layout Standard
+El servicio se provee mediante una interfaz de programación de aplicaciones
+ (API) a la que se puede acceder mediante el protocolo HTTP.
+\end_layout
+
+\begin_layout Standard
+Para desarrolladores web existe la opción de incluir unas cuantas líneas
+ de código javascript a las páginas donde se desee implementar la funcionalidad,
+ para así ahorrarse el paso de desarrollar una interfaz y métodos que manejen
+ las recomendaciones; los implementadores en otro tipo de aplicaciones deberán
+ implementar las llamadas a la API y proveer a sus usuarios de una interfaz
+ que las presente, el desarrollo de la misma puede seguir algunos lineamientos
+ aquí presentados, para aprovechar al máximo el servicio.
 \end_layout
 
 \begin_layout Addsec
@@ -76,21 +128,954 @@ Audiencia
 \end_layout
 
 \begin_layout Standard
-Desarrolladores con experiencia en comunicación mediante el protocolo HTTP;
- para aplicaciones web, conocimiento básico de diseño de páginas web y javascrip
-t se aconseja.
+El presente documento está dirigido a desarrolladores de software tanto
+ novatos como experimentados.
+ Para utilizar el servicio no es necesario utilizar ningún lenguaje específico,
+ lo único necesario es que el desarrollador sepa cómo hacer solicitudes
+ a URLs e interpretar las respuestas mediante el protocolo HTTP.
+ El contenido de las respuestas del servidor, en la versión actual, estará
+ codificado utilizando la notación de intercambio de texto JSON (
+\emph on
+Javascript Object Notation
+\emph default
+) por lo que también se requiere que el implementador conozca una manera
+ de extraer información de un texto en JSON en el lenguaje que elija.
+ Los implementadores web que deseen incluir el 
+\emph on
+widget
+\emph default
+ de javascript, deben tener conocimiento básico de javascript, html y selectores
+ en la sintaxis de css.
 \end_layout
 
 \begin_layout Chapter
 Para empezar
 \end_layout
 
+\begin_layout Standard
+Aquí se detallan los pasos preliminares que cualquier implementador deberá
+ seguir antes de usar el servicio.
+\end_layout
+
 \begin_layout Section
 Obtener clave de aplicación
 \end_layout
 
+\begin_layout Standard
+Tanto el 
+\emph on
+widget
+\emph default
+ como el uso de la API requieren que se cuente con una 
+\emph on
+clave de aplicación
+\emph default
+.
+ Ésta es una cadena de caracteres que identifica a cada aplicación registrada,
+ por cada aplicación que implemente el servicio, el desarrollador deberá
+ proveer una clave válida.
+ 
+\end_layout
+
+\begin_layout Standard
+Al acceder a 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://trecs.com/register/
+\end_layout
+
+\end_inset
+
+, se encontrará un formulario como el mostrado en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:register-form"
+
+\end_inset
+
+.
+ Contiene los siguientes campos:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/20_RegisterForm.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:register-form"
+
+\end_inset
+
+ Formulario de registro
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Nombre o url de la aplicación: el implementador deberá proveer un nombre
+ 
+\emph on
+único
+\emph default
+ para la aplicación, si es una aplicación web, se recomienda utilizar el
+ URL con el que se accede a la misma.
+ Si una aplicación con el mismo nombre ya está registrada para uso del servicio,
+ se hará notar al usuario mediante un reporte de error en el formulario.
+\end_layout
+
+\begin_layout Enumerate
+Correo electrónico de contacto: aquí se deberá cuidar de proporcionar una
+ dirección de correo electrónico válida y activa: toda la comunicación subsiguie
+nte con el desarrollador se hará mediante ésta.
+\end_layout
+
+\begin_layout Enumerate
+Verificación: para evitar el abuso de aplicaciones maliciosas, se requiere
+ que se llene un campo de verificación 
+\emph on
+recaptcha
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+recaptcha.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Una vez completo con éxito el formulario, el usuario será redirigido a la
+ página de instrucciones de uso y el sistema enviará un correo electrónico
+ a la dirección provista con la clave de aplicación y las credenciales de
+ autenticación correspondientes a la aplicación.
+ Las credenciales de autenticación consisten en un nombre de usuario (el
+ nombre de la aplicación) y una contraseña generada aleatoriamente, permiten
+ el uso seguro de llamadas a métodos sensibles como adición y eliminación
+ de usuarios.
+\end_layout
+
+\begin_layout Standard
+Si el correo electrónico no se recibe -antes de asumir que no se recibió,
+ se recomienda revisar en la carpeta que algunos clientes asignan a correo
+ no deseado, el implementador no debe intentar registrarse de nuevo, sino
+ contactar al servicio.
+\end_layout
+
+\begin_layout Section
+Comprender cómo puede responder el servicio
+\end_layout
+
+\begin_layout Standard
+Para todas las llamadas a la API, el servidor habrá de contestar con una
+ respuesta http.
+ Todas las llamadas requieren que se provea la clave única de la aplicación.
+ En caso de que la solicitud sea correcta, el servidor contestará con una
+ respuesta con código de estado 200 (éxito) y el contenido codificado en
+ el formato de intercambio de datos JSON con los atributos pertinentes a
+ cada llamada.
+ Si el servidor responde con un documento con un código de estado diferente
+ a 200, refiérase a la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:api-errors"
+
+\end_inset
+
+ para determinar la causa, todos los errores tratan de apegarse a la semántica
+ estándar de códigos de estado definidos
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ por la IETF (
+\emph on
+Internet Engineering Task Force, 
+\emph default
+Grupo de Trabajo en Ingeniería de Internet).
+\end_layout
+
+\begin_layout Standard
+Para permitir llamadas a la API desde aplicaciones que utilicen la técnica
+ AJAX (
+\emph on
+Asynchronous Javascript and XML, 
+\emph default
+Xml y javascript asíncronos), todas las llamadas pueden recibir un parámetro
+ opcional adicional: 
+\emph on
+callback
+\emph default
+ , que especifica una función de retorno.
+ De esta manera, provisto este parámetro, la respuesta del servidor contendrá
+ el objeto JSON de la contestación original puesto como parámetro de la
+ función especificada en 
+\emph on
+callback
+\emph default
+.
+ Esta es la 
+\emph on
+única
+\emph default
+ manera en la que aplicaciones que utilicen la técnica AJAX pueden acceder
+ a la API, porque la política de mismo origen
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Para más detalles, véase lo documentado en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/en/Same_origin_policy_for_JavaScript
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ impuesta por los navegadores modernos prohíbe, por seguridad, que intercambios
+ entre dominios distintos alternen código del lado del cliente (mas permite
+ el intercambio de 
+\emph on
+scripts
+\emph default
+, que es como los navegadores reconocerán esta respuesta, en lugar de una
+ asignación de un objeto en código cliente, que es lo que se hace con datos
+ en JSON por lo general).
+ Esta técnica se conoce como JSONP
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+Para más detalles, consúltense 
+\lang spanish
+
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://developer.yahoo.com/common/json.html
+\backslash
+#callbackparam
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (
+\emph on
+JSON with padding
+\emph default
+, JSON con relleno).
+ El usuario deberá saber interpretar el 
+\emph on
+script 
+\emph default
+devuelto como una llamada a una función que deberá definirse en el lado
+ del cliente, es de notar que la mayor parte de librerías de javascript
+ contemporáneas tienen la capacidad de manejar automáticamente solicitudes
+ con la técnica JSONP
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Mootools 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://mootools.net/docs/more/Request/Request.JSONP
+\end_layout
+
+\end_inset
+
+ y jquery 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://api.jquery.com/jQuery.getJSON/
+\end_layout
+
+\end_inset
+
+, para citar un par de ejemplos, tienen métodos especializados para ello.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features>
+<column alignment="center" valignment="top" width="10page%">
+<column alignment="center" valignment="top" width="25page%">
+<column alignment="center" valignment="top" width="20page%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Código
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Posible Causa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Solución
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+400 (solicitud mal-formada)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Uno de los parámetros requeridos por la llamada no ha sido provisto o el
+ parámetro opcional general de función de retorno javascript no es un identifica
+dor válido.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Revisar la llamada e incluir los parámetros necesarios: el contenido de
+ la respuesta contendrá los parámetros requeridos que hayan faltado.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+401 (no autorizado)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fallo de autenticación (por ausencia de credenciales o credenciales incorrectas
+ en una llamada que requiere autenticación básica http
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://tools.ietf.org/html/rfc2617
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Incluir las credenciales o revisarlas.
+ Si se sospecha que un tercero las ha cambiado, contactar al servicio.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+403 (acceso prohibido)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sólo es devuelto al tratar de registrar usuarios.
+ Sucede cuando se ha excedido el límite permitido.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eliminar usuarios inactivos o solicitar una expansión personalizada del
+ límite (esta característica no es ofrecida en la versión actual del servicio).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+404 (no encontrado)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Si la solicitud es a una URL válida del servicio, la causa se debe a la
+ provisión de una clave única inválida o un usuario no existente para la
+ aplicación que llama.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Proveer una clave única de aplicación válida o un identificador de usuario
+ existente.
+ Si no se está seguro de qué usuarios se tiene registrados, utilizar la
+ llamada del listado de usuarios o el panel de control.
+ Si se ha perdido la clave única, contactar personalmente al servicio.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500 (error interno)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cuando el servidor ha tenido un error en alguno de sus componentes y no
+ puede llevar a cabo el proceso.
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Este es el único error que el usuario no puede enmendar y no requiere mayor
+ acción de su parte.
+ El servicio cuenta con un mecanismo de auto-reporte de errores internos
+ a los desarrolladores.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:api-errors"
+
+\end_inset
+
+Posibles errores en llamadas a la API
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Decidir método de administración de usuarios
+\end_layout
+
+\begin_layout Standard
+Es responsabilidad del desarrollador registrar los usuarios que recibirán
+ recomendaciones.
+ Las llamadas al método de obtención de recomendaciones, además de la clave
+ de aplicación, requieren un identificador único para el usuario actual,
+ este identificador debe corresponder con alguno previamente registrado
+ para la aplicación.
+ 
+\end_layout
+
+\begin_layout Standard
+Se recomienda utilizar la dirección de correo electrónico como identificador
+ único de los usuarios, pero cualquier cadena de caracteres que identifique
+ unívocamente a cada usuario en la aplicación implementadora servirá.
+ 
+\end_layout
+
+\begin_layout Standard
+Existen dos alternativas de agregación: mediante el panel de control provisto
+ en el sitio web del servicio y mediante llamadas a la API de administración
+ de usuarios.
+ Asimismo, se provee una interfaz para que cualquier implementador pueda
+ cambiar la contraseña asignada a su aplicación.
+\end_layout
+
+\begin_layout Subsection
+Administración mediante el panel de control
+\end_layout
+
+\begin_layout Standard
+Esta alternativa se recomienda sólo para aplicaciones con un número pequeño
+ y limitado de usuarios o donde la membresía se determina manualmente.
+ Para acceder al panel de control, dirígase a 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+trecs.com/dashboard/
+\end_layout
+
+\end_inset
+
+.
+ Téngase en cuenta que si no se ha autenticado, se le solicitarán sus credencial
+es de acceso.
+\end_layout
+
+\begin_layout Subsubsection
+Adición de usuarios
+\end_layout
+
+\begin_layout Standard
+La interfaz del servicio permite la agregación de varios usuarios de una
+ vez, mientras no se exceda el límite de usuarios.
+ Para agregar usuarios, se deben llenar los campos de texto deseados con
+ los identificadores únicos que la aplicación proveerá cuando se utilice.
+ Es responsabilidad del implementador la gestión de usuarios dentro del
+ límite, y el servicio no se responsabiliza por la mala administración de
+ los mismos ni por errores tipográficos en la adición; mas el servicio se
+ compromete a no divulgar la información introducida y aplicar las mejores
+ medidas de seguridad y confiabilidad en el almacenamiento de los datos.
+ La interfaz de adición de usuarios se puede apreciar en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:user-addition"
+
+\end_inset
+
+.
+ Como se puede observar, en la parte superior se indica el estado del número
+ de usuarios registrados respecto al límite impuesto por la aplicación.
+ El número de cajas de texto para introducción de identificadores está limitado
+ por el límite actual (que es el límite total menos el número de usuarios
+ registrados).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/24_DashboardRegister.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:user-addition"
+
+\end_inset
+
+Adición de usuarios en el panel de control
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Listado y eliminación de usuarios
+\end_layout
+
+\begin_layout Standard
+El panel de control también permite revisar los usuarios ya registrados
+ en la aplicación y da la facilidad de eliminarlos.
+ Téngase presente que, al tratar de eliminar un usuario aparecerá un diálogo
+ de confirmación para evitar borrados accidentales.
+ Para identificar esta interfaz, véase la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:user-listing"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/25_DashboardList.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:user-listing"
+
+\end_inset
+
+Listado y eliminación de usuarios en panel de control
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Administración mediante llamadas a la API
+\end_layout
+
+\begin_layout Standard
+Se han provisto métodos de administración de usuarios en la API.
+ El uso de estas llamadas es responsabilidad última del implementador, y
+ él deberá saber manejar las credenciales de manera que sea difícil que
+ usuarios mal-intencionados (o demasiado curiosos) las obtengan.
+ Se recomienda no incluirlas en código del lado del cliente u ofuscarlas
+ si fuera absolutamente necesario incluirlas en la aplicación final.
+ Para una explicación detallada de estos métodos, refiérase a la sección
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:user-management"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Gestión de credenciales
+\end_layout
+
+\begin_layout Standard
+Para acceder al panel de control o hacer llamadas de gestión de usuarios
+ a la API, como ya se mencionó, la aplicación debe proveer credenciales
+ de autenticación.
+ Un nombre de usuario -que consiste en el nombre de aplicación usado para
+ el registro- y una contraseña aleatoria son incluidas en el correo electrónico
+ de confirmación de registro.
+ Si por alguna razón el implementador pierde su contraseña o tiene razones
+ para sospechar que ha sido robada, puede reestablecerla accediendo a 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+trecs.com/dashboard/password_reset/
+\end_layout
+
+\end_inset
+
+.
+ Ahí se solicitará una dirección de correo electrónico que debe corresponder
+ a la que se proveyó durante el registro (véase la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:pwd-reset"
+
+\end_inset
+
+).
+ Acto seguido, el sistema enviará al correo provisto un mensaje conteniendo
+ una URL única para el acto de reestablecimiento.
+ Siguiendo la dirección ahí provista, el implementador puede reestablecer
+ la contraseña para su aplicación (refiérase a la figura).
+ Lamentablemente, si la dirección de correo electrónico de registro tuviese
+ la seguridad comprometida, no existe aún un mecanismo alterno de reestablecimie
+nto de contraseña.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/22_PasswordReset.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:pwd-reset"
+
+\end_inset
+
+Formulario de solicitud de reestablecimiento de contraseña
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/23_PasswordResetConfirm.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:pwd-reset-confirm"
+
+\end_inset
+
+Formulario de reestablecimiento de contraseña
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -98,7 +1083,1607 @@ Uso básico
 \end_layout
 
 \begin_layout Standard
-Widget.
+La forma más expedita de comenzar a utilizar el servicio en una aplicación
+ web es mediante la inclusión del widget.
+ Éste es una interfaz que muestra las recomendaciones y hace las actualizaciones
+ de perfiles automáticamente.
+ Se requiere cierto conocimiento de javascript para configurarlo y de html
+ para aprovecharlo.
+ 
+\end_layout
+
+\begin_layout Standard
+Para demostrar cómo usarlo, se utilizará como referencia el documento html
+ de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:html-src"
+
+\end_inset
+
+ (se puede ver cómo lo mostraría un navegador web en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:html-doc"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/32_htmlDemoPage.png
+	width 50page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:html-doc"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/31_htmlDemo.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:html-src"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Documento html de prueba
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A continuación, se detallan los pasos a seguir para comenzar a utilizar
+ el servicio en una aplicación web.
+\end_layout
+
+\begin_layout Section
+Configuración preliminar
+\end_layout
+
+\begin_layout Enumerate
+Agregar las dependencias del widget.
+ Antes de incluir el archivo que contiene la funcionalidad del widget, se
+ requiere que, al menos, la librería 
+\emph on
+jquery 
+\emph default
+-se recomienda la versión 1.4.1 o una mayor- esté incluida (y opcionalmente
+ 
+\emph on
+jqueryui
+\emph default
+ para efectos y animaciones, recomendada la versión 1.8.1).
+ No es necesario bajarlas e incluirlas entre los archivos estáticos de la
+ aplicación: es servida por google para este tipo de usos, y esta opción
+ es la recomendada.
+
+\emph on
+ 
+\emph default
+Para incluirlas, entonces, se debe incluir, entre las etiquetas 
+\emph on
+head
+\emph default
+ del documento, las siguientes líneas de código:
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},breaklines=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script type="text/javascript"
+\end_layout
+
+\begin_layout Plain Layout
+
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\begin_layout Plain Layout
+
+<script type="text/javascript"
+\end_layout
+
+\begin_layout Plain Layout
+
+src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery.min.js">
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Agregar el archivo de javascript provisto por el servicio.
+ Esto agregará la funcionalidad del 
+\emph on
+widget.
+ 
+\emph default
+Agréguese mediante la siguiente línea de código entre las etiquetas 
+\emph on
+head 
+\emph default
+del documento:
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},breaklines=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script type="text/javascript"
+\end_layout
+
+\begin_layout Plain Layout
+
+src="http://trecs.com/static/js/service/recommmender.js" >
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Luego de haber incluido los 
+\emph on
+scripts
+\emph default
+ necesarios, se puede proceder a configurar el widget.
+\end_layout
+
+\begin_layout Section
+Configuración del widget
+\end_layout
+
+\begin_layout Standard
+La configuración del widget se hace mediante la inclusión de una etiqueta
+ 
+\emph on
+script
+\emph default
+ dentro de la etiqueta 
+\emph on
+head
+\emph default
+ del documento.
+ Esto permitirá que la interfaz se agregue al documento original mientras
+ éste se carga.
+ La tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:widget-conf"
+
+\end_inset
+
+ muestra todas las opciones que la versión actual del 
+\emph on
+widget
+\emph default
+ ofrece.
+ Téngase presente que la notación 
+\emph on
+objeto.propiedad
+\emph default
+ es sólo por hacer la tabla de configuración más sencilla de entender.
+ A la hora de configurar se habrá de representar como 
+\emph on
+{objeto: propiedad}
+\emph default
+, en la notación de objetos estándar de javascript.
+ Las únicas opciones obligatorias son 
+\emph on
+appId 
+\emph default
+y 
+\emph on
+appUser
+\emph default
+.
+ Se recomienda que el implementador utilice una página generada dinámicamente
+ del lado del servidor para poder obtener el usuario actual.
+ Esto es posible mediante un script php que genere la configuración en tiempo
+ de solicitud o mediante el sistema de plantillas para páginas dinámicas
+ de 
+\emph on
+django
+\emph default
+, para citar algunos ejemplos.
+ 
+\end_layout
+
+\begin_layout Standard
+Por ejemplo, utilizando el sistema de plantillas de django, se podría incluir
+ un script como el siguiente antes de la configuración:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script>
+\end_layout
+
+\begin_layout Plain Layout
+
+	var app="{{appId}}"; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	var user="{{user}}";
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+o, en php:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script>
+\end_layout
+
+\begin_layout Plain Layout
+
+	//utilizando funciones ficticias que obtienen de alguna manera
+\end_layout
+
+\begin_layout Plain Layout
+
+	//la información:
+\end_layout
+
+\begin_layout Plain Layout
+
+	var app="<?php getCurrentApp();?>";
+\end_layout
+
+\begin_layout Plain Layout
+
+	var user="<?php getCurrentUser();?>";
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En todo caso, por simplicidad, se asume que alguna variación de este script
+ fue incluido antes de la configuración en los ejemplos que siguen (de modo
+ que se cuenta con las variables 
+\emph on
+app y user
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="30page%">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Opción
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Función
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Valor por defecto
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+appId (obligatoria)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+establece la clave única de la aplicación
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+null
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+appUser (obligatoria)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+establece el id.
+ único del usuario actual
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+null
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+lang
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+establece el lenguaje de la sesión actual
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+en
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+data.submit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+selector que identifica unívocamente el elemento que causará la actualización
+ de los perfiles
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+null
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+data.form
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+selector del formulario donde se encuentran el campo donde se introduce
+ el texto
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+null
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+data.content
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+selector del área de donde se sacará el contexto local.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+'#id_content'
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+feedback.mode
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+modo de provisión de retroalimentación.
+ Las opciones son 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+follow
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ para que, si un usuario sigue un vínculo, se tome como retroalimentación
+ y 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+select
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ que incluye un botón en cada recomendación para seleccionarla explícitamente.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+'follow'
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+feedback.container
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+selector del contenedor al cual se agregarán las recomendaciones elegidas
+ (sólo válido para el modo 
+\emph on
+select
+\emph default
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+null
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+feedback.element
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Elemento html dentro del cual se agregarán los vínculos de las recomendaciones
+ elegidas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+<li></li>
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:widget-conf"
+
+\end_inset
+
+Opciones de configuración de la interfaz opcional (widget)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A continuación, se muestran algunas configuraciones de ejemplo.
+\end_layout
+
+\begin_layout Subsection
+Solamente obtener recomendaciones
+\end_layout
+
+\begin_layout Standard
+Si se deseara utilizar el servicio sólo para ofrecer recomendaciones basándose
+ en un contexto local (sin evolucionar perfiles y menos devolver retroalimentaci
+ón), se podría incluir un script de configuración como el siguiente -basándose
+ en la estructura de ejemplo mostrada en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:html-src"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script>
+\end_layout
+
+\begin_layout Plain Layout
+
+	$(function(){
+\end_layout
+
+\begin_layout Plain Layout
+
+		RECOMMENDER.init(
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\end_layout
+
+\begin_layout Plain Layout
+
+				appUser: user,
+\end_layout
+
+\begin_layout Plain Layout
+
+				appId: app,
+\end_layout
+
+\begin_layout Plain Layout
+
+				data: {
+\end_layout
+
+\begin_layout Plain Layout
+
+					content: '#edition-area',
+\end_layout
+
+\begin_layout Plain Layout
+
+				},
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		);
+\end_layout
+
+\begin_layout Plain Layout
+
+	});
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nótese el uso de la notación de selectores
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+Si no se es familiar con esta sintaxis, refiérase a 
+\lang spanish
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.w3.org/TR/CSS2/selector.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ de css para referirse al área de texto de edición.
+ 
+\end_layout
+
+\begin_layout Subsection
+Obtener recomendaciones y actualizar perfil con retroalimentación implícita
+\end_layout
+
+\begin_layout Standard
+Este es el escenario más probable: un usuario edita contenido y lo guarda
+ de alguna manera.
+ Asumiendo que el documento sigue los estándares semánticos del html, esta
+ edición se logra mediante un formulario.
+ El widget cambiará el comportamiento de la página: antes de ejecutar la
+ acción original del formulario donde están los datos, actualiza el perfil
+ del usuario actual.
+ Asimismo, puesto que por defecto la retroalimentación es implícita, el
+ código del widget supervisará los vínculos seguidos y utilizará esa información
+ para aprender las preferencias del usuario.
+ Un script como el siguiente podría lograr tal configuración (siempre en
+ base al documento de ejemplo):
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script>
+\end_layout
+
+\begin_layout Plain Layout
+
+	$(function(){
+\end_layout
+
+\begin_layout Plain Layout
+
+		RECOMMENDER.init(
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\end_layout
+
+\begin_layout Plain Layout
+
+				appUser: user,
+\end_layout
+
+\begin_layout Plain Layout
+
+				appId: app,
+\end_layout
+
+\begin_layout Plain Layout
+
+				data: {
+\end_layout
+
+\begin_layout Plain Layout
+
+					content: '#edition-area',
+\end_layout
+
+\begin_layout Plain Layout
+
+					form: '#edition-form',
+\end_layout
+
+\begin_layout Plain Layout
+
+					submit: '#edition-save',
+\end_layout
+
+\begin_layout Plain Layout
+
+				},
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		);
+\end_layout
+
+\begin_layout Plain Layout
+
+	});
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Utilizar retroalimentación explícita
+\end_layout
+
+\begin_layout Standard
+Este escenario aún es experimental y puede cambiar en futuras versiones
+ del servicio.
+ La retroalimentación explícita permite que sólo documentos elegidos conscientem
+ente por el usuario se consideren para aprender sus preferencias.
+ Para este fin, a cada resultado de las recomendaciones se le agrega un
+ botón, el cual, presionado, constituye retroalimentación.
+ 
+\end_layout
+
+\begin_layout Standard
+Una funcionalidad extra es que, si en el documento existe algún contenedor
+ para las referencias, cada documento elegido como retroalimentación se
+ agregará como un 
+\emph on
+hijo
+\emph default
+ de éste.
+ Si se decide utilizar esta característica, el implementador debe cuidar
+ que la relación entre el componente donde se mantendrán las referencias
+ elegidas y el elemento dentro del cual se 
+\emph on
+envolverán
+\emph default
+ estas estén relacionados semánticamente y produzcan html válido (por ello
+ el valor por defecto asume que el contenedor es una lista y el componente
+ para envolver documentos es un elemento de lista).
+\end_layout
+
+\begin_layout Standard
+Ua configuración como esta, siguiendo el documento de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:html-src"
+
+\end_inset
+
+ como ejemplo para los selectores, se puede lograr mediante un script como
+ el siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script>
+\end_layout
+
+\begin_layout Plain Layout
+
+	$(function(){
+\end_layout
+
+\begin_layout Plain Layout
+
+		RECOMMENDER.init(
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\end_layout
+
+\begin_layout Plain Layout
+
+				appUser: user,
+\end_layout
+
+\begin_layout Plain Layout
+
+				appId: app,
+\end_layout
+
+\begin_layout Plain Layout
+
+				data: {
+\end_layout
+
+\begin_layout Plain Layout
+
+					content: '#edition-area',
+\end_layout
+
+\begin_layout Plain Layout
+
+					form: '#edition-form',
+\end_layout
+
+\begin_layout Plain Layout
+
+					submit: '#edition-save',
+\end_layout
+
+\begin_layout Plain Layout
+
+				},
+\end_layout
+
+\begin_layout Plain Layout
+
+				feedback: {
+\end_layout
+
+\begin_layout Plain Layout
+
+					mode: 'select',
+\end_layout
+
+\begin_layout Plain Layout
+
+					container: '#edition-references',
+\end_layout
+
+\begin_layout Plain Layout
+
+				},
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		);
+\end_layout
+
+\begin_layout Plain Layout
+
+	});
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El script anterior agregará la retroalimentación a la lista con identificador
+ 
+\begin_inset Quotes eld
+\end_inset
+
+edition-references
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Si, por ejemplo, 
+\begin_inset Quotes eld
+\end_inset
+
+edition-references
+\begin_inset Quotes erd
+\end_inset
+
+ no fuese una lista sino una tabla, y cada documento debiera ser una fila
+ de esa tabla, se podría usar un script como este:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+<script>
+\end_layout
+
+\begin_layout Plain Layout
+
+	$(function(){
+\end_layout
+
+\begin_layout Plain Layout
+
+		RECOMMENDER.init(
+\end_layout
+
+\begin_layout Plain Layout
+
+			{
+\end_layout
+
+\begin_layout Plain Layout
+
+				appUser: user,
+\end_layout
+
+\begin_layout Plain Layout
+
+				appId: app,
+\end_layout
+
+\begin_layout Plain Layout
+
+				data: {
+\end_layout
+
+\begin_layout Plain Layout
+
+					content: '#edition-area',
+\end_layout
+
+\begin_layout Plain Layout
+
+					form: '#edition-form',
+\end_layout
+
+\begin_layout Plain Layout
+
+					submit: '#edition-save',
+\end_layout
+
+\begin_layout Plain Layout
+
+				},
+\end_layout
+
+\begin_layout Plain Layout
+
+				feedback:{
+\end_layout
+
+\begin_layout Plain Layout
+
+					mode: 'select',
+\end_layout
+
+\begin_layout Plain Layout
+
+					container: '#edition-references',
+\end_layout
+
+\begin_layout Plain Layout
+
+					element: '<tr></tr>'
+\end_layout
+
+\begin_layout Plain Layout
+
+				}
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		);
+\end_layout
+
+\begin_layout Plain Layout
+
+	});
+\end_layout
+
+\begin_layout Plain Layout
+
+</script>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Comprender el comportamiento del widget
+\end_layout
+
+\begin_layout Standard
+Una vez configurado el widget, la interfaz 
+\emph on
+antes
+\emph default
+ de comenzar una edición se verá como la de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:idle-widget"
+
+\end_inset
+
+ (la cual es una variación con estilos css del ejemplo de la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:html-doc"
+
+\end_inset
+
+).
+ Nótese que a la derecha de la pantalla se encuentra un ícono de color negro:
+ en este lugar no estorba la tarea principal del usuario y, puesto que no
+ hay recomendaciones, el color es lo más inconspicuo posible (tiene incluso
+ cierta transparencia).
+\end_layout
+
+\begin_layout Standard
+Cuando el usuario comienza a editar y el 
+\emph on
+widget
+\emph default
+ determina que el contenido es suficiente como para hacer las primeras recomenda
+ciones, cambiará de imagen y color, pulsando cinco veces.
+ De esta manera se llama la atención del usuario -sin causar demasiada interrupc
+ión.
+ Este cambio se ilustra en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:active-widget"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Nótese que la pestaña de recomendaciones se encuentra en el borde de la
+ pantalla, esto permite una navegación más fácil hacia ella cuando el usuario
+ decida revisar las recomendaciones.
+ Dar click en esta pestaña abre la interfaz de recomendaciones ilustrada
+ en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:implicit-interface"
+
+\end_inset
+
+.
+ Nótese que esta interfaz es incremental: aprovecha el hecho de que el usuario
+ promedio la leerá de arriba hacia abajo para mostrar información cada vez
+ más distrayente y en cada elemento el usuario puede decidir cerrar la interfaz
+ y continuar trabajando o continuar inspeccionándolos: 
+\end_layout
+
+\begin_layout Itemize
+El primer elemento muestra un promedio de relevancia acompañado de una represent
+ación gráfica.
+ Este promedio indica qué tan útiles considera el servicio las recomendaciones
+ que encontró para el contexto actual.
+ Si no las considera muy útiles (promedio menor a 30%), el gráfico se torna
+ rojo, si son medianamente relevantes, amarillo y si exceden un umbral (60%),
+ verde.
+\end_layout
+
+\begin_layout Itemize
+A continuación, el usuario encuentra un cuadro de texto con los términos
+ clave que el servicio encontró en su contexto local; si el usuario considera
+ que estos términos reflejan la información que está produciendo, puede
+ continuar.
+ 
+\end_layout
+
+\begin_layout Itemize
+El siguiente elemento contiene la lista de recomendaciones en sí.
+ Cada una tiene un título que a la vez es un vínculo a la fuente original
+ y está acompañada de las primeras diez palabras de un sumario.
+ Si el usuario ha llegado a este punto, probablemente haya navegado con
+ el 
+\emph on
+ratón 
+\emph default
+(mejor conocido como mouse o puntero) hacia esta zona de la interfaz.
+ Si el puntero pasa por encima de una recomendación, el sumario se expande,
+ mostrándose en su totalidad.
+ En esta etapa de la inspección el usuario ha dedicado suficiente atención
+ a la interfaz de recomendación como para pensar en utilizar alguna de las
+ sugerencias.
+\end_layout
+
+\begin_layout Itemize
+La última etapa es cuando un usuario decide seguir el vínculo de un documento
+ para revisarlo.
+ Aquí, si se está en modo implícito, se considera retroalimentación.
+ Si se está en modo explícito, sólo cuando el usuario regrese a la interfaz
+ y elija activamente el documento se considerará retroalimentación.
+ Una interfaz en modo explícito se puede observar en la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:explicit-relevance"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Mientras el usuario siga editando, el widget seguirá supervisando los cambios
+ al contexto, ofreciendo nuevas recomendaciones cuando considere que éste
+ ha cambiado lo suficiente.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/27_InactiveWidget.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:idle-widget"
+
+\end_inset
+
+Widget inactivo: aún no hay recomendaciones
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/28_RecommendationsHint.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:active-widget"
+
+\end_inset
+
+Widget activo: existen recomendaciones
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/29_ImplicitFeedback.png
+	height 60pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:implicit-interface"
+
+\end_inset
+
+Interfaz de recomendaciones
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/30_ExplicitFeedback.png
+	width 70page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:explicit-relevance"
+
+\end_inset
+
+Ejemplo de interfaz con retroalimentación explícita: dos documentos han
+ sido elegidos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -106,11 +2691,1152 @@ Uso avanzado
 \end_layout
 
 \begin_layout Standard
-API
+Para los desarrolladores que deseen aprovechar al máximo el servicio se
+ creó una API que permite que, mediante solicitudes HTTP a métodos ubicados
+ en URLs, se pueda obtener la funcionalidad ofrecida por el sistema.
+ Como ya se aclaró, todas las respuestas a solicitudes bien formadas tendrán
+ código de estado 200 (éxito) y el cuerpo será texto representando un objeto
+ de javascript según la notación JSON.
+ Consúltese la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:api-errors"
+
+\end_inset
+
+ para una explicación de las solicitudes que devuelvan una respuesta cuyo
+ código sea distinto a 200.
+ 
 \end_layout
 
-\begin_layout Chapter
-Recomendaciones de uso
+\begin_layout Standard
+Se pueden distinguir dos conjuntos de métodos en la API: los que se utilizan
+ para administrar usuarios y los utilizados para el servicio de recomendación
+ en sí.
+ En este capítulo se explican todos en detalle y se incluye un apartado
+ con ejemplos de llamadas a algunos de éstos para dar ideas de implementación
+ a los desarrolladores.
+\end_layout
+
+\begin_layout Section
+Métodos de gestión de usuarios
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:user-management"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En esta sección se detallan los métodos de la API creados para permitir
+ la gestión de usuarios.
+ Es responsabilidad del implementador restringir el uso de éstos de manera
+ que la utilización del servicio no se vea comprometida.
+\end_layout
+
+\begin_layout Subsection
+Adición de usuarios individuales
+\end_layout
+
+\begin_layout Standard
+Esta llamada permite al implementador agregar los usuarios uno por uno (método
+ recomendado para cuando se desee registrar un usuario al momento en que
+ se cree en la aplicación implementadora o cuando el usuario elija utilizar
+ la interfaz de recomendación) Sólo se requiere un usuario como parámetro,
+ si se pasa una lista de usuarios, sólo el último se agregará y los demás
+ se obviarán.
+ 
+\end_layout
+
+\begin_layout Description
+URL: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/registerUser/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Método
+\begin_inset space ~
+\end_inset
+
+requerido: POST con autenticación básica HTTP.
+\end_layout
+
+\begin_layout Description
+Parámetros:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+appId: la clave única de la aplicación
+\end_layout
+
+\begin_layout Description
+user: el identificador único a agregar.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Atributos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+created: un valor booleano que indica si la adición se hizo.
+ Si el valor es inválido, se retornará un valor falso.
+ Si el usuario es un duplicado, la adición no se hará y se retornará verdadero:
+ no se permiten duplicados.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Agregación de múltiples usuarios
+\end_layout
+
+\begin_layout Standard
+Esta llamada se proporciona para aplicaciones que deseen agregar varios
+ usuarios ya existentes de una sola vez.
+ Debido a que esto involucra una cantidad considerable de inserciones, la
+ agregación se hace de manera asíncrona.
+ Así, cuando se hace la llamada se agrega la solicitud a una cola de tareas
+ para ser procesada cuando el administrador de carga del servidor lo considere
+ idóneo.
+ Un correo electrónico se enviará a la dirección de contacto registrada
+ para la aplicación una vez terminada esta tarea.
+\end_layout
+
+\begin_layout Description
+URL: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/bulkRegisterUsers/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Método
+\begin_inset space ~
+\end_inset
+
+requerido: POST con autenticación básica HTTP.
+\end_layout
+
+\begin_layout Description
+Parámetros:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+appId: la clave única de la aplicación
+\end_layout
+
+\begin_layout Description
+user: un arreglo de identificadores únicos a agregar.
+ De preferencia, este arreglo se ha de representar en la solicitud como
+ parámetros separados con el mismo nombre, por ejemplo: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+?user=trex&user=raptor&user=you
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Atributos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+queued: un valor booleano que indica si la tarea se agregó a la cola de
+ trabajos.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Listado de usuarios
+\end_layout
+
+\begin_layout Standard
+Esta llamada puede ser útil para la creación de interfaces de administración
+ propias de la aplicación que se desarrolla, para detectar que personas
+ maliciosas han agregado usuarios en contra de la voluntad del administrador
+ o validar si se está cerca de sobrepasar el límite de usuarios permitido.
+\end_layout
+
+\begin_layout Description
+URL: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/getUsers/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Método
+\begin_inset space ~
+\end_inset
+
+requerido: GET
+\end_layout
+
+\begin_layout Description
+Parámetros:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+appId: la clave única de la aplicación
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Atributos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+users: una colección de objetos representando a los usuarios registrados
+ de la aplicación, cada cual con los siguientes atributos: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+id: el identificador único del usuario
+\end_layout
+
+\begin_layout Description
+added: la fecha en la cual se agregó el usuario.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Subsection
+Eliminación de usuarios
+\end_layout
+
+\begin_layout Standard
+Sólo se permite para eliminar un usuario por vez.
+ De la misma manera que la agregación individual de usuarios, sólo el último
+ parámetro de usuario pasado será considerado.
+ También requiere autenticación HTTP básica.
+ Eliminar usuarios puede ser útil para cuando las aplicaciones dan la opción
+ de desactivar usuarios o permiten desinstalación o renuncia a la aplicación
+ del lado del cliente, es responsabilidad del implementador prever las consecuen
+cias y tomar las medidas correspondientes en los casos donde se utilizará
+ la eliminación de usuarios.
+ La eliminación de un usuario implica la remoción irreversible del perfil
+ que se haya mantenido del mismo.
+\end_layout
+
+\begin_layout Description
+URL: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/deleteUser/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Método
+\begin_inset space ~
+\end_inset
+
+requerido: POST con autenticación básica HTTP.
+\end_layout
+
+\begin_layout Description
+Parámetros:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+appId: la clave única de la aplicación
+\end_layout
+
+\begin_layout Description
+user: el identificador único a eliminar.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Atributos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+created: un valor booleano que indica si la eliminación se hizo.
+ Si el valor es inválido, se retornará falso.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Servicio de recomendación
+\end_layout
+
+\begin_layout Standard
+En esta sección se detallan las funciones del servicio de recomendación.
+ Es responsabilidad del implementador llamarlas cuando se considere necesario
+ en la aplicación desarrollada y proveer una interfaz donde los usuarios
+ puedan ver las recomendaciones y proveer retroalimentación.
+\end_layout
+
+\begin_layout Subsection
+Obtener recomendaciones
+\end_layout
+
+\begin_layout Standard
+La llamada fundamental del servicio.
+ Dados un texto libre y un usuario, el servicio encontrará documentos temáticame
+nte relacionados al texto y los filtrará según las preferencias que se tengan
+ registradas del usuario (el perfil).
+ Si es la primera vez que se solicitan recomendaciones para un usuario,
+ la etapa de filtrado sencillamente se ignorará.
+ En la versión actual, solicitar recomendaciones para textos en lenguajes
+ diferentes al inglés causará un período de latencia ligeramente mayor,
+ debido al uso de servicios web externos para el análisis de los textos.
+\end_layout
+
+\begin_layout Description
+URL: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/getRecommendations/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Método
+\begin_inset space ~
+\end_inset
+
+requerido: GET o POST.
+ Para reducir la latencia en textos cortos, se recomienda GET, pero si el
+ texto excede los 2048 caracteres, se recomienda usar POST, para evitar
+ problemas de librerías y navegadores que imponen este límite arbitrario.
+\end_layout
+
+\begin_layout Description
+Parámetros:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+appId
+\begin_inset space ~
+\end_inset
+
+(obligatorio): la clave única de la aplicación.
+ 
+\end_layout
+
+\begin_layout Description
+appUser
+\begin_inset space ~
+\end_inset
+
+(obligatorio): el identificador único de un usuario registrado 
+\end_layout
+
+\begin_layout Description
+context
+\begin_inset space ~
+\end_inset
+
+(obligatorio): el texto introducido por el usuario.
+ Debe ser texto plano, sin ningún tipo de marcaje (HTML, XML, etc).
+\end_layout
+
+\begin_layout Description
+lang
+\begin_inset space ~
+\end_inset
+
+(opcional): el lenguaje en el que el texto está escrito.
+ Si no se provee se asume que está en inglés.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Atributos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+terms: un arreglo de cadenas de caracteres con los términos clave encontrados
+ en el texto.
+\end_layout
+
+\begin_layout Description
+results: un arreglo de objetos con las recomendaciones en sí.
+ Cada objeto tiene los siguientes atributos:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+id: el código del documento en la colección documental.
+ 
+\end_layout
+
+\begin_layout Description
+title: el título del documento.
+\end_layout
+
+\begin_layout Description
+summary: un resumen del documento (puede estar vacío).
+\end_layout
+
+\begin_layout Description
+url: el URL donde se puede encontrar el documento original.
+\end_layout
+
+\begin_layout Description
+percent: el porcentaje de relevancia del documento respecto a los términos
+ clave.
+\end_layout
+
+\begin_layout Description
+category: el código de la categoría de la base de conocimiento del servicio
+ bajo la cual está clasificado el documento.
+\end_layout
+
+\begin_layout Description
+weight: el porcentaje de utilidad del documento respecto al perfil del usuario.
+ Es una modificación del porcentaje.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Description
+Recomendaciones
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+uso: se exhorta al implementador a respetar el orden en el que se devuelven
+ los documentos, ya que éste refleja las preferencias del usuario.
+ Asimismo, la url se puede utilizar para permitir al usuario revisar el
+ documento recomendado.
+ No se recomienda mostrar datos como el porcentaje, el peso, la categoría
+ o el código del documento, ya que pueden confundir a los usuarios finales.
+ El implementador deberá crear un mecanismo que reciba retroalimentación
+ de los usuarios de alguna manera: se debe saber qué documentos eligió el
+ usuario en una sesión y almacenar los códigos de los mismos, puesto que
+ la evolución del perfil se puede beneficiar de este tipo de retroalimentación.
+ 
+\begin_inset Newline newline
+\end_inset
+
+La interfaz donde se muestren las recomendaciones se debería diseñar de
+ manera que no invada la tarea principal del usuario (la edición de información)
+, por lo que se alienta al programador a utilizar un tema cromático que
+ no distraiga y a ubicarla a la derecha de la pantalla, puesto que esa es
+ la zona a la cual los usuarios tienden a prestar menos atención (aunque
+ esto depende de la aplicación).
+\end_layout
+
+\begin_layout Subsection
+Actualizar perfiles
+\end_layout
+
+\begin_layout Standard
+Esta llamada es fundamental si se desea sacar el máximo provecho del sistema
+ de recomendación.
+ Permite a la aplicación implementadora indicar cuándo actualizar las preferenci
+as de los usuarios registrados, de modo que se mejoren el conocimiento sobre
+ los mismos y la calidad de las recomendaciones.
+\end_layout
+
+\begin_layout Description
+URL: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/updateProfile/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+Método
+\begin_inset space ~
+\end_inset
+
+requerido: POST o GET.
+ Igual que la solicitud de recomendaciones, se recomienda POST para solicitudes
+ muy largas.
+\end_layout
+
+\begin_layout Description
+Parámetros:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+appId
+\begin_inset space ~
+\end_inset
+
+(obligatorio): la clave única de la aplicación
+\end_layout
+
+\begin_layout Description
+appUser
+\begin_inset space ~
+\end_inset
+
+(obligatorio): el identificador único de un usuario registrado.
+\end_layout
+
+\begin_layout Description
+context
+\begin_inset space ~
+\end_inset
+
+(opcional): texto libre representando el contenido introducido por el usuario
+ a considerar para actualizar el perfil.
+\end_layout
+
+\begin_layout Description
+lang
+\begin_inset space ~
+\end_inset
+
+(opcional): el lenguaje del contexto.
+ Inglés por defecto.
+\end_layout
+
+\begin_layout Description
+docs
+\begin_inset space ~
+\end_inset
+
+(opcional): un arreglo con los códigos de los documentos elegidos como retroalim
+entación.
+ De preferencia, este arreglo se ha de representar en la solicitud como
+ parámetros separados con el mismo nombre, por ejemplo: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+?docs=1117&docs=62&docs=1962
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Atributos
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno: Ninguno.
+ Si la tarea de actualización logró agregarse al administrador de trabajos
+ para procesamiento asíncrono se contestará con una respuesta con código
+ de estado 200.
+ 
+\end_layout
+
+\begin_layout Description
+Recomendaciones
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+uso: El escenario de uso ideal de esta llamada es cuando el usuario decide
+ guardar su trabajo (o salir del sistema), aunque se puede llamar cuantas
+ veces se quiera, mas no se asegura la actualización inmediata del perfil
+ del usuario, pues esta es una tarea asíncrona que se ejecuta cuando el
+ servidor tiene poca carga, dado que requiere procesamiento considerable.
+ Como ya se mencionó, es altamente recomendado que se implemente un mecanismo
+ para proveer retroalimentación, de forma que el servicio pueda aprender
+ las preferencias del usuario con mayor exactitud y rapidez.
+ Se puede proveer también un texto introducido por el usuario para el aprendizaj
+e de las preferencias, se aconseja que éste sea la forma final de la edición.
+ Si no se provee ni contexto ni retroalimentación, el perfil sencillamente
+ 
+\emph on
+envejecerá: 
+\emph default
+se asumirá que el usuario ha perdido un poco de interés en 
+\emph on
+todas
+\emph default
+ las categorías que se sepa que ha preferido anteriormente.
+ 
+\end_layout
+
+\begin_layout Section
+Ejemplos de llamadas a la API
+\end_layout
+
+\begin_layout Standard
+En esta sección se ejemplifica una llamada al método de obtención de recomendaci
+ones en distintos lenguajes de programación, con el fin de dar un punto
+ de partida a los desarrolladores.
+ Todas las llamadas tienen como salida la simple impresión en pantalla de
+ los títulos y urls de los resultados devueltos por el servicio.
+\end_layout
+
+\begin_layout Subsection
+En javascript (con la librería jquery)
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},breaklines=true,numbers=left,numberstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+$.getJSON('http://trecs.com/api/getRecommendations/?callback=?',
+\end_layout
+
+\begin_layout Plain Layout
+
+{context: 'Science is neat!', appId: '12345abc321', appUser: 'someUser'},
+\end_layout
+
+\begin_layout Plain Layout
+
+function(data){
+\end_layout
+
+\begin_layout Plain Layout
+
+	alert("Recommendations: ");
+\end_layout
+
+\begin_layout Plain Layout
+
+	$.each(data.results, function(i,doc){
+\end_layout
+
+\begin_layout Plain Layout
+
+		alert('Title: 'doc.title+', URL: '+ doc.url);
+\end_layout
+
+\begin_layout Plain Layout
+
+	});
+\end_layout
+
+\begin_layout Plain Layout
+
+});
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+En python
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},breaklines=true,language=Python,numbers=left,numberstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from urllib import urlopen, urlencode
+\end_layout
+
+\begin_layout Plain Layout
+
+import json
+\end_layout
+
+\begin_layout Plain Layout
+
+raw_data = urlopen('http://trecs.com/api/getRecommendations/',
+\end_layout
+
+\begin_layout Plain Layout
+
+			urlencode({'appId': '12345abc321',
+\end_layout
+
+\begin_layout Plain Layout
+
+		   'appUser': 'someUser',
+\end_layout
+
+\begin_layout Plain Layout
+
+		   'context': "science is neat"})).read()
+\end_layout
+
+\begin_layout Plain Layout
+
+data = json.loads(raw_data)
+\end_layout
+
+\begin_layout Plain Layout
+
+print "Recommendations: "
+\end_layout
+
+\begin_layout Plain Layout
+
+for doc in data['results']:
+\end_layout
+
+\begin_layout Plain Layout
+
+    print "Title: %s, URL: %s" % (doc['title'], doc['url'])
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+En java
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},breaklines=true,language=Java,numbers=left,numberstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import java.net.HttpURLConnection;
+\end_layout
+
+\begin_layout Plain Layout
+
+import java.net.MalformedURLException;
+\end_layout
+
+\begin_layout Plain Layout
+
+import java.net.URL;
+\end_layout
+
+\begin_layout Plain Layout
+
+import java.io.IOException;
+\end_layout
+
+\begin_layout Plain Layout
+
+import java.io.InputStream;
+\end_layout
+
+\begin_layout Plain Layout
+
+import java.io.BufferedReader;
+\end_layout
+
+\begin_layout Plain Layout
+
+import java.io.InputStreamReader;
+\end_layout
+
+\begin_layout Plain Layout
+
+import com.google.gson.Gson;
+\end_layout
+
+\begin_layout Plain Layout
+
+class Result {
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Doc[] results;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public String terms;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Result(){}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+class Doc {
+\end_layout
+
+\begin_layout Plain Layout
+
+	String title;
+\end_layout
+
+\begin_layout Plain Layout
+
+	String summary;
+\end_layout
+
+\begin_layout Plain Layout
+
+	String id;
+\end_layout
+
+\begin_layout Plain Layout
+
+	String url;
+\end_layout
+
+\begin_layout Plain Layout
+
+	String percent;
+\end_layout
+
+\begin_layout Plain Layout
+
+	String category;
+\end_layout
+
+\begin_layout Plain Layout
+
+	String weight;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Doc(){}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+public class Demo {
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static String getContents(InputStream s) throws IOException{
+\end_layout
+
+\begin_layout Plain Layout
+
+	  BufferedReader in = new BufferedReader(new InputStreamReader(s));
+\end_layout
+
+\begin_layout Plain Layout
+
+      String inputLine;
+\end_layout
+
+\begin_layout Plain Layout
+
+      StringBuffer outLine = new StringBuffer();
+\end_layout
+
+\begin_layout Plain Layout
+
+      while ((inputLine = in.readLine()) != null)
+\end_layout
+
+\begin_layout Plain Layout
+
+       outLine.append(inputLine);
+\end_layout
+
+\begin_layout Plain Layout
+
+      in.close();
+\end_layout
+
+\begin_layout Plain Layout
+
+      return outLine.toString();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	public static void main(String[] args) throws IOException, MalformedURLExceptio
+n {
+\end_layout
+
+\begin_layout Plain Layout
+
+      //build the request
+\end_layout
+
+\begin_layout Plain Layout
+
+      URL serviceCall = null; 
+\end_layout
+
+\begin_layout Plain Layout
+
+      String call = "http://localhost:8000/api/getRecommendations/";
+\end_layout
+
+\begin_layout Plain Layout
+
+      String appId = "12345abc321";
+\end_layout
+
+\begin_layout Plain Layout
+
+      String appUser = "someUser";
+\end_layout
+
+\begin_layout Plain Layout
+
+      String context = "Science+is+neat!";
+\end_layout
+
+\begin_layout Plain Layout
+
+      String urlpath = String.format("%s?appId=%s&appUser=%s&content=%s",
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+       call, appId, appUser, context);
+\end_layout
+
+\begin_layout Plain Layout
+
+      serviceCall = new URL(urlpath); 
+\end_layout
+
+\begin_layout Plain Layout
+
+      //get the response:
+\end_layout
+
+\begin_layout Plain Layout
+
+      HttpURLConnection conn = (HttpURLConnection)serviceCall.openConnection();
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+      //interpret the response:
+\end_layout
+
+\begin_layout Plain Layout
+
+      InputStream is; 
+\end_layout
+
+\begin_layout Plain Layout
+
+      if(conn.getResponseCode() < 400){
+\end_layout
+
+\begin_layout Plain Layout
+
+        is = conn.getInputStream(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+        Gson gson = new Gson();
+\end_layout
+
+\begin_layout Plain Layout
+
+        String json = getContents(is); 
+\end_layout
+
+\begin_layout Plain Layout
+
+        Result data = gson.fromJson(json, Result.class); 
+\end_layout
+
+\begin_layout Plain Layout
+
+        System.out.println("Recommendations");
+\end_layout
+
+\begin_layout Plain Layout
+
+        for(Doc doc: data.results){
+\end_layout
+
+\begin_layout Plain Layout
+
+         System.out.printf("Title: %s, URL: %s 
+\backslash
+n", doc.title, doc.url);
+\end_layout
+
+\begin_layout Plain Layout
+
+        }
+\end_layout
+
+\begin_layout Plain Layout
+
+      }else{
+\end_layout
+
+\begin_layout Plain Layout
+
+        System.out.printf("Error in call: %s", conn.getErrorStream().toString());
+\end_layout
+
+\begin_layout Plain Layout
+
+      }
+\end_layout
+
+\begin_layout Plain Layout
+
+   }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
