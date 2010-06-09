@@ -1259,7 +1259,7 @@ head
 \emph default
  del documento, las siguientes líneas de código:
 \begin_inset listings
-lstparams "basicstyle={\ttfamily},breaklines=true"
+lstparams "basicstyle={\ttfamily},breaklines=true,language=HTML"
 inline false
 status open
 
@@ -1311,7 +1311,7 @@ head
 \emph default
 del documento:
 \begin_inset listings
-lstparams "basicstyle={\ttfamily},breaklines=true"
+lstparams "basicstyle={\ttfamily},breaklines=true,language=HTML"
 inline false
 status open
 
