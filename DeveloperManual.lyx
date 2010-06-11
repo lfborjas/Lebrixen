@@ -117,10 +117,11 @@ El servicio se provee mediante una interfaz de programación de aplicaciones
 Para desarrolladores web existe la opción de incluir unas cuantas líneas
  de código javascript a las páginas donde se desee implementar la funcionalidad,
  para así ahorrarse el paso de desarrollar una interfaz y métodos que manejen
- las recomendaciones; los implementadores en otro tipo de aplicaciones deberán
- implementar las llamadas a la API y proveer a sus usuarios de una interfaz
- que las presente, el desarrollo de la misma puede seguir algunos lineamientos
- aquí presentados, para aprovechar al máximo el servicio.
+ las recomendaciones; la otra alternativa (y la única para los implementadores
+ de otro tipo de aplicaciones) es implementar las llamadas a la API y proveer
+ a sus usuarios de una interfaz que las presente, el desarrollo de la misma
+ puede seguir algunos lineamientos presentados en la descripción de cada
+ método, para aprovechar al máximo el servicio.
 \end_layout
 
 \begin_layout Addsec
@@ -153,8 +154,26 @@ Para empezar
 \end_layout
 
 \begin_layout Standard
-Aquí se detallan los pasos preliminares que cualquier implementador deberá
- seguir antes de usar el servicio.
+El implementador, antes de poder utilizar el servicio (mediante el 
+\emph on
+widget 
+\emph default
+-capítulo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:widget"
+
+\end_inset
+
+ - o la API -capítulo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:api"
+
+\end_inset
+
+), debe seguir un par de pasos preliminares.
+ Éstos se detallan a continuación.
 \end_layout
 
 \begin_layout Section
@@ -302,445 +321,6 @@ Si el correo electrónico no se recibe -antes de asumir que no se recibió,
  se recomienda revisar en la carpeta que algunos clientes asignan a correo
  no deseado, el implementador no debe intentar registrarse de nuevo, sino
  contactar al servicio.
-\end_layout
-
-\begin_layout Section
-Comprender cómo puede responder el servicio
-\end_layout
-
-\begin_layout Standard
-Para todas las llamadas a la API, el servidor habrá de contestar con una
- respuesta http.
- Todas las llamadas requieren que se provea la clave única de la aplicación.
- En caso de que la solicitud sea correcta, el servidor contestará con una
- respuesta con código de estado 200 (éxito) y el contenido codificado en
- el formato de intercambio de datos JSON con los atributos pertinentes a
- cada llamada.
- Si el servidor responde con un documento con un código de estado diferente
- a 200, refiérase a la tabla 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:api-errors"
-
-\end_inset
-
- para determinar la causa, todos los errores tratan de apegarse a la semántica
- estándar de códigos de estado definidos
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- por la IETF (
-\emph on
-Internet Engineering Task Force, 
-\emph default
-Grupo de Trabajo en Ingeniería de Internet).
-\end_layout
-
-\begin_layout Standard
-Para permitir llamadas a la API desde aplicaciones que utilicen la técnica
- AJAX (
-\emph on
-Asynchronous Javascript and XML, 
-\emph default
-Xml y javascript asíncronos), todas las llamadas pueden recibir un parámetro
- opcional adicional: 
-\emph on
-callback
-\emph default
- , que especifica una función de retorno.
- De esta manera, provisto este parámetro, la respuesta del servidor contendrá
- el objeto JSON de la contestación original puesto como parámetro de la
- función especificada en 
-\emph on
-callback
-\emph default
-.
- Esta es la 
-\emph on
-única
-\emph default
- manera en la que aplicaciones que utilicen la técnica AJAX pueden acceder
- a la API, porque la política de mismo origen
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Para más detalles, véase lo documentado en 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-https://developer.mozilla.org/en/Same_origin_policy_for_JavaScript
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- impuesta por los navegadores modernos prohíbe, por seguridad, que intercambios
- entre dominios distintos alternen código del lado del cliente (mas permite
- el intercambio de 
-\emph on
-scripts
-\emph default
-, que es como los navegadores reconocerán esta respuesta, en lugar de una
- asignación de un objeto en código cliente, que es lo que se hace con datos
- en JSON por lo general).
- Esta técnica se conoce como JSONP
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Para más detalles, consúltense 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/
-\end_layout
-
-\end_inset
-
- y 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://developer.yahoo.com/common/json.html
-\backslash
-#callbackparam
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- (
-\emph on
-JSON with padding
-\emph default
-, JSON con relleno).
- El usuario deberá saber interpretar el 
-\emph on
-script 
-\emph default
-devuelto como una llamada a una función que deberá definirse en el lado
- del cliente, es de notar que la mayor parte de librerías de javascript
- contemporáneas tienen la capacidad de manejar automáticamente solicitudes
- con la técnica JSONP
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Mootools 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://mootools.net/docs/more/Request/Request.JSONP
-\end_layout
-
-\end_inset
-
- y jquery 
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://api.jquery.com/jQuery.getJSON/
-\end_layout
-
-\end_inset
-
-, para citar un par de ejemplos, tienen métodos especializados para ello.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="3">
-<features>
-<column alignment="center" valignment="top" width="10page%">
-<column alignment="center" valignment="top" width="25page%">
-<column alignment="center" valignment="top" width="20page%">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Código
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Posible Causa
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Solución
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-400 (solicitud mal-formada)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Uno de los parámetros requeridos por la llamada no ha sido provisto o el
- parámetro opcional general de función de retorno javascript no es un identifica
-dor válido.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Revisar la llamada e incluir los parámetros necesarios: el contenido de
- la respuesta contendrá los parámetros requeridos que hayan faltado.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-401 (no autorizado)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Fallo de autenticación (por ausencia de credenciales o credenciales incorrectas
- en una llamada que requiere autenticación básica http
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://tools.ietf.org/html/rfc2617
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Incluir las credenciales o revisarlas.
- Si se sospecha que un tercero las ha cambiado, contactar al servicio.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-403 (acceso prohibido)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Sólo es devuelto al tratar de registrar usuarios.
- Sucede cuando se ha excedido el límite permitido.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Eliminar usuarios inactivos o solicitar una expansión personalizada del
- límite (esta característica no es ofrecida en la versión actual del servicio).
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-404 (no encontrado)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Si la solicitud es a una URL válida del servicio, la causa se debe a la
- provisión de una clave única inválida o un usuario no existente para la
- aplicación que llama.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Proveer una clave única de aplicación válida o un identificador de usuario
- existente.
- Si no se está seguro de qué usuarios se tiene registrados, utilizar la
- llamada del listado de usuarios o el panel de control.
- Si se ha perdido la clave única, contactar personalmente al servicio.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-500 (error interno)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Cuando el servidor ha tenido un error en alguno de sus componentes y no
- puede llevar a cabo el proceso.
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Este es el único error que el usuario no puede enmendar y no requiere mayor
- acción de su parte.
- El servicio cuenta con un mecanismo de auto-reporte de errores internos
- a los desarrolladores.
- 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:api-errors"
-
-\end_inset
-
-Posibles errores en llamadas a la API
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -1077,6 +657,13 @@ Formulario de restablecimiento de contraseña
 
 \begin_layout Chapter
 Uso básico
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:widget"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2627,10 +2214,6 @@ Interfaz de recomendaciones
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -2682,34 +2265,618 @@ Ejemplo de interfaz con retroalimentación explícita: dos documentos han
 
 \begin_layout Chapter
 Uso avanzado
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:api"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Para los desarrolladores que deseen aprovechar al máximo el servicio se
  creó una API que permite que, mediante solicitudes HTTP a métodos ubicados
  en URLs, se pueda obtener la funcionalidad ofrecida por el sistema.
- Como ya se aclaró, todas las respuestas a solicitudes bien formadas tendrán
- código de estado 200 (éxito) y el cuerpo será texto representando un objeto
- de javascript según la notación JSON.
- Consúltese la tabla 
+ En este capítulo se explica el comportamiento general de la API y luego
+ se procede a detallar cada método.
+ Se pueden distinguir dos conjuntos de métodos en la API: los que se utilizan
+ para administrar usuarios y los utilizados para el servicio de recomendación
+ en sí.
+ En este capítulo se explican todos en detalle y se incluye un apartado
+ con ejemplos de llamadas a algunos de éstos para dar ideas de implementación
+ a los desarrolladores.
+\end_layout
+
+\begin_layout Section
+Comportamiento general de llamadas a la API
+\end_layout
+
+\begin_layout Standard
+Para todas las llamadas a la API, el servidor habrá de contestar con una
+ respuesta http.
+ 
+\end_layout
+
+\begin_layout Standard
+Todas las llamadas requieren que se provea la clave única de la aplicación.
+\end_layout
+
+\begin_layout Standard
+Para 
+\emph on
+todas
+\emph default
+ las llamadas a la API (excepto en dos casos, que se explican más adelante),
+ el servicio contestará con una respuesta con código de estado 200 (éxito)
+ y el contenido codificado en el formato de intercambio de datos JSON representa
+ndo un objeto con la siguiente estructura (en json):
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+ data: Object| null,
+\end_layout
+
+\begin_layout Plain Layout
+
+ message: '' | mensaje-de-error,
+\end_layout
+
+\begin_layout Plain Layout
+
+ status: 200 | código-de-error,
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si la llamada se hizo con éxito, la propiedad 
+\emph on
+data
+\emph default
+ será una instancia del objeto descrito en la documentación de cada método
+ por separado; el 
+\emph on
+status
+\emph default
+ será 200 (éxito) y 
+\emph on
+message
+\emph default
+ será una cadena vacía.
+ 
+\end_layout
+
+\begin_layout Standard
+Las propiedades del atributo 
+\emph on
+data
+\emph default
+ se especifican en la explicación de cada método bajo el apartado 
+\emph on
+atributos de retorno.
+\end_layout
+
+\begin_layout Standard
+Si la llamada tiene errores (parámetros incorrectos/faltantes o hubo un
+ error al procesarla), la propiedad 
+\emph on
+data 
+\emph default
+será 
+\emph on
+null
+\emph default
+, el mensaje contendrá una cadena indicando el error que se encontró y el
+ 
+\emph on
+status
+\emph default
+ contendrá un código de error http.
+ Las probables causas de errores se explican en la tabla
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:api-errors"
 
 \end_inset
 
- para una explicación de las solicitudes que devuelvan una respuesta cuyo
- código sea distinto a 200.
+.
+ Todos los errores tratan de apegarse a la semántica estándar de códigos
+ de estado definidos
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ por la IETF (
+\emph on
+Internet Engineering Task Force, 
+\emph default
+Grupo de Trabajo en Ingeniería de Internet).
+\end_layout
+
+\begin_layout Standard
+Para permitir llamadas a la API desde aplicaciones que utilicen la técnica
+ AJAX (
+\emph on
+Asynchronous Javascript and XML, 
+\emph default
+Xml y javascript asíncronos), todas las llamadas pueden recibir un parámetro
+ opcional adicional: 
+\emph on
+callback
+\emph default
+ , que especifica una función de retorno.
+ De esta manera, provisto este parámetro, la respuesta del servidor contendrá
+ el objeto JSON de la contestación original puesto como parámetro de la
+ función especificada en 
+\emph on
+callback
+\emph default
+.
+ Esta es la 
+\emph on
+única
+\emph default
+ manera en la que aplicaciones que utilicen la técnica AJAX pueden acceder
+ a la API, porque la política de mismo origen
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Para más detalles, véase lo documentado en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/en/Same_origin_policy_for_JavaScript
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ impuesta por los navegadores modernos prohíbe, por seguridad, que intercambios
+ entre dominios distintos alternen código del lado del cliente (mas permite
+ el intercambio de 
+\emph on
+scripts
+\emph default
+, que es como los navegadores reconocerán esta respuesta, en lugar de una
+ asignación de un objeto en código cliente, que es lo que se hace con datos
+ en JSON por lo general).
+ Esta técnica se conoce como JSONP
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Para más detalles, consúltense 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/
+\end_layout
+
+\end_inset
+
+ y 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://developer.yahoo.com/common/json.html
+\backslash
+#callbackparam
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (
+\emph on
+JSON with padding
+\emph default
+, JSON con relleno).
+ El usuario deberá saber interpretar el 
+\emph on
+script 
+\emph default
+devuelto como una llamada a una función que deberá definirse en el lado
+ del cliente, es de notar que la mayor parte de librerías de javascript
+ contemporáneas tienen la capacidad de manejar automáticamente solicitudes
+ con la técnica JSONP
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Mootools 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://mootools.net/docs/more/Request/Request.JSONP
+\end_layout
+
+\end_inset
+
+ y jquery 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://api.jquery.com/jQuery.getJSON/
+\end_layout
+
+\end_inset
+
+, para citar un par de ejemplos, tienen métodos especializados para ello.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Sólo existen dos casos excepcionales en los cuales el servicio responde
+ con un documento con un código de estado diferente a 200 y el contenido
+ no está codificado en JSON sino que es texto plano:
+\end_layout
+
+\begin_layout Enumerate
+Para respetar mecanismos de auto-descubrimiento de páginas restringidas,
+ si se llama a los métodos privilegiados de adición o eliminación de usuarios
+ -que requieren autenticación básica http
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://tools.ietf.org/html/rfc2617
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+- el servidor contesta con una respuesta con código 401: así se permite
+ que se provean credenciales si se dispone de ellas.
+ Para comodidad de los desarolladores que dependan de tales mecanismos,
+ se optó por 
+\emph on
+no
+\emph default
+ devolver datos en formato JSON que explicasen el error de autenticación.
+\end_layout
+
+\begin_layout Enumerate
+Si se provee el parámetro opcional 
+\emph on
+callback
+\emph default
+, y éste no es un identificador javascript válido
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docstore.mik.ua/orelly/webprog/jscript/ch02_07.htm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, el servidor responderá con un documento con código de estado 400 (solicitud
+ incorrecta).
+ No se devuelve la descripción del error en JSON puesto que, al no contar
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Si la función 
+\emph on
+callback
+\emph default
+ es inválida, se asume que el código que llama está violando la política
+ del mismo origen
+\end_layout
+
+\end_inset
+
+ con un 
+\emph on
+callback
+\emph default
+, el solicitante no tendría manera de examinar la respuesta y, por tanto,
+ no podría 
+\emph on
+ver
+\emph default
+ el JSON.
+\end_layout
+
+\begin_layout Standard
+Cuando se implementen llamadas a la API, se aconseja revisar que la propiedad
+ 
+\emph on
+status
+\emph default
+ sea igual a 200 para asegurar que la propiedad 
+\emph on
+data
+\emph default
+ contará con los atributos específicos a la llamada.
+ Nótese que el implementador también debe prever la ocurrencia de los dos
+ casos excepcionales (fallo de autenticación y función de retorno inválida)
+ que no se devuelven como JSON.
  
 \end_layout
 
 \begin_layout Standard
-Se pueden distinguir dos conjuntos de métodos en la API: los que se utilizan
- para administrar usuarios y los utilizados para el servicio de recomendación
- en sí.
- En este capítulo se explican todos en detalle y se incluye un apartado
- con ejemplos de llamadas a algunos de éstos para dar ideas de implementación
- a los desarrolladores.
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="center" valignment="top" width="10page%">
+<column alignment="center" valignment="top" width="25page%">
+<column alignment="center" valignment="top" width="20page%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Código
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Posible Causa
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Solución
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+400 (solicitud mal-formada)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Uno de los parámetros requeridos por la llamada no ha sido provisto o el
+ parámetro opcional general de función de retorno javascript no es un identifica
+dor válido.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Revisar la llamada e incluir los parámetros necesarios: el contenido de
+ la respuesta contendrá los parámetros requeridos que hayan faltado.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+403 (acceso prohibido)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sólo es devuelto al tratar de registrar usuarios.
+ Sucede cuando se ha excedido el límite permitido.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eliminar usuarios inactivos o solicitar una expansión personalizada del
+ límite (esta característica no es ofrecida en la versión actual del servicio).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+404 (no encontrado)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Si la solicitud es a una URL válida del servicio, la causa se debe a la
+ provisión de una clave única inválida o un usuario no existente para la
+ aplicación que llama.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Proveer una clave única de aplicación válida o un identificador de usuario
+ existente.
+ Si no se está seguro de qué usuarios se tiene registrados, se puede utilizar
+ la llamada del listado de usuarios o el panel de control.
+ Si se ha perdido la clave única, contactar personalmente al servicio.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500 (error interno)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cuando el servidor ha tenido un error en alguno de sus componentes y no
+ puede llevar a cabo el proceso.
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Este es el único error que el usuario no puede enmendar y no requiere mayor
+ acción de su parte.
+ El servicio cuenta con un mecanismo de auto-reporte de errores internos
+ a los desarrolladores, así que el reporte del error es totalmente opcional.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:api-errors"
+
+\end_inset
+
+Posibles errores en llamadas a la API
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2747,6 +2914,7 @@ Esta llamada permite al implementador agregar los usuarios uno por uno (método
 \begin_layout Description
 URL: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -2797,7 +2965,7 @@ retorno:
 
 \begin_deeper
 \begin_layout Description
-created: un valor booleano que indica si la adición se hizo.
+added: un valor booleano que indica si la adición se hizo.
  Si el valor es inválido, se retornará un valor falso.
  Si el usuario es un duplicado, la adición no se hará y se retornará verdadero:
  no se permiten duplicados.
@@ -2823,6 +2991,7 @@ Esta llamada se proporciona para aplicaciones que deseen agregar varios
 \begin_layout Description
 URL: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -2858,6 +3027,7 @@ user: un arreglo de identificadores únicos a agregar.
  De preferencia, este arreglo se ha de representar en la solicitud como
  parámetros separados con el mismo nombre, por ejemplo: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -2886,8 +3056,7 @@ retorno:
 
 \begin_deeper
 \begin_layout Description
-queued: un valor booleano que indica si la tarea se agregó a la cola de
- trabajos.
+added: un valor booleano que indica si la tarea se agregó a la cola de trabajos.
  
 \end_layout
 
@@ -2906,6 +3075,7 @@ Esta llamada puede ser útil para la creación de interfaces de administración
 \begin_layout Description
 URL: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -2987,6 +3157,7 @@ cias y tomar las medidas correspondientes en los casos donde se utilizará
 \begin_layout Description
 URL: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -3037,7 +3208,7 @@ retorno:
 
 \begin_deeper
 \begin_layout Description
-created: un valor booleano que indica si la eliminación se hizo.
+deleted: un valor booleano que indica si la eliminación se hizo.
  Si el valor es inválido, se retornará falso.
  
 \end_layout
@@ -3073,6 +3244,7 @@ nte relacionados al texto y los filtrará según las preferencias que se tengan
 \begin_layout Description
 URL: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -3242,6 +3414,7 @@ as de los usuarios registrados, de modo que se mejoren el conocimiento sobre
 \begin_layout Description
 URL: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -3314,6 +3487,7 @@ entación.
  De preferencia, este arreglo se ha de representar en la solicitud como
  parámetros separados con el mismo nombre, por ejemplo: 
 \begin_inset listings
+lstparams "basicstyle={\ttfamily}"
 inline false
 status open
 
@@ -3337,13 +3511,17 @@ de
 \begin_inset space ~
 \end_inset
 
-retorno: Ninguno.
- Si la tarea de actualización logró agregarse al administrador de trabajos
- para procesamiento asíncrono se contestará con una respuesta con código
- de estado 200.
+retorno: 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+queued: Si la tarea de actualización logró agregarse al administrador de
+ trabajos para procesamiento asíncrono.
  
 \end_layout
 
+\end_deeper
 \begin_layout Description
 Recomendaciones
 \begin_inset space ~
@@ -3410,7 +3588,7 @@ $.getJSON('http://trecs.com/api/getRecommendations/?callback=?',
 
 \begin_layout Plain Layout
 
-function(data){
+function(returned){
 \end_layout
 
 \begin_layout Plain Layout
@@ -3420,7 +3598,7 @@ function(data){
 
 \begin_layout Plain Layout
 
-	$.each(data.results, function(i,doc){
+	$.each(returned.data.results, function(i,doc){
 \end_layout
 
 \begin_layout Plain Layout
@@ -3485,7 +3663,7 @@ raw_data = urlopen('http://trecs.com/api/getRecommendations/',
 
 \begin_layout Plain Layout
 
-data = json.loads(raw_data)
+returned = json.loads(raw_data)
 \end_layout
 
 \begin_layout Plain Layout
@@ -3495,7 +3673,7 @@ print "Recommendations: "
 
 \begin_layout Plain Layout
 
-for doc in data['results']:
+for doc in returned['data']['results']:
 \end_layout
 
 \begin_layout Plain Layout
@@ -3560,7 +3738,7 @@ import com.google.gson.Gson;
 
 \begin_layout Plain Layout
 
-class Result {
+class RecommendationsResult{
 \end_layout
 
 \begin_layout Plain Layout
@@ -3571,6 +3749,31 @@ class Result {
 \begin_layout Plain Layout
 
 	public String terms;
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+class Result {
+\end_layout
+
+\begin_layout Plain Layout
+
+	public RecommendationsResult data;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public String message;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public int status;
 \end_layout
 
 \begin_layout Plain Layout
@@ -3778,7 +3981,7 @@ n {
 
 \begin_layout Plain Layout
 
-        Result data = gson.fromJson(json, Result.class); 
+        Result returned = gson.fromJson(json, Result.class); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -3788,7 +3991,7 @@ n {
 
 \begin_layout Plain Layout
 
-        for(Doc doc: data.results){
+        for(Doc doc: returned.data.results){
 \end_layout
 
 \begin_layout Plain Layout
