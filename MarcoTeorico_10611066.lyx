@@ -15796,6 +15796,204 @@ end{algorithm}
 \end_layout
 
 \begin_layout Chapter
+Pruebas
+\end_layout
+
+\begin_layout Standard
+En este capítulo se presentan la estrategia y tipos de pruebas utilizados
+ para asegurar la calidad del servicio desarrollado durante el presente
+ proyecto.
+ Si se desea consultar los detalles de los casos de prueba principales,
+ refiérase al anexo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:test-cases"
+
+\end_inset
+
+.
+ Se identificaron tres grandes áreas relativamente independientes a probar:
+ la interfaz de programación de aplicaciones, el 
+\emph on
+widget
+\emph default
+ opcional y el sitio web del servicio.
+ Las discusiones de pruebas se harán aquí para cada uno de éstos.
+ La justificación teórica de los procedimientos y estrategias de prueba
+ se puede encontrar en 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pressman2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Pruebas de la API
+\end_layout
+
+\begin_layout Standard
+Cada URL de la API, dado su diseño, se puede considerar una función.
+ Por lo tanto, las pruebas de la misma se realizaron como cualquier producto
+ de software convencional.
+ 
+\end_layout
+
+\begin_layout Standard
+Se comenzó con 
+\emph on
+pruebas de unidad
+\emph default
+ para cada elemento involucrado en las llamadas a la API, el diseño de los
+ casos de prueba se hizo siguiendo una estrategia de integración ascendente
+ [incluir árbol?].
+ Cada elemento se probó mediante una prueba de unidad escrita con la ayuda
+ de la herramienta 
+\emph on
+unittest
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.python.org/library/unittest.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ para python.
+ Para las funciones internas (llamadas dentro de cada método de la API)
+ y las funciones de la API con complejidad suficiente (presencia de bifurcacione
+s mediante sentencias 
+\emph on
+if
+\emph default
+ o 
+\emph on
+try-except
+\emph default
+) se diseñaron casos de prueba de caja blanca según el método basado en
+ la noción de complejidad ciclomática de McCabe: el número mínimo de casos
+ se establece según la complejidad calculada para el grafo.
+ Una vez probada satisfactoriamente una función, se procedía a probar la
+ siguiente en el mismo nivel del árbol de integración, hasta llegar a la
+ prueba funcional de un método de la API.
+ [detallarlos]
+\end_layout
+
+\begin_layout Standard
+A continuación, se utilizaron los casos de prueba diseñados para cada llamada
+ a la API para crear pruebas de desempeño utilizando la herramienta de automatiz
+ación de pruebas FunkLoad
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://funkload.nuxeo.org/ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Pruebas del Widget
+\end_layout
+
+\begin_layout Standard
+El 
+\emph on
+widget
+\emph default
+ se puede considerar como una aplicación con interfaz gráfica convencional,
+ por tanto, la estrategia de prueba fue la siguiente:
+\end_layout
+
+\begin_layout Standard
+Se revisó el contenido, de manera que estuviera correctamente presentado
+ para los usuarios de los idiomas implementados (inglés y español).
+\end_layout
+
+\begin_layout Standard
+Acto seguido, se probó la interfaz para que fuera semánticamente coherente,
+ inteligible y compatible con los navegadores web más utilizados: internet
+ explorer, google chrome, mozilla firefox, safari y opera.
+\end_layout
+
+\begin_layout Standard
+Se diseñaron pruebas de unidad para el código javascript del widget, siguiendo
+ una estrategia similar a la presentada en la sección anterior.
+ Para la aplicación de las pruebas se utilizó la herramienta QUnit 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://docs.jquery.com/QUnit
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Pruebas del sitio web del servicio
+\end_layout
+
+\begin_layout Standard
+Se comenzó con una revisión del contenido y la navegación, asegurando que
+ fueran claros y semánticamente aceptables para los usuarios de los idiomas
+ implementados.
+ 
+\end_layout
+
+\begin_layout Standard
+Luego, se probaron funcionalmente los distintos formularios, utilizando
+ técnicas de caja negra; además de pruebas de validación para asegurar que
+ los casos de uso se pudiesen llevar a cabo satisfactoriamente.
+\end_layout
+
+\begin_layout Standard
+Se realizaron pruebas de seguridad y desempeño para encontrar vulnerabilidades
+ y deficiencias.
+\end_layout
+
+\begin_layout Chapter
 Conclusión
 \end_layout
 
@@ -16734,6 +16932,17 @@ Manual del implementador
 	filename DeveloperManual.pdf
 	display false
 	extra LaTeX "pages={1-28}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Casos de prueba principales
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:test-cases"
 
 \end_inset
 
