@@ -15802,17 +15802,11 @@ Pruebas
 \begin_layout Standard
 En este capítulo se presentan la estrategia y tipos de pruebas utilizados
  para asegurar la calidad del servicio desarrollado durante el presente
- proyecto.
- Si se desea consultar los detalles de los casos de prueba principales,
- refiérase al anexo 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "cha:test-cases"
+ proyecto, discutiendo someramente las herramientas elegidas en cada caso.
+\end_layout
 
-\end_inset
-
-.
- Se identificaron tres grandes áreas relativamente independientes a probar:
+\begin_layout Standard
+Se identificaron tres grandes áreas relativamente independientes a probar:
  la interfaz de programación de aplicaciones, el 
 \emph on
 widget
@@ -15830,15 +15824,396 @@ key "Pressman2006"
 .
 \end_layout
 
+\begin_layout Standard
+Se optó por usar pruebas automatizadas donde fuese posible y conveniente,
+ tratando de sopesar el costo y el beneficio de cada caso individual por
+ lo que -en vista del poco tiempo que se tuvo- no se desarrollaron pruebas
+ automatizadas para componentes o interfaces donde el esfuerzo de codificar
+ una prueba hubiera sido mayor que el de conducirla manualmente, o donde
+ la función no permitía que se pudiera hacer mediante herramientas de prueba
+ (como el caso del formulario de registro, que contiene un campo 
+\emph on
+reCaptcha
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://recaptcha.net/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, el cual está explícitamente diseñado para poder ser resuelto por seres
+ humanos y no por computadoras o programas convencionales).
+\end_layout
+
+\begin_layout Standard
+La filosofía de pruebas del 
+\emph on
+framework
+\emph default
+ django se adoptó donde fuese posible: las pruebas de unidad se diseñaron
+ de forma que todas encontrasen la base de datos en un mismo estado consistente,
+ por lo que se aprovechó el mecanismo de prueba de 
+\emph on
+django, 
+\emph default
+que crea una base de datos temporal cada vez que los casos de prueba se
+ ejecutan y se encarga de dejar esta en el mismo estado después de cada
+ prueba -borrando cualquier dato que una prueba haya introducido.
+ Puesto que los casos relativos al servicio necesitan de una colección documenta
+l y una ontología, se creó una base de datos de control de tamaño reducido
+ que eliminase la incertidumbre durante la codificación de los casos, permitiend
+o predictibilidad y, a la vez, ofreciendo un ambiente similar a la ejecución
+ real del software.
+ Las pruebas de unidad escritas según las convenciones de los 
+\emph on
+frameworks 
+\emph default
+de prueba 
+\emph on
+xUnit
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Estas convenciones están fundamentadas en el siguiente artículo de Kent
+ Beck: http://www.xprogramming.com/testfram.htm
+\end_layout
+
+\end_inset
+
+ establecen que los casos de prueba se representan como un objeto, el cual
+ puede tener varios 
+\emph on
+métodos de prueba; 
+\emph default
+en este proyecto, se diseñaron casos de prueba para cada componente y los
+ distintos valores de prueba -o situaciones de uso- se expresaron dentro
+ de los métodos.
+ 
+\end_layout
+
+\begin_layout Standard
+El tamaño de la ontología y la colección documental es deliberadamente pequeño,
+ con documentos de dos párrafos a lo sumo, pero -aparte de la cantidad de
+ datos- se procuró cubrir situaciones ocurrentes con datos reales: documentos
+ en ambos idiomas soportados, categorías con sub-categorías y palabras presentes
+ en el texto de más de una categoría, para estudiar los efectos de la ambigüedad
+ en la categorización de textos.
+\end_layout
+
+\begin_layout Standard
+La figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:test-ontology"
+
+\end_inset
+
+ presenta la ontología de control y la tabla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:test-document-collection"
+
+\end_inset
+
+, la colección documental previamente descritas.
+ El contenido de los documentos se extrajo de 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+wikipedia.org
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/33_TestOntology.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:test-ontology"
+
+\end_inset
+
+Ontología de prueba (la cantidad de documentos clasificada bajo cada categoría
+ se presenta entre corchetes).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="2">
+<features>
+<column alignment="center" valignment="top" width="10page%">
+<column alignment="center" valignment="top" width="40page%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Título[Categoría]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Contenido
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Science [Ciencia]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Systematic enterprise of gathering knowledge about the world and organizing
+ and condensing that knowledge into testable laws and theories
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ciencia [Ciencia]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Conjunto de conocimientos obtenidos mediante la observación y el razonamiento,
+ sistemáticamente estructurados y de los que se deducen principios y leyes
+ generales
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Physics [Física]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+is a natural science that involves the study of matter and its motion through
+ spacetime, as well as all applicable concepts, such as energy and force
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quantum Physics [Mecánica Cuántica]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Einstein himself is well known for rejecting some of the claims of quantum
+ mechanics.
+ He did not accept the more philosophical consequences and interpretations
+ of quantum mechanics
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Física Cuántica [Mecánica Cuántica]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+El mismo Einstein es conocido por haber rechazado algunas de las demandas
+ de la mecánica cuántica.
+ No aceptó la interpretación ortodoxa de la mecánica cuántica
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Computer Science [Ciencias Computacionales]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The study of the theoretical foundations of information and computation,
+ and of practical techniques for their implementation and application in
+ computer systems
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ciencias Computacionales [Ciencias Computacionales]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Son aquellas que abarcan el estudio de las bases teóricas de la información
+ y la computación y su aplicación en sistemas computacionales.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:test-document-collection"
+
+\end_inset
+
+Colección documental de prueba
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Pruebas de la API
 \end_layout
 
 \begin_layout Standard
 Cada URL de la API, dado su diseño, se puede considerar una función.
- Por lo tanto, las pruebas de la misma se realizaron como cualquier producto
- de software convencional.
- 
+ Por lo tanto, las pruebas de la misma se enfocaron en que cada función
+ individual cumpliese los requerimientos enunciados en la fase de análisis
+ y diseño y que fuera capaz de manejar varios escenarios de uso.
+\end_layout
+
+\begin_layout Subsection
+Pruebas de unidad
 \end_layout
 
 \begin_layout Standard
@@ -15846,9 +16221,7 @@ Se comenzó con
 \emph on
 pruebas de unidad
 \emph default
- para cada elemento involucrado en las llamadas a la API, el diseño de los
- casos de prueba se hizo siguiendo una estrategia de integración ascendente
- [incluir árbol?].
+ para cada elemento involucrado en las llamadas a la API.
  Cada elemento se probó mediante una prueba de unidad escrita con la ayuda
  de la herramienta 
 \emph on
@@ -15874,10 +16247,18 @@ http://docs.python.org/library/unittest.html
 
 \end_inset
 
- para python.
- Para las funciones internas (llamadas dentro de cada método de la API)
- y las funciones de la API con complejidad suficiente (presencia de bifurcacione
-s mediante sentencias 
+ para python, en concreto, con la extensión a ésta provista por 
+\emph on
+django
+\emph default
+, que ofrece funciones explícitamente diseñadas para probar comunicación
+ mediante HTTP.
+\end_layout
+
+\begin_layout Standard
+Para las funciones internas (llamadas dentro de cada método de la API) y
+ las funciones de la API con complejidad suficiente (presencia de bifurcaciones
+ mediante sentencias 
 \emph on
 if
 \emph default
@@ -15888,16 +16269,986 @@ try-except
 ) se diseñaron casos de prueba de caja blanca según el método basado en
  la noción de complejidad ciclomática de McCabe: el número mínimo de casos
  se establece según la complejidad calculada para el grafo.
- Una vez probada satisfactoriamente una función, se procedía a probar la
- siguiente en el mismo nivel del árbol de integración, hasta llegar a la
- prueba funcional de un método de la API.
- [detallarlos]
+ 
 \end_layout
 
 \begin_layout Standard
-A continuación, se utilizaron los casos de prueba diseñados para cada llamada
- a la API para crear pruebas de desempeño utilizando la herramienta de automatiz
-ación de pruebas FunkLoad
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/34_ComponentDependencyTests.dia
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:test-dependencies"
+
+\end_inset
+
+Diagrama de dependencias entre componentes y enumeración de escenarios de
+ uso.
+ Las funciones de la API están enfatizadas en gris.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:test-dependencies"
+
+\end_inset
+
+ presenta una representación esquemática de los componentes y sus dependencias
+ entre sí: se crearon pruebas para cada función o módulo que tuviera una
+ relación de dependencia con las funciones de la API; el número de escenarios
+ de uso (métodos de prueba) desarrollado para cada componente se presenta
+ entre corchetes junto al título de cada cual.
+ Los casos de prueba se desarrollaron de manera 
+\emph on
+ascendente: 
+\emph default
+comenzando por los métodos que no tenían dependencias hasta llegar a las
+ funciones de la API, de las cuales ningún otro componente depende; de esta
+ manera se redujo al mínimo la necesidad de escribir resguardos que jugasen
+ el papel de otros elementos.
+ 
+\end_layout
+
+\begin_layout Minisec
+Principales casos de prueba
+\end_layout
+
+\begin_layout Standard
+Dada la gran cantidad de métodos de prueba, aquí se presentan únicamente
+ los casos de prueba de las funciones de la API y casos de prueba generales
+ con métodos comunes entre las funciones.
+ Se presenta cada caso y su propósito, y se agrupan bajo éste los métodos
+ de prueba.
+\end_layout
+
+\begin_layout Description
+Autenticación Se probó la función común a las llamadas del API de administración
+ de usuarios que verificase que las solicitudes incluyesen credenciales
+ de autenticación HTTP básica válidas.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+ausencia
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+encabezados: Una solicitud sin el encabezado 
+\emph on
+HTTP_AUTHORIZATION 
+\emph default
+debe resultar en una respuesta con código de error 401 (no autorizado).
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+usuario
+\begin_inset space ~
+\end_inset
+
+inexistente: Si se proveen encabezados, mas el nombre de aplicación no existe,
+ la respuesta debe ser una 401.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+credenciales
+\begin_inset space ~
+\end_inset
+
+inválidas: Provistos encabezados y un nombre de usuario válido, se prueba
+ que se responda con código 401 si se provee una contraseña incorrecta.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+autenticación: Se prueba que una combinación correcta de credenciales resulte
+ en una respuesta exitosa (código 200).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Interpretación
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+validación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+comunicación: todos los métodos de la API tienen ciertos parámetros requeridos
+ -además, todos tienen uno opcional en común: una llamada de retorno (
+\emph on
+callback
+\emph default
+) para javascript- y todos responden con un objeto JSON con una estructura
+ común, por lo que estos comportamientos se agruparon en una sola función
+ 
+\emph on
+decoradora
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.python.org/dev/peps/pep-0318/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (una que tiene como parámetro otra función y transforma sus entradas o
+ salidas).
+ Dada, entonces, su importancia, se describe aquí el caso de prueba que
+ se desarrolló para la misma.
+ Si se agrega un predicado entre paréntesis al título de un método de prueba,
+ se está apuntando un segundo método con el mismo propósito y ligeramente
+ distinto proceder.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+función
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+retorno
+\begin_inset space ~
+\end_inset
+
+inválida: el parámetro opcional de función de retorno debe ser un identificador
+ válido de javascript.
+ En caso de no serlo, se debería devolver una respuesta con código de error
+ 400 (solicitud inválida).
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+parámetros
+\begin_inset space ~
+\end_inset
+
+requeridos
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): las solicitudes a una función de la API deben llevar los parámetros
+ que ésta identifique como requeridos, su ausencia debería resultar en una
+ respuesta 400 codificada en JSON -o una llamada a la función de retorno
+ si ésta es provista.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+codificación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+errores
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+estructura): Probar que se respeta la estructura del objeto JSON y los mensajes
+ y códigos de error se reportan adecuadamente cuando la respuesta no tiene
+ código de éxito (un código mayor o igual a 400).
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+retorno
+\begin_inset space ~
+\end_inset
+
+exitoso
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): Probar que una función cuya llamada es válida tiene código HTTP
+ de éxito (200) y respeta la estructura general del objeto JSON y los atributos
+ específicos que se declararon para la misma.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+retorno
+\begin_inset space ~
+\end_inset
+
+indirecto
+\begin_inset space ~
+\end_inset
+
+exitoso
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): Similar al anterior, pero para respuestas con códigos de éxito
+ distintos a 200 (como 301 y 302, redirecciones).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Claves
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+aplicación: todas las llamadas a la API requieren que se provea la clave
+ única de aplicación (
+\emph on
+token
+\emph default
+) asignada a quien las llame.
+ Se creó un caso general que probase ésto.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Token
+\begin_inset space ~
+\end_inset
+
+inválido
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): un token mal formado o inexistente debe devolver una respuesta
+ con código 404 (no encontrado).
+\end_layout
+
+\begin_layout Description
+Token
+\begin_inset space ~
+\end_inset
+
+válido: un token correspondiente a una aplicación registrada debería resultar
+ en una respuesta distinta a 404 (no necesariamente 200, 301 ó 302, porque
+ aún está sujeta a otras validaciones, como falta de parámetros requeridos).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Identificadores
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuarios: las llamadas a la API de recomendaciones requieren que se provea
+ un identificador único de usuario registrado por la aplicación que llame.
+ Se creó un caso general que probase ésto.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Identificador
+\begin_inset space ~
+\end_inset
+
+inválido
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): un identificador no registrado debe devolver una respuesta con
+ código 404 (no encontrado).
+\end_layout
+
+\begin_layout Description
+Identificador
+\begin_inset space ~
+\end_inset
+
+válido: un identificador correspondiente a una usuario registrado debería
+ resultar en una respuesta distinta a 404 (no necesariamente 200, 301 ó
+ 302, porque aún está sujeta a otras validaciones, como falta de parámetros
+ requeridos).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Obtención
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuarios: se prueba la llamada a obtención de usuarios.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+llamada
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): se asegura que los usuarios registrados para una aplicación sean
+ devueltos con los identificadores y fechas de adición correctos.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+método
+\begin_inset space ~
+\end_inset
+
+inválido: si la llamada es hecha mediante un método HTTP distinto a GET,
+ se devuelve una respuesta con código 405 (no permitido).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Registro
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuario: se prueba la adición síncrona de un solo usuario.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+registro
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): una solicitud de registro a un usuario nuevo debería resultar
+ en una respuesta con código 200 (éxito) y un objeto con el atributo 
+\emph on
+added
+\emph default
+ con valor de verdadero.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+parámetros
+\begin_inset space ~
+\end_inset
+
+requeridos: una solicitud sin el parámetro con el identificador del usuario
+ debería resultar en una respuesta con código 400 (mal formada)
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+duplicados: una solicitud de registro a un usuario ya existente debería
+ resultar en una respuesta con código 200 (éxito) y un objeto con el atributo
+ 
+\emph on
+added
+\emph default
+ con valor de falso.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+método
+\begin_inset space ~
+\end_inset
+
+inválido: si la llamada es hecha mediante un método HTTP distinto a POST,
+ se devuelve una respuesta con código 405 (no permitido).
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+límite: si se trata de agregar usuarios una vez que se ha alcanzado el límite
+ de usuarios permitidos a una aplicación, se debería retornar una respuesta
+ con código 403 (prohibido).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Adición
+\begin_inset space ~
+\end_inset
+
+múltiple
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuarios: se creó una llamada aparte para registrar varios usuarios de una
+ vez de manera asíncrona (dado que, si se quisiera agregar una gran cantidad
+ y el servidor estuviese particularmente ocupado, podría alcanzarse la restricci
+ón de tiempo máximo de espera impuesta por algunos navegadores o interfaces).
+ Se prueba este método.
+ Esta función comparte código con la adición de usuarios, por lo que sería
+ reduntante incluir métodos de prueba ya cubiertos en ésta.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+adición
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): se asegura que la tarea se crea y lleva a cabo y los usuarios
+ se agregan con éxito.
+ La respuesta debe tener código 200 y contener el atributo 
+\emph on
+queued 
+\emph default
+con valor de verdadero.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+duplicados: se asegura que no se inserten duplicados una vez terminada la
+ tarea.
+ La respuesta también tiene código 200 y el mismo atributo.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+límite: si se trata de agregar usuarios una vez que se ha alcanzado el límite
+ de usuarios permitidos a una aplicación, se debería retornar una respuesta
+ con código 403 (prohibido).
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Borrado
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuarios: se prueba que la eliminación de usuarios se comporte consistentemente.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+parámetros
+\begin_inset space ~
+\end_inset
+
+requeridos: se asegura que, si falta el parámetro del usuario a eliminar,
+ se retorne una respuesta con código 400.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+eliminación
+\begin_inset space ~
+\end_inset
+
+(con
+\begin_inset space ~
+\end_inset
+
+callback): una llamada con un identificador de un usuario registrado debería
+ tener código 200 y el atributo 
+\emph on
+deleted
+\emph default
+ en los datos específicos a la llamada
+\emph on
+ 
+\emph default
+con valor de verdadero.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+eliminación
+\begin_inset space ~
+\end_inset
+
+inválida: una llamada con un identificador de un usuario no existente debería
+ tener código 200 y el atributo 
+\emph on
+deleted
+\emph default
+ en los datos específicos a la llamada
+\emph on
+ 
+\emph default
+con valor de falso.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+método
+\begin_inset space ~
+\end_inset
+
+inválido: si la llamada es hecha mediante un método HTTP distinto a POST,
+ se devuelve una respuesta con código 405 (no permitido).
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+límite: probar que, una vez alcanzado el límite, se pueden borrar usuarios
+ y efectivamente se libera espacio para nuevas adiciones.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Evolución
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+perfil: se prueba que la tarea asíncrona de evolución real de perfil se
+ agregue a la cola de trabajos en varios escenarios.
+ En todos se asegura que la tarea se agregue a la cola, se ejecute y el
+ perfil del usuario de la llamada haya efectivamente evolucionado.
+ Téngase presente que el idioma por defecto es inglés, por lo que los escenarios
+ se crearon por separado para situaciones con textos en inglés y otras con
+ textos en idiomas que utilizasen codificación Unicode
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://unicode.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, como el español, dado el comportamiento propenso a errores 
+\emph on
+python
+\emph default
+ en relación al postrero tipo de textos.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+sólo
+\begin_inset space ~
+\end_inset
+
+contexto
+\begin_inset space ~
+\end_inset
+
+(en
+\begin_inset space ~
+\end_inset
+
+español): el perfil debería evolucionar si lo único que se provee es texto
+ libre.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+contexto
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+términos
+\begin_inset space ~
+\end_inset
+
+(en
+\begin_inset space ~
+\end_inset
+
+español): se prueba la evolución con un contexto de términos clave.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+lenguaje
+\begin_inset space ~
+\end_inset
+
+no
+\begin_inset space ~
+\end_inset
+
+soportado: la evolución se debería hacer en el lenguaje por defecto si se
+ provee un lenguaje no reconocido por el servicio.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+contexto
+\begin_inset space ~
+\end_inset
+
+(libre
+\begin_inset space ~
+\end_inset
+
+o
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+términos)
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+documentos
+\begin_inset space ~
+\end_inset
+
+(en
+\begin_inset space ~
+\end_inset
+
+español): probar las otras posibles combinaciones de contextualización:
+ texto libre o de términos y listados de documentos como retroalimentación,
+ en inglés y español.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Obtención
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+recomendaciones: Otro caso donde se desarrollaron métodos con el tema de
+ los lenguajes en mente.
+ Métodos que probasen más estrictamente los posibles contextos y lenguajes,
+ sin embargo, se desarrollaron para los sub-componentes correspondientes,
+ y no se discutirán aquí.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+obtención
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+recomendaciones
+\begin_inset space ~
+\end_inset
+
+(en
+\begin_inset space ~
+\end_inset
+
+español
+\begin_inset space ~
+\end_inset
+
+y
+\begin_inset space ~
+\end_inset
+
+lenguajes
+\begin_inset space ~
+\end_inset
+
+inválidos): dado un contexto en inglés o español, se prueba que se extrajeron
+ términos y se buscaron documentos -ambos como atributos en los datos específico
+s a la llamada- y se devuelven con código 200.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+presencia
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+contexto: Se prueba que la ausencia de un contexto resulta en una respuesta
+ con código 400.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+personalización
+\begin_inset space ~
+\end_inset
+
+(en
+\begin_inset space ~
+\end_inset
+
+español): se prueba que el filtrado de los resultados sea acorde al perfil
+ del usuario especificado en la llamada.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+contexto
+\begin_inset space ~
+\end_inset
+
+vacío: se prueba que un contexto sin términos útiles (se utilizó texto aleatorio
+ en latín) o efectivamente vacío no afecte la llamada mas retorne colecciones
+ de términos y resultados vacías.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Pruebas de desempeño
+\end_layout
+
+\begin_layout Standard
+Puesto que el tamaño de los datos de pruebas utilizados no se podía considerar
+ una medida del desempeño del servicio, se desarrolló una colección distinta
+ de pruebas que se comunicasen con el servidor 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+, para medir los tiempos de respuesta y el manejo de conexiones concurrentes.
+ Estas pruebas se desarrollaron con la herramienta de automatización de
+ pruebas FunkLoad
 \begin_inset Foot
 status collapsed
 
@@ -15919,6 +17270,10 @@ http://funkload.nuxeo.org/
 
 .
  
+\end_layout
+
+\begin_layout Subsection
+Resultados de las pruebas y observaciones
 \end_layout
 
 \begin_layout Section
