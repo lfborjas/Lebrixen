@@ -17226,8 +17226,33 @@ contexto
 \end_inset
 
 vacío: se prueba que un contexto sin términos útiles (se utilizó texto aleatorio
- en latín) o efectivamente vacío no afecte la llamada mas retorne colecciones
- de términos y resultados vacías.
+ en latín
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+En concreto, palabras y párrafos al azar del famoso 
+\emph on
+lorem ipsum
+\emph default
+, se puede encontrar más sobre éste en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://es.lipsum.co.uk/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+) o efectivamente vacío no afecte la llamada mas retorne colecciones de
+ términos y resultados vacías.
 \end_layout
 
 \end_deeper
@@ -17268,12 +17293,133 @@ http://funkload.nuxeo.org/
 
 \end_inset
 
-.
+, elegida por su respeto a las convenciones de xUnit y su capacidad de generar
+ reportes detallados de las pruebas y los estados de carga y uso de recursos
+ de las computadoras involucradas en la ejecución.
+ Puesto que la agregación de usuarios se limita hasta una constante, las
+ llamadas relacionadas a usuarios -agregación, eliminación y listado- se
+ pueden considerar acotadas por la misma, por lo que los resultados de pruebas
+ reales de desempeño (simulando muchas más solicitudes que el límite) serían
+ relativamente superfluos.
  
+\end_layout
+
+\begin_layout Standard
+Para probar el desempeño, se hicieron llamadas con cantidades crecientes
+ de usuarios concurrentes, con textos en inglés y español de dos párrafos
+ de extensión.
 \end_layout
 
 \begin_layout Subsection
 Resultados de las pruebas y observaciones
+\end_layout
+
+\begin_layout Standard
+Durante las pruebas se logró limpiar el código de rutas no cubiertas (condicione
+s que no se daban o estaban siendo revisadas en lugares previos de la ejecución
+ o excepciones redundantemente manejadas), asimismo, se descubrieron errores
+ en los algoritmos de filtrado de información e interpretación y validación
+ de las solicitudes y respuestas.
+\end_layout
+
+\begin_layout Standard
+Estas pruebas pusieron al descubierto el verdadero desempeño de los servicios
+ web utilizados para la extracción de términos clave: tagthe.net, el que
+ cuenta con mejor extracción, falla con textos muy largos (cerca de 150
+ Kb de texto), 
+\emph on
+alchemy
+\emph default
+, tiene un límite de 150 Kb y yahoo probó ser el más robusto, siempre devolviend
+o respuestas a las solicitudes aún con textos muy largos.
+\end_layout
+
+\begin_layout Standard
+Se descubrió que la función de agregación de múltiples usuarios, aunada
+ al límite actual (30 usuarios) está demás: la única razón para su creación
+ era hacer una alternativa asíncrona para operaciones temporalmente complejas
+ en la base de datos, pero un límite tan pequeño la vuelve contraproducente:
+ ¿para qué separar semánticamente la agregación de uno o varios usuarios
+ cuando el tiempo de ejecución de ambas no es demasiado distinto? Y, sobre
+ todo, ¿para qué molestar al usuario con correos electrónicos cuando podría
+ esperar a que se termine de ejecutar? Mas el aspecto más detrimental para
+ esta función es el problema de concurrencia que introduce ¿qué sucede si,
+ puesta en la cola de trabajos la tarea, se utiliza la alternativa síncrona
+ de agregación individual y se rebasa el límite? La restricción, al no estar
+ a nivel de base de datos, sencillamente sería violada.
+ La única ventaja de esta función se podría llegar a ver si el límite fuese
+ una cantidad considerable de usuarios (cientos o miles), donde el factor
+ tiempo se hace importante -al acercarse a los límites de tiempo máximo
+ de espera mencionados antes.
+ 
+\end_layout
+
+\begin_layout Standard
+De este último hallazgo de devela que la función de agregación síncrona
+ de usuarios individuales también tiene sus propios problemas de concurrencia:
+ varios usuarios -más allá del límite- podrían agregarse casi al mismo tiempo,
+ y la condición que revisa el límite podría permitir que todos se agreguen.
+ Estos dos descubrimientos hacen patente la necesidad de imponer el límite
+ de usuarios a nivel de base de datos, sin embargo, el desarrollo requeriría
+ más tiempo del disponible en esta etapa, además del compromiso del componente
+ más importante del sistema por una restricción por demás accesoria.
+\end_layout
+
+\begin_layout Standard
+El descubrimiento más crítico se dio al encontrar que 
+\emph on
+djapian,
+\emph default
+ el paquete de terceros utilizado para las búsquedas, a pesar de asegurarlo
+ en la documentación -mas una revisión de la última versión por parte del
+ auto del código fuente desmintió esta aseveración- no implementa una funcionali
+dad básica de los sistemas de recuperación de información: la 
+\emph on
+lematización, 
+\emph default
+la cual es, en pocas palabras, la reducción de las palabras a su raíz: eliminand
+o plurales, terminaciones relativas a conjugación o género y normalizar
+ vocablos derivativos.
+ Este defecto afecta la efectividad del componente de búsqueda, al reducir
+ la probabilidad de encontrar un documento obligando a las consultas a contener
+ palabras exactas (por ejemplo, una búsqueda de la palabra 
+\begin_inset Quotes eld
+\end_inset
+
+sistemas
+\begin_inset Quotes erd
+\end_inset
+
+ debería considerar en los resultados documentos que en su texto original
+ contuviesen 
+\begin_inset Quotes eld
+\end_inset
+
+sistema
+\begin_inset Quotes erd
+\end_inset
+
+ o 
+\begin_inset Quotes eld
+\end_inset
+
+sistemáticamente
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Lamentablemente, las soluciones encontradas por el autor a este problema
+ eran o contribuir al proyecto de 
+\emph on
+djapian
+\emph default
+ y terminar de implementar esta funcionalidad (según la inspección del código,
+ algunos componentes necesarios sí están presentes, pero no se utilizan)
+ o cambiar el componente de búsqueda, lo cual requeriría cambios de configuració
+n, reconstrucción del componente de búsqueda y creación de un nuevo índice
+ documental.
+ Ambas alternativas requerían más tiempo del que se disponía para concluir
+ el proyecto, por lo que se deja como trabajo futuro.
 \end_layout
 
 \begin_layout Section
@@ -17301,9 +17447,24 @@ Acto seguido, se probó la interfaz para que fuera semánticamente coherente,
 \end_layout
 
 \begin_layout Standard
-Se diseñaron pruebas de unidad para el código javascript del widget, siguiendo
- una estrategia similar a la presentada en la sección anterior.
- Para la aplicación de las pruebas se utilizó la herramienta QUnit 
+Aunque pruebas de unidad se 
+\emph on
+pudieron
+\emph default
+ haber diseñado para todo el comportamiento del widget: actualización de
+ los términos y documentos encontrados, recabación de la retroalimentación
+ e interacción con la página donde se agrega.
+ la codificación de pruebas automatizadas superaba en costo el beneficio.
+ En lugar de ello, se creó una página de prueba donde se pudieran llevar
+ a cabo estas comprobaciones manualmente.
+\end_layout
+
+\begin_layout Standard
+Se diseñaron pruebas de unidad para el método de detección de cambios en
+ el contexto: éste examina la entrada de texto registrada como la que contiene
+ la tarea del usuario para determinar si el texto introducido puede tener
+ nuevos términos clave que resultarán en nuevas recomendaciones.
+ Los casos de prueba implementaron con la herramienta QUnit 
 \begin_inset Foot
 status open
 
@@ -17323,7 +17484,131 @@ http://docs.jquery.com/QUnit
 
 \end_inset
 
-.
+, elegida por su compatibilidad con jQuery y su respeto a las convenciones
+ de xUnit sin comprometer la portabilidad entre navegadores, vital para
+ pruebas en más de uno; se enumeran a continuación:
+\end_layout
+
+\begin_layout Enumerate
+El evento de presionar una tecla sólo dispara la detección de cambios cuando
+ ésta es la barra espaciadora.
+\end_layout
+
+\begin_layout Enumerate
+La detección de contexto no se hace cuando el texto tiene una longitud muy
+ pequeña.
+\end_layout
+
+\begin_layout Enumerate
+La detección no se hace si, luego de eliminar espacios vacíos y URLs, la
+ longitud no alcanza el umbral (en la implementación actual, dos palabras).
+\end_layout
+
+\begin_layout Enumerate
+Probar que palabras que en conjunto tienen más caracteres que el umbral
+ hacen que se trate de detectar contexto (partiendo de la premisa que palabras
+ con longitud mayor al promedio tienen mayor probabilidad de ser términos
+ clave).
+\end_layout
+
+\begin_layout Enumerate
+Probar que si el contexto cambia, mas está vacío, no se harán nuevas recomendaci
+ones.
+\end_layout
+
+\begin_layout Enumerate
+Probar que contenidos distintos con la misma cantidad de palabras se consideran
+ contextos nuevos.
+\end_layout
+
+\begin_layout Enumerate
+Probar que agregar/eliminar contenido con longitud justo en el umbral se
+ identifica como cambio de contexto.
+\end_layout
+
+\begin_layout Enumerate
+Probar que agregar/eliminar párrafos al principio, en medio y al final se
+ considera cambio de contexto.
+\end_layout
+
+\begin_layout Enumerate
+Probar que cambiar menos de un tercio de las palabras en lugares al azar
+ no se considera un cambio de contexto (partiendo de la premisa que el tema
+ principal no cambiaría con pocos cambios en palabras)
+\end_layout
+
+\begin_layout Enumerate
+Probar que cambiar más de un tercio de las palabras se considera un cambio
+ de contexto.
+\end_layout
+
+\begin_layout Subsection
+Resultados de las pruebas y observaciones
+\end_layout
+
+\begin_layout Standard
+El componente de detección de cambios de contexto implementa técnicas heurística
+s: los cambios en el texto se analizan sólo si se han agregado -o eliminado-
+ una cantidad fija de palabras (en la implementación actual, dos) y las
+ palabras no se identifican mediante espacios en el texto, si no más bien
+ por la cantidad de caracteres introducidos en relación a la longitud promedio
+ de palabras en los idiomas soportados (5.16 caracteres
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Éste es el promedio de las medias de longitud del inglés y español, según
+ los datos encontrados en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.puchu.net/doc/Average_Word_Length
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+), de modo que palabras vacías tengan menos probabilidades de poner en marcha
+ los algoritmos de detección de cambios.
+ Cuando se determina que los cambios son suficientes para una inspección
+ más detallada, se comparan los contenidos mediante los algoritmos de diferencia
+s textuales previamente mencionados (el de Myers y la distancia de Levenshtein)
+ y, si los cambios introducidos exceden cierto límite (en un principio,
+ 60%), se identifica un cambio de contexto y se procede a realizar nuevas
+ recomendaciones.
+\end_layout
+
+\begin_layout Standard
+Durante la ejecución de las pruebas con texto aleatorio en latín (una vez
+ más, el texto de relleno por antonomasia, 
+\emph on
+lorem ipsum
+\emph default
+, elegido por tener una longitud de palabra promedio similar a la de los
+ idiomas soportados), se descubrió que el uso de un estimado del número
+ de palabras mediante la cantidad de caracteres y la confirmación de cambios
+ mediante un método que también se basa en cambios a nivel de caracteres
+ (la distancia de Levenshtein) vuelve el algoritmo casi impredecible: algunas
+ pruebas, al introducir varias palabras con longitudes menores al promedio
+ pero en cantidades suficientes como para representar, para un observador
+ humano, un cambio notable, fallaban.
+ El autor no puede considerar esto un problema en sí, pues el algoritmo
+ hace lo que debería hacer: filtrar heurísticamente palabras probablemente
+ vacías, mas quizá se debería estudiar con mayor cuidado 
+\emph on
+qué
+\emph default
+ constituye realmente un cambio textual desde el punto de vista del procesamient
+o del lenguaje natural, en lugar de valerse de aproximaciones meramente
+ probabilísticas.
+ Sobra decir que esto último trasciende los límites del proyecto y se relega
+ a trabajo futuro.
 \end_layout
 
 \begin_layout Section
@@ -17341,13 +17626,278 @@ Se comenzó con una revisión del contenido y la navegación, asegurando que
 Luego, se probaron funcionalmente los distintos formularios, utilizando
  técnicas de caja negra; además de pruebas de validación para asegurar que
  los casos de uso se pudiesen llevar a cabo satisfactoriamente.
+ Estas pruebas se automatizaron mediante pruebas escritas con la API para
+ python del sistema de pruebas de aplicaciones web 
+\emph on
+selenium
+\emph default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://seleniumhq.org/projects/remote-control/
 \end_layout
 
-\begin_layout Standard
-Se realizaron pruebas de seguridad y desempeño para encontrar vulnerabilidades
- y deficiencias.
+\end_inset
+
+
 \end_layout
 
+\end_inset
+
+.
+ Para mantener la consistencia con el mecanismo de pruebas de unidad de
+ 
+\emph on
+django
+\emph default
+, se utilizó una aplicación de código abierto
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+En concreto, el siguiente módulo de python: http://pypi.python.org/pypi/django-sel
+enium-test-runner/0.1.0
+\end_layout
+
+\end_inset
+
+ que une éste con la API de selenium, sin embargo, el autor tuvo que modificar
+ el código para hacerlo verdaderamente funcional, ya que la aplicación -en
+ su versión actual- no cumple del todo con el estándar de pruebas de unidad
+ del 
+\emph on
+framework 
+\emph default
+y presenta
+\emph on
+ 
+\emph default
+serios defectos de eficiencia y compatibilidad.
+ Aunque otros sistemas son basados en python, como windmill
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.getwindmill.com/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ o twill
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://twill.idyll.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, se eligió selenium por ser verdaderamente orientado a pruebas de unidad
+ según las convenciones de xUnit.
+ Los casos de prueba se presentan a continuación.
+\end_layout
+
+\begin_layout Description
+Registro: se garantiza que la interfaz de suscripción al servicio respete
+ los requerimientos.
+ Cabe notar que el formulario de registro incluye un campo reCaptcha, por
+ lo que este campo es ignorado en las pruebas automatizadas y las pruebas
+ del mismo se hicieron manualmente.
+ Las pruebas se hicieron en los idiomas soportados (inglés y español).
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+suscripción: una aplicación que llene el formulario exitosamente debería
+ ser redirigida a la página de instrucciones de uso y recibir un correo
+ con su clave única de aplicación.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+nombre
+\begin_inset space ~
+\end_inset
+
+ausente: si no se llena el campo de nombre de aplicación, se debería hacer
+ notar el error.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+correo
+\begin_inset space ~
+\end_inset
+
+ausente: si no se llena el campo de correo electrónico de contacto, se debería
+ hacer notar el error.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+correo
+\begin_inset space ~
+\end_inset
+
+inválido: un error se debe mostrar si el correo provisto no es válido (según
+ el estándar establecido en 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://tools.ietf.org/html/rfc5322
+\backslash
+#section-3.4.1
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+nombre
+\begin_inset space ~
+\end_inset
+
+duplicado: el usuario debe ser advertido si intenta registrarse con un nombre
+ que ya está suscrito al servicio
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Panel
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+control: el panel de control ofrece una alternativa a la gestión de usuarios
+ (agregación, listado y eliminación) mediante la API, y está pensado para
+ implementadores de aplicaciones con pocos usuarios o con inconvenientes
+ de implementación de las llamadas al servicio.
+ Este componente requiere autenticación, y esto introduce interfaces de
+ inicio de sesión y restablecimiento de contraseñas.
+ Para éstos no se desarrollaron pruebas, puesto que se utilizaron los métodos
+ genéricos provistos por 
+\emph on
+django, 
+\emph default
+y éstos 
+\emph on
+ya
+\emph default
+ cuentan con sus propias pruebas de unidad.
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+agregación
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuarios: la adición de un par de usuarios en la interfaz debería resultar
+ en que, al inspeccionar la página donde se listan los usuarios, estos nuevos
+ usuarios aparezcan.
+ Aquí también se prueba la interfaz de javascript dinámica de agregación.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+listado
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+usuarios: luego de agregar programáticamente usuarios, éstos deberían aparecer
+ en la página que los lista con los identificadores y fechas de adición
+ correctos.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+límite: sólo deberían poder agregarse usuarios hasta el límite.
+ Luego de esto debería aparecer un mensaje de límite excedido en futuros
+ intentos de agregación.
+\end_layout
+
+\begin_layout Description
+Probar
+\begin_inset space ~
+\end_inset
+
+eliminación: en la página de listado de usuarios, el botón de eliminar debería
+ resultar en la aparición de un diálogo de confirmación: la cancelación
+ en éste no debería tener consecuencias en la lista y la confirmación debería
+ reflejar el borrado del usuario al eliminarlo de la tabla.
+\end_layout
+
+\end_deeper
 \begin_layout Chapter
 Conclusión
 \end_layout
@@ -18249,9 +18799,12 @@ Respuesta de la facultad
 
 \begin_layout Standard
 En respuesta a la solicitud, se procedió a asignar una dirección IP pública
- al servidor de virtualización del laboratorio de sistemas computacionales,
- acto seguido, se configuró un enrutador para hacer redirección de puertos
- hacia la dirección IP asignada al servidor virtual.
+ al servidor de virtualización del laboratorio de sistemas computacionales.
+ Sin embargo, no se logró el acceso a la máquina virtual desde donde se
+ sirve el sistema.
+ Por ello, la facultad ofreció como alternativa que la presentación para
+ la terna de graduación se llevase a cabo en el laboratorio de sistemas
+ computacionales.
 \end_layout
 
 \begin_layout Chapter
@@ -18287,17 +18840,6 @@ Manual del implementador
 	filename DeveloperManual.pdf
 	display false
 	extra LaTeX "pages={1-28}"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Chapter
-Casos de prueba principales
-\begin_inset CommandInset label
-LatexCommand label
-name "cha:test-cases"
 
 \end_inset
 
