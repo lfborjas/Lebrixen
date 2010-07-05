@@ -11008,13 +11008,14 @@ Análisis y Diseño.
 
 \begin_layout Standard
 En este capítulo se documentan los distintos artefactos producidos a la
- hora de analizar y diseñar el sistema propuesto en este proyecto.
- Por cuestiones cronológicas, ambas etapas se han agrupado aquí, mereciendo
- la etapa de implementación y evaluación un capítulo aparte.
- Como se imaginará, el sistema no consiste en un sistema de información
- a gran escala, con una larga lista de requerimientos, casos de uso y escenarios
- de interacción; sin embargo, ninguna empresa de ingeniería debe hacerse
- sin ningún tipo de definición previa del derrotero a seguir.
+ hora de analizar y diseñar el servicio aquí descrito.
+ Se han agrupado aquí las etapas de análisis y diseño, mereciendo la etapa
+ de implementación un capítulo aparte.
+ Como se podrá inferir en base a los capítulos anteriores, el servicio no
+ consiste en un sistema de información a gran escala, con una larga lista
+ de requerimientos, casos de uso y escenarios de interacción; sin embargo,
+ ninguna empresa de ingeniería debe hacerse sin ningún tipo de definición
+ previa del derrotero a seguir.
 \end_layout
 
 \begin_layout Standard
@@ -11041,8 +11042,8 @@ key "Schach2004"
  Este enfoque iterativo es mucho más realista y efectivo que el enfoque
  tradicional, pero requiere de una gran cantidad de tiempo y una organización
  tales que se puede probar demasiado costoso para proyectos pequeños o de
- corta duración, características típicas del desarrollo web, que es la clase
- de desarrollo a llevar a cabo en este proyecto.
+ corta duración, características típicas del desarrollo web el cual es precisame
+nte la clase de desarrollo a llevar a cabo en este proyecto.
  Por ello, una metodología adaptada al desarrollo de aplicaciones web de
  este modelo iterativo, como la propuesta en 
 \begin_inset CommandInset citation
@@ -11063,9 +11064,10 @@ Análisis
 En esta etapa se definirán la motivación, alcance, audiencia y contribución
  del sistema desarrollado.
  El producto final de esta fase será un resumen de los requisitos funcionales
- y no funcionales, en la metodología elegida, la identificación de estos
- se hace en cuatro etapas: los análisis de contenido, de interacción, de
- función y de configuración.
+ y no funcionales.
+ En la metodología elegida, la identificación de estos se hace en cuatro
+ etapas: los análisis de contenido, de interacción, de función y de configuració
+n.
  Por mor del orden, y para fundamentar sólidamente las etapas subsiguientes,
  cada análisis se discutirá brevemente en los apartados siguientes, finalizando
  con el listado de requerimientos.
@@ -11074,27 +11076,36 @@ En esta etapa se definirán la motivación, alcance, audiencia y contribución
 \end_layout
 
 \begin_layout Enumerate
-¿Cuál es la principal motivación para la aplicación? Siendo la aplicación
- la implementación de un proyecto de apoyo a la producción de información,
- la principal fuerza tras el desarrollo de la misma es determinar si un
- sistema que pueda recomendar recursos útiles a un usuario que lleva a cabo
- una tarea de documentación es verdaderamente una ganancia para los usuarios,
- tanto los autores de la información, que lo utilizarán directamente, como
- los consumidores que se beneficiarán de la calidad de la misma.
+¿Cuál es la principal motivación para la aplicación?
+\begin_inset Newline newline
+\end_inset
+
+Se desea proveer un recurso fundamental para los desarrolladores de aplicaciones
+ para producción de información que deseen ofrecer asistencia a sus usuarios
+ mediante recomendaciones oportunas de referencias.
 \end_layout
 
 \begin_layout Enumerate
-¿Cuáles son los objetivos que debe satisfacer la aplicación? En suma, la
- aplicación debe trascender los sistemas de recuperación oportuna de la
- información equivalentes al basarse en una representación más fidedigna
- del contexto local del usuario, así como en la construcción y evolución
- de perfiles para evitar la ambigüedad en las recomendaciones.
+¿Cuáles son los objetivos que debe satisfacer la aplicación? 
+\begin_inset Newline newline
+\end_inset
+
+La interfaz de programación de aplicaciones (API), mediante la cual se comunicar
+án los implementadores con el servicio, debe ser fácil de usar y ser fiel
+ a la arquitectura REST, de modo que pueda ser utilizada donde sea que solicitud
+es y respuestas HTTP puedan ser construidas e interpretadas.
+ Asimismo, el servicio debe ser tan simple como para que desarrolladores
+ con poca experiencia lo puedan utilizar y a la vez tan flexible como para
+ satisfacer las necesidades de otros más avezados.
 \end_layout
 
 \begin_layout Enumerate
-¿Quién utilizará la aplicación? Cualquier usuario del sistema anfitrión
- que emprenda una actividad de producción de información.
- 
+¿Quién utilizará la aplicación?
+\begin_inset Newline newline
+\end_inset
+
+Desarolladores de software, directamente; Y personas que produzcan información
+ en la forma de textos, indirectamente.
 \end_layout
 
 \begin_layout Subsection
@@ -11120,8 +11131,8 @@ Requisitos funcionales
 
 \begin_layout Enumerate
 El sistema deberá tratar lo que el usuario escriba en la interfaz de documentaci
-ón como el contexto local, representándolo como los demás documentos de
- la colección, con el fin de realizar una búsqueda.
+ón como el contexto local, extrayendo términos que le permitan realizar
+ una búsqueda en la colección documental, para formar las recomendaciones.
 \end_layout
 
 \begin_layout Enumerate
@@ -11131,10 +11142,10 @@ El sistema deberá mantener un perfil del usuario con el fin de tener éste
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá determinar cuándo es el momento idóneo de iniciar la recomenda
-ción o hacer una nueva, ya sea en base al tiempo pasado desde el inicio
- de la sesión, la cantidad de información aportada por el usuario o la diferenci
-a entre el último contexto inmediato que creó una búsqueda y el actual.
+El sistema deberá determinar cuándo es el momento idóneo de iniciar el proceso
+ de recomendación, ya sea en base al tiempo pasado desde el inicio de la
+ sesión, la cantidad de información aportada por el usuario o la diferencia
+ entre el último contexto inmediato que creó una búsqueda y el actual.
 \end_layout
 
 \begin_layout Enumerate
@@ -11168,13 +11179,10 @@ name "sub:nf-requirements"
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá permitir reflejar la separación entre el sistema anfitrión,
- el que extrae los datos de entrada y presenta los de salida y el componente
- principal, el que realiza las búsquedas y filtrado e indexa y mantiene
- la colección documental.
- Tal separación se logrará mediante una interfaz de programación de aplicaciones
+El sistema se habrá de basar en una interfaz de programación de aplicaciones
  que reciba y devuelva los datos en un formato serializado (json, de preferencia
-, o xml).
+, o xml), de modo que la parte implementadora no deba hacer nada más que
+ construir solicitudes e interpretar respuestas HTTP.
 \end_layout
 
 \begin_layout Enumerate
@@ -11209,8 +11217,8 @@ www.djangoproject.com
 \end_layout
 
 \begin_layout Enumerate
-El sistema, en el lado del cliente, estará escrito en el lenguaje de programació
-n javascript, con la librería jquery
+El widget opcional, en el lado del cliente, estará escrito en el lenguaje
+ de programación javascript, con la librería jquery
 \begin_inset Foot
 status collapsed
 
@@ -11234,7 +11242,7 @@ http://jquery.com/
 \end_layout
 
 \begin_layout Enumerate
-El sistema deberá apegarse a los estándares de diseño de w3
+La interfaz opcional deberá apegarse a los estándares de diseño de w3
 \begin_inset Foot
 status collapsed
 
@@ -11288,8 +11296,9 @@ El sistema funcionará en un servidor Linux.
 
 \begin_layout Enumerate
 El sistema deberá devolver los primeros resultados de las recomendaciones
- en menos de diez segundos, tal cantidad de tiempo es aceptable, dada la
- naturaleza secundaria y no intrusiva del sistema 
+ en menos de diez segundos, partiendo de la premisa de que tal cantidad
+ de tiempo es aceptable dada la naturaleza secundaria y no intrusiva del
+ sistema 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Nielsen1994"
@@ -11300,7 +11309,8 @@ key "Nielsen1994"
 \end_layout
 
 \begin_layout Enumerate
-El uso del sistema deberá estar libre de estado: toda la información necesaria
+El servicio deberá fundamentarse en los principios de arquitectura REST,
+ sobre todo, deberá estar libre de estado: toda la información necesaria
  para el uso del servicio deberá estar contenida en la solicitud, permitiendo
  así la escalabilidad mediante sistemas distribuidos.
 \end_layout
@@ -11317,10 +11327,10 @@ name "sub:use_cases"
 \end_layout
 
 \begin_layout Standard
-Se resumen a continuación los distintos casos de uso del sistema.
- Nótese que la escasez de éstos se debe a que la mayor funcionalidad del
- sistema radica en el trasfondo algorítmico de la indización, búsqueda y
- filtrado.
+Se resumen a continuación los distintos casos de uso del servicio.
+ Nótese que la escasez y simplicidad de éstos se debe a que la mayor funcionalid
+ad del sistema radica en el trasfondo algorítmico de la indización, búsqueda
+ y filtrado y a los requerimientos de simplicidad.
  Un diagrama UML que los ilustra se presenta en la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11342,7 +11352,8 @@ Registro: el implementador llena un formulario de registro para el uso del
  de contacto válido, a la vez se valida que la solicitud sea hecha por un
  ser humano.
  El sistema responderá con un correo electrónico conteniendo la llave única
- correspondiente a la aplicación solicitante.
+ correspondiente a la aplicación solicitante y las credenciales de autenticación
+ para las llamadas de gestión de usuarios provistas por la API.
 \end_layout
 
 \begin_layout Description
@@ -11354,8 +11365,8 @@ interfaz: si el implementador opta por utilizar la interfaz provista por
  el servicio, se devuelve ésta serializada y configurada con los parámetros
  adecuados.
  El solicitante debe ser estar debidamente registrado como usuario del servicio.
- La interfaz, dado que es un agregado a la interfaz propia del sistema implement
-ador, será conocida indistintamente como 
+ La interfaz, dado que es un agregado funcional a la interfaz propia del
+ sistema implementador, será conocida también como 
 \emph on
 widget
 \emph default
@@ -11371,8 +11382,8 @@ Recomendaciones: El sistema implementador provee el usuario y el contexto
  inmediato, el cual se analiza y se sintetiza en una consulta al componente
  de búsqueda, luego, el componente de filtrado analiza y pondera las recomendaci
 ones en base al perfil del usuario y éstas son devueltas en un formato serializa
-do de hipermedia.
- Nótese que, si el usuario es nuevo, se habrá de crear su perfil.
+do de hipermedia (JSON).
+ 
 \end_layout
 
 \begin_layout Description
@@ -11405,8 +11416,8 @@ Registra/Elimina
 
 Usuarios: el implementador opta por agregar uno o varios usuarios al servicio
  (o eliminarlos).
- En cualquier caso, debe proveer el identificador único del usuario y sus
- credenciales de autenticación.
+ En cualquier caso, debe proveer sus credenciales de autenticación y el
+ identificador único del usuario en cuestión.
  El servicio responderá con un mensaje adecuado de fallo o éxito.
 \end_layout
 
@@ -11451,21 +11462,26 @@ Diagrama de casos de uso
 Análisis de contenido
 \end_layout
 
+\begin_layout Standard
+Se presenta aquí una visión general de los elementos estructurales que habrán
+ de formar el producto de software final, desde la información presentada
+ al usuario en las interfaces hasta los componentes sobre los cuales se
+ fundamentará la funcionalidad del servicio.
+\end_layout
+
 \begin_layout Subsubsection
 Objetos del contenido
 \end_layout
 
 \begin_layout Standard
 Como se puede deducir, el único contenido que el sistema mostrará al usuario
- son las representaciones de los documentos (en inglés, 
-\emph on
-code snippets
-\emph default
-).
- Éstas consistirán en el título del documento, un sumario -de ser posible-
- y un enlace para visitar la localización original del documento (o descargarlo).
+ son las representaciones de los documentos recomendados.
+ Éstas consistirán en el título del documento, un sumario y un enlace para
+ visitar la fuente original del documento (o descargarlo).
  Nótese que este contenido sólo se mostraría si el implementador decide
- utilizar la interfaz provista por el sistema.
+ utilizar el widget, en otro caso, será devuelto por la llamada de obtención
+ de recomendaciones de la API y los campos presentados -y la manera de hacerlo-
+ quedarán a discreción del desarrollador.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11546,7 +11562,7 @@ name "fig:analysis_class_diagram"
 
 \end_inset
 
-Diagrama de clases UML para las clases del análisis
+Diagrama UML para las clases del análisis
 \end_layout
 
 \end_inset
@@ -11574,8 +11590,8 @@ reference "sub:use_cases"
 \end_inset
 
 .
- Aquí se presentan diagramas de interacción profundizando en los casos de
- uso (figuras 
+ Aquí se presentan diagramas de interacción representando los casos de uso
+ (figuras 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:interaction_diagrams-1-3"
@@ -11589,7 +11605,11 @@ reference "fig:interaction_diagrams-4-6"
 
 \end_inset
 
- ), diagramas de estado (figura 
+ ), diagramas de estado para la interacción 
+\emph on
+a nivel macro
+\emph default
+ con el servicio (figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:state-diagrams"
@@ -11603,7 +11623,7 @@ status collapsed
 \begin_layout Plain Layout
 Creado con 
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -11629,9 +11649,8 @@ reference "fig:interface_prototype"
 \end_layout
 
 \begin_layout Standard
-Se consideran aquí dos enfoques posibles para la implementación del sistema
- -asumiendo el uso de la interfaz provista por el servicio: el primero (figura
- 
+Se consideran aquí dos enfoques posibles para la implementación del servicio:
+ el primero (figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:pre-filtering-approach"
@@ -11693,10 +11712,6 @@ Caso de uso 1: Solicitar Registro
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -12113,11 +12128,11 @@ reference "sub:nf-requirements"
 \end_layout
 
 \begin_layout Standard
-Puesto que se ofrece la funcionalidad del sistema como un servicio solicitado
- por un implementador, la comunicación entre ambos debería ser tan independiente
- de las implementaciones como sea posible, para ello, se proponen dos notaciones
- de intercambio de datos ampliamente utilizadas en las aplicaciones web:
- 
+Puesto que se ofrece la funcionalidad del sistema como un servicio web mediante
+ una API, la comunicación entre ambas partes debería ser tan independiente
+ de las implementaciones como sea posible, para ello, se tienen como alternativa
+s dos notaciones de intercambio de datos ampliamente utilizadas en las aplicacio
+nes web: 
 \emph on
 json
 \emph default
@@ -12126,7 +12141,9 @@ json
 xml
 \emph default
 .
- Se ha favorecido el primero por la facilidad de generación y análisis.
+ Se ha favorecido el primero por la sencillez de la información a transmitir,
+ y cómo el uso de XML incurriría en una carga adicional de producción e
+ interpretación innecesaria.
 \end_layout
 
 \begin_layout Standard
@@ -12135,16 +12152,18 @@ El lenguaje de programación python se ha elegido por su fácil sintaxis,
  El marco de desarrollo django se ha favorecido por la experiencia previa
  del autor con el mismo, su adhesión a filosofías de desarrollo efectivas,
  como el uso del modelo de arquitectura MVC, la orientación al desarrollo
- modular y la posibilidad de escalabilidad.
+ modular y la posibilidad de escalabilidad al fundamentarse en la separación
+ entre capas estructurales.
 \end_layout
 
 \begin_layout Standard
-Puesto que se desea una interfaz de usuario dinámica e intuitiva, se hizo
- evidente que se necesitaría agregar funcionalidad al lado del cliente con
- javascript.
- Puesto que se desea que el sistema funcione en todos los navegadores web
- populares, se ha optado por la librería jquery, que se encarga de la compatibil
-idad y permite al desarrollador preocuparse por escribir código funcional.
+Puesto que se desea para el widget una interfaz de usuario dinámica e intuitiva,
+ se hizo evidente que se necesitaría agregar funcionalidad al lado del cliente
+ con javascript.
+ Y como se espera que el sistema funcione en la mayor parte de los navegadores
+ web populares, se ha optado por la librería jquery, que se encarga de la
+ compatibilidad y permite al desarrollador preocuparse por escribir código
+ funcional.
  A pesar de la existencia de diversas librerías javascript que comparten
  el mismo propósito (como prototype
 \begin_inset Foot
@@ -12220,13 +12239,13 @@ PostgreSQL es un motor de bases de datos eficiente en la manipulación de
 
 \begin_layout Standard
 Siguiendo la tradición del uso de servidores Linux para aplicaciones que
- pretendan escalar y ofrecer el mayor rendimiento y la compatibilidad óptima
- del 
+ pretendan escalar y ofrecer el mayor rendimiento; y la compatibilidad óptima
+ con esta plataforma del 
 \emph on
 framework 
 \emph default
-de desarrollo con esta plataforma se ha optado un sistema operativo ubuntu
- linux para el almacenamiento y servicio.
+de desarrollo elegido se ha optado un sistema operativo ubuntu linux para
+ el almacenamiento y servicio.
 \end_layout
 
 \begin_layout Section
@@ -12242,12 +12261,7 @@ key "Pressman2006"
 
 \end_inset
 
-, téngase en cuenta que la tercera etapa de ese flujo de diseño, el 
-\emph on
-diseño de navegación
-\emph default
-, se obvia aquí porque el sistema carece de distintas interfaces a las cuales
- el usuario pudiese navegar; el usuario sólo verá la interfaz de recomendaciones.
+.
 \end_layout
 
 \begin_layout Subsection
@@ -12273,15 +12287,16 @@ widget
 \begin_layout Standard
 Para no causar una división de atención contraproducente, se habrán de elegir
  colores neutros para el diseño de la interfaz.
- Y, tomando la idea de interfaz incremental propuesta por 
+ Tomando, además, la idea de interfaz incremental propuesta por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Rhodes2000"
 
 \end_inset
 
- que presenta seis etapas del uso de una interfaz a la cual dirige paulatinament
-e su atención, se adaptaron éstas al presente proyecto de la siguiente manera:
+ que presenta seis etapas del uso de una interfaz a la cual el usuario final
+ dirige paulatinamente su atención, se adaptaron éstas al presente proyecto
+ de la siguiente manera:
 \end_layout
 
 \begin_layout Enumerate
@@ -12338,9 +12353,9 @@ status collapsed
 Existen recomendaciones
 \emph default
 .
- Cuando ya existan recomendaciones, se lo hará saber al usuario mediante
+ Cuando ya existan recomendaciones, se le hará saber al usuario mediante
  una discreta pestaña a la derecha de la pantalla, de manera que sea notable
- en la visión periférica del usuario.
+ en su visión periférica.
  Véase la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -12350,8 +12365,8 @@ reference "fig:stage2_hint"
 
  para un prototipo de cómo se vería la interfaz en este estado.
  Siguiendo los lineamientos de la ley de Fitt, se ha decidido ubicar esta
- pestaña en el borde de la pantalla, haciendo así la navegación a esta más
- rápida.
+ pestaña en el borde derecho de la pantalla, haciendo así más rápida la
+ navegación a ésta .
 \end_layout
 
 \begin_layout Enumerate
@@ -12362,11 +12377,12 @@ Gráfico de relevancia
 .
  Una vez que el usuario decida que es hora de evaluar las recomendaciones,
  dará clic en la pestaña de la interfaz.
- Esto dará paso a la ventana de recomendaciones, con un gráfico mostrando
- qué tan relacionadas están éstas, en promedio, al contexto inmediato actual.
+ Esto hará que se muestre la ventana de recomendaciones, con un gráfico
+ en la parte superior mostrando qué tan relacionadas están éstas, en promedio,
+ al contexto inmediato actual.
  Así el usuario puede decidir regresar a su tarea sin continuar viendo el
  resto de la interfaz de recomendaciones.
- En todo momento el usuario debe poder esconder las recomendaciones.
+ 
 \end_layout
 
 \begin_layout Enumerate
@@ -12375,8 +12391,9 @@ Gráfico de relevancia
 Palabras clave.
 
 \emph default
- El usuario debe ser capaz de ver qué términos se extrajeron de su contexto
- local, y así juzgar si vale la pena seguir examinando los resultados.
+ Inmediatamente debajo del gráfico de relevancia, se mostrará un cuadro
+ de texto con los términos clave encontrados permitiendo así al usuario
+ juzgar si vale la pena seguir examinando los resultados.
 \end_layout
 
 \begin_layout Enumerate
@@ -12387,7 +12404,7 @@ Muestras documentales ordenadas por relevancia
 .
  Bajo el gráfico de relevancia se encontrarán las representaciones de los
  documentos encontrados, éstas estarán ordenadas por relevancia con el título
- resaltado y un corto sumario.
+ presentado como hipervínculo a la fuente original y un corto sumario.
  Así el usuario puede juzgarlas someramente.
 \end_layout
 
@@ -12399,16 +12416,16 @@ Visualizar el recurso
 .
  Una vez que el usuario ha decidido que un recurso puede serle útil, puede
  agregarlo inmediatamente a sus documentos de la sesión actual o visualizarlo
- en una ventana aparte.
+ en una ventana aparte siguiendo el vínculo correspondiente.
  Nótese que en esta etapa el usuario ha pasado completamente de su tarea
  principal a la secundaria.
 \end_layout
 
 \begin_layout Standard
-Además de las etapas de interfaz incremental de las recomendaciones en relación
- a la tarea principal antes discutidas, la interfaz de recomendación en
- sí debe obedecer lineamientos de diseño que aseguren una alta eficiencia
- cuando el usuario se decida a dividir su atención hacia ella.
+Además de las etapas de interfaz incremental antes discutidas, la interfaz
+ de recomendación en sí debe obedecer lineamientos de diseño que aseguren
+ una alta eficiencia cuando el usuario se decida a dividir su atención hacia
+ ella.
  Los siguientes han sido tenidos en cuenta:
 \end_layout
 
@@ -12419,9 +12436,7 @@ Reducir el esfuerzo
 \emph default
 .
  La interfaz de recomendación permitirá seleccionar fácilmente las recomendacion
-es y agregarlas con un botón que se encuentre en la muestra documental -o
- quizá agregar varias con un botón cercano a la lista de sugerencias.
- 
+es y agregarlas con un botón que se encuentre en la muestra documental.
 \end_layout
 
 \begin_layout Enumerate
@@ -12431,11 +12446,8 @@ Facilidad de aprendizaje
 \emph default
 .
  La interfaz de recomendaciones debe ser similar a lo que usuarios hayan
- usado antes, por ello, las muestras documentales se parecen a resultados
- de un motor de búsqueda .
- Además, claro, de lo discutido en el primer punto: las alternativas de
- uso permiten que tanto usuarios acostumbrados a interfaces dinámicas como
- neófitos puedan intuir sin mayor esfuerzo cómo usar las recomendaciones.
+ usado antes, por ello, las muestras documentales se parecerán a los resultados
+ de un motor de búsqueda.
 \end_layout
 
 \begin_layout Enumerate
@@ -12444,8 +12456,8 @@ Facilidad de aprendizaje
 Reducción de latencia
 \emph default
 .
- Mediante el uso de solicitudes asíncronas al servidor (gracias a la técnica
- 
+ Mediante el uso de solicitudes asíncronas al servidor de hipermedia en
+ formato JSON (gracias a la técnica 
 \emph on
 ajax
 \emph default
@@ -12465,7 +12477,9 @@ asynchronous javascript and xml
 
 \end_inset
 
-) a la hora de hacer las búsquedas de recursos a recomendar.
+) a la hora de hacer las búsquedas de recursos a recomendar, de modo que
+ interpretar y mostrar los resultados se haga sin demasiado costo de procesamien
+to.
 \end_layout
 
 \begin_layout Enumerate
@@ -12481,21 +12495,8 @@ minimalismo
 \emph default
  a la hora de mostrar los resultados: sólo lo necesario, sin elementos de
  distracción, con fuentes de tamaño y color legibles, y sumarios lo suficienteme
-nte cortos como para ser comprendidos pero no incurrir en una sobrecarga
+nte cortos como para ser comprendidos pero sin incurrir en una sobrecarga
  de información.
- Otra motivación para un diseño minimalista es lo poco deseable que, dada
- alguna configuración de pantalla relativamente estándar, el contenido tenga
- tan poco espacio que una barra de desplazamiento deba ser agregada por
- el navegador.
- Esto porque los usuarios encuentran indeseable este tipo de comportamiento
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Pressman2006"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Enumerate
@@ -12634,7 +12635,8 @@ arquitectura de aplicación
 \emph default
  que se refiere al sistema en su totalidad.
  Dada la inexistencia de la primera arquitectura en el sistema propuesto,
- se hablará aquí solamente de la postrera.
+ se hablará aquí solamente de la postrera, tanto desde el punto de vista
+ arquitectural abstracto como el de despliegue físico.
 \end_layout
 
 \begin_layout Subsubsection
@@ -12697,17 +12699,16 @@ Los componentes de esta arquitectura se describen someramente a continuación:
 \end_layout
 
 \begin_layout Description
-Modelo: un modelo en la arquitectura MTV es una clase que extiende a una
- súper-clase definida en el 
-\emph on
-framework 
-\emph default
-que abstrae tanto los atributos como la funcionalidad relacionadas a un
- objeto.
+Modelo: un modelo en la arquitectura MTV es una clase que abstrae tanto
+ los atributos como la funcionalidad relacionadas a un objeto.
  Esta clase es independiente del sistema administrador de bases de datos
  que se utilice.
  Toda operación que se realice con el almacenamiento se hará a través de
- métodos implementados en la súper-clase.
+ éste 
+\emph on
+mapeo objeto-relacional
+\emph default
+.
 \end_layout
 
 \begin_layout Description
@@ -12720,7 +12721,7 @@ template
 \emph on
 framework
 \emph default
- permite que desarrolladores y diseñadores puedan trabajar en la presentación
+ que permite que programadores y diseñadores puedan trabajar en la presentación
  y el comportamiento de la aplicación de manera separada y ordenada.
  Corresponde en parte a la 
 \emph on
@@ -12805,9 +12806,8 @@ vista
 \emph on
 modelos
 \emph default
- -creándolos, modificándolos o sencillamente obteniendo un conjunto de diversas
- instancias de éstos- y devuelve una respuesta que es mostrada en alguna
- 
+ -creando, modificando o sencillamente consultando un conjunto de instancias
+ de éstos- y devuelve una respuesta que es mostrada en alguna 
 \emph on
 plantilla
 \emph default
@@ -12904,7 +12904,7 @@ xapian
  el servicio web para clasificar documentos y consultas.
  Fuera del nodo del servidor web, se encuentran los servicios web externos
  utilizados para la extracción de términos clave.
- Por último, se puede apreciar que no se supone nada del implementador,
+ Por último, se puede apreciar que no se supone nada del nodo implementador,
  más que la comunicación con el servicio web mediante el protocolo http.
 \end_layout
 
@@ -12942,10 +12942,6 @@ Diagrama de despliegue del servicio
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -12968,17 +12964,17 @@ Para el desarrollo de este proyecto, dada su naturaleza académica y el poco
  a partir de la mayor cantidad de librerías re-utilizables ya existentes
  posible, de manera que tareas de considerable dificultad mas lo suficientemente
  comunes -como la indexación, búsqueda y clasificación- fueran realizadas
- mediante código ya probado e implementado, de manera que el implementador
- se pudiera dedicar a llevar a cabo los objetivos principales con éxito.
+ mediante código ya probado e implementado, de manera que el autor se pudiera
+ dedicar a llevar a cabo los objetivos principales con éxito.
 \end_layout
 
 \begin_layout Standard
-Como lo dice el título, el conocimiento sobre las preferencias de los usuarios
- se modelará mediante una ontología: una representación de conceptos relacionado
-s mediante un grafo, donde los nodos son conceptos y las aristas las diversas
- relaciones entre ellos.
- En este proyecto, como se discutirá más adelante, se utiliza una ontología
- jerárquica, de modo que las relaciones entre conceptos son de 
+El conocimiento sobre las preferencias de los usuarios se modelará mediante
+ una ontología: una representación de conceptos relacionados mediante un
+ grafo, donde los nodos son conceptos y las aristas, las diversas relaciones
+ entre ellos.
+ En este proyecto se utiliza una ontología jerárquica, de modo que las relacione
+s entre conceptos son de 
 \emph on
 herencia
 \emph default
@@ -12998,10 +12994,11 @@ Obtención de la colección documental y creación de la base de conocimiento
 \begin_layout Standard
 Una colección documental suficientemente grande y bien organizada es fundamental
  para un sistema de recuperación de información, pues tendrá una mayor probabili
-dad de satisfacer cualquier consulta, no importa qué tan poco frecuente.
- Asimismo, un repositorio de conocimiento sobre el dominio elegido es crucial
- para un sistema de recomendación, ya que es mediante éste que se pueden
- hacer suposiciones acertadas sobre las preferencias del usuario.
+dad de satisfacer cualquier consulta.
+ Asimismo, un repositorio de conocimiento suficientemente variado del dominio
+ elegido es crucial para un sistema de recomendación, ya que es mediante
+ éste que se pueden hacer suposiciones acertadas sobre las preferencias
+ del usuario.
 \end_layout
 
 \begin_layout Standard
@@ -13009,15 +13006,14 @@ Dado el carácter de este proyecto, ambas características son igualmente
  necesarias, y encuentran su síntesis en la siguiente necesidad concreta:
  poder, partiendo de suficiente evidencia documental, relacionar conceptos
  de una ontología (en este caso concreto) a un contexto de usuario, para
- poder, en última instancia, construir un perfil conceptual de los cursos
+ poder, en última instancia, construir un perfil conceptual de los usuarios
  asistidos por el sistema.
 \end_layout
 
 \begin_layout Standard
 Como primera opción, se podría optar por construir una ontología a partir
- de una colección de documentos no clasificados, conseguidos de antemano
- o a medida los usuarios aporten recursos -un método interesante para ello
- se puede encontrar en 
+ de una colección de documentos no clasificados, conseguidos de antemano:
+ un método interesante para ello se puede encontrar en 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Cimiano2005"
@@ -13030,8 +13026,9 @@ key "Cimiano2005"
 \emph on
 a la larga
 \emph default
- en una base de conocimiento exacta, dentro del contexto de la comunidad
- que la construya y utilice, no es factible para la implementación actual.
+ en una base de conocimiento exacta dentro del contexto de la comunidad
+ que la construya y utilice, no es factible, por la restricción de tiempo,
+ para la implementación actual.
 \end_layout
 
 \begin_layout Standard
@@ -13045,7 +13042,7 @@ key "AlexanderGelbukh2005"
 
 .
  La ventaja, evidentemente, radica en que el esfuerzo de obtener la ontología
- se minimiza, permitiendo ajustarla -en la mediad de lo posible- a las necesidad
+ se minimiza, permitiendo ajustarla -en la medida de lo posible- a las necesidad
 es propias.
  Es este enfoque el que se ha adoptado en este proyecto.
  A continuación, se resumen las fases seguidas en esta etapa de la implementació
@@ -13065,16 +13062,16 @@ web semántica
  surgido, y otros que existían desde hacía varios años han encontrado nueva
  atención.
  Las necesidades consideradas para la elección de una fuente de ontología
- y, quizá, la misma colección documental, fueron:
+ y hasta la propia colección documental, fueron:
 \end_layout
 
 \begin_layout Itemize
-El fácil acceso a una estructura predefinida
+El fácil acceso a una estructura predefinida.
 \end_layout
 
 \begin_layout Itemize
 La posibilidad de actualización y la facilidad de la obtención de un sub-conjunt
-o de la base entera de conocimiento 
+o de la base entera de conocimiento.
 \end_layout
 
 \begin_layout Itemize
@@ -13118,11 +13115,11 @@ key "Ramanathan2008"
 \end_inset
 
 ) la elección de un sub-conjunto del compendio de wikipedia, la coerción
- a una ontología jerárquica y la relativamente poca investigación académica
- realizada en ese respecto lograron que, aunque tentador, se optara por
- no utilizarla como fuente de la ontología y la colección documental.
- Una estructuración orientada a hacer más fácil para las aplicaciones obtener
- información estructurada de 
+ a la forma de ontología jerárquica y la relativamente poca investigación
+ académica realizada en ese respecto lograron que, aunque tentador, se optara
+ por no utilizarla como fuente de la ontología y la colección documental.
+ Cabe notar, sin embargo, que un formato orientado a hacer más fácil para
+ las aplicaciones obtener información estructurada de 
 \emph on
 Wikipedia
 \emph default
@@ -13148,8 +13145,15 @@ DBpedia.org
 \emph default
 que se perfilan más acordes a las necesidades de este proyecto, mas lamentableme
 nte éstas sólo están disponibles en inglés (aún cuando ambas aseveran la
- existencia de datos en varios idiomas, las ontologías sólo se encuentran
- en inglés).
+ existencia de 
+\emph on
+datos
+\emph default
+ en varios idiomas, las 
+\emph on
+ontologías
+\emph default
+ sólo se encuentran en inglés).
 \end_layout
 
 \begin_layout Standard
@@ -13193,13 +13197,12 @@ http://www.mpi-inf.mpg.de/yago-naga/yago/
 
 \end_inset
 
-, además de sólo estar disponibles en inglés, no ofrecen fácil acceso web.
+, además de sólo estar disponibles en inglés, no ofrecen fácil acceso web
+ mediante medios automatizados.
 \end_layout
 
 \begin_layout Standard
-La alternativa más sencilla de tomar -siendo la sencillez de implementación
- una necesidad informal, dada la poca cantidad de tiempo del que se dispone
- para el desarrollo de este proyecto- es la encontrada en el 
+La alternativa más sencilla de tomar es la encontrada en el 
 \emph on
 Open Directory Project
 \emph default
@@ -13234,19 +13237,20 @@ wikipedia y freebase.com
 \emph on
 ODP
 \emph default
- son varias: la estructura jerárquica, la disponibilidad en varios idiomas,
- las opciones de obtención de la ontología (por exploración directa de un
- web crawler o mediante la descarga de un documento estructurado, un 
+ son varias: la ontología casi totalmente jerárquica, la disponibilidad
+ en varios idiomas, las opciones de obtención de la ontología (por exploración
+ directa de un web crawler o mediante la descarga de un documento estructurado:
+ un 
 \emph on
 RDF
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
 \emph on
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -13263,10 +13267,10 @@ http://www.w3.org/RDF/
 
 \emph default
 ), la posibilidad de obtener de una sola vez la colección documental y el
- hecho de haber sido sujeto de investigaciones académicas relacionadas a
- la presente 
+ hecho de haber sido sujeto de varias investigaciones académicas relacionadas
+ al presente proyecto, como las de 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Daoud2008,Sieg2007"
 
 \end_inset
@@ -13325,7 +13329,7 @@ http://www.dmoz.org/Science/
 \emph default
 (ciencia) del ODP y los nodos paralelos a éste en español
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
@@ -13348,16 +13352,17 @@ http://www.dmoz.org/World/Español/Ciencia_y_tecnología/
 \end_layout
 
 \begin_layout Standard
-En un principio se había considerado el uso de una araña web (
+En un principio se consideró el uso de una araña web (
 \emph on
 web crawler
 \emph default
 ) para obtener los árboles de ambas ontologías paralelas y luego los documentos
  que están listados en cada una.
  Esta consideración partió de un rápido vistazo a algunas páginas del sitio,
- que parecían dar un lugar específico a las sub-categorías y a los documentos
- que los usuarios han considerado relacionados con cada concepto.
- Pero la escritura de una pequeña araña
+ que parecían dar un lugar específico en la estructura del documento a las
+ sub-categorías y a los documentos que los usuarios han considerado relacionados
+ con cada concepto.
+ Pero la escritura de una araña provisional
 \begin_inset Foot
 status collapsed
 
@@ -13471,9 +13476,10 @@ http://rdf.dmoz.org/rdf/tags.html
 \end_inset
 
 .
- Y la inspección visual del mismo para determinar el orden de escritura
- de los tópicos: se descubrió que se parte del tópico más general y lo siguen
- inmediatamente sus categorías (encerradas en las etiquetas 
+ Mediante inspección visual del mismo para determinar el orden de escritura
+ de los tópicos se descubrió que se parte del tópico más general y lo siguen
+ inmediatamente sus categorías (apuntadas desde el concepto padre con las
+ etiquetas 
 \emph on
 narrow, narrow1 y narrow2)
 \emph default
@@ -13488,7 +13494,7 @@ altlang
 \begin_layout Enumerate
 La búsqueda del rango entre el cual se encontraban los tópicos referentes
  a la sub-ontología elegida, esto mediante el uso de expresiones regulares
- mediante el comando 
+ con el comando 
 \emph on
 egrep
 \emph default
@@ -13525,8 +13531,8 @@ http://unixhelp.ed.ac.uk/CGI/man-cgi?sed
 .
  
 \emph default
-El archivo de la sub-ontología de ciencia medía apenas 10 megabytes, cien
- veces menos que el original.
+El archivo resultante de la sub-ontología de ciencia medía apenas 10 megabytes,
+ cien veces menos que el original.
 \end_layout
 
 \begin_layout Enumerate
@@ -13561,19 +13567,19 @@ Almacenamiento de la ontología
 
 \begin_layout Standard
 Por cuestiones de rendimiento, se optó por almacenar la ontología en la
- base de datos, como punto de partida para la creación de los perfiles de
- los cursos (ya que éstos, una vez almacenados, se referirían a categorías
+ base de datos como punto de partida para la creación de los perfiles de
+ los usuarios (ya que éstos, una vez almacenados, se referirían a categorías
  de la ontología), dado que, si se conservase solamente el RDF como referencia
  ontológica, se tendría que interpretar éste en memoria cada vez que se
- actualizase un perfil, incurriendo en gastos innecesarios de memoria y
- procesamiento.
+ utilizase un perfil, incurriendo en gastos innecesarios de memoria y procesamie
+nto.
  
 \end_layout
 
 \begin_layout Standard
 Como primer paso, se expresó la ontología como un árbol de categorías, siendo
- cada nodo modelado una tupla relacional cuyos atributos, basados en los
- atributos establecidos en el 
+ cada nodo una tupla relacional cuyos atributos, basados en los atributos
+ establecidos en el 
 \emph on
 RDF
 \emph default
@@ -13624,11 +13630,11 @@ ODP.
 \end_layout
 
 \begin_layout Description
-Descripción: un breve sumario
+Descripción: un breve sumario, extraído del archivo RDF.
 \end_layout
 
 \begin_layout Description
-Padre: el tópico predecesor inmediato
+Padre: el tópico predecesor inmediato.
 \end_layout
 
 \begin_layout Description
@@ -13741,9 +13747,9 @@ reference "cha:resources-requirement"
 \end_layout
 
 \begin_layout Standard
-Como nota marginal, es importante notar que una araña web debe tener en
- cuenta los límites de los recursos que utiliza: una araña puede tomar dos
- caminos a la hora de hacer la exploración del sitio designado: un recorrido
+Como nota marginal, es importante resaltar que una araña web debe tener
+ en cuenta los límites de los recursos que utiliza: una araña puede tomar
+ dos caminos a la hora de hacer la exploración del sitio designado: un recorrido
  en anchura o en profundidad.
  Interesantemente, el árbol de exploración, en este caso, era conspicuamente
  ancho (13,407 
@@ -13763,9 +13769,9 @@ scrapy
 \emph default
  es el recorrido en anchura.
  Tomado esto en consideración, se optó por el recorrido en profundidad,
- con efectos dramáticos: cuatro horas después, la araña había logrado bajar
- varios cientos de documentos, cuando con la estrategia anterior, no logró
- bajar 
+ con efectos verdaderamente notables: cuatro horas después, la araña había
+ logrado bajar varios cientos de documentos, cuando con la estrategia anterior,
+ no logró bajar 
 \emph on
 ninguno
 \emph default
