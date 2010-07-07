@@ -13770,8 +13770,8 @@ scrapy
  es el recorrido en anchura.
  Tomado esto en consideración, se optó por el recorrido en profundidad,
  con efectos verdaderamente notables: cuatro horas después, la araña había
- logrado bajar varios cientos de documentos, cuando con la estrategia anterior,
- no logró bajar 
+ logrado descargar varios cientos de documentos, cuando con la estrategia
+ anterior, no logró obtener 
 \emph on
 ninguno
 \emph default
@@ -13793,9 +13793,9 @@ Implementación del componente de búsqueda
 \end_layout
 
 \begin_layout Standard
-Una vez en poder de la colección documental, restan dos cuestiones: el almacenam
-iento estructurado de ésta y la elección de un módulo para buscar en la
- misma.
+Una vez en poder de la colección documental, restaban dos cuestiones: el
+ almacenamiento estructurado de ésta y la elección de un módulo para buscar
+ en la misma.
 \end_layout
 
 \begin_layout Subsection
@@ -13803,43 +13803,30 @@ Elección de sustitutos documentales
 \end_layout
 
 \begin_layout Standard
-Como se explicó antes
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-consúltese 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "des:doc-collection"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-, es importante representar de manera informativa y compacta cada documento
- en la colección.
+En un sistema de recuperación de información es importante representar de
+ manera descriptiva y compacta cada documento en la colección.
  En esta implementación, se optó por seguir el patrón sentado por el 
 \emph on
 ODP
 \emph default
 : almacenar un título, una descripción, la categoría del directorio donde
  se encontró (expresada como una ruta desde la raíz hasta el nodo donde
- se encuentra listado como recurso el sitio), una descripción, el 
+ se encuentra el documento listado como recurso), una descripción, el 
 \emph on
 url
 \emph default
- original, la fecha en que se obtuvo el documento y el contenido en sí.
+ del documento original, la fecha en que se obtuvo el y el contenido en
+ sí (para fines de indexación; pues, en principio, el contenido no debería
+ almacenarse en el sustituto documental).
  
 \end_layout
 
 \begin_layout Standard
 La araña web que obtuvo los documentos se escribió de manera que preservase
- toda esta información serializada en archivos, de manera que facilitase
- el llenado de la base de datos de sustitutos documentales.
+ toda esta información serializada en formato JSON dentro de archivos de
+ texto independientes, de manera que se facilitase el llenado de la base
+ de datos de sustitutos documentales.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -13847,20 +13834,18 @@ Elección de una implementación de recuperación de información
 \end_layout
 
 \begin_layout Standard
-Puesto que el alcance del proyecto no incluye el demostrar la idoneidad
- de uno u otro modelo de IR ni mucho menos se centra en la implementación
- de alguno, se optó por elegir una implementación existente que pudiera
- ser integrada a un proyecto en 
+Se optó por elegir una implementación existente que pudiera ser integrada
+ a un proyecto en 
 \emph on
 django
 \emph default
- sin mayor problema y que pudiera obtener su colección documental de una
- base de datos relacional.
+ sin mayor problema y que pudiera manejar una colección documental almacenada
+ en una base de datos relacional.
  
 \end_layout
 
 \begin_layout Standard
-Se determinaron dos alternativas: 
+Se encontraron dos alternativas: 
 \end_layout
 
 \begin_layout Enumerate
@@ -13892,9 +13877,8 @@ http://haystacksearch.org/
 \emph default
 un proyecto que permite al desarrollador desentenderse de la implementación
  de búsqueda subyacente, mediante el uso de una interfaz de programación
- de aplicaciones.
- Actualmente, permite el uso de tres motores de recuperación de información:
- 
+ de aplicaciones que abstrae el componente propio de recuperación de información.
+ Actualmente, permite el uso de tres motores de IR: 
 \emph on
 solr
 \emph default
@@ -13981,10 +13965,8 @@ Haystack
 \emph default
  es una solución idónea para proyectos comerciales, donde se requiere poca
  interacción, y a muy alto nivel, con la implementación de búsqueda, se
- consideró demasiado complejo para el proyecto actual por lo que se descartó,
- aunque los otros módulos del proyecto están escritos de manera que respeten
- el principio de bajo acoplamiento de modo que la posibilidad de uso de
- esta alternativa queda abierta.
+ consideró que no tenía la granularidad funcional necesaria para el proyecto
+ actual, por lo que se descartó.
 \end_layout
 
 \begin_layout Enumerate
@@ -14026,7 +14008,7 @@ haystack
 , djapian ofrece más control sobre los particulares de búsqueda, en especial
  la sensibilidad al idioma de las consultas y documentos, característica
  decisiva para su elección, ya que inicialmente el proyecto cuenta con una
- colección documental bilingüe.
+ colección documental bilingüe, extensible a otros lenguajes.
 \end_layout
 
 \begin_layout Section
@@ -14063,10 +14045,9 @@ key "Sieg2007"
 \end_inset
 
  y construir vectores acumulativos para cada categoría, siguiendo el modelo
- de espacio vectorial.
- Sin embargo, puesto que tal implementación habría trascendido el alcance
- del proyecto, se decidió hacer uso de una herramienta de propósito general:
- 
+ de espacio vectorial tal implementación habría trascendido el alcance del
+ proyecto, por lo que se decidió hacer uso de una herramienta de propósito
+ general: 
 \emph on
 xappy
 \emph default
@@ -14085,7 +14066,8 @@ xapian
 Para cada categoría, se tomaron todos los documentos que pertenecían a la
  misma, según lo determinado en la etapa anterior, y se usaron para indexarla.
  En otras palabras, se consideró cada categoría como un gran documento compuesto
- del texto de todos los sub-documentos pertenecientes a ella, según el 
+ del texto de todos los documentos en la colección clasificados bajo ella
+ según el 
 \emph on
 ODP; 
 \emph default
@@ -14130,8 +14112,8 @@ todo
 luego
 \emph default
  crear un índice de xapian (el cual, en el peor de los casos, es tan grande
- como la base de datos original), este precio se pagó con los sustitutos
- documentales porque se requería la integración con django; pero para la
+ como la base de datos original); este precio se pagó con los sustitutos
+ documentales porque se requería la integración con django, pero para la
  clasificación de categorías el almacenamiento redundante de los documentos
  para las categorías era sencillamente una pérdida.
  Con 
@@ -14142,14 +14124,15 @@ xappy
  relacional y agregar los documentos inmediatamente al índice, con lo que
  se utiliza efectivamente menos espacio, ya que los documentos indexados
  no contienen todo el texto original, sino sólo lo que resulta luego del
- procesamiento de la librería: colecciones de-duplicadas de términos clave,
- libres de palabras vacías y, sobre todo, de redundancia.
+ procesamiento de la librería: colecciones no redundantes de términos clave
+ lematizados, libres de palabras vacías.
 \end_layout
 
 \begin_layout Standard
 Una vez creado el índice de categorías, se implementó una función que recibe
  una consulta y devuelve las diez categorías a las cuales tiene mayor probabilid
-ad de pertenecer.
+ad de pertenecer, para poder utilizarla a la hora de determinar las preferencias
+ en base a las sesiones de uso.
 \end_layout
 
 \begin_layout Subsection
@@ -14159,8 +14142,9 @@ Ponderación de las categorías
 \begin_layout Standard
 Una de las razones por las cuales elegir el uso de una ontología, frente
  a la opción de una lista plana de categorías (o conceptos) es la posibilidad
- de descubrir, mediante las relaciones entre nodos de la ontología, conceptos
- que podrían ser de interés -aunque indirectamente- al usuario.
+ de descubrir mediante las relaciones entre conceptos, partiendo de los
+ que se determinen como relevantes a una sesión de uso, aquellos que podrían
+ ser de interés -indirectamente- al usuario.
 \end_layout
 
 \begin_layout Standard
@@ -14189,17 +14173,15 @@ key "Alani2003"
 \end_inset
 
 , se debe recurrir a un algoritmo de propagación, que permita encontrar
- otros nodos -o categorías- relacionados al inicial siguiendo las relaciones
- semánticas representadas como aristas en el grafo de la ontología.
- Este tipo de algoritmos se han usado en sistemas que utilizan como base
- de conocimiento una ontología, con distintos enfoques.
+ otros nodos relacionados al conjunto inicial siguiendo las relaciones semántica
+s representadas como aristas en el grafo de la ontología.
  En el previamente mencionado 
 \emph on
 ontocopi
 \emph default
-, por ejemplo, debido a la existencia de diversas relaciones en la ontología,
- el algoritmo de propagación es equivalentemente complejo y flexible: puede
- ajustarse a sólo seguir ciertas relaciones hasta cierta profundidad.
+, por ejemplo, debido a la existencia de diversos tipos de relaciones en
+ la ontología, el algoritmo de propagación es complejo y puede ajustarse
+ a sólo seguir ciertas relaciones hasta cierta profundidad.
 \end_layout
 
 \begin_layout Standard
@@ -14237,7 +14219,11 @@ key "Middleton2001"
  a su sucesor y así sucesivamente hacia la raíz.
  Esto permite que, aunque el usuario se haya interesado en una categoría
  específica, el perfil -y, por tanto, las recomendaciones- pueda tener en
- cuenta los antecesores más generales de ésta.
+ cuenta los antecesores más generales de ésta con una asignación de interés
+ inversamente proporcional al número de nodos entre el evaluado y el inicial.
+ Este enfoque, a juicio del autor, es demasiado simple: ignora cualquier
+ información semántica dando exclusiva importancia a la distancia en la
+ ruta jerárquica entre nodos.
 \end_layout
 
 \begin_layout Standard
@@ -14253,10 +14239,10 @@ key "Sieg2007"
 \emph on
 inclusión
 \emph default
- que una categoría tiene con su padre, es decir, dado el vector que representa
- a una categoría, el peso de la arista que une a ésta con su padre es proporcion
-al a qué tantos de los términos del vector de ésta están contenidos en el
- vector que representa a su sucesor.
+ que una categoría tiene respecto a su padre, es decir, dado el vector que
+ representa a una categoría, el peso de la arista que une a ésta con su
+ antecesor es proporcional a qué tantos de los términos del vector de ésta
+ están contenidos en el vector que representa a su sucesor.
  
 \end_layout
 
@@ -14368,7 +14354,9 @@ name "fig:weighted-ontology"
 
 \end_inset
 
-Ejemplo de ontología ponderada
+Ejemplo de ontología ponderada.
+ Los números bajo los títulos de los nodos indican la cantidad de documentos
+ clasificados bajo el concepto.
 \end_layout
 
 \end_inset
@@ -14392,11 +14380,12 @@ Evolución del perfil
 \begin_layout Standard
 Una vez construida y ponderada la ontología, la creación y evolución de
  los perfiles se convierten en tareas relativamente sencillas.
- Como ya se discutió en el marco teórico, existen dos enfoques principales
+ Como se presenta en el marco teórico, existen dos enfoques principales
  para perfiles automáticos: utilizarlos para re-escribir las consultas del
  usuario, mediante conocimiento obtenido en sesiones anteriores; o usar
  ese mismo conocimiento para re-ordenar resultados de una búsqueda en una
- colección documental respecto a la similitud entre el perfil y los resultados.
+ colección documental basándose en la similitud entre las preferencias contenida
+s en el perfil de usuario y los resultados.
  En la actual implementación se decidió utilizar el segundo enfoque, debido
  a que éste puede ser implementado mediante técnicas estadísticas puras,
  mientras que el primero debe ser implementado mediante técnicas de procesamient
@@ -14426,7 +14415,7 @@ puntaje
 de preferencia
 \emph default
  asignado a la categoría, este puntaje es un valor en el rango 
-\begin_inset Formula $[0,\infty]$
+\begin_inset Formula $[0,1]$
 \end_inset
 
 , de manera que la preferencia demostrada por el usuario a una categoría
@@ -14449,7 +14438,7 @@ reference "sub:category-classifier"
  para obtener las categorías a las cuales el contexto tenga mayor probabilidad
  de pertenecer, asignando a éstas un puntaje de preferencia equivalente
  a la similitud calculada por el clasificador entre cada categoría y el
- contexto, estando éste en el rango 
+ contexto -estando ésta en el rango 
 \begin_inset Formula $[0,1]$
 \end_inset
 
@@ -14457,8 +14446,8 @@ reference "sub:category-classifier"
  Asimismo, los conceptos bajo los cuales están clasificados los documentos
  que el usuario pueda haber elegido como retroalimentación reciben un puntaje
  inicial de 1.
- Con los conceptos en este conjunto, los devueltos por el clasificador y
- los de los documentos, se tiene el 
+ Con los conceptos en este conjunto (los devueltos por el clasificador y
+ los de los documentos) se tiene el 
 \emph on
 conjunto de conceptos base
 \emph default
@@ -14502,9 +14491,12 @@ Construido el conjunto expandido de conceptos, se procede al paso más crucial:
  la existencia previa de un puntaje de preferencia en el perfil: en este
  siguiente paso sólo se toman en cuenta los conceptos que tenían un puntaje
  previo, los otros no reciben más procesamiento y se agregan al perfil.
- De esta manera, para cada concepto previamente existente en el perfil,
- se calcula un nuevo puntaje de preferencia, utilizando la siguiente fórmula,
- adaptada de 
+\end_layout
+
+\begin_layout Standard
+Luego, para cada concepto previamente existente en el perfil, se calcula
+ un nuevo puntaje de preferencia, utilizando la siguiente fórmula, adaptada
+ de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Daoud2008"
@@ -14543,9 +14535,13 @@ Donde
  el interés es disminuido (se puede decir que el concepto envejece).
  En cambio, si el concepto vuelve a aparecer, aunque es deteriorado -para
  favorecer conceptos más nuevos- es aumentado mediante el inverso del factor
- de decadencia.
- En suma, el interés de los conceptos va decayendo y este deterioro sólo
- es contrarrestado si un concepto vuelve a ser favorecido.
+ de decadencia (a menos que alcance el valor máximo de preferencia, en cuyo
+ caso sencillamente no cambia).
+\end_layout
+
+\begin_layout Standard
+En otras palabras, el interés de los conceptos va decayendo y este deterioro
+ sólo es contrarrestado si un concepto vuelve a ser favorecido.
  Para acelerar el proceso de deterioro y poder favorecer los conceptos más
  recientes, se ha elegido un valor de 0.2 para el factor 
 \begin_inset Formula $\beta$
@@ -14864,8 +14860,7 @@ reference "sec:solution-description"
  por cualquier desarrollador en cualquier plataforma.
  Por ello, se decidió crear una interfaz de programación de aplicaciones
  que funcione sobre el protocolo HTTP, para que los implementadores sólo
- se preocupen de hacer las solicitudes correspondientes e interpretar las
- respuestas.
+ deban hacer las solicitudes correspondientes e interpretar las respuestas.
  
 \end_layout
 
@@ -14982,7 +14977,7 @@ http://www.mozilla-europe.org/es/firefox/
 \end_layout
 
 \begin_layout Standard
-Pero la flexibilidad no debería afectar la facilidad de uso: aunque la solución
+La flexibilidad no debería afectar la facilidad de uso: aunque la solución
  más conveniente para desarrolladores experimentados sea una API que les
  permita utilizar el servicio como deseen, registrando los usuarios desde
  sus propias aplicaciones y luego utilizando los métodos de recomendaciones
@@ -14991,8 +14986,8 @@ Pero la flexibilidad no debería afectar la facilidad de uso: aunque la solució
  Para este segmento de los usuarios potenciales se idearon dos soluciones:
  luego de registrarse y obtener las credenciales, se permite al usuario
  utilizar una interfaz web en el sitio del servicio para registrar usuarios,
- de manera que no se deben preocupar por crear su propio código para este
- efecto.
+ de manera que no se deben preocupar por implementar su propio software
+ para este efecto.
  La segunda solución, sólo para implementadores en aplicaciones web, es
  la interfaz opcional (o widget): para poder utilizar el servicio de recomendaci
 ones, sólo deben incluir en la fuente de sus páginas web un pequeño 
@@ -15005,9 +15000,16 @@ diseñado para ser tan fácil de personalizar como lo es llenar un formulario-
 \end_layout
 
 \begin_layout Standard
-Ambas soluciones se describen con detalle en el anexo [manual de usuario];
- en las siguiente secciones se detallan las decisiones de ingeniería que
- cada una de ellas implicó.
+Ambas soluciones se describen con detalle en el manual del implementador
+ (anexo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:developers-manual"
+
+\end_inset
+
+) ; en las siguientes secciones se detallan las decisiones de ingeniería
+ que cada una de ellas implicó.
 \end_layout
 
 \begin_layout Subsection
@@ -15028,9 +15030,10 @@ Distinción
 
 cliente-servidor: Característica fundamental de cualquier servicio web,
  el solo hecho de implementar éste como una API permite que tanto el cliente
- como el servidor puedan evolucionar independientemente, mientras cumplan
- con el protocolo HTTP y puedan interpretar lo que uno u otro transmite
- en las comunicaciones.
+ como el servidor puedan evolucionar independientemente (en términos de
+ procesamiento, almacenamiento, memoria y software), mientras cumplan con
+ el protocolo HTTP y puedan interpretar lo que uno u otro transmite en las
+ comunicaciones.
 \end_layout
 
 \begin_layout Description
@@ -15042,8 +15045,8 @@ estado: Se decidió que el implementador tendrá que enviar en cada solicitud
  el token único asignado a la aplicación así como el identificador del usuario
  final; aunque esto podría haberse resuelto con una llamada a alguna función
  de inicialización de sesión en la que estos datos se determinasen y guardasen
- en una sesión, se hubiera dependido de almacenamiento entre transiciones
- de estado en el servidor, obstaculizando la escalabilidad y la distribución
+ en el servidor, se hubiera dependido de almacenamiento entre transiciones
+ del estado en el servidor, obstaculizando la escalabilidad y la distribución
  de las tareas.
  Por ello, se prefirió hacer búsquedas en la base de datos cada vez que
  se reciba una solicitud, teniendo en cuenta claro, que existen facilidades
@@ -15104,7 +15107,7 @@ text/html
 \begin_inset Quotes erd
 \end_inset
 
-} para el widget opcional.
+} para el widget opcional).
 \end_layout
 
 \begin_layout Description
@@ -15125,8 +15128,8 @@ mediante
 \end_inset
 
 representaciones: el implementador hace solicitudes utilizando los métodos
- GET o POST y puede leer los recursos recomendados, devueltos en formato
- JSON o modificar el perfil de un usuario mediante una llamada a la URL
+ GET o POST y puede extraer los recursos recomendados, devueltos en formato
+ JSON o actualizar el perfil de un usuario mediante una llamada a la URL
  correspondiente.
  
 \end_layout
@@ -15200,8 +15203,8 @@ Aunque podría parecer que la semántica de las solicitudes bajo los principios
  REST requeriría también que la actualización de los perfiles fuese una
  solicitud POST autenticada, nótese que es una tarea que no puede causar
  mayor daño a los datos de usuarios de una aplicación: actualizaciones deliberad
-as de preferencias no consisten en sí amenazas a la seguridad, téngase también
- en cuenta que, si la actualización de perfil requiriese autenticación,
+as de preferencias no consisten en sí amenazas a la seguridad y téngase
+ también en cuenta que, si la actualización de perfil requiriese autenticación,
  la contraseña estaría expuesta en el código del lado del cliente en interfaces
  web que hagan solicitudes con la técnica AJAX.
  
@@ -15220,9 +15223,9 @@ capas: inherente al
 \emph on
 framework 
 \emph default
-elegido (django), separa el almacenamiento y el procesamiento de las solicitudes
-, de manera que todos los componentes del sistema del lado del servidor
- tienen el acoplamiento más bajo posible.
+elegido (django), separa el almacenamiento del procesamiento de las solicitudes,
+ de manera que todos los componentes del sistema del lado del servidor tienen
+ el acoplamiento más bajo posible.
 \end_layout
 
 \begin_layout Description
@@ -15231,7 +15234,8 @@ Code-on-demand: el
 widget
 \emph default
  opcional es provisto por el servidor como un script de javascript al cliente,
- de manera que se pueda expandir la funcionalidad.
+ de manera que se pueda expandir la funcionalidad de la aplicación implementador
+a.
 \end_layout
 
 \begin_layout Subsection
@@ -15251,19 +15255,26 @@ reference "sub:interface-design"
 
 ).
  Se decidió que la inclusión del widget se haría mediante un método que
- recibiese un objeto de javascript con los parámetros que el usuario desee
- (siendo éstos la clave de aplicación, el identificador único de usuario
- y las opciones de obtención de datos y retroalimentación descritas en el
- anexo [manual de implementador].
+ recibiese un objeto de javascript con los parámetros de configuración que
+ el usuario desee (incluyendo éstos la clave de aplicación, el identificador
+ único de usuario y las opciones de obtención de datos y retroalimentación
+ descritas en el anexo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:developers-manual"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
 En cuanto a la opción de registrar usuarios desde el sitio del servicio,
  se creó una pequeña interfaz que permite -luego de ingresar las credenciales
  de autenticación- introducir varios usuarios a registrar de una sola vez,
- así como ver qué usuarios están registrados y eliminar.
- (Cabe recalcar que toda esta funcionalidad está disponible a través de
- la API).
+ así como ver qué usuarios están registrados y eliminar los que se desee.
+ (Cabe recalcar que toda esta funcionalidad está disponible también a través
+ de la API).
 \end_layout
 
 \begin_layout Subsection
@@ -15276,13 +15287,12 @@ Para la interfaz opcional, el
 widget
 \emph default
 , se agregó un componente de detección de cambios en el componente de interfaz
- gráfica que el implementador elija (véase el manual de implementación para
- más detalles al respecto).
+ gráfica que el implementador elija.
  Los cambios en el texto se monitorean cada
 \begin_inset Formula $\delta$
 \end_inset
 
- palabras -este factor se ha establecido en 5- y son analizados con un algoritmo
+ palabras -este factor se ha establecido en 2- y son analizados con un algoritmo
  de diferencia textual, en especifico, el propuesto en 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -15312,7 +15322,7 @@ key "Levenshtein1966"
 \end_inset
 
  entre el nuevo contenido y el anterior, y si esta distancia es mayor que
- un umbral aceptable (establecido para las pruebas preliminares en un 60%),
+ un umbral aceptable (establecido para las pruebas preliminares en un 33%),
  se considera que el texto ha cambiado lo suficiente como para contener
  nuevos conceptos que podrían resultar en nuevas recomendaciones.
  El algoritmo 
@@ -15437,7 +15447,7 @@ RETURN $(
 \backslash
 Delta/contenidoNuevo.longitud) 
 \backslash
-geq 0.6 $
+geq 0.33 $
 \end_layout
 
 \begin_layout Plain Layout
@@ -15497,10 +15507,8 @@ http://pypi.python.org/pypi/topia.termextract/
 
 \end_inset
 
- para documentos en inglés, y, para los demás lenguajes, (y opcionalmente
- para los que se pueden analizar con la librería previamente mencionada)
- se utiliza, por elección de quien utilice el sub-componente, uno de los
- siguientes servicios web:
+ para documentos en inglés, y, para los demás lenguajes se utiliza uno de
+ los siguientes servicios web:
 \end_layout
 
 \begin_layout Enumerate
@@ -15657,7 +15665,9 @@ El sub-componente está abierto a la inclusión de más servicios web o librerí
 \begin_layout Standard
 En la presente implementación, para construir una consulta se utiliza el
  método de extracción de términos clave previamente mencionado para obtener
- una lista que luego se une en una sola frase.
+ una lista que luego se une en una sola frase, fundamentándose en la nula
+ importancia del orden de palabras del enfoque probabilístico de recuperación
+ de información utilizado.
  Es importante notar que el estado presente del proyecto no es factible
  para un ambiente de producción, ya que los servicios web tienen límites
  de uso y/o pueden bloquear las solicitudes si se excede un umbral.
@@ -15665,18 +15675,19 @@ En la presente implementación, para construir una consulta se utiliza el
 
 \begin_layout Standard
 Para la implementación final, aunque se crearon módulos para comunicarse
- con todos los servicios antes mencionados, se decidió utilizar el servicio
- 
+ con todos los servicios antes mencionados, se decidió utilizar por defecto
+ el servicio 
 \emph on
 tagthe
 \emph default
- por defecto.
+.
  Esto porque, en primer lugar, la calidad de los términos extraídos con
  éste es superior a los demás (puede lidiar con caracteres unicode y tiene
  una orientación al procesamiento de lenguaje natural), asimismo, el servicio
  no tiene límite de solicitudes.
- En caso de que una solicitud a este servicio fallase, el sistema tratará
- de utilizar el servicio de 
+ En caso de que una solicitud a este servicio fallase -y las pruebas demostraron
+ que esto sucede cuando el texto es demasiado grande, alrededor de 150 kb,
+ el sistema tratará de utilizar el servicio de 
 \emph on
 yahoo
 \emph default
@@ -15687,13 +15698,13 @@ yahoo
 alchemy
 \emph default
 , que, aunque orientado al lenguaje natural, no presentó la misma calidad
- que tagthe de resultados en las pruebas de evaluación.
+ de resultados en las pruebas de evaluación.
  Estas pruebas se hicieron comparando los términos que cada servicio extraía
  de textos en lenguaje natural con los que seres humanos extraían de los
  mismos.
- Aunque se diseñó una encuesta para este efecto, el factor tiempo no permitió
- que ésta se analizase, por lo que el criterio utilizado fue únicamente
- el del autor.
+ Aunque se diseñó una encuesta para este efecto, el la cantidad de respuestas
+ (doce) no justificaba el esfuerzo de la creación de software para analizarla,
+ por lo que el criterio utilizado fue únicamente el del autor.
 \end_layout
 
 \begin_layout Subsection
@@ -15727,7 +15738,7 @@ key "Daoud2008"
 
 \begin_layout Standard
 \begin_inset Formula \begin{equation}
-r.puntaje=\gamma*r.puntaje+(1-\gamma)*IS(r.concepto)\end{equation}
+r.puntaje=\gamma*r.puntaje+(1-\gamma)*IS(perfil,r.concepto)\end{equation}
 
 \end_inset
 
@@ -15755,7 +15766,7 @@ IS(perfil, concepto),
  que devuelve el puntaje de preferencia dado por el perfil al concepto dado,
  o un valor de cero si el perfil no tiene un puntaje de preferencia para
  el concepto.
- El re-ordenamiento se puede encontrar en el algoritmo 
+ El re-ordenamiento se puede encontrar representado en el algoritmo 
 \begin_inset ERT
 status open
 
@@ -19013,6 +19024,13 @@ name "cha:project-plan"
 
 \begin_layout Chapter
 Manual del implementador
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:developers-manual"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
