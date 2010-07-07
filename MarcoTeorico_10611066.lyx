@@ -10514,12 +10514,6 @@ Calendarización
 \end_layout
 
 \begin_layout Standard
-Como ya se apuntó, la restricción de tiempo estaba fija, de modo que lo
- que se describe a continuación se hizo con el lapso de tres meses en mente.
- 
-\end_layout
-
-\begin_layout Standard
 La metodología utilizada para la administración del proyecto fue una adaptación
  ágil a la tradicional (que incluye, como se describe en 
 \begin_inset CommandInset citation
@@ -10645,7 +10639,7 @@ planificación
 temporal: una vez identificados los hitos y las tareas necesarias para llevar
  a cabo cada objetivo, se utilizó un diagrama de Gantt para identificar
  qué tareas dependían de otras y cuales podían realizarse en paralelo, distribuy
-endo los tres meses de desarrollo.
+endo el plazo de desarrollo.
 \end_layout
 
 \begin_layout Description
@@ -15894,8 +15888,8 @@ En este capítulo se presentan la estrategia y tipos de pruebas utilizados
 \end_layout
 
 \begin_layout Standard
-Se identificaron tres grandes áreas relativamente independientes a probar:
- la interfaz de programación de aplicaciones, el 
+Se identificaron tres grandes áreas independientes a probar: la interfaz
+ de programación de aplicaciones, el 
 \emph on
 widget
 \emph default
@@ -15915,11 +15909,12 @@ key "Pressman2006"
 \begin_layout Standard
 Se optó por usar pruebas automatizadas donde fuese posible y conveniente,
  tratando de sopesar el costo y el beneficio de cada caso individual por
- lo que -en vista del poco tiempo que se tuvo- no se desarrollaron pruebas
- automatizadas para componentes o interfaces donde el esfuerzo de codificar
- una prueba hubiera sido mayor que el de conducirla manualmente, o donde
- la función no permitía que se pudiera hacer mediante herramientas de prueba
- (como el caso del formulario de registro, que contiene un campo 
+ lo que -en vista del límite de tiempo que se tuvo- no se desarrollaron
+ pruebas automatizadas para componentes o interfaces donde el esfuerzo de
+ codificar una prueba hubiera sido mayor que el de conducirla manualmente,
+ o donde la función no permitía que se pudiera hacer mediante herramientas
+ de prueba (como el caso del formulario de registro, que contiene un campo
+ 
 \emph on
 reCaptcha
 \emph default
@@ -15944,7 +15939,7 @@ http://recaptcha.net/
 \end_inset
 
 , el cual está explícitamente diseñado para poder ser resuelto por seres
- humanos y no por computadoras o programas convencionales).
+ humanos y no por software convencional).
 \end_layout
 
 \begin_layout Standard
@@ -15960,13 +15955,18 @@ django,
 \emph default
 que crea una base de datos temporal cada vez que los casos de prueba se
  ejecutan y se encarga de dejar esta en el mismo estado después de cada
- prueba -borrando cualquier dato que una prueba haya introducido.
+ prueba -borrando cualquier dato que ésta haya introducido.
  Puesto que los casos relativos al servicio necesitan de una colección documenta
 l y una ontología, se creó una base de datos de control de tamaño reducido
  que eliminase la incertidumbre durante la codificación de los casos, permitiend
 o predictibilidad y, a la vez, ofreciendo un ambiente similar a la ejecución
  real del software.
- Las pruebas de unidad escritas según las convenciones de los 
+ 
+\end_layout
+
+\begin_layout Standard
+Las pruebas de unidad, escritas en este caso según las convenciones de los
+ 
 \emph on
 frameworks 
 \emph default
@@ -15985,14 +15985,14 @@ Estas convenciones están fundamentadas en el siguiente artículo de Kent
 
 \end_inset
 
- establecen que los casos de prueba se representan como un objeto, el cual
+, establecen que los casos de prueba se representan como un objeto, el cual
  puede tener varios 
 \emph on
-métodos de prueba; 
+métodos de prueba.
+ 
 \emph default
-en este proyecto, se diseñaron casos de prueba para cada componente y los
- distintos valores de prueba -o situaciones de uso- se expresaron dentro
- de los métodos.
+En este proyecto, se diseñaron casos de prueba para cada componente y los
+ distintos valores de prueba -o situaciones de uso- se expresaron como métodos.
  
 \end_layout
 
@@ -16000,9 +16000,9 @@ en este proyecto, se diseñaron casos de prueba para cada componente y los
 El tamaño de la ontología y la colección documental es deliberadamente pequeño,
  con documentos de dos párrafos a lo sumo, pero -aparte de la cantidad de
  datos- se procuró cubrir situaciones ocurrentes con datos reales: documentos
- en ambos idiomas soportados, categorías con sub-categorías y palabras presentes
- en el texto de más de una categoría, para estudiar los efectos de la ambigüedad
- en la categorización de textos.
+ en ambos de los idiomas soportados, categorías con sub-categorías y palabras
+ presentes en el texto de más de una categoría, para incluir los efectos
+ de la ambigüedad en la categorización de textos.
 \end_layout
 
 \begin_layout Standard
@@ -16311,7 +16311,7 @@ pruebas de unidad
 \emph default
  para cada elemento involucrado en las llamadas a la API.
  Cada elemento se probó mediante una prueba de unidad escrita con la ayuda
- de la herramienta 
+ del módulo 
 \emph on
 unittest
 \emph default
@@ -16335,7 +16335,7 @@ http://docs.python.org/library/unittest.html
 
 \end_inset
 
- para python, en concreto, con la extensión a ésta provista por 
+ para python, en concreto, con la extensión a éste provista por 
 \emph on
 django
 \emph default
@@ -16344,9 +16344,9 @@ django
 \end_layout
 
 \begin_layout Standard
-Para las funciones internas (llamadas dentro de cada método de la API) y
- las funciones de la API con complejidad suficiente (presencia de bifurcaciones
- mediante sentencias 
+Para las funciones internas (llamadas dentro de cada método de la API) con
+ complejidad suficiente (presencia de bifurcaciones mediante sentencias
+ 
 \emph on
 if
 \emph default
@@ -16354,9 +16354,10 @@ if
 \emph on
 try-except
 \emph default
-) se diseñaron casos de prueba de caja blanca según el método basado en
- la noción de complejidad ciclomática de McCabe: el número mínimo de casos
- se establece según la complejidad calculada para el grafo.
+) y las funciones de la API se diseñaron casos de prueba de caja blanca
+ según el método basado en la noción de complejidad ciclomática de McCabe:
+ el número mínimo de casos se establece según la complejidad calculada para
+ el grafo.
  
 \end_layout
 
@@ -16413,15 +16414,15 @@ reference "fig:test-dependencies"
  entre sí: se crearon pruebas para cada función o módulo que tuviera una
  relación de dependencia con las funciones de la API; el número de escenarios
  de uso (métodos de prueba) desarrollado para cada componente se presenta
- entre corchetes junto al título de cada cual.
+ entre corchetes junto al título del mismo.
  Los casos de prueba se desarrollaron de manera 
 \emph on
 ascendente: 
 \emph default
 comenzando por los métodos que no tenían dependencias hasta llegar a las
  funciones de la API, de las cuales ningún otro componente depende; de esta
- manera se redujo al mínimo la necesidad de escribir resguardos que jugasen
- el papel de otros elementos.
+ manera se eliminó la necesidad de escribir resguardos que jugasen el papel
+ de otros elementos.
  
 \end_layout
 
@@ -16431,15 +16432,15 @@ Principales casos de prueba
 
 \begin_layout Standard
 Dada la gran cantidad de métodos de prueba, aquí se presentan únicamente
- los casos de prueba de las funciones de la API y casos de prueba generales
- con métodos comunes entre las funciones.
- Se presenta cada caso y su propósito, y se agrupan bajo éste los métodos
- de prueba.
+ los casos de prueba de las funciones de la API y los casos de prueba generales
+ de métodos comunes utilizados por éstas.
+ Se describe cada caso mediante su propósito y se agrupan bajo éste los
+ métodos de prueba.
 \end_layout
 
 \begin_layout Description
-Autenticación Se probó la función común a las llamadas del API de administración
- de usuarios que verificase que las solicitudes incluyesen credenciales
+Autenticación Se prueba la función común a las llamadas de la API de administrac
+ión de usuarios que verificase que las solicitudes incluyesen credenciales
  de autenticación HTTP básica válidas.
 \end_layout
 
@@ -16474,7 +16475,7 @@ usuario
 \end_inset
 
 inexistente: Si se proveen encabezados, mas el nombre de aplicación no existe,
- la respuesta debe ser una 401.
+ la respuesta debe ser una con código 401.
 \end_layout
 
 \begin_layout Description
@@ -16518,7 +16519,7 @@ de
 \end_inset
 
 comunicación: todos los métodos de la API tienen ciertos parámetros requeridos
- -además, todos tienen uno opcional en común: una llamada de retorno (
+ -además de tener uno opcional en común: una llamada de retorno (
 \emph on
 callback
 \emph default
@@ -16534,7 +16535,7 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -16553,7 +16554,7 @@ http://www.python.org/dev/peps/pep-0318/
  Dada, entonces, su importancia, se describe aquí el caso de prueba que
  se desarrolló para la misma.
  Si se agrega un predicado entre paréntesis al título de un método de prueba,
- se está apuntando un segundo método con el mismo propósito y ligeramente
+ se está apuntando a un segundo método con el mismo propósito y ligeramente
  distinto proceder.
 \end_layout
 
@@ -16634,8 +16635,8 @@ y
 \end_inset
 
 estructura): Probar que se respeta la estructura del objeto JSON y los mensajes
- y códigos de error se reportan adecuadamente cuando la respuesta no tiene
- código de éxito (un código mayor o igual a 400).
+ y códigos de error se reportan adecuadamente cuando la respuesta tiene
+ código de error (uno mayor o igual a 400).
 \end_layout
 
 \begin_layout Description
@@ -16682,7 +16683,7 @@ exitoso
 \end_inset
 
 callback): Similar al anterior, pero para respuestas con códigos de éxito
- distintos a 200 (como 301 y 302, redirecciones).
+ distintos a 200 (como 301 y 302, que representan redirecciones).
 \end_layout
 
 \end_deeper
@@ -16701,7 +16702,7 @@ aplicación: todas las llamadas a la API requieren que se provea la clave
 token
 \emph default
 ) asignada a quien las llame.
- Se creó un caso general que probase ésto.
+ 
 \end_layout
 
 \begin_deeper
@@ -16743,8 +16744,9 @@ de
 \end_inset
 
 usuarios: las llamadas a la API de recomendaciones requieren que se provea
- un identificador único de usuario registrado por la aplicación que llame.
- Se creó un caso general que probase ésto.
+ un identificador único de usuario registrado por la aplicación que haga
+ la llamada.
+ 
 \end_layout
 
 \begin_deeper
@@ -16770,7 +16772,7 @@ Identificador
 \begin_inset space ~
 \end_inset
 
-válido: un identificador correspondiente a una usuario registrado debería
+válido: un identificador correspondiente a un usuario registrado debería
  resultar en una respuesta distinta a 404 (no necesariamente 200, 301 ó
  302, porque aún está sujeta a otras validaciones, como falta de parámetros
  requeridos).
@@ -16786,7 +16788,8 @@ de
 \begin_inset space ~
 \end_inset
 
-usuarios: se prueba la llamada a obtención de usuarios.
+usuarios: se prueba la llamada a obtención de usuarios registrados en una
+ aplicación.
 \end_layout
 
 \begin_deeper
@@ -17012,13 +17015,9 @@ eliminación
 \end_inset
 
 callback): una llamada con un identificador de un usuario registrado debería
- tener código 200 y el atributo 
+ tener código 200 y un atributo 
 \emph on
-deleted
-\emph default
- en los datos específicos a la llamada
-\emph on
- 
+deleted 
 \emph default
 con valor de verdadero.
 \end_layout
@@ -17033,13 +17032,9 @@ eliminación
 \end_inset
 
 inválida: una llamada con un identificador de un usuario no existente debería
- tener código 200 y el atributo 
+ tener código 200 y un atributo 
 \emph on
-deleted
-\emph default
- en los datos específicos a la llamada
-\emph on
- 
+deleted 
 \emph default
 con valor de falso.
 \end_layout
@@ -17078,8 +17073,8 @@ de
 
 perfil: se prueba que la tarea asíncrona de evolución real de perfil se
  agregue a la cola de trabajos en varios escenarios.
- En todos se asegura que la tarea se agregue a la cola, se ejecute y el
- perfil del usuario de la llamada haya efectivamente evolucionado.
+ En todos se asegura que la tarea se agregue a la cola y se ejecute y que
+ el perfil del usuario de la llamada haya efectivamente evolucionado.
  Téngase presente que el idioma por defecto es inglés, por lo que los escenarios
  se crearon por separado para situaciones con textos en inglés y otras con
  textos en idiomas que utilizasen codificación Unicode
@@ -17227,7 +17222,7 @@ de
 recomendaciones: Otro caso donde se desarrollaron métodos con el tema de
  los lenguajes en mente.
  Métodos que probasen más estrictamente los posibles contextos y lenguajes,
- sin embargo, se desarrollaron para los sub-componentes correspondientes,
+ sin embargo, se desarrollaron para los sub-componentes correspondientes
  y no se discutirán aquí.
 \end_layout
 
@@ -17313,7 +17308,7 @@ contexto
 \begin_inset space ~
 \end_inset
 
-vacío: se prueba que un contexto sin términos útiles (se utilizó texto aleatorio
+vacío: se prueba que un contexto sin términos útiles (utilizando texto aleatorio
  en latín
 \begin_inset Foot
 status collapsed
@@ -17323,7 +17318,8 @@ En concreto, palabras y párrafos al azar del famoso
 \emph on
 lorem ipsum
 \emph default
-, se puede encontrar más sobre éste en 
+.
+ Se puede encontrar más información sobre éste en 
 \begin_inset Flex URL
 status collapsed
 
@@ -17339,8 +17335,8 @@ http://es.lipsum.co.uk/
 
 \end_inset
 
-) o efectivamente vacío no afecte la llamada mas retorne colecciones de
- términos y resultados vacías.
+) o efectivamente vacío no afecte la llamada sino que retorne colecciones
+ de términos y resultados vacías.
 \end_layout
 
 \end_deeper
@@ -17351,15 +17347,8 @@ Pruebas de desempeño
 \begin_layout Standard
 Puesto que el tamaño de los datos de pruebas utilizados no se podía considerar
  una medida del desempeño del servicio, se desarrolló una colección distinta
- de pruebas que se comunicasen con el servidor 
-\begin_inset Quotes eld
-\end_inset
-
-real
-\begin_inset Quotes erd
-\end_inset
-
-, para medir los tiempos de respuesta y el manejo de conexiones concurrentes.
+ de pruebas que se comunicasen con el servidor de producción, para medir
+ los tiempos de respuesta y el manejo de conexiones concurrentes.
  Estas pruebas se desarrollaron con la herramienta de automatización de
  pruebas FunkLoad
 \begin_inset Foot
@@ -17388,7 +17377,7 @@ http://funkload.nuxeo.org/
  llamadas relacionadas a usuarios -agregación, eliminación y listado- se
  pueden considerar acotadas por la misma, por lo que los resultados de pruebas
  reales de desempeño (simulando muchas más solicitudes que el límite) serían
- relativamente superfluos.
+ superfluos.
  
 \end_layout
 
@@ -17405,9 +17394,9 @@ Resultados de las pruebas y observaciones
 \begin_layout Standard
 Durante las pruebas se logró limpiar el código de rutas no cubiertas (condicione
 s que no se daban o estaban siendo revisadas en lugares previos de la ejecución
- o excepciones redundantemente manejadas), asimismo, se descubrieron errores
- en los algoritmos de filtrado de información e interpretación y validación
- de las solicitudes y respuestas.
+ y excepciones redundantemente manejadas, por ejemplo), asimismo, se descubriero
+n y corrigieron errores en los algoritmos de filtrado de información e interpret
+ación y validación de las solicitudes y respuestas.
 \end_layout
 
 \begin_layout Standard
@@ -17418,27 +17407,27 @@ Estas pruebas pusieron al descubierto el verdadero desempeño de los servicios
 \emph on
 alchemy
 \emph default
-, tiene un límite de 150 Kb y yahoo probó ser el más robusto, siempre devolviend
-o respuestas a las solicitudes aún con textos muy largos.
+, tiene un límite de 150 Kb y yahoo probó ser el más robusto, devolviendo
+ respuestas a las solicitudes aún con textos muy extensos.
 \end_layout
 
 \begin_layout Standard
 Se descubrió que la función de agregación de múltiples usuarios, aunada
- al límite actual (30 usuarios) está demás: la única razón para su creación
- era hacer una alternativa asíncrona para operaciones temporalmente complejas
- en la base de datos, pero un límite tan pequeño la vuelve contraproducente:
- ¿para qué separar semánticamente la agregación de uno o varios usuarios
- cuando el tiempo de ejecución de ambas no es demasiado distinto? Y, sobre
- todo, ¿para qué molestar al usuario con correos electrónicos cuando podría
- esperar a que se termine de ejecutar? Mas el aspecto más detrimental para
- esta función es el problema de concurrencia que introduce ¿qué sucede si,
- puesta en la cola de trabajos la tarea, se utiliza la alternativa síncrona
- de agregación individual y se rebasa el límite? La restricción, al no estar
- a nivel de base de datos, sencillamente sería violada.
+ al límite actual (30 usuarios) está de sobra: la única razón para su creación
+ era proporcionar una alternativa asíncrona para operaciones complejas -en
+ términos de tiempo- en la base de datos, pero un límite tan pequeño la
+ vuelve contraproducente: ¿para qué separar semánticamente la agregación
+ de uno o varios usuarios cuando el tiempo de ejecución de ambas no es demasiado
+ distinto? Y, sobre todo, ¿para qué molestar al usuario con correos electrónicos
+ cuando es factible que espere a que se termine de ejecutar? El aspecto
+ más detrimental para esta función es el problema de concurrencia que introduce
+ ¿qué sucede si, puesta en la cola de trabajos la tarea, se utiliza la alternati
+va síncrona de agregación individual y se rebasa el límite? La restricción,
+ al no estar a nivel de base de datos, sencillamente sería violada.
  La única ventaja de esta función se podría llegar a ver si el límite fuese
  una cantidad considerable de usuarios (cientos o miles), donde el factor
  tiempo se hace importante -al acercarse a los límites de tiempo máximo
- de espera mencionados antes.
+ de espera de algunos navegadores web.
  
 \end_layout
 
@@ -17447,10 +17436,14 @@ De este último hallazgo de devela que la función de agregación síncrona
  de usuarios individuales también tiene sus propios problemas de concurrencia:
  varios usuarios -más allá del límite- podrían agregarse casi al mismo tiempo,
  y la condición que revisa el límite podría permitir que todos se agreguen.
- Estos dos descubrimientos hacen patente la necesidad de imponer el límite
- de usuarios a nivel de base de datos, sin embargo, el desarrollo requeriría
- más tiempo del disponible en esta etapa, además del compromiso del componente
- más importante del sistema por una restricción por demás accesoria.
+\end_layout
+
+\begin_layout Standard
+Estos dos descubrimientos hacen patente la necesidad de imponer el límite
+ de usuarios a nivel de base de datos, sin embargo, el desarrollo hubiera
+ requerido más tiempo del disponible en esta etapa, además de comprometer
+ el componente más importante del sistema por una restricción por demás
+ accesoria.
 \end_layout
 
 \begin_layout Standard
@@ -17459,18 +17452,19 @@ El descubrimiento más crítico se dio al encontrar que
 djapian,
 \emph default
  el paquete de terceros utilizado para las búsquedas, a pesar de asegurarlo
- en la documentación -mas una revisión de la última versión por parte del
- auto del código fuente desmintió esta aseveración- no implementa una funcionali
-dad básica de los sistemas de recuperación de información: la 
+ en la documentación -una revisión de la última versión por parte del auto
+ del código fuente desmintió esta aseveración- no implementa una funcionalidad
+ básica de los sistemas de recuperación de información: la 
 \emph on
 lematización, 
 \emph default
 la cual es, en pocas palabras, la reducción de las palabras a su raíz: eliminand
 o plurales, terminaciones relativas a conjugación o género y normalizar
  vocablos derivativos.
- Este defecto afecta la efectividad del componente de búsqueda, al reducir
- la probabilidad de encontrar un documento obligando a las consultas a contener
- palabras exactas (por ejemplo, una búsqueda de la palabra 
+ Esto tiene un impacto directo en la efectividad del componente de búsqueda,
+ al reducir la probabilidad de encontrar un documento, obligando a las consultas
+ a contener palabras exactas (mientras que se espera que, por ejemplo, una
+ búsqueda de la palabra 
 \begin_inset Quotes eld
 \end_inset
 
@@ -17529,8 +17523,8 @@ Se revisó el contenido, de manera que estuviera correctamente presentado
 \end_layout
 
 \begin_layout Standard
-Acto seguido, se probó la interfaz para que fuera semánticamente coherente,
- inteligible y compatible con los navegadores web más utilizados: internet
+Acto seguido, se probó la interfaz para que fuera semánticamente coherente
+ e inteligible, y compatible con los navegadores web más utilizados: internet
  explorer, google chrome, mozilla firefox, safari y opera.
 \end_layout
 
@@ -17539,12 +17533,12 @@ Aunque pruebas de unidad se
 \emph on
 pudieron
 \emph default
- haber diseñado para todo el comportamiento del widget: actualización de
- los términos y documentos encontrados, recabación de la retroalimentación
+ haber diseñado para todo el comportamiento del widget, como ser la actualizació
+n de los términos y documentos encontrados, recabación de la retroalimentación
  e interacción con la página donde se agrega.
- la codificación de pruebas automatizadas superaba en costo el beneficio.
- En lugar de ello, se creó una página de prueba donde se pudieran llevar
- a cabo estas comprobaciones manualmente.
+ La codificación de pruebas automatizadas superaba en costo el beneficio.
+ En lugar de ello, se creó una página de prueba que implementa el widget
+ donde se pudieran llevar a cabo estas comprobaciones manualmente.
 \end_layout
 
 \begin_layout Standard
@@ -17552,7 +17546,7 @@ Se diseñaron pruebas de unidad para el método de detección de cambios en
  el contexto: éste examina la entrada de texto registrada como la que contiene
  la tarea del usuario para determinar si el texto introducido puede tener
  nuevos términos clave que resultarán en nuevas recomendaciones.
- Los casos de prueba implementaron con la herramienta QUnit 
+ Los casos de prueba se implementaron con la herramienta QUnit 
 \begin_inset Foot
 status open
 
@@ -17574,7 +17568,8 @@ http://docs.jquery.com/QUnit
 
 , elegida por su compatibilidad con jQuery y su respeto a las convenciones
  de xUnit sin comprometer la portabilidad entre navegadores, vital para
- pruebas en más de uno; se enumeran a continuación:
+ pruebas de compatibiliad.
+ Los casos se enumeran a continuación:
 \end_layout
 
 \begin_layout Enumerate
@@ -17589,7 +17584,7 @@ La detección de contexto no se hace cuando el texto tiene una longitud muy
 
 \begin_layout Enumerate
 La detección no se hace si, luego de eliminar espacios vacíos y URLs, la
- longitud no alcanza el umbral (en la implementación actual, dos palabras).
+ longitud no alcanza el umbral (en la implementación actual, de dos palabras).
 \end_layout
 
 \begin_layout Enumerate
@@ -17611,12 +17606,12 @@ Probar que contenidos distintos con la misma cantidad de palabras se consideran
 
 \begin_layout Enumerate
 Probar que agregar/eliminar contenido con longitud justo en el umbral se
- identifica como cambio de contexto.
+ identifica como un cambio de contexto.
 \end_layout
 
 \begin_layout Enumerate
 Probar que agregar/eliminar párrafos al principio, en medio y al final se
- considera cambio de contexto.
+ considera un cambio de contexto.
 \end_layout
 
 \begin_layout Enumerate
@@ -17663,13 +17658,13 @@ http://www.puchu.net/doc/Average_Word_Length
 \end_inset
 
 ), de modo que palabras vacías tengan menos probabilidades de poner en marcha
- los algoritmos de detección de cambios.
+ el proceso de detección de cambios.
  Cuando se determina que los cambios son suficientes para una inspección
  más detallada, se comparan los contenidos mediante los algoritmos de diferencia
 s textuales previamente mencionados (el de Myers y la distancia de Levenshtein)
  y, si los cambios introducidos exceden cierto límite (en un principio,
- 60%), se identifica un cambio de contexto y se procede a realizar nuevas
- recomendaciones.
+ 60%, luego de las pruebas reducido a 33%), se identifica un cambio de contexto
+ y se procede a realizar nuevas recomendaciones.
 \end_layout
 
 \begin_layout Standard
@@ -17712,8 +17707,7 @@ Se comenzó con una revisión del contenido y la navegación, asegurando que
 
 \begin_layout Standard
 Luego, se probaron funcionalmente los distintos formularios, utilizando
- técnicas de caja negra; además de pruebas de validación para asegurar que
- los casos de uso se pudiesen llevar a cabo satisfactoriamente.
+ técnicas de caja negra.
  Estas pruebas se automatizaron mediante pruebas escritas con la API para
  python del sistema de pruebas de aplicaciones web 
 \emph on
@@ -17768,7 +17762,7 @@ y presenta
  
 \emph default
 serios defectos de eficiencia y compatibilidad.
- Aunque otros sistemas son basados en python, como windmill
+ Aunque existen otros sistemas basados en su totalidad en python, como windmill
 \begin_inset Foot
 status collapsed
 
@@ -17779,6 +17773,26 @@ status collapsed
 \begin_layout Plain Layout
 
 www.getwindmill.com/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, pyccuracy
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://wiki.github.com/heynemann/pyccuracy/
 \end_layout
 
 \end_inset
@@ -17810,7 +17824,6 @@ http://twill.idyll.org/
 
 , se eligió selenium por ser verdaderamente orientado a pruebas de unidad
  según las convenciones de xUnit.
- Los casos de prueba se presentan a continuación.
  Cabe notar que no se diseñaron pruebas que verificasen la validación de
  la longitud de la entrada en los campos de texto porque ésta se hace mediante
  el atributo 
@@ -17851,8 +17864,8 @@ http://www.w3schools.com/tags/att_input_maxlength.asp
 \begin_layout Description
 Registro: se garantiza que la interfaz de suscripción al servicio respete
  los requerimientos.
- Cabe notar que el formulario de registro incluye un campo reCaptcha, por
- lo que este campo es ignorado en las pruebas automatizadas y las pruebas
+ Es de observar que el formulario de registro incluye un campo reCaptcha,
+ por lo que este campo es ignorado en las pruebas automatizadas y las pruebas
  del mismo se hicieron manualmente.
  Las pruebas se hicieron en los idiomas soportados (inglés y español).
  
@@ -17918,7 +17931,7 @@ http://tools.ietf.org/html/rfc5322
 
 \end_inset
 
-.
+ ).
 \end_layout
 
 \begin_layout Description
@@ -17931,7 +17944,7 @@ nombre
 \end_inset
 
 duplicado: el usuario debe ser advertido si intenta registrarse con un nombre
- que ya está suscrito al servicio
+ que ya está suscrito al servicio.
 \end_layout
 
 \end_deeper
@@ -17948,8 +17961,8 @@ control: el panel de control ofrece una alternativa a la gestión de usuarios
  (agregación, listado y eliminación) mediante la API, y está pensado para
  implementadores de aplicaciones con pocos usuarios o con inconvenientes
  de implementación de las llamadas al servicio.
- Este componente requiere autenticación, y esto introduce interfaces de
- inicio de sesión y restablecimiento de contraseñas.
+ Este componente requiere autenticación, y esto introduce el posible uso
+ de las interfaces de inicio de sesión y restablecimiento de contraseñas.
  Para éstos no se desarrollaron pruebas, puesto que se utilizaron los métodos
  genéricos provistos por 
 \emph on
@@ -17979,7 +17992,8 @@ de
 usuarios: la adición de un par de usuarios en la interfaz debería resultar
  en que, al inspeccionar la página donde se listan los usuarios, estos nuevos
  usuarios aparezcan.
- Aquí también se prueba la interfaz de javascript dinámica de agregación.
+ Aquí también se prueba la interfaz de javascript dinámica de agregación
+ de campos de entrada.
 \end_layout
 
 \begin_layout Description
