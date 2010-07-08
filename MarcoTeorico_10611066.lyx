@@ -18054,7 +18054,7 @@ Visión General
 \end_layout
 
 \begin_layout Standard
-El presente proyecto exploró el concepto de ofrecer un servicio de recomendación
+El proyecto exploró el concepto de ofrecer un servicio de recomendación
  para enriquecimiento de tareas de producción de información.
  Dado que la mayor parte de las personas que crean datos textuales para
  ser leídos por otras lo hacen mediante herramientas informáticas y tienen
@@ -18062,7 +18062,10 @@ El presente proyecto exploró el concepto de ofrecer un servicio de recomendaci�
  (API) que permitiese a los desarrolladores de tales herramientas agregar
  esta funcionalidad a sus soluciones de software haciendo unas cuantas llamadas
  mediante el protocolo HTTP, en lugar de crearla por sí mismos.
- Los implementadores registran su aplicación en el sitio web del servicio
+\end_layout
+
+\begin_layout Standard
+Los implementadores registran su aplicación en el sitio web del servicio
  y obtienen una clave única y credenciales de autenticación.
  Por razones de seguridad, y para ofrecer un servicio más confiable, la
  responsabilidad de registrar y administrar los usuarios para los cuales
@@ -18070,13 +18073,16 @@ El presente proyecto exploró el concepto de ofrecer un servicio de recomendaci�
  desarrolladores o administradores de la aplicación, proveyéndoles una interfaz
  en el sitio del servicio para llevar a cabo esta tarea manualmente y llamadas
  a la API para hacerlo programáticamente (requiriendo ambos casos autenticación).
- Para aplicaciones web, se creó un archivo de javascript cuya inclusión
- permite la llamada a un método de inicialización que agrega a la página
- donde se incluya el archivo una interfaz donde se presentarán recomendaciones
- para el usuario actual.
- Y, alternativamente para aplicaciones web y como única opción para aplicaciones
- no basadas en hipermedia, la obtención de recomendaciones y actualizaciones
- de los perfiles se puede hacer mediante llamadas a la API.
+\end_layout
+
+\begin_layout Standard
+Para aplicaciones web, se creó un archivo de javascript cuya inclusión permite
+ la llamada a un método de inicialización que agrega a la página donde se
+ incluya el archivo una interfaz donde se presentarán recomendaciones para
+ el usuario actual.
+ Además, para cualquier plataforma de desarrollo, la obtención de recomendacione
+s y actualizaciones de los perfiles se puede hacer mediante llamadas a la
+ API.
 \end_layout
 
 \begin_layout Standard
@@ -18089,8 +18095,11 @@ framework
  de desarrollo web -concretamente, django- para eliminar la necesidad de
  manejar manualmente tareas de bajo nivel y permitir la separación en capas
  de la arquitectura.
- Para representar el conocimiento semántico del sistema se utilizó una ontología
-: la sub-jerarquía del concepto 
+\end_layout
+
+\begin_layout Standard
+Para representar el conocimiento semántico del sistema se utilizó una ontología:
+ la sub-jerarquía del concepto 
 \emph on
 ciencia
 \emph default
@@ -18103,18 +18112,18 @@ Open Directory Project
 \emph on
  
 \emph default
-De cada una de las sub-categorías en la rama elegida se obtuvo la colección
- documental, misma que se utilizó para entrenar un clasificador que permitiera
- identificar los conceptos involucrados en el texto introducido por usuarios
- finales.
+De las listas de recursos de cada una de las sub-categorías en la rama elegida
+ se obtuvo la colección documental, misma que se utilizó para entrenar un
+ clasificador que permitiera identificar los conceptos involucrados en el
+ texto introducido por los usuarios de las aplicaciones implementadoras.
  Los perfiles de usuario se representaron como instancias de ontologías
  anotadas con puntajes de preferencia.
  Para ofrecer recomendaciones, se utilizaron librerías y servicios web que
- extrajesen los términos clave de los textos provistos por los usuarios
- finales y transmitidos al servicio mediante llamadas a la API, los cuales
- se utilizan para hacer búsquedas en la colección documental, para luego
- re-ordenar estos resultados en función de su similitud con los conceptos
- presentes en los perfiles de los usuarios.
+ extrajesen, de los textos provistos por los usuarios finales y transmitidos
+ al servicio mediante llamadas a la API, términos clave que se utilizan
+ para hacer búsquedas en la colección documental, para luego re-ordenar
+ estos resultados en función de su similitud con los conceptos presentes
+ en los perfiles de los usuarios y presentarlos como recomendaciones.
  En la interfaz opcional que se puede obtener mediante la inclusión del
  
 \emph on
@@ -18122,23 +18131,26 @@ widget
 \emph default
  de javascript se implementó una rutina de supervisión de cambios en el
  texto introducido por el usuario final, de manera que se renovaran las
- recomendaciones cuando evolucione el contenido.
- La representación de la ontología se creó con la extensibilidad a otros
+ recomendaciones cuando evolucionase el contenido.
+ 
+\end_layout
+
+\begin_layout Standard
+La representación de la ontología se creó con la extensibilidad a otros
  lenguajes en mente utilizando el modelo de la ontología original del ODP:
  el idioma principal es inglés, y las categorías alternas se refieren a
  la misma instancia que la original en inglés.
  Esto permitió que, si un usuario introduce texto en un idioma, este texto
- tiene una influencia trans-lingüe en la evolución del perfil, de forma
- que lo aprendido del usuario en esa sesión será totalmente útil si en una
- sesión próxima decide escribir en otro de los idiomas soportados.
+ tendrá una influencia trans-lingüe en la evolución del perfil, de forma
+ que lo aprendido del usuario en esa sesión será completamente útil si en
+ una sesión próxima decide escribir en otro de los idiomas soportados.
  
 \end_layout
 
 \begin_layout Standard
 Se considera que el presente proyecto contribuye a las áreas de investigación
  de los sistemas de recuperación de información oportuna y de recomendación
- al proveer un servicio sobre el cual nuevas soluciones de software se puedan
- fundamentar.
+ al proveer un servicio sobre útil como base para nuevas soluciones de software.
  Asimismo, es una implementación donde se prueba el concepto de recomendación
  orientada al conocimiento, donde éste se modela mediante ontologías y los
  perfiles del usuario evolucionan heurísticamente, de modo que los investigadore
@@ -18153,9 +18165,10 @@ Observaciones y evaluación
 En primer lugar, se debe hacer notar que, lamentablemente, no se lograron
  hacer experimentos con usuarios finales para descubrir qué tan útil es
  en realidad el enfoque de recomendaciones en tiempo real -en términos de
- reducción del esfuerzo e impacto en la usabilidad; el aprendizaje de perfiles
- trans-lingüe, y las elecciones algorítmicas correspondientes a la creación,
- uso y evolución automática de perfiles.
+ reducción del esfuerzo total utilizado en culminar la tarea e impacto en
+ la usabilidad; el aprendizaje de perfiles trans-lingüe, y las elecciones
+ algorítmicas correspondientes a la creación, uso y evolución automática
+ de perfiles.
  Así, este tipo de estudio se habrá de relegar para trabajo futuro, para
  contribuir teóricamente a las áreas de investigación de recuperación oportuna
  de información y sistemas de recomendación.
@@ -18190,11 +18203,11 @@ s originales.
 \begin_layout Standard
 Para la extracción de términos, sólo se utilizó una librería re-utilizable
  para el idioma inglés, para otros idiomas, dada la ausencia de una implementaci
-ón en el lenguaje de programación elegido de una librería de extracción
- de términos, se optó por servicios web, esto, aunque práctico, agregó riesgos
- al proceso de extracción de términos dadas las posibles fallas de esos
- servicios y las restricciones que imponen (algunos limitan el tamaño del
- texto a analizar o el número de solicitudes al día).
+ón de una librería de extracción de términos en el lenguaje de programación
+ elegido, se optó por servicios web, esto, aunque práctico, agregó riesgos
+ al proceso de extracción de términos dadas las posibles fallas de éstos
+ y las restricciones que imponen (algunos limitan el tamaño del texto a
+ analizar o el número de solicitudes al día).
  Asimismo, dado que las llamadas son a servidores remotos, el tiempo total
  de la obtención de recomendaciones para idiomas distintos al inglés tiene
  una latencia considerablemente mayor (en algunas pruebas preliminares,
@@ -18206,18 +18219,19 @@ Para la extracción de términos, sólo se utilizó una librería re-utilizable
 \begin_layout Standard
 La librería de recuperación de información elegida era idónea a primera
  vista: permite ponderar campos específicos de los sustitutos documentales
- (como dar más peso al título, por ejemplo), almacenar documentos en distintos
- idiomas en una misma colección y ofrece una API de nivel medio flexible,
- sin embargo carece de documentación de calidad y algunas de las características
- que promete no están en realidad implementadas (la lematización para múltiples
- idiomas, aunque implementada en ciertas partes del código y prometida en
- la documentación no funciona, por ejemplo) y el mecanismo de cargado de
- índices es ineficiente: pretende cargar los índices en su totalidad a la
- memoria de acceso aleatorio, dependiendo del sistema operativo para esta
- tarea, causando errores en las aplicaciones que dependen de ella si no
- se dispone de suficiente memoria y el espacio que el sistema operativo
- asigna a paginación se acaba (en sistemas operativos linux, los procesos
- que abusan de memoria son sencillamente terminados).
+ (como dar más importancia a los términos título, por ejemplo), almacenar
+ documentos en distintos idiomas en una misma colección y ofrece una API
+ de nivel medio flexible, sin embargo carece de documentación de calidad
+ y algunas de las características que promete no están en realidad implementadas
+ (la lematización para múltiples idiomas, aunque implementada en ciertas
+ partes del código y prometida en la documentación no funciona, por ejemplo)
+ y el mecanismo de cargado de índices es ineficiente: pretende cargar los
+ índices en su totalidad a la memoria de acceso aleatorio, dependiendo del
+ sistema operativo para esta tarea, causando errores en las aplicaciones
+ que dependen de ella si no se dispone de suficiente memoria y el espacio
+ que el sistema operativo asigna a paginación se acaba (y en sistemas operativos
+ linux, los procesos que abusan de memoria son sencillamente terminados,
+ lo cual podría presentar un problema en un ámbito de producción).
 \end_layout
 
 \begin_layout Standard
@@ -18234,7 +18248,7 @@ n que un servidor no debería tardar demasiado en responder a una solicitud
 \end_layout
 
 \begin_layout Standard
-Para la evolución de perfiles, se consideró que la similitud de un documento
+Para la evolución de perfiles, se consideró que la similitud entre un documento
  y la categoría bajo la cual está clasificado es de un 100%, esto debido
  a que los documentos son obtenidos del ODP, donde están clasificados por
  seres humanos, y el criterio automático del clasificador, aunque quizá
@@ -18253,32 +18267,34 @@ r de tener que crear una interfaz para edición de perfil, mas priva al sistema
 \begin_layout Standard
 Para la agregación de múltiples usuarios y la evolución de perfiles se utilizó
  una cola de tareas, permitiendo el procesamiento asíncrono de éstas.
- Sin embargo, se introdujo el riesgo de que una tarea no fuese procesada,
- o el orden en que las evoluciones del perfil se haga incorrectamente, además
- de los problemas típicos introducidos por la concurrencia.
+ Sin embargo, se introdujo el riesgo de que una tarea no fuese procesada
+ o el orden de las evoluciones del perfil se viese afectado, además de los
+ problemas típicos introducidos por la concurrencia.
  Se debe recalcar que el software utilizado para este efecto está especializado
  en la tarea, por lo que ofrece protección básica para situaciones peligrosas
  de concurrencia, junto a mecanismos de re-intento; pero riesgos de seguridad
  y confiabilidad subsisten, por ejemplo, en pruebas preliminares, se logró
- burlar el límite nominal de usuarios permitidos por aplicación al ejecutar
+ burlar el límite nominal por aplicación de usuarios permitidos al ejecutar
  una agregación múltiple (asíncrona) con el proceso de administración de
- tareas apagado, luego insertando más usuarios de manera sincronizada mediante
+ tareas detenido, luego insertando más usuarios de manera sincronizada mediante
  la llamada de inserción individual hasta llegar al límite y por último
- activando el proceso de tareas: éste guardó como límite el número de usuarios
- que había 
+ activando el proceso de tareas: éste había guardado como límite el número
+ de usuarios que había 
 \emph on
 antes
 \emph default
- de las otras inserciones, efectivamente sobrepasando el límite.
+ de las otras inserciones, efectivamente sobrepasando el límite al ejecutar
+ las tareas que estaban en cola.
 \end_layout
 
 \begin_layout Standard
 El servicio se implementó apegándose donde fuera útil a la filosofía de
  diseño REST y la semántica inherente al protocolo HTTP, de ahí que operaciones
- que involucren cambios directos en la base de datos sólo se permitan mediante
- solicitudes autenticadas y mediante el método POST (en realidad, se debió
- haber utilizado PUT para la agregación de usuarios y DELETE para la eliminación
-, pero no todos los exploradores y librerías implementan estos métodos).
+ que involucrasen cambios directos en la base de datos sólo se permiten
+ mediante solicitudes autenticadas y a través del método POST (en realidad,
+ se debió haber utilizado PUT para la agregación de usuarios y DELETE para
+ la eliminación, pero no todos los exploradores y librerías implementan
+ estos métodos).
  Al requerir que las llamadas de obtención de recomendaciones y actualización
  de perfiles causaran siempre búsquedas en la base de datos (para obtener
  el usuario y la aplicación) en lugar de utilizar un sistema de sesiones
@@ -18288,11 +18304,10 @@ do que
 una
 \emph default
  llamada a la solicitud de recomendaciones tuviera presente los parámetros
- y suponiendo que, si faltasen en las subsiguientes, era porque la misma
- aplicación las solicitaba para el mismo usuario) quizá se sacrificó rapidez
- de respuesta, pero se hizo con el fin de permitir la escalabilidad en el
- futuro y proveer una interfaz más simple de implementar para los desarrolladore
-s.
+ y suponiendo luego que, si faltasen en las subsiguientes llamadas, era
+ porque la misma aplicación las solicitaba para el mismo usuario) quizá
+ se sacrificó rapidez de respuesta, pero se hizo con el fin de permitir
+ la escalabilidad en el futuro y no afectar la simplicidad de la API.
 \end_layout
 
 \begin_layout Standard
@@ -18305,21 +18320,21 @@ La confiabilidad se tuvo presente durante el desarrollo: para la extracción
 \end_layout
 
 \begin_layout Standard
-El lenguaje de programación utilizado, python, aunque práctico y muy poderoso,
- al ser de mayor nivel que otros lenguajes como C o C++, puede reducir el
- desempeño de aplicaciones como la desarrollada en este proyecto, que lidian
- con grandes cantidades de datos; de igual manera este lenguaje, al menos
- en la versión utilizada para el desarrollo -2.6; a diferencia de otros lenguajes
- utilizados para software similar (como java o C#), asume que las cadenas
- de caracteres están codificadas en ASCII por defecto, causando problemas
- serios -que en algunos casos retrasaron el desarrollo- cuando se procesa
- texto en lenguajes que requieren codificación UNICODE (como el español).
+El lenguaje de programación utilizado, python, aunque versátil, al ser de
+ mayor nivel que otros lenguajes como C o C++, puede reducir el desempeño
+ de aplicaciones como la desarrollada en este proyecto, que lidian con grandes
+ cantidades de datos; de igual manera, este lenguaje, al menos en la versión
+ utilizada para el desarrollo -la 2.6- a diferencia de otros lenguajes utilizados
+ para software similar (como java o C#), asume que las cadenas de caracteres
+ están codificadas en ASCII por defecto, causando problemas serios -que
+ en algunos casos retrasaron el desarrollo- cuando se procesa texto en lenguajes
+ que requieren codificación UNICODE (como el español).
 \end_layout
 
 \begin_layout Standard
 Este proyecto fue la primera incursión del autor en el uso de pruebas automatiza
-das, y, aunque la metodología ágil de desarrollo usualmente alienta el uso
- de prácticas de programación extrema como ser el 
+das, y, aunque la metodología ágil de desarrollo alienta el uso de prácticas
+ de programación extrema como ser el 
 \emph on
 desarrollo conducido por pruebas
 \emph default
@@ -18327,18 +18342,19 @@ desarrollo conducido por pruebas
 \emph on
 TDD, por Test driven development), 
 \emph default
-por cuestiones de tiempo -y, sobre todo, temiendo a lo desconocido- se dejó
- el desarrollo y aplicación de éstas para la última etapa del desarollo.
+por falta de habituación y familiaridad con estas prácticas se dejó el desarroll
+o y aplicación de éstas para la última etapa del desarollo.
  Las pruebas develaron, como se discute en el capítulo correspondiente,
- algunos problemas y permitieron una evaluación verdaderamente crítica del
- desarrollo, por lo que hubiera sido muy útil haber seguido la filosofía
+ algunos problemas que pudieron corregirse y otros que pudieron identificarse
+ como trabajo futuro y permitieron una evaluación verdaderamente crítica
+ del desarrollo, por lo que hubiera sido muy útil haber seguido la filosofía
  TDD y diseñar las pruebas 
 \emph on
 antes
 \emph default
- de los componentes fundamentales del código, pues esta práctica permite
- librarse más rápido de los errores más obvios y concentrarse en las tareas
- a probar, sin divagar produciendo código que al final se prueba inútil.
+ de los componentes fundamentales del código, ya que esto permite librarse
+ más rápido de los errores más obvios y concentrarse en las tareas a probar,
+ sin divagar produciendo código que al final resulta inútil.
 \end_layout
 
 \begin_layout Section
@@ -18359,14 +18375,15 @@ Desarrollo
 La implementación modular del servicio tiene la ventaja que cualquiera de
  los cambios propuestos a un componente a continuación tendrían poco o ningún
  impacto en los demás.
- El trabajo futuro se procura redactar aquí de manera que vaya de lo más
- importante en los primeros párrafos a lo meramente deseable al final.
+ El trabajo futuro se procura redactar aquí de lo más importante en los
+ primeros párrafos a lo más tentativo al final.
 \end_layout
 
 \begin_layout Standard
-El primer paso en desarrollo comprendería el diseño de un componente de
- evolución de la colección documental y la ontología.
- Respecto a la ontología, se podría mantener el modelo actual y mantenerla
+El primer paso en cuanto a desarrollo comprendería el diseño de un componente
+ de actualización automática tanto para la colección documental como la
+ ontología.
+ Respecto a la ontología, se podría conservar el modelo actual y mantenerla
  al día utilizando las actualizaciones semanales en formato 
 \emph on
 RDF
@@ -18377,7 +18394,7 @@ ODP.
  
 \emph default
 Se podrían, también, agregar nuevas fuentes de ontologías y permitir a los
- implementadores elegir el dominio de conocimiento u ontología de donde
+ implementadores elegir los dominios de conocimiento u ontologías de donde
  desean recibir recomendaciones.
  Asimismo, se podría cambiar radicalmente el modelo y depender de APIs o
  servicios de proyectos como 
@@ -18392,33 +18409,35 @@ freebase.com
 \end_inset
 
  para la adquisición del conocimiento semántico.
- En cuanto a la colección documental, se podría seguir obteniendo documentos
+ En cuanto a la colección documental, se podrían seguir obteniendo documentos
  del ODP, lo cual tiene la ventaja de evitar una fase de clasificación,
  ya que en el ODP los documentos ya están agrupados bajo una categoría.
- De manera similar a la ontología, se podrían agregar nuevas fuentes parametriza
-bles de documentos para dominios de conocimiento específicos, en este caso,
- se habría de construir un componente más especializado de clasificación
- para asignar categorías a los documentos.
-\end_layout
-
-\begin_layout Standard
-Dado el polimorfismo de la información útil en la actualidad, el servicio
- debería poder ofrecer más hipermedia que la actual (HTML y PDF), como imágenes,
- video o archivos de sonido, siempre y cuando esto tuviera en cuenta que
- la filosofía fundamental del desarrollo es no distraer al usuario de su
- tarea principal, sino enriquecerla sin intrusión.
+ Se podrían agregar también nuevas fuentes parametrizables de documentos
+ para dominios de conocimiento específicos, y, en este caso, se habría de
+ construir un componente más especializado de clasificación para asignar
+ categorías a los documentos.
 \end_layout
 
 \begin_layout Standard
 Se podría implementar un modelo de seguimiento histórico de sesiones, de
  manera que se sepa qué documentos han sido recomendados recientemente:
- así, se podría tomar en cuenta la última vez que un recurso se sugirió
- y dar preferencia a otros que no se hayan recomendado o que se hayan recomendad
-o más allá de cierto umbral temporal; con esto se incrementaría la 
+ así se podría tomar en cuenta la última vez que un recurso se sugirió y
+ dar preferencia a otros que no se hayan recomendado o que se hayan recomendado
+ más allá de cierto umbral temporal; con esto se incrementaría la 
 \emph on
 serendipia
 \emph default
- de los resultados.
+ de los resultados, al aumentar la probabilidad de que un recurso recomendado
+ no haya sido visto antes por el usuario.
+\end_layout
+
+\begin_layout Standard
+Estando consciente de la diversidad de formatos de archivo en los cuales
+ se puede encontrar información útil en la actualidad, el servicio debería
+ poder ofrecer más hipermedia que la actual (HTML y PDF), como imágenes,
+ video o archivos de sonido, siempre y cuando esto tuviese en cuenta que
+ la filosofía fundamental del desarrollo es no distraer al usuario de su
+ tarea principal, sino enriquecerla sin intrusión.
 \end_layout
 
 \begin_layout Standard
@@ -18427,7 +18446,7 @@ Las políticas de registro de usuario podrían revisarse para normalizar los
  como códigos, nombres de usuario o direcciones de correo electrónico),
  sin embargo, quizá sería más sencillo para ambas partes (servicio e implementad
 ores) que se exigiese uno solo -siendo el correo electrónico una opción
- recomendada.
+ recomendable.
  Asimismo, la verdadera utilidad de la llamada asíncrona de adición de usuarios
  bajo una aplicación se habría de revisar bajo límites mayores, para descubrir
  de una vez si es verdaderamente útil o sólo una mala decisión 
@@ -18440,18 +18459,19 @@ La interfaz opcional (
 \emph on
 widget
 \emph default
-) se puede reescribir para ser aún más adaptable a las necesidades del implement
-ador: múltiples campos de entrada de texto para el análisis de contexto
- local, cambios en los temas cromáticos y más opciones para provisión de
- retroalimentación y uso de las recomendaciones, entre otros.
+) se podría reescribir para ser aún más adaptable a las necesidades del
+ implementador: múltiples campos de entrada de texto para el análisis de
+ contexto local, cambios en los temas cromáticos y más opciones para provisión
+ de retroalimentación y uso de las recomendaciones, entre otros.
 \end_layout
 
 \begin_layout Standard
 Se podría construir un componente de clasificación más efectivo: en lugar
  de utilizar un modelo simple de recuperación estadística de información
- para obtener categorías similares a un documento, aprovechar técnicas de
- aprendizaje de máquina para obtener clasificaciones cuyos criterios sean
- más sofisticados que los que un modelado de lenguaje simple puede lograr.
+ para encontrar categorías similares a un documento, aprovechar técnicas
+ de aprendizaje de máquina para obtener clasificaciones cuyos criterios
+ sean más sofisticados que los que un modelado de lenguaje simple puede
+ lograr.
 \end_layout
 
 \begin_layout Standard
@@ -18468,8 +18488,11 @@ djapian
 Un modelo semántico de recuperación de información se podría utilizar para
  obtener los documentos a recomendar, de esta manera, en lugar de incurrir
  en el paso extra de la extracción de términos clave, se podrían encontrar
- documentos con un contenido relacionado al contexto local a nivel de significad
-o, reportando -quizá- mejoras en sesiones donde el perfil aún no contiene
+ documentos con un contenido relacionado al contexto local 
+\emph on
+a nivel de significado
+\emph default
+, reportando -quizá- mejoras en sesiones donde el perfil aún no contiene
  suficientes datos (reduciendo aún más el problema de arranque en frío del
  cual sufren los sistemas de recomendación y que el uso de una ontología
  palia hasta cierto punto).
@@ -18483,9 +18506,9 @@ o, reportando -quizá- mejoras en sesiones donde el perfil aún no contiene
 
 \begin_layout Standard
 Los enfoques de evolución de perfiles y personalización se podrían revisar:
- la personalización podría expandir las consultas a la colección documental
- mediante términos de sesiones anteriores o utilizando otras técnicas de
- re-escritura de consultas.
+ la personalización podría consistir en la expansión de las consultas a
+ la colección documental mediante términos clave encontrados en sesiones
+ anteriores o utilizando otras técnicas de re-escritura de consultas.
  La evolución podría utilizar técnicas de procesamiento de lenguaje natural
  para una identificación más exacta de las preferencias del usuario.
 \end_layout
@@ -18565,10 +18588,10 @@ Para obtener una ganancia monetaria de este servicio, se podría seguir el
 
 \begin_layout Itemize
 Como muchas aplicaciones actuales, se podría imponer un límite de usuarios
- registrados para aplicaciones que hagan uso gratuito del servicio, si se
- requiere agregar más usuarios, habría que pagar una tarifa fija.
- Un límite adecuado al almacenamiento actual del servidor ya se impuso en
- la versión actual del software.
+ registrados para aplicaciones que hagan uso gratuito del servicio, y si
+ se requiriese agregar más usuarios, habría que pagar una tarifa fija.
+ Un límite basado en la capacidad de almacenamiento actual del servidor
+ ya se impuso en la versión actual del software: 30 usuarios por aplicación.
 \end_layout
 
 \begin_layout Itemize
@@ -18596,10 +18619,11 @@ http://developer.yahoo.com/search/rate.html
 \end_inset
 
 ).
+ 
 \end_layout
 
 \begin_layout Itemize
-Una opción interesante de comercialización es la que implementa 
+Un enfoque interesante de comercialización es el que implementa 
 \emph on
 zemanta
 \begin_inset Foot
@@ -18638,7 +18662,8 @@ contenido promocionado
 \begin_inset Quotes erd
 \end_inset
 
-, lo cual demuestra respeto a la integridad de la filosofía inicial.
+ cuando los recomienda, lo cual demuestra respeto a la integridad de la
+ filosofía inicial.
 \end_layout
 
 \begin_layout Section
@@ -18745,9 +18770,34 @@ dor de software caótico e incapaz de tratar con otras personas o de crear
 \begin_layout Itemize
 Aunque el desarrollo conducido por pruebas (TDD) es quizá, llevado a sus
  extremos, contraproducente para proyectos pequeños, el beneficio que el
- sólo hecho de pensar y elaborar casos de prueba automatizados es innegable:
- los desarrolladores acostumbramos probar nuestro software con valores y
- en situaciones que 
+ sólo hecho de pensar y elaborar casos de prueba automatizados es innegable
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+De hecho, el verdadero beneficio consiste en detallar escenarios de uso,
+ de ahí la nueva tendencia al 
+\emph on
+desarrollo conducido por el comportamiento
+\emph default
+ (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://behaviour-driven.org/Introduction
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+: los desarrolladores acostumbramos probar nuestro software con valores
+ y en situaciones que 
 \emph on
 sabemos
 \emph default
@@ -18757,7 +18807,11 @@ sabemos
  estudiantes de la carrera de ingeniería en sistemas computacionales que
  tengan interés en el desarrollo de software conozcan esta práctica desde
  temprano en su formación, para aprender a construir software de calidad
- comprobable, no solo probablemente software de calidad.
+ 
+\emph on
+comprobable
+\emph default
+.
 \end_layout
 
 \begin_layout Itemize
