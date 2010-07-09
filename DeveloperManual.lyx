@@ -47,7 +47,7 @@ Manual para Implementadores
 \end_layout
 
 \begin_layout Author
-T-Recs: un servicio de recomendación basado en ontologías
+T-Recs: un servicio web de recomendación basado en ontologías
 \begin_inset Newline newline
 \end_inset
 
@@ -86,7 +86,7 @@ En la actualidad, la gente que produce información para ser consumida por
 \emph on
 luego
 \emph default
- dedicarse a escribir su propio trabajo.
+ dedicarse a escribir su propio trabajo sin volver a investigar.
  Esta costumbre, sin embargo, tiende a producir trabajos de baja calidad
  o alto riesgo de plagio y contradicciones, debido a que las ideas evolucionan
  y se desarrollan sólo cuando se está escribiendo.
@@ -114,14 +114,18 @@ El servicio se provee mediante una interfaz de programación de aplicaciones
 \end_layout
 
 \begin_layout Standard
-Para desarrolladores web existe la opción de incluir unas cuantas líneas
- de código javascript a las páginas donde se desee implementar la funcionalidad,
- para así ahorrarse el paso de desarrollar una interfaz y métodos que manejen
- las recomendaciones; la otra alternativa (y la única para los implementadores
- de otro tipo de aplicaciones) es implementar las llamadas a la API y proveer
- a sus usuarios de una interfaz que las presente, el desarrollo de la misma
- puede seguir algunos lineamientos presentados en la descripción de cada
- método, para aprovechar al máximo el servicio.
+Para desarrolladores web existe la opción de incluir un 
+\emph on
+widget
+\emph default
+ con unas cuantas líneas de código javascript a las páginas donde se desee
+ implementar la funcionalidad, para así ahorrarse el paso de desarrollar
+ una interfaz y métodos que manejen las recomendaciones; la otra alternativa
+ (y la única para los implementadores de otro tipo de aplicaciones) es implement
+ar las llamadas a la API y proveer a sus usuarios de una interfaz que las
+ presente; teniendo en cuenta que el desarrollo de la misma puede seguir
+ algunos lineamientos presentados en la descripción de cada método, para
+ aprovechar al máximo el servicio.
 \end_layout
 
 \begin_layout Addsec
@@ -140,7 +144,8 @@ El presente documento está dirigido a desarrolladores de software tanto
 Javascript Object Notation
 \emph default
 ) por lo que también se requiere que el implementador conozca una manera
- de extraer información de un texto en JSON en el lenguaje que elija.
+ de extraer información estructurada de un texto en JSON en el lenguaje
+ que elija.
  Los implementadores web que deseen incluir el 
 \emph on
 widget
@@ -190,9 +195,9 @@ widget
 clave de aplicación
 \emph default
 .
- Ésta es una cadena de caracteres que identifica a cada aplicación registrada,
- por cada aplicación que implemente el servicio, el desarrollador deberá
- proveer una clave válida.
+ Ésta es una cadena de caracteres que identifica a cada aplicación registrada;
+ de modo que por cada aplicación que implemente el servicio, el desarrollador
+ deberá proveer una clave válida.
  
 \end_layout
 
@@ -311,20 +316,20 @@ Una vez completo con éxito el formulario, el usuario será redirigido a la
  a la dirección provista con la clave de aplicación y las credenciales de
  autenticación correspondientes a la aplicación.
  Las credenciales de autenticación consisten en un nombre de usuario (el
- nombre de la aplicación) y una contraseña generada aleatoriamente, permiten
- el uso seguro de llamadas a métodos sensibles como adición y eliminación
- de usuarios.
+ nombre de la aplicación) y una contraseña generada aleatoriamente; éstas
+ permiten el uso seguro de llamadas a métodos sensibles como adición y eliminaci
+ón de usuarios.
 \end_layout
 
 \begin_layout Standard
 Si el correo electrónico no se recibe -antes de asumir que no se recibió,
- se recomienda revisar en la carpeta que algunos clientes asignan a correo
- no deseado, el implementador no debe intentar registrarse de nuevo, sino
- contactar al servicio.
+ se recomienda revisar en la carpeta que algunos clientes de correo asignan
+ a correo no deseado- el implementador no debe intentar registrarse de nuevo,
+ sino contactar al servicio.
 \end_layout
 
 \begin_layout Section
-Decidir método de administración de usuarios
+Decidir el método de administración de usuarios
 \end_layout
 
 \begin_layout Standard
@@ -332,8 +337,8 @@ Es responsabilidad del desarrollador registrar los usuarios que recibirán
  recomendaciones.
  Las llamadas al método de obtención de recomendaciones, además de la clave
  de aplicación, requieren un identificador único para el usuario actual,
- este identificador debe corresponder con alguno previamente registrado
- para la aplicación.
+ este identificador debe estar previamente registrado para la aplicación
+ que haga la llamada.
  
 \end_layout
 
@@ -341,15 +346,19 @@ Es responsabilidad del desarrollador registrar los usuarios que recibirán
 Se recomienda utilizar la dirección de correo electrónico como identificador
  único de los usuarios, pero cualquier cadena de caracteres que identifique
  unívocamente a cada usuario en la aplicación implementadora servirá.
- 
+ No se permiten duplicados.
 \end_layout
 
 \begin_layout Standard
 Existen dos alternativas de agregación: mediante el panel de control provisto
  en el sitio web del servicio y mediante llamadas a la API de administración
  de usuarios.
- Asimismo, se provee una interfaz para que cualquier implementador pueda
- cambiar la contraseña asignada a su aplicación.
+ 
+\end_layout
+
+\begin_layout Standard
+Se provee también una interfaz para que cualquier implementador pueda restablece
+r la contraseña asignada a su aplicación.
 \end_layout
 
 \begin_layout Subsection
@@ -359,7 +368,7 @@ Administración mediante el panel de control
 \begin_layout Standard
 Esta alternativa se recomienda sólo para aplicaciones con un número pequeño
  y limitado de usuarios o donde la membresía se determina manualmente.
- Para acceder al panel de control, diríjase a 
+ Para acceder al panel de control, se habrá de dirigir a 
 \begin_inset Flex URL
 status collapsed
 
@@ -371,8 +380,8 @@ trecs.com/dashboard/
 \end_inset
 
 .
- Téngase en cuenta que si no se ha autenticado, se le solicitarán sus credencial
-es de acceso.
+ Téngase en cuenta que se requiere autenticación, por lo que se deberá llenar
+ el formulario de autenticación antes de acceder.
 \end_layout
 
 \begin_layout Subsubsection
@@ -399,9 +408,10 @@ reference "fig:user-addition"
 .
  Como se puede observar, en la parte superior se indica el estado del número
  de usuarios registrados respecto al límite impuesto por la aplicación.
- El número de cajas de texto para introducción de identificadores está limitado
- por el límite actual (que es el límite total menos el número de usuarios
- registrados).
+ El número de cajas de texto con las que se puede contar para introducción
+ de identificadores no excederá la cantidad de usuarios que aún se pueden
+ agregar, de modo que no se puede forzar esta interfaz -en circunstancias
+ normales de uso- a agregar más usuarios de lo permitido.
 \end_layout
 
 \begin_layout Standard
@@ -453,9 +463,9 @@ Listado y eliminación de usuarios
 
 \begin_layout Standard
 El panel de control también permite revisar los usuarios ya registrados
- en la aplicación y da la facilidad de eliminarlos.
+ en la aplicación y da la facilidad de borrarlos.
  Téngase presente que, al tratar de eliminar un usuario aparecerá un diálogo
- de confirmación para evitar borrados accidentales.
+ de confirmación para evitar eliminaciones accidentales.
  Para identificar esta interfaz, véase la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -671,14 +681,14 @@ La forma más expedita de comenzar a utilizar el servicio en una aplicación
  web es mediante la inclusión del widget.
  Éste es una interfaz que muestra las recomendaciones y hace las actualizaciones
  de perfiles automáticamente.
- Se requiere cierto conocimiento de javascript para configurarlo y de html
- para aprovecharlo.
+ Se requiere cierto conocimiento de javascript, css y html para configurarlo
+ y utilizarlo correctamente.
  
 \end_layout
 
 \begin_layout Standard
-Para demostrar cómo usarlo, se utilizará como referencia el documento html
- de la figura 
+Para demostrar cómo usarlo, se usará como referencia el documento html de
+ la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:html-src"
@@ -732,10 +742,6 @@ name "fig:html-doc"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -831,13 +837,32 @@ jqueryui
 \emph default
  para efectos y animaciones, recomendada la versión 1.8.1).
  No es necesario bajarlas e incluirlas entre los archivos estáticos de la
- aplicación: es servida por google para este tipo de usos, y esta opción
- es la recomendada.
+ aplicación: es servida por google
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://code.google.com/apis/ajaxlibs/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ para este tipo de usos, y esta opción es la recomendada.
 
 \emph on
  
 \emph default
-Para incluirlas, entonces, se debe incluir, entre las etiquetas 
+Para incluirlas, entonces, se habrán de incluir, entre las etiquetas 
 \emph on
 head
 \emph default
@@ -980,14 +1005,14 @@ appUser
 \emph default
 .
  Se recomienda que el implementador utilice una página generada dinámicamente
- del lado del servidor para poder obtener el usuario actual.
- Esto es posible mediante un script php que genere la configuración en tiempo
- de solicitud o mediante el sistema de plantillas para páginas dinámicas
- de 
+ del lado del servidor para poder obtener el identificador del usuario actual.
+ Esto, por ejemplo, es posible mediante un script php que genere la configuració
+n en tiempo de solicitud o mediante el sistema de plantillas para páginas
+ dinámicas de 
 \emph on
 django
 \emph default
-, para citar algunos ejemplos.
+.
  
 \end_layout
 
@@ -1079,7 +1104,7 @@ En todo caso, por simplicidad, se asume que alguna variación de este script
 \emph on
 app y user
 \emph default
-.
+).
 \end_layout
 
 \begin_layout Standard
@@ -1584,11 +1609,15 @@ Este es el escenario más probable: un usuario edita contenido y lo guarda
  Asumiendo que el documento sigue los estándares semánticos del html, esta
  edición se logra mediante un formulario.
  El widget cambiará el comportamiento de la página: antes de ejecutar la
- acción original del formulario donde están los datos, actualiza el perfil
+ acción original del formulario donde están los datos, actualizará el perfil
  del usuario actual.
- Asimismo, puesto que por defecto la retroalimentación es implícita, el
- código del widget supervisará los vínculos seguidos y utilizará esa información
- para aprender las preferencias del usuario.
+ 
+\end_layout
+
+\begin_layout Standard
+Puesto que por defecto la retroalimentación es implícita, el código del
+ widget supervisará los vínculos seguidos y utilizará esa información para
+ aprender las preferencias del usuario.
  Un script como el siguiente podría lograr tal configuración (siempre en
  base al documento de ejemplo):
 \end_layout
@@ -1689,7 +1718,8 @@ Este escenario aún es experimental y puede cambiar en futuras versiones
  La retroalimentación explícita permite que sólo documentos elegidos conscientem
 ente por el usuario se consideren para aprender sus preferencias.
  Para este fin, a cada resultado de las recomendaciones se le agrega un
- botón, el cual, presionado, constituye retroalimentación.
+ botón, el cual, presionado, hace que el documento se considere retroalimentació
+n.
  
 \end_layout
 
@@ -1974,18 +2004,19 @@ Comprender el comportamiento del widget
 \end_layout
 
 \begin_layout Standard
-Una vez configurado el widget, la interfaz 
+Una vez configurado el widget, 
 \emph on
 antes
 \emph default
- de comenzar una edición se verá como la de la figura 
+ de comenzar una edición la interfaz se verá como la de la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:idle-widget"
 
 \end_inset
 
- (la cual es una variación con estilos css del ejemplo de la figura 
+ (esta figura es una variación con estilos css del ejemplo de la figura
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:html-doc"
@@ -2006,8 +2037,8 @@ widget
 \emph default
  determina que el contenido es suficiente como para hacer las primeras recomenda
 ciones, cambiará de imagen y color, pulsando cinco veces.
- De esta manera se llama la atención del usuario -sin causar demasiada interrupc
-ión.
+ De esta manera se llama la atención del usuario sin causar demasiada interrupci
+ón.
  Este cambio se ilustra en la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2043,15 +2074,15 @@ ación gráfica.
  Este promedio indica qué tan útiles considera el servicio las recomendaciones
  que encontró para el contexto actual.
  Si no las considera muy útiles (promedio menor a 30%), el gráfico se torna
- rojo, si son medianamente relevantes, amarillo y si exceden un umbral (60%),
- verde.
+ rojo, si son medianamente relevantes, amarillo y si exceden un umbral aceptable
+ (60%), verde.
 \end_layout
 
 \begin_layout Itemize
 A continuación, el usuario encuentra un cuadro de texto con los términos
  clave que el servicio encontró en su contexto local; si el usuario considera
  que estos términos reflejan la información que está produciendo, puede
- continuar.
+ proceder a revisar las recomendaciones.
  
 \end_layout
 
@@ -2077,8 +2108,9 @@ La última etapa es cuando un usuario decide seguir el vínculo de un documento
  para revisarlo.
  Aquí, si se está en modo implícito, se considera retroalimentación.
  Si se está en modo explícito, sólo cuando el usuario regrese a la interfaz
- y elija activamente el documento se considerará retroalimentación.
- Una interfaz en modo explícito se puede observar en la figura 
+ y elija activamente el documento se considerará a éste como retroalimentación.
+ Una interfaz configurada en modo explícito se puede observar en la figura
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:explicit-relevance"
@@ -2090,8 +2122,8 @@ reference "fig:explicit-relevance"
 
 \begin_layout Standard
 Mientras el usuario siga editando, el widget seguirá supervisando los cambios
- al contexto, ofreciendo nuevas recomendaciones cuando considere que éste
- ha cambiado lo suficiente.
+ al contexto, ofreciendo nuevas recomendaciones cuando considere que el
+ contenido ha cambiado lo suficiente.
 \end_layout
 
 \begin_layout Standard
@@ -2278,14 +2310,16 @@ name "cha:api"
 Para los desarrolladores que deseen aprovechar al máximo el servicio se
  creó una API que permite que, mediante solicitudes HTTP a métodos ubicados
  en URLs, se pueda obtener la funcionalidad ofrecida por el sistema.
- En este capítulo se explica el comportamiento general de la API y luego
- se procede a detallar cada método.
- Se pueden distinguir dos conjuntos de métodos en la API: los que se utilizan
+ 
+\end_layout
+
+\begin_layout Standard
+Se pueden distinguir dos conjuntos de métodos en la API: los que se utilizan
  para administrar usuarios y los utilizados para el servicio de recomendación
  en sí.
  En este capítulo se explican todos en detalle y se incluye un apartado
- con ejemplos de llamadas a algunos de éstos para dar ideas de implementación
- a los desarrolladores.
+ con ejemplos de llamadas a algunos de éstos en ciertos lenguajes de programació
+n para dar ideas de implementación a los desarrolladores.
 \end_layout
 
 \begin_layout Section
@@ -2294,23 +2328,14 @@ Comportamiento general de llamadas a la API
 
 \begin_layout Standard
 Para todas las llamadas a la API, el servidor habrá de contestar con una
- respuesta http.
- 
+ respuesta http y se requiere que se provea la clave única de la aplicación.
 \end_layout
 
 \begin_layout Standard
-Todas las llamadas requieren que se provea la clave única de la aplicación.
-\end_layout
-
-\begin_layout Standard
-Para 
-\emph on
-todas
-\emph default
- las llamadas a la API (excepto en dos casos, que se explican más adelante),
- el servicio contestará con una respuesta con código de estado 200 (éxito)
- y el contenido codificado en el formato de intercambio de datos JSON representa
-ndo un objeto con la siguiente estructura (en json):
+Para la totalidad de las llamadas a la API (excepto en dos casos, que se
+ explican más adelante), el servicio contestará con una respuesta con código
+ de estado 200 (éxito) y el contenido codificado en el formato de intercambio
+ de datos JSON representando un objeto con la siguiente estructura (en json):
 \end_layout
 
 \begin_layout Standard
@@ -2378,8 +2403,8 @@ atributos de retorno.
 \end_layout
 
 \begin_layout Standard
-Si la llamada tiene errores (parámetros incorrectos/faltantes o hubo un
- error al procesarla), la propiedad 
+Si la llamada tiene errores (parámetros incorrectos o faltantes, o hubo
+ un error al procesarla), la propiedad 
 \emph on
 data 
 \emph default
@@ -2527,7 +2552,7 @@ JSON with padding
 script 
 \emph default
 devuelto como una llamada a una función que deberá definirse en el lado
- del cliente, es de notar que la mayor parte de librerías de javascript
+ del cliente; téngase en cuenta que la mayor parte de librerías de javascript
  contemporáneas tienen la capacidad de manejar automáticamente solicitudes
  con la técnica JSONP
 \begin_inset Foot
@@ -2631,6 +2656,11 @@ http://docstore.mik.ua/orelly/webprog/jscript/ch02_07.htm
 , el servidor responderá con un documento con código de estado 400 (solicitud
  incorrecta).
  No se devuelve la descripción del error en JSON puesto que, al no contar
+ con un 
+\emph on
+callback
+\emph default
+
 \begin_inset Foot
 status collapsed
 
@@ -2645,10 +2675,6 @@ callback
 
 \end_inset
 
- con un 
-\emph on
-callback
-\emph default
 , el solicitante no tendría manera de examinar la respuesta y, por tanto,
  no podría 
 \emph on
@@ -2678,7 +2704,7 @@ data
 \begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -2731,8 +2757,7 @@ Solución
 
 \begin_layout Plain Layout
 Uno de los parámetros requeridos por la llamada no ha sido provisto o el
- parámetro opcional general de función de retorno javascript no es un identifica
-dor válido.
+ parámetro callback no es un identificador válido en el lenguaje javascript.
 \end_layout
 
 \end_inset
@@ -2742,7 +2767,8 @@ dor válido.
 
 \begin_layout Plain Layout
 Revisar la llamada e incluir los parámetros necesarios: el contenido de
- la respuesta contendrá los parámetros requeridos que hayan faltado.
+ la respuesta contendrá una lista con los parámetros requeridos que hayan
+ faltado.
 \end_layout
 
 \end_inset
@@ -2772,8 +2798,9 @@ Sólo es devuelto al tratar de registrar usuarios.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Eliminar usuarios inactivos o solicitar una expansión personalizada del
- límite (esta característica no es ofrecida en la versión actual del servicio).
+Eliminar usuarios inactivos.
+ En versiones futuras se podrá solicitar una expansión del límite, mas no
+ es posible en la versión actual del servicio.
 \end_layout
 
 \end_inset
@@ -2793,9 +2820,9 @@ Eliminar usuarios inactivos o solicitar una expansión personalizada del
 \begin_inset Text
 
 \begin_layout Plain Layout
-Si la solicitud es a una URL válida del servicio, la causa se debe a la
- provisión de una clave única inválida o un usuario no existente para la
- aplicación que llama.
+Si la solicitud es a una URL existente del servicio, la causa se debe a
+ la provisión de una clave única inválida o un usuario no existente para
+ la aplicación que llama.
 \end_layout
 
 \end_inset
@@ -2842,7 +2869,7 @@ Cuando el servidor ha tenido un error en alguno de sus componentes y no
 Este es el único error que el usuario no puede enmendar y no requiere mayor
  acción de su parte.
  El servicio cuenta con un mecanismo de auto-reporte de errores internos
- a los desarrolladores, así que el reporte del error es totalmente opcional.
+ a los desarrolladores.
  
 \end_layout
 
@@ -2905,8 +2932,8 @@ Adición de usuarios individuales
 Esta llamada permite al implementador agregar los usuarios uno por uno (método
  recomendado para cuando se desee registrar un usuario al momento en que
  se cree en la aplicación implementadora o cuando el usuario elija utilizar
- la interfaz de recomendación) Sólo se requiere un usuario como parámetro,
- si se pasa una lista de usuarios, sólo el último se agregará y los demás
+ la interfaz de recomendación) sólo se requiere un usuario como parámetro,
+ si se pasa una lista de usuarios, sólo el primero se agregará y los demás
  se obviarán.
  
 \end_layout
@@ -2984,8 +3011,7 @@ Esta llamada se proporciona para aplicaciones que deseen agregar varios
  Así, cuando se hace la llamada se agrega la solicitud a una cola de tareas
  para ser procesada cuando el administrador de carga del servidor lo considere
  idóneo.
- Un correo electrónico se enviará a la dirección de contacto registrada
- para la aplicación una vez terminada esta tarea.
+ 
 \end_layout
 
 \begin_layout Description
@@ -3025,7 +3051,7 @@ appId: la clave única de la aplicación
 \begin_layout Description
 user: un arreglo de identificadores únicos a agregar.
  De preferencia, este arreglo se ha de representar en la solicitud como
- parámetros separados con el mismo nombre, por ejemplo: 
+ parámetros separados, mas con el mismo nombre, por ejemplo: 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline false
@@ -3067,9 +3093,9 @@ Listado de usuarios
 
 \begin_layout Standard
 Esta llamada puede ser útil para la creación de interfaces de administración
- propias de la aplicación que se desarrolla, para detectar que personas
- maliciosas han agregado usuarios en contra de la voluntad del administrador
- o validar si se está cerca de sobrepasar el límite de usuarios permitido.
+ propias de la aplicación que se desarrolla, para detectar si personas maliciosa
+s han agregado usuarios en contra de la voluntad del administrador o validar
+ si se está cerca de sobrepasar el límite de usuarios permitido.
 \end_layout
 
 \begin_layout Description
@@ -3141,17 +3167,16 @@ Eliminación de usuarios
 \end_layout
 
 \begin_layout Standard
-Sólo se permite para eliminar un usuario por vez.
- De la misma manera que la agregación individual de usuarios, sólo el último
- parámetro de usuario pasado será considerado.
+Sólo se permite eliminar un usuario por vez.
+ De la misma manera que la agregación individual de usuarios, sólo el primer
+ parámetro de usuario pasado será considerado en caso de recibirse una lista.
  También requiere autenticación HTTP básica.
  Eliminar usuarios puede ser útil para cuando las aplicaciones dan la opción
  de desactivar usuarios o permiten desinstalación o renuncia a la aplicación
  del lado del cliente, es responsabilidad del implementador prever las consecuen
 cias y tomar las medidas correspondientes en los casos donde se utilizará
- la eliminación de usuarios.
- La eliminación de un usuario implica la remoción irreversible del perfil
- que se haya mantenido del mismo.
+ la eliminación de usuarios, pues la eliminación de un usuario implica la
+ remoción irreversible del perfil que se haya mantenido del mismo.
 \end_layout
 
 \begin_layout Description
@@ -3266,7 +3291,7 @@ Método
 requerido: GET o POST.
  Para reducir la latencia en textos cortos, se recomienda GET, pero si el
  texto excede los 2048 caracteres, se recomienda usar POST, para evitar
- problemas de librerías y navegadores que imponen este límite arbitrario.
+ problemas con librerías y navegadores que imponen este límite arbitrario.
 \end_layout
 
 \begin_layout Description
@@ -3382,7 +3407,8 @@ uso: se exhorta al implementador a respetar el orden en el que se devuelven
  Asimismo, la url se puede utilizar para permitir al usuario revisar el
  documento recomendado.
  No se recomienda mostrar datos como el porcentaje, el peso, la categoría
- o el código del documento, ya que pueden confundir a los usuarios finales.
+ o el código del documento, ya que pueden confundir a los usuarios finales;
+ mas pueden ser útiles para implementaciones avanzadas.
  El implementador deberá crear un mecanismo que reciba retroalimentación
  de los usuarios de alguna manera: se debe saber qué documentos eligió el
  usuario en una sesión y almacenar los códigos de los mismos, puesto que
@@ -3396,7 +3422,7 @@ La interfaz donde se muestren las recomendaciones se debería diseñar de
 , por lo que se alienta al programador a utilizar un tema cromático que
  no distraiga y a ubicarla a la derecha de la pantalla, puesto que esa es
  la zona a la cual los usuarios tienden a prestar menos atención (aunque
- esto depende de la aplicación).
+ esto depende de la disposición de los elementos de interfaz en la aplicación).
 \end_layout
 
 \begin_layout Subsection
@@ -3434,8 +3460,8 @@ Método
 \end_inset
 
 requerido: POST o GET.
- Igual que la solicitud de recomendaciones, se recomienda POST para solicitudes
- muy largas.
+ Igual que en la solicitud de recomendaciones, se recomienda POST para solicitud
+es muy largas.
 \end_layout
 
 \begin_layout Description
@@ -3485,7 +3511,7 @@ docs
 (opcional): un arreglo con los códigos de los documentos elegidos como retroalim
 entación.
  De preferencia, este arreglo se ha de representar en la solicitud como
- parámetros separados con el mismo nombre, por ejemplo: 
+ parámetros separados, pero con el mismo nombre, por ejemplo: 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily}"
 inline false
@@ -3532,16 +3558,17 @@ de
 \end_inset
 
 uso: El escenario de uso ideal de esta llamada es cuando el usuario decide
- guardar su trabajo (o salir del sistema), aunque se puede llamar cuantas
- veces se quiera, mas no se asegura la actualización inmediata del perfil
- del usuario, pues esta es una tarea asíncrona que se ejecuta cuando el
- servidor tiene poca carga, dado que requiere procesamiento considerable.
+ guardar su trabajo (o salir del sistema), se puede llamar cuantas veces
+ se quiera, mas no se asegura la actualización inmediata del perfil del
+ usuario, pues esta es una tarea asíncrona que se ejecuta cuando el servidor
+ tiene relativamente poca carga, dado que requiere procesamiento considerable.
  Como ya se mencionó, es altamente recomendado que se implemente un mecanismo
  para proveer retroalimentación, de forma que el servicio pueda aprender
  las preferencias del usuario con mayor exactitud y rapidez.
  Se puede proveer también un texto introducido por el usuario para el aprendizaj
-e de las preferencias, se aconseja que éste sea la forma final de la edición.
- Si no se provee ni contexto ni retroalimentación, el perfil sencillamente
+e de las preferencias, se aconseja que éste sea el contenido más reciente
+ de la edición.
+ Si no se proveen ni contexto ni retroalimentación, el perfil sencillamente
  
 \emph on
 envejecerá: 

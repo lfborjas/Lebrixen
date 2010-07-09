@@ -65,7 +65,7 @@ Proyecto de graduación
 \end_layout
 
 \begin_layout Title
-Servicio de recomendación de documentos basado en ontología
+Servicio web de recomendación de documentos basado en ontologías
 \end_layout
 
 \begin_layout Author
@@ -133,59 +133,59 @@ world wide web
 blogs, 
 \emph default
 las revistas en línea y las redes sociales hasta las aplicaciones que permiten
- editar documentos académicos en internet, las personas están dejando paulatinam
-ente atrás los antiguos medios de consumo y producción de datos.
+ editar documentos en internet desde el mismo navegador web, las personas
+ están dejando paulatinamente atrás los antiguos medios de consumo y producción
+ de datos.
  Pero este incremento ha traído consigo un efecto secundario: la 
 \emph on
 sobrecarga de información; 
 \emph default
-esto no afecta tanto a quien escribe un blog personal o se expresa en una
- red social, porque nunca, o casi nunca, tiene que desarrollar o justificar
+la cual no afecta tanto a quien escribe un blog personal o se expresa en
+ una red social, porque nunca, o casi nunca, tiene que desarrollar o justificar
  su argumento.
  Mas aquellos cuya opinión está sujeta al escrutinio de otros deben dedicar
  parte del tiempo que utilizan en la producción de información a tratar
- de encontrar fuentes, ideas o fundamentos, muchas veces sin éxito, al no
- poder expresar su necesidad de información en forma de consulta al utilizar
- motores de búsqueda; sin embargo, luego de familiarizarse con el tema,
- nuevas necesidades más específicas de información aparecen, pues las ideas
- fluyen y evolucionan, y buscar nuevas fuentes requeriría interrumpir la
- tarea, lo cual es contraproducente.
+ de encontrar
+\emph on
+ 
+\emph default
+fuentes, ideas o fundamentos, muchas veces sin éxito, al no poder expresar
+ su necesidad de información como una consulta para los motores de búsqueda;
+ y todo esto 
+\emph on
+luego
+\emph default
+ de la investigación inicial y durante la composición misma.
  Para poder asistir en estas etapas de la escritura, en el pasado se han
  propuesto sistemas que asistan a quien escribe, supervisando en tiempo
- real el proceso y recomendándole referencias en tanto, de modo que pueda
- ampliar el contenido sin interrumpir completamente su tarea.
+ real el proceso y recomendándole referencias oportunamente, de modo que
+ pueda ampliar el contenido sin interrumpir completamente su tarea.
  Pero la mayor parte de estas soluciones o consisten en un sistema exclusivo
  -
 \emph on
 otra 
 \emph default
-aplicación que el usuario debe instalar y aprender a usar; no tratan de
- personalizar las recomendaciones, perdiendo en utilidad, o no son lo suficiente
-mente flexibles como para que los desarrolladores de software las adopten
- en sus propios productos -menos aún implementarlas por su propia cuenta,
- por la complejidad involucrada y la relativa baja ganancia en el contexto
- del producto final.
+aplicación que el usuario debe instalar y aprender a usar- , no aprovechan
+ la historia de uso y el contexto del usuario, o no son lo suficientemente
+ flexibles como para que los desarrolladores de software las adopten en
+ sus propios productos; e implementar este tipo de software secundario por
+ su propia cuenta es quizá una pérdida, por la complejidad involucrada y
+ la relativa baja ganancia en el contexto del producto final.
 \end_layout
 
 \begin_layout Abstract
 En el espíritu de la nueva generación de servicios web y aplicaciones híbridas,
- se propone aquí un enfoque distinto: un 
-\emph on
-servicio
-\emph default
- de recomendación que, a través de una 
-\emph on
-interfaz de programación de aplicaciones
-\emph default
-, pueda ser implementado en cualquier producto de software que desee mejorar
- la experiencia de sus usuarios al crear información; asimismo, con el fin
- de personalizar las referencias a recomendar, el servicio habrá de aprender
- 
+ se propone aquí un enfoque distinto: ofrecer esta funcionalidad a través
+ de llamadas sobre el protocolo HTTP a una interfaz de programación de aplicacio
+nes, para implementarla en cualquier producto de software que desee mejorar
+ la experiencia de sus usuarios productores de información; asimismo, con
+ el fin de personalizar las referencias a recomendar, este servicio habrá
+ de aprender 
 \emph on
 automáticamente
 \emph default
- las preferencias de los usuarios mediante técnicas estadísticas y conocimiento
- representado en una ontología.
+ las preferencias de los usuarios mediante técnicas estadísticas, basándose
+ en conocimiento representado en una ontología.
  
 \end_layout
 
@@ -231,9 +231,16 @@ LatexCommand tableofcontents
 \end_inset
 
 
-\end_layout
+\begin_inset FloatList figure
 
-\begin_layout Standard
+\end_inset
+
+
+\begin_inset FloatList table
+
+\end_inset
+
+
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -18317,6 +18324,26 @@ La confiabilidad se tuvo presente durante el desarrollo: para la extracción
  de solicitudes de recomendaciones fallidas (aunque este escenario se trató
  de evitar en la medida de lo posible, dada la latencia que introducen tal
  cantidad de llamadas a servicios web).
+\end_layout
+
+\begin_layout Standard
+La seguridad de la información es un tema que no fue soslayado durante el
+ desarrollo del proyecto: tanto el uso del widget como las llamadas a la
+ API, incluyendo el límite de usuarios y la necesidad de autenticación para
+ administración de usuarios, están diseñadas para dificultar que terceros
+ afecten a las aplicaciones suscritas al servicio.
+ Por ello es que en lugar de ofrecer una interfaz para cambio de contraseña
+ -a la cual podrían acceder personas que se hubieran apoderado de la contraseña
+ de una aplicación implementadora o de uso físico de una computadora con
+ una sesión autenticada en un navegador- se proporciona una interfaz de
+ restablecimiento de contraseña que requiere que una parte del proceso se
+ haga mediante un correo enviado a un usuario registrado; sin embargo, esto
+ deja la vulnerabilidad de que si un administrador malintencionado se hace
+ de la dirección de correo de 
+\emph on
+otro
+\emph default
+ usuario registrado, puede obtener acceso al cambio de contraseña del mismo.
 \end_layout
 
 \begin_layout Standard
