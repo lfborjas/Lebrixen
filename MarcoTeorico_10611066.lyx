@@ -138,39 +138,53 @@ las revistas en línea y las redes sociales hasta las aplicaciones que permiten
  de datos.
  Pero este incremento ha traído consigo un efecto secundario: la 
 \emph on
-sobrecarga de información; 
+sobrecarga de información
 \emph default
-la cual no afecta tanto a quien escribe un blog personal o se expresa en
- una red social, porque nunca, o casi nunca, tiene que desarrollar o justificar
- su argumento.
- Mas aquellos cuya opinión está sujeta al escrutinio de otros deben dedicar
+:
+\emph on
+ 
+\emph default
+ésta no afecta tanto a quien escribe un blog personal o se expresa en una
+ red social, porque casi nunca tiene que desarrollar o justificar su argumento,
+ mas aquellos cuya opinión está sujeta al escrutinio de otros deben dedicar
  parte del tiempo que utilizan en la producción de información a tratar
  de encontrar
 \emph on
  
 \emph default
-fuentes, ideas o fundamentos, muchas veces sin éxito, al no poder expresar
- su necesidad de información como una consulta para los motores de búsqueda;
- y todo esto 
+fuentes, ideas o fundamentos.
+ En las etapas previas a la escritura, cuando se tiene una idea general
+ del tópico, se puede investigar en motores de búsqueda u otras fuentes,
+ pero 
 \emph on
-luego
+durante
 \emph default
- de la investigación inicial y durante la composición misma.
- Para poder asistir en estas etapas de la escritura, en el pasado se han
+ la escritura, cuando surgen necesidades 
+\emph on
+específicas
+\emph default
+ de información, es más difícil -en términos de concentración y esfuerzo-
+ abandonar la tarea para dedicarse a faenas de recuperación de información.
+\end_layout
+
+\begin_layout Abstract
+Para poder asistir en estas etapas de la escritura, en el pasado se han
  propuesto sistemas que asistan a quien escribe, supervisando en tiempo
  real el proceso y recomendándole referencias oportunamente, de modo que
- pueda ampliar el contenido sin interrumpir completamente su tarea.
+ pueda ampliar su conocimiento del tema sin interrumpir completamente su
+ ocupación principal.
  Pero la mayor parte de estas soluciones o consisten en un sistema exclusivo
  -
 \emph on
 otra 
 \emph default
-aplicación que el usuario debe instalar y aprender a usar- , no aprovechan
- la historia de uso y el contexto del usuario, o no son lo suficientemente
+aplicación que el usuario debe instalar y aprender a usar- , o no aprovechan
+ la historia de uso y el contexto del usuario o no son lo suficientemente
  flexibles como para que los desarrolladores de software las adopten en
- sus propios productos; e implementar este tipo de software secundario por
- su propia cuenta es quizá una pérdida, por la complejidad involucrada y
- la relativa baja ganancia en el contexto del producto final.
+ sus propios productos; e implementar este tipo de software secundario en
+ aplicaciones dedicadas a crear documentos de texto es quizá una pérdida,
+ por la complejidad de procesamiento y almacenamiento involucradas y la
+ relativa baja ganancia en el contexto del producto final.
 \end_layout
 
 \begin_layout Abstract
@@ -178,9 +192,9 @@ En el espíritu de la nueva generación de servicios web y aplicaciones híbrida
  se propone aquí un enfoque distinto: ofrecer esta funcionalidad a través
  de llamadas sobre el protocolo HTTP a una interfaz de programación de aplicacio
 nes, para implementarla en cualquier producto de software que desee mejorar
- la experiencia de sus usuarios productores de información; asimismo, con
- el fin de personalizar las referencias a recomendar, este servicio habrá
- de aprender 
+ la experiencia de sus usuarios productores de información; y, con el fin
+ de personalizar las referencias a recomendar, este servicio habrá de aprender
+ 
 \emph on
 automáticamente
 \emph default
@@ -255,49 +269,50 @@ Introducción
 En este proyecto se explora el concepto de un servicio de recomendación:
  proveer una interfaz para que aplicaciones orientadas a la producción de
  información (sistemas de gestión de contenidos y procesadores de texto,
- por ejemplo) y desarrolladas para cualquier plataforma puedan ofrecer a
- sus usuarios una mejora a su experiencia mediante la recomendación oportuna
+ por ejemplo) desarrolladas para cualquier plataforma puedan ofrecer a sus
+ usuarios una mejora a su experiencia mediante la recomendación oportuna
  de referencias.
  
 \end_layout
 
 \begin_layout Standard
 La motivación inicial para el desarrollo de este proyecto fue poder experimentar
- con tecnologías de procesamiento del lenguaje natural, con la idea de desarroll
-ar un sistema que adquiriese el conocimiento suficiente como para recomendar
- a docentes referencias y lecturas adicionales en sus actividades de documentaci
-ón y planificación.
+ con tecnologías de procesamiento de lenguajes naturales, con la idea de
+ desarrollar un sistema que adquiriese el conocimiento suficiente como para
+ recomendar a docentes referencias y lecturas adicionales en sus actividades
+ de documentación y planificación.
  Sin embargo, pronto se encontró que era imposible ignorar la tendencia
  actual a desarrollar aplicaciones híbridas (mejor conocidas, en el mundo
  angloparlante, como 
 \emph on
 mashups
 \emph default
-) que, en lugar de recurrir a distintas aplicaciones para resolver problemas
- relacionados o crear soluciones que sacrifican la calidad y la experiencia
- del usuario por intentar suplir todas las posibles necesidades del usuario,
- se está optando por implementar en los sistemas, mediante interfaces web
- de programación de aplicaciones o librerías re-utilizables, alternativas
- 
+) que, en lugar de recurrir a distintas soluciones de software para resolver
+ problemas relacionados o crear soluciones que sacrifican la calidad y la
+ experiencia del usuario por intentar suplir todas las posibles necesidades
+ del usuario, se está optando por implementar en los sistemas, mediante
+ interfaces web de programación de aplicaciones o librerías re-utilizables,
+ alternativas 
 \emph on
 ya existentes
 \emph default
  que se dedican a resolver con eficiencia problemas comunes.
- De esta manera, la orientación cambió del desarrollo de un producto independien
-te a la implementación de un 
+ Con esto en mente, la orientación cambió del desarrollo de un producto
+ independiente a la implementación de un 
 \emph on
 servicio
 \emph default
- al cual los implementadores -tanto de sistemas híbridos como aplicaciones
- tradicionales- pudieran acceder mediante el protocolo HTTP, siendo éste
- ideal para no exigir de quien lo use nada más que conexión a internet,
+ al cual los implementadores -tanto de sistemas web híbridos como aplicaciones
+ tradicionales de escritorio- pudieran acceder mediante el protocolo HTTP,
+ siendo éste ideal para no exigir de quien lo use nada más que una conexión
+ a internet y una manera de construir solicitudes e interpretar respuestas,
  sin restricciones de sistemas operativos o lenguajes de programación.
 \end_layout
 
 \begin_layout Standard
 Se observó, además, que una gran parte de las personas están utilizando
  computadoras para crear documentos textuales y tienen acceso a internet;
- además, -dado que existen incontables fuentes alternativas de información-
+ además -dado que existen incontables fuentes alternativas de información-
  en la actualidad se requiere que, si esta información está dirigida a un
  auditorio considerable, se necesite conocer otros documentos que justifiquen,
  expandan, contextualicen o eliciten lo que se está escribiendo.
@@ -311,20 +326,22 @@ Se observó, además, que una gran parte de las personas están utilizando
 \emph on
 durante
 \emph default
- el proceso de escritura involucran o que el usuario conjeture o que interrumpa
- su tarea para tratar de encontrar nuevas referencias (muchas veces sin
- éxito o perdiendo tiempo valioso, pues la necesidad de información apenas
- se viene formando y seguramente cambiará con la evolución del texto); ambas
- alternativas tienen como consecuencia que se cree trabajo de baja calidad
- o se invierta más tiempo del necesario en producirlo.
+ el proceso de escritura involucran o que el usuario conjeture datos en
+ base a información previa, usualmente poca, o que interrumpa su tarea para
+ tratar de encontrar nuevas referencias (muchas veces sin éxito o perdiendo
+ tiempo valioso, pues la necesidad de información apenas se viene formando
+ y seguramente cambiará con la evolución del texto); ambas alternativas
+ resultan en que se cree trabajo de baja calidad o se invierta más tiempo
+ del necesario en producirlo.
  Considerando que el ser humano trata al trabajo con la 
 \emph on
 ley del mínimo esfuerzo,
 \emph default
  de modo que siempre está dispuesto a elegir alternativas que reduzcan el
- tiempo total que él estima tomará la realización de una tarea, esto también
- pone en riesgo la calidad del trabajo si la investigación por referencias
- nuevas tomará un tiempo considerable y las meras conjeturas son más expeditas.
+ tiempo total que él estima tomará la realización de una tarea, se puede
+ inferir el riesgo que corre la calidad del trabajo si la investigación
+ por referencias nuevas tomará un tiempo considerable y la alternativa,
+ las meras conjeturas, es más expedita.
  Y la ley del mínimo esfuerzo se relaciona también con la creación de productos
  de software al sopesar el relativo poco beneficio de ofrecer esta funcionalidad
  -pues el escritor puede utilizar motores de búsqueda u otro tipo de herramienta
@@ -333,8 +350,8 @@ s- frente al alto costo de desarrollarla -dado que consiste en un producto
 \end_layout
 
 \begin_layout Standard
-Ya se han propuesto sistemas de asistencia a la escritura con base en estas
- dos realidades.
+Ya se han propuesto en los campo académico y comercial sistemas de asistencia
+ a la escritura con base en estas dos realidades.
  El proyecto que se describe aquí supone un avance al proveer una base común
  para la implementación de esta funcionalidad en software nuevo y ya existente,
  proveyendo un componente útil para desarrolladores que deseen mejorar la
@@ -356,16 +373,14 @@ Es decir, se representará mediante ontologías: grafos donde los nodos son
 
 \end_inset
 
-: en lugar de aprender lentamente los perfiles, el sistema subyacente al
- servicio ya 
+: en lugar de aprender lentamente los perfiles identificando patrones luego
+ de varias sesiones de uso, el sistema subyacente al servicio ya 
 \emph on
-sabrá
+sabrá, 
 \emph default
- distinguir los conceptos de los documentos, de modo que pueda identificar
- las preferencias de los usuarios más rápido en relación al tiempo de uso
- (una sesión, frente a varias sesiones en enfoques tradicionales, que requieren
- más información para identificar lo que tienen en común las sesiones entre
- ellas y con otras).
+gracias al conocimiento representado en la ontología, distinguir los conceptos
+ en los documentos, de modo que podrá identificar las preferencias de los
+ usuarios más rápido en relación al tiempo de uso .
  En este proyecto, la ontología utilizada es la del 
 \emph on
 Open Directory Project
@@ -443,7 +458,7 @@ Capítulo
 
 1: Comprende las generalidades del proyecto: se plantean el propósito y
  los objetivos, se establece el contexto, se exploran proyectos relacionados,
- se detallan el problema y la solución -incluyendo diagramaa que describen
+ se detallan el problema y la solución -incluyendo diagramas que describen
  a grandes rasgos el funcionamiento del servicio- y se establece la metodología
  utilizada para la implementación.
  
@@ -454,9 +469,9 @@ Capítulo
 \begin_inset space ~
 \end_inset
 
-2: En éste se exploran los conceptos relacionados al proyecto, así como
- los fundamentos teóricos relacionados con la implementación de un sistema
- de esta naturaleza.
+2: En éste se exploran los conceptos relacionados al proyecto: recuperación
+ de información, sistemas de recomendación, perfilado de usuarios, diseño
+ de interfaces y los fundamentos teóricos de los servicios web.
 \end_layout
 
 \begin_layout Description
@@ -488,9 +503,10 @@ Capítulo
 \begin_inset space ~
 \end_inset
 
-6: se discuten las estrategias de prueba, orientadas a asegurar la calidad
- del software y su apego a los requerimientos; sólo se presentan los casos
- de uso principales.
+6: se discuten las estrategias de prueba de los distintos componentes del
+ software, orientadas a asegurar su calidad y su apego a los requerimientos;
+ se presentan los casos de uso principales y se discuten los resultados
+ más relevantes.
 \end_layout
 
 \begin_layout Description
@@ -498,13 +514,15 @@ Capítulo
 \begin_inset space ~
 \end_inset
 
-7: Comprende las conclusiones y recomendaciones, así como el trabajo futuro,
- los estándares de uso esperados de los implementadores y las posibles alternati
-vas de comercialización del producto desarrollado.
+7: Comprende las conclusiones y recomendaciones, así como el trabajo futuro
+ y las posibles alternativas de comercialización del producto desarrollado.
 \end_layout
 
 \begin_layout Description
-Apéndices: 
+Apéndices: incluyen los correos electrónicos pertinentes a requisiciones
+ de recursos a la facultad, el documento final del plan de proyecto y un
+ manual para implementadores donde se puede encontrar de una manera más
+ concisa y técnica una descripción del software.
 \end_layout
 
 \begin_layout Chapter
@@ -513,8 +531,8 @@ Generalidades
 
 \begin_layout Standard
 Este capítulo ofrece una visión a grandes rasgos del proyecto, estableciendo
- un contexto para el mismo y sentando las bases teóricas y técnicas de la
- comprensión del desarrollo del mismo.
+ un contexto para el mismo y sentando las bases teóricas y técnicas para
+ el resto del presente trabajo.
 \end_layout
 
 \begin_layout Section
@@ -546,12 +564,12 @@ Elegir la naturaleza de la colección documental base para la implementación
  Ya sea en la forma de documentos obtenidos de internet o mediante la interfaz
  de búsqueda de una librería digital o motor de búsqueda existente.
  Acto seguido, obtener una muestra significativa de la colección para efectos
- de desarrollo y muestra preliminar.
+ de desarrollo.
 \end_layout
 
 \begin_layout Enumerate
-Elegir e implementar la manera en la que se expresarán, construirán y actualizar
-án los perfiles de los usuarios.
+Elegir e implementar la manera en la que se expresarán, construirán y evoluciona
+rán los perfiles de los usuarios.
 \end_layout
 
 \begin_layout Enumerate
@@ -588,17 +606,16 @@ www.amazon.com
 
 \begin_layout Standard
 Por otro lado, los sistemas de recuperación de información pretenden suplir
- necesidades de información : el sistema busca qué documentos en su colección
+ necesidades de información: el sistema busca qué documentos en su colección
  guardan alguna relación de similitud con las consultas que los usuarios
- expresan en un intento de concretar su necesidad.
+ expresan con el fin de concretar su necesidad de información.
  Un sistema de recuperación de información, por excelencia, es 
 \emph on
 el
 \emph default
  componente principal y la tarea primordial de un usuario en cualquier contexto,
- por lo que pueden darse la licencia de dejar que el usuario examine un
- conjunto relativamente grande de resultados y que refine o reformule las
- consultas.
+ por lo que puede darse la licencia de dejar que el usuario examine un conjunto
+ relativamente grande de resultados y que refine o reformule las consultas.
  
 \end_layout
 
@@ -614,47 +631,49 @@ Pero en esta era de la información activa, los usuarios se ven sobrecogidos
 El servicio que se pretende construir en este proyecto puede ser visto como
  un híbrido de recomendador y recuperador de información: satisfacer necesidades
  de información en contextos productivos en segundo plano, sin obligar al
- usuario a distraerse pero ofreciendo recomendaciones útiles.
- Este enfoque no es nuevo, y la investigación en sistemas de este tipo en
- especial -iniciada por 
+ usuario a distraerse, ofreciendo recomendaciones personalizadas en base
+ a las preferencias que se hayan descubierto a través de distintas sesiones
+ de uso.
+ 
+\end_layout
+
+\begin_layout Standard
+Este enfoque no es nuevo, y la investigación en sistemas de este tipo en
+ especial -presentada formalmente en la tesis doctoral de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Rhodes2000"
 
 \end_inset
 
-- se ha valido de servicios ya existentes de recuperación de información,
- lo cual podría probarse contraproducente: los sistemas de recuperación
- de información tradicionales asumen que la relevancia de un documento es
- equivalente a su similitud a la consulta del usuario, y están en lo correcto,
- para aplicaciones orientadas a la búsqueda activa.
- Pero, en un sistema que pretenda apoyar una tarea realizada por el usuario
- ¿sería verdaderamente 
+- donde se propone que un sistema que pretenda apoyar una tarea realizada
+ por el usuario ¿será verdaderamente 
 \emph on
 útil
 \emph default
- proporcionarle documentos que probablemente no están relacionados con la
+ si proporciona documentos que probablemente no están relacionados con la
  tarea actual más allá del nivel léxico del contexto inmediato? En realidad,
- el sistema debería traer a la atención del usuario artefactos que habría
- pasado por alto por no saber cómo buscar o ni siquiera estar al tanto de
- su existencia o relación con su contexto local.
- Para ello, la medida por la cual se debería regir un sistema como el propuesto
- debería ser la 
+ propone el citado autor, el sistema debería traer a la atención del usuario
+ artefactos que habría pasado por alto por no saber cómo buscarlos o ni
+ siquiera estar al tanto de su existencia o la relación que guardasen con
+ su contexto local.
+ Por ello, la medida por la cual se rige un sistema como el propuesto debería
+ ser la 
 \emph on
 utilidad
 \emph default
 : qué artefactos pueden traerle una ganancia al usuario mediante la reducción
  de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
  o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
- 
+ -como se menciona en 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "Herlocker2004,Rhodes2000"
 
 \end_inset
 
- y esta utilidad sólo se puede lograr llegando a conocer al usuario, como
- se hace en los sistemas de recomendación.
+- ) y esta utilidad sólo se puede lograr llegando a conocer al usuario,
+ como se hace en los sistemas de recomendación.
  
 \end_layout
 
@@ -964,11 +983,11 @@ es a las URLs definidas en la API e interpretar los datos que el servidor
 \end_layout
 
 \begin_layout Standard
-Las ventajas de una solución basada en una API apegada a ciertos principios
- REST incluyen la flexibilidad -los implementadores podrán hacer uso de
- ella desde aplicaciones de escritorio, aplicaciones web tradicionales o
- aplicaciones web que implementen la técnica AJAX (ofreciendo soporte a
- la técnica JSONP) porque sólo requiere poder comunicarse mediante HTTP-
+Las ventajas de una solución basada en una API apegada a los principios
+ de arquitectura REST incluyen la flexibilidad -los implementadores podrán
+ hacer uso de ella desde aplicaciones de escritorio, aplicaciones web tradiciona
+les o aplicaciones web que implementen la técnica AJAX (ofreciendo soporte
+ a la técnica JSONP) porque sólo requiere poder comunicarse mediante HTTP-
  y la escalabilidad.
 \end_layout
 
@@ -10664,7 +10683,7 @@ la
 
 marcha: conforme se avanzó en el desarrollo, el diagrama se fue refinando
  conforme las tareas se cumplían -dado que muchas se lograron antes de lo
- estimado y otras después, dando como resultado final el diagrama que se
+ estimado y otras después- dando como resultado final el diagrama que se
  presenta en el anexo 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -15889,7 +15908,7 @@ Pruebas
 \end_layout
 
 \begin_layout Standard
-En este capítulo se presentan la estrategia y tipos de pruebas utilizados
+En este capítulo se presentan la estrategia y tipos de pruebas utilizadas
  para asegurar la calidad del servicio desarrollado durante el presente
  proyecto, discutiendo someramente las herramientas elegidas en cada caso.
 \end_layout
@@ -17389,9 +17408,11 @@ http://funkload.nuxeo.org/
 \end_layout
 
 \begin_layout Standard
-Para probar el desempeño, se hicieron llamadas con cantidades crecientes
- de usuarios concurrentes, con textos en inglés y español de dos párrafos
- de extensión.
+Para probar el desempeño, se crearon pruebas que implementaban llamadas
+ con cantidades crecientes de usuarios concurrentes, con textos en inglés
+ y español de dos párrafos de extensión.
+ No se presentan ni discuten aquí sus resultados porque, lamentablemente,
+ estas pruebas no se pudieron llevar a cabo en el servidor de producción.
 \end_layout
 
 \begin_layout Subsection
@@ -17399,8 +17420,8 @@ Resultados de las pruebas y observaciones
 \end_layout
 
 \begin_layout Standard
-Durante las pruebas se logró limpiar el código de rutas no cubiertas (condicione
-s que no se daban o estaban siendo revisadas en lugares previos de la ejecución
+Durante las pruebas se logró librar al código de rutas no cubiertas (condiciones
+ que no se daban o estaban siendo revisadas en lugares previos de la ejecución
  y excepciones redundantemente manejadas, por ejemplo), asimismo, se descubriero
 n y corrigieron errores en los algoritmos de filtrado de información e interpret
 ación y validación de las solicitudes y respuestas.
@@ -17439,14 +17460,11 @@ va síncrona de agregación individual y se rebasa el límite? La restricción,
 \end_layout
 
 \begin_layout Standard
-De este último hallazgo de devela que la función de agregación síncrona
- de usuarios individuales también tiene sus propios problemas de concurrencia:
- varios usuarios -más allá del límite- podrían agregarse casi al mismo tiempo,
+Este último hallazgo devela que la función de agregación síncrona de usuarios
+ individuales también tiene sus propios problemas de concurrencia: varios
+ usuarios -más allá del límite- podrían agregarse casi al mismo tiempo,
  y la condición que revisa el límite podría permitir que todos se agreguen.
-\end_layout
-
-\begin_layout Standard
-Estos dos descubrimientos hacen patente la necesidad de imponer el límite
+ Estos dos descubrimientos hacen patente la necesidad de imponer el límite
  de usuarios a nivel de base de datos, sin embargo, el desarrollo hubiera
  requerido más tiempo del disponible en esta etapa, además de comprometer
  el componente más importante del sistema por una restricción por demás
