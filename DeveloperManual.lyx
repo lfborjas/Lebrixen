@@ -319,10 +319,7 @@ Una vez completo con éxito el formulario, el usuario será redirigido a la
  nombre de la aplicación) y una contraseña generada aleatoriamente; éstas
  permiten el uso seguro de llamadas a métodos sensibles como adición y eliminaci
 ón de usuarios.
-\end_layout
-
-\begin_layout Standard
-Si el correo electrónico no se recibe -antes de asumir que no se recibió,
+ Si el correo electrónico no se recibe -antes de asumir que no se recibió,
  se recomienda revisar en la carpeta que algunos clientes de correo asignan
  a correo no deseado- el implementador no debe intentar registrarse de nuevo,
  sino contactar al servicio.
@@ -2620,7 +2617,7 @@ http://tools.ietf.org/html/rfc2617
 
 - el servidor contesta con una respuesta con código 401: así se permite
  que se provean credenciales si se dispone de ellas.
- Para comodidad de los desarolladores que dependan de tales mecanismos,
+ Para comodidad de los desarrolladores que dependan de tales mecanismos,
  se optó por 
 \emph on
 no
