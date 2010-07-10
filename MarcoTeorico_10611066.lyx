@@ -9240,7 +9240,7 @@ key "Daoud2008"
  en el enfoque orientado a diagramas de influencia de 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Tamine-Lechani2007"
+key "Tamine-lechani2007"
 
 \end_inset
 
@@ -9306,7 +9306,7 @@ key "Semeraro2005a"
  individuales, o se puede seguir lo establecido por 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "Tamine-Lechani2007"
+key "Tamine-lechani2007"
 
 \end_inset
 
@@ -18868,7 +18868,7 @@ te paso la nueva versión del código por usb -o lo que sea- copiá y pegá
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "bibtex_references/ReferenciasFaseI"
-options "bibtotoc,/home/lfborjas/Aplicaciones/apa-good"
+options "bibtotoc,apa-good"
 
 \end_inset
 
