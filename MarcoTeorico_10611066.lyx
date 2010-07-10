@@ -17740,11 +17740,11 @@ selenium
 \emph default
 
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -17766,7 +17766,7 @@ django
 \emph default
 , se utilizó una aplicación de código abierto
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 En concreto, el siguiente módulo de python: http://pypi.python.org/pypi/django-sel
@@ -17782,22 +17782,18 @@ enium-test-runner/0.1.0
 \emph on
 framework 
 \emph default
-y presenta
-\emph on
- 
-\emph default
-serios defectos de eficiencia y compatibilidad.
+y presenta serios defectos de eficiencia y compatibilidad.
  Aunque existen otros sistemas basados en su totalidad en python, como windmill
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
-www.getwindmill.com/
+www.getwindmill.com
 \end_layout
 
 \end_inset
@@ -17809,7 +17805,7 @@ www.getwindmill.com/
 
 , pyccuracy
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
@@ -17833,7 +17829,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Flex URL
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -17851,20 +17847,11 @@ http://twill.idyll.org/
  según las convenciones de xUnit.
  Cabe notar que no se diseñaron pruebas que verificasen la validación de
  la longitud de la entrada en los campos de texto porque ésta se hace mediante
- el atributo 
-\emph on
-maxlength
-\size small
-\emph default
-\color foreground
-
+ el atributo maxlength
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
-
-\size small
-\color foreground
 \begin_inset Flex URL
 status collapsed
 
@@ -17880,9 +17867,6 @@ http://www.w3schools.com/tags/att_input_maxlength.asp
 
 \end_inset
 
-
-\size default
-\color inherit
  de html y éste es respetado en todos los navegadores web modernos.
 \end_layout
 
