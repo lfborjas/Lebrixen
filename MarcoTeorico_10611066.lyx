@@ -540,7 +540,7 @@ Propósito
 \end_layout
 
 \begin_layout Standard
-Desarrollar un servicio web que permita a desarolladores de aplicaciones
+Desarrollar un servicio web que permita a desarrolladores de aplicaciones
  implementar la funcionalidad de recomendar al usuario documentos relevantes
  a un contexto local, entendiéndose por éste cualquier tarea que involucre
  el ingreso de texto libre en la interfaz del sistema, con el fin de producir
@@ -10524,8 +10524,8 @@ to de
 \emph on
 urls
 \emph default
- y la interpretación y codificación de la comunicación HTTP, luego, se requerier
-e software pre-existente para las siguientes tareas: indexación y búsqueda
+ y la interpretación y codificación de la comunicación HTTP, luego, se requería
+ software pre-existente para las siguientes tareas: indexación y búsqueda
  de documentos para recomendación, entrenamiento del clasificador de categorías
  y extracción de términos clave.
  Se desarrolló software nuevo para el manejo de solicitudes al servicio,
@@ -12980,7 +12980,7 @@ En este capítulo se discuten los aspectos teóricos y técnicos que llevaron
 
 \begin_layout Standard
 Para el desarrollo de este proyecto, dada su naturaleza académica y el poco
- tiempo disponible, se optó por construir el producto de sotfware final
+ tiempo disponible, se optó por construir el producto de software final
  a partir de la mayor cantidad de librerías re-utilizables ya existentes
  posible, de manera que tareas de considerable dificultad mas lo suficientemente
  comunes -como la indexación, búsqueda y clasificación- fueran realizadas
@@ -15985,7 +15985,7 @@ que crea una base de datos temporal cada vez que los casos de prueba se
  Puesto que los casos relativos al servicio necesitan de una colección documenta
 l y una ontología, se creó una base de datos de control de tamaño reducido
  que eliminase la incertidumbre durante la codificación de los casos, permitiend
-o predictibilidad y, a la vez, ofreciendo un ambiente similar a la ejecución
+o predecibilidad y, a la vez, ofreciendo un ambiente similar a la ejecución
  real del software.
  
 \end_layout
@@ -16954,7 +16954,7 @@ usuarios: se creó una llamada aparte para registrar varios usuarios de una
 ón de tiempo máximo de espera impuesta por algunos navegadores o interfaces).
  Se prueba este método.
  Esta función comparte código con la adición de usuarios, por lo que sería
- reduntante incluir métodos de prueba ya cubiertos en ésta.
+ redundante incluir métodos de prueba ya cubiertos en ésta.
 \end_layout
 
 \begin_deeper
@@ -17593,7 +17593,7 @@ http://docs.jquery.com/QUnit
 
 , elegida por su compatibilidad con jQuery y su respeto a las convenciones
  de xUnit sin comprometer la portabilidad entre navegadores, vital para
- pruebas de compatibiliad.
+ pruebas de compatibilidad.
  Los casos se enumeran a continuación:
 \end_layout
 
