@@ -3964,18 +3964,8 @@ n {
 
 \begin_layout Plain Layout
 
-      //get the response:
-\end_layout
-
-\begin_layout Plain Layout
-
       HttpURLConnection conn = (HttpURLConnection)serviceCall.openConnection();
  
-\end_layout
-
-\begin_layout Plain Layout
-
-      //interpret the response:
 \end_layout
 
 \begin_layout Plain Layout
