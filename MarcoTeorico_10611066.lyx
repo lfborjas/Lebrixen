@@ -1122,7 +1122,7 @@ Implementación del servicio
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -8851,7 +8851,7 @@ key "Gruzd2006"
  
 \emph default
 Asimismo, existen librerías que implementan esta funcionalidad mediante
- la identificación de roles gramaticales (una implementación en el lenguaje
+ la identificación de roles gramaticales -una implementación en el lenguaje
  de programación python se encuentra disponible en 
 \begin_inset Flex URL
 status collapsed
