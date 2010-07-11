@@ -33,8 +33,8 @@
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks false
-\pdf_pdfborder true
-\pdf_colorlinks true
+\pdf_pdfborder false
+\pdf_colorlinks false
 \pdf_backref false
 \pdf_pdfusetitle true
 \papersize default
@@ -133,7 +133,7 @@ world wide web
 blogs, 
 \emph default
 las revistas en línea y las redes sociales hasta las aplicaciones que permiten
- editar documentos en internet desde el mismo navegador web, las personas
+ editar documentos en internet dentro del mismo navegador web, las personas
  están dejando paulatinamente atrás los antiguos medios de consumo y producción
  de datos.
  Pero este incremento ha traído consigo un efecto secundario: la 
@@ -152,7 +152,7 @@ sobrecarga de información
 \emph on
  
 \emph default
-fuentes, ideas o fundamentos.
+fuentes, ideas o argumentos antagónicos.
  En las etapas previas a la escritura, cuando se tiene una idea general
  del tópico, se puede investigar en motores de búsqueda u otras fuentes,
  pero 
@@ -168,8 +168,8 @@ específicas
 \end_layout
 
 \begin_layout Abstract
-Para poder asistir en estas etapas de la escritura, en el pasado se han
- propuesto sistemas que asistan a quien escribe, supervisando en tiempo
+Para poder asistir en estas etapas de la escritura, ya se han propuesto
+ e implementado sistemas que asistan a quien escribe, supervisando en tiempo
  real el proceso y recomendándole referencias oportunamente, de modo que
  pueda ampliar su conocimiento del tema sin interrumpir completamente su
  ocupación principal.
@@ -178,13 +178,13 @@ Para poder asistir en estas etapas de la escritura, en el pasado se han
 \emph on
 otra 
 \emph default
-aplicación que el usuario debe instalar y aprender a usar- , o no aprovechan
+aplicación que el usuario debe instalar y aprender a usar- , no aprovechan
  la historia de uso y el contexto del usuario o no son lo suficientemente
  flexibles como para que los desarrolladores de software las adopten en
- sus propios productos; e implementar este tipo de software secundario en
- aplicaciones dedicadas a crear documentos de texto es quizá una pérdida,
- por la complejidad de procesamiento y almacenamiento involucradas y la
- relativa baja ganancia en el contexto del producto final.
+ sus propios productos; además del hecho que implementar este tipo de software
+ secundario en aplicaciones dedicadas a crear documentos de texto es quizá
+ una pérdida, por la complejidad de procesamiento y almacenamiento involucradas
+ y la relativa baja ganancia en el contexto del producto final.
 \end_layout
 
 \begin_layout Abstract
@@ -277,50 +277,55 @@ En este proyecto se explora el concepto de un servicio de recomendación:
 
 \begin_layout Standard
 La motivación inicial para el desarrollo de este proyecto fue poder experimentar
- con tecnologías de procesamiento de lenguajes naturales, con la idea de
- desarrollar un sistema que adquiriese el conocimiento suficiente como para
- recomendar a docentes referencias y lecturas adicionales en sus actividades
- de documentación y planificación.
+ con tecnologías de procesamiento de lenguajes naturales, desarrollando
+ un sistema que adquiriese el conocimiento suficiente como para recomendar
+ a docentes referencias y lecturas adicionales en sus actividades de documentaci
+ón y planificación.
  Sin embargo, pronto se encontró que era imposible ignorar la tendencia
- actual a desarrollar aplicaciones híbridas (mejor conocidas, en el mundo
- angloparlante, como 
-\emph on
-mashups
-\emph default
-) que, en lugar de recurrir a distintas soluciones de software para resolver
- problemas relacionados o crear soluciones que sacrifican la calidad y la
- experiencia del usuario por intentar suplir todas las posibles necesidades
- del usuario, se está optando por implementar en los sistemas, mediante
- interfaces web de programación de aplicaciones o librerías re-utilizables,
- alternativas 
+ actual a desarrollar aplicaciones híbridas
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+mejor conocidas, en el mundo angloparlante, como 'mashups'
+\end_layout
+
+\end_inset
+
+: en lugar de recurrir a distintas soluciones de software para resolver
+ los diversos problemas relacionados a una tarea o crear soluciones que
+ sacrifican la calidad y la experiencia del usuario por intentar suplir
+ todas sus posibles necesidades -no importa cuán foráneas-, se está optando
+ por implementar en los sistemas, mediante interfaces web de programación
+ de aplicaciones o librerías re-utilizables, alternativas 
 \emph on
 ya existentes
 \emph default
- que se dedican a resolver con eficiencia problemas comunes.
- Con esto en mente, la orientación cambió del desarrollo de un producto
- independiente a la implementación de un 
+ que se dediquen a resolver con eficiencia problemas comunes.
+ De ahí que la orientación cambió del desarrollo de un producto independiente
+ a la implementación de un 
 \emph on
 servicio
 \emph default
  al cual los implementadores -tanto de sistemas web híbridos como aplicaciones
  tradicionales de escritorio- pudieran acceder mediante el protocolo HTTP,
- siendo éste ideal para no exigir de quien lo use nada más que una conexión
+ siendo éste ideal por no exigir de quien lo use nada más que una conexión
  a internet y una manera de construir solicitudes e interpretar respuestas,
  sin restricciones de sistemas operativos o lenguajes de programación.
 \end_layout
 
 \begin_layout Standard
-Se observó, además, que una gran parte de las personas están utilizando
- computadoras para crear documentos textuales y tienen acceso a internet;
- además -dado que existen incontables fuentes alternativas de información-
- en la actualidad se requiere que, si esta información está dirigida a un
- auditorio considerable, se necesite conocer otros documentos que justifiquen,
- expandan, contextualicen o eliciten lo que se está escribiendo.
- Para este propósito, los escritores promedio contemporáneos (autores de
- blogs, estudiantes, periodistas informales) han dejado en segundo plano
- -u olvidado del todo- la consulta a bibliotecas y personas con autoridad
- en sus respectivos campos y han adoptado como costumbre el utilizar motores
- de búsqueda para obtener estos documentos.
+En la actualidad, además, es común que gran parte de la población utilice
+ herramientas informáticas para crear documentos textuales y tenga acceso
+ a internet; además -dado que existen incontables fuentes alternativas de
+ información- se requiere que, si esta información está dirigida a un auditorio
+ considerable, se necesite conocer otros documentos que justifiquen, expandan,
+ contextualicen o eliciten lo que se está escribiendo.
+ Para este propósito, muchos de los escritores contemporáneos (autores de
+ blogs, estudiantes y periodistas informales, por citar algunos ejemplos)
+ han dejado en segundo plano -u olvidado del todo- la consulta a bibliotecas
+ y personas con autoridad en sus respectivos campos y han adoptado como
+ costumbre el utilizar motores de búsqueda para obtener estos documentos.
  Por lo general, esta búsqueda es previa a la escritura, de modo que las
  nuevas necesidades de información que surgen 
 \emph on
@@ -330,18 +335,37 @@ durante
  base a información previa, usualmente poca, o que interrumpa su tarea para
  tratar de encontrar nuevas referencias (muchas veces sin éxito o perdiendo
  tiempo valioso, pues la necesidad de información apenas se viene formando
- y seguramente cambiará con la evolución del texto); ambas alternativas
- resultan en que se cree trabajo de baja calidad o se invierta más tiempo
- del necesario en producirlo.
- Considerando que el ser humano trata al trabajo con la 
+ y seguramente cambiará con la evolución del texto); de una u otra forma
+ se termina creando trabajo de baja calidad o se invierte más tiempo del
+ necesario en producirlo 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Gruzd2006"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Se consideró, por otra parte, que el ser humano trata al trabajo con la
+ 
 \emph on
-ley del mínimo esfuerzo,
+ley del mínimo esfuerzo
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Rhodes2000"
+
+\end_inset
+
+
 \emph default
- de modo que siempre está dispuesto a elegir alternativas que reduzcan el
- tiempo total que él estima tomará la realización de una tarea, se puede
- inferir el riesgo que corre la calidad del trabajo si la investigación
- por referencias nuevas tomará un tiempo considerable y la alternativa,
- las meras conjeturas, es más expedita.
+: siempre está dispuesto a elegir alternativas que reduzcan el tiempo total
+ que él estima tomará la realización de una tarea, se puede inferir el riesgo
+ que corre la calidad del trabajo si la investigación por referencias nuevas
+ tomará un tiempo considerable y la alternativa, las meras conjeturas, es
+ más expedita.
  Y la ley del mínimo esfuerzo se relaciona también con la creación de productos
  de software al sopesar el relativo poco beneficio de ofrecer esta funcionalidad
  -pues el escritor puede utilizar motores de búsqueda u otro tipo de herramienta
@@ -350,13 +374,12 @@ s- frente al alto costo de desarrollarla -dado que consiste en un producto
 \end_layout
 
 \begin_layout Standard
-Ya se han propuesto en los campo académico y comercial sistemas de asistencia
+Ya se han propuesto en los campos académico y comercial sistemas de asistencia
  a la escritura con base en estas dos realidades.
  El proyecto que se describe aquí supone un avance al proveer una base común
  para la implementación de esta funcionalidad en software nuevo y ya existente,
  proveyendo un componente útil para desarrolladores que deseen mejorar la
- productividad de los usuarios de sus productos a la hora de producir informació
-n.
+ eficiencia de los usuarios de sus productos a la hora de generar información.
  
 \end_layout
 
@@ -459,7 +482,7 @@ Capítulo
 1: Comprende las generalidades del proyecto: se plantean el propósito y
  los objetivos, se establece el contexto, se exploran proyectos relacionados,
  se detallan el problema y la solución -incluyendo diagramas que describen
- a grandes rasgos el funcionamiento del servicio- y se establece la metodología
+ a grandes rasgos el funcionamiento de la misma- y se establece la metodología
  utilizada para la implementación.
  
 \end_layout
@@ -491,7 +514,7 @@ y
 \begin_inset space ~
 \end_inset
 
-5: Aquí se presentan los aspectos relacionados al desarrollo del software:,
+5: Aquí se presentan los aspectos relacionados al desarrollo del software:
  la gestión -la metodología de planificación, la estimación y calendarización-
  , el análisis y diseño del producto y una memoria descriptiva de la implementac
 ión de la solución, donde se detallan las decisiones de ingeniería tomadas
@@ -503,9 +526,9 @@ Capítulo
 \begin_inset space ~
 \end_inset
 
-6: se discuten las estrategias de prueba de los distintos componentes del
+6: Se discuten las estrategias de prueba de los distintos componentes del
  software, orientadas a asegurar su calidad y su apego a los requerimientos;
- se presentan los casos de uso principales y se discuten los resultados
+ se presentan los casos de prueba principales y se discuten los resultados
  más relevantes.
 \end_layout
 
@@ -519,7 +542,7 @@ Capítulo
 \end_layout
 
 \begin_layout Description
-Apéndices: incluyen los correos electrónicos pertinentes a requisiciones
+Apéndices: Se incluyen los correos electrónicos pertinentes a requisiciones
  de recursos a la facultad, el documento final del plan de proyecto y un
  manual para implementadores donde se puede encontrar de una manera más
  concisa y técnica una descripción del software.
@@ -543,14 +566,14 @@ Propósito
 Desarrollar un servicio web que permita a desarrolladores de aplicaciones
  implementar la funcionalidad de recomendar al usuario documentos relevantes
  a un contexto local, entendiéndose por éste cualquier tarea que involucre
- el ingreso de texto libre en la interfaz del sistema, con el fin de producir
+ el ingreso de texto libre en la interfaz del sistema con el fin de producir
  información.
  La recomendación consistirá en la búsqueda de documentos relacionados conceptua
 lmente a la tarea del usuario en un índice de documentos mantenido por el
  sistema y la consiguiente recomendación de los que se consideren útiles,
- evaluando la utilidad a partir de un perfil construido y actualizado automática
-mente en base al uso histórico del servicio, basando el conocimiento de
- las preferencias de usuarios en una ontología jerárquica.
+ evaluando esta utilidad a partir de un perfil construido y actualizado
+ automáticamente en base al uso histórico del servicio, basando el aprendizaje
+ de las preferencias de usuarios en una ontología jerárquica.
  
 \end_layout
 
@@ -597,8 +620,8 @@ www.amazon.com
 
  analizan el contexto local de un usuario en base a un perfil de éste o
  a su similitud con otros usuarios, donde tanto el perfil como la vecindad
- -en cuanto a preferencias- se decide por los artículos de la colección
- propia del sistema que se han elegido explícitamente, en este caso, entonces,
+ -en cuanto a preferencias- se definen por los artículos de la colección
+ propia del sistema que se han elegido explícitamente; en este caso, entonces,
  se trata de una tarea complementaria a lo que el usuario esté haciendo,
  orientada a llevar a éste a explorar otras opciones dentro de las ofrecidas
  por el servicio.
@@ -607,8 +630,8 @@ www.amazon.com
 \begin_layout Standard
 Por otro lado, los sistemas de recuperación de información pretenden suplir
  necesidades de información: el sistema busca qué documentos en su colección
- guardan alguna relación de similitud con las consultas que los usuarios
- expresan con el fin de concretar su necesidad de información.
+ guardan alguna relación de similitud con las necesidades de información
+ que los usuarios expresan mediante consultas textuales.
  Un sistema de recuperación de información, por excelencia, es 
 \emph on
 el
@@ -621,51 +644,51 @@ el
 
 \begin_layout Standard
 Pero en esta era de la información activa, los usuarios se ven sobrecogidos
- por la masiva cantidad de resultados que los motores de búsqueda ofrecen
- o las infinitas elecciones de palabras, a veces inasequibles, que pueden
- marcar la diferencia entre una búsqueda exitosa y un completo fracaso.
+ por la ingente cantidad de resultados que los motores de búsqueda ofrecen
+ y las infinitas elecciones de palabras que pueden conformar una consulta
+ y que pueden marcar la diferencia entre una búsqueda exitosa y un completo
+ fracaso.
  
 \end_layout
 
 \begin_layout Standard
-El servicio que se pretende construir en este proyecto puede ser visto como
- un híbrido de recomendador y recuperador de información: satisfacer necesidades
- de información en contextos productivos en segundo plano, sin obligar al
- usuario a distraerse, ofreciendo recomendaciones personalizadas en base
- a las preferencias que se hayan descubierto a través de distintas sesiones
- de uso.
+El servicio que se presenta aquí puede ser visto como un híbrido de recomendador
+ y recuperador de información: satisface necesidades de información en contextos
+ productivos en segundo plano, sin obligar al usuario a distraerse, ofreciendo
+ recomendaciones personalizadas en base a las preferencias que se hayan
+ descubierto a través de distintas sesiones de uso.
  
 \end_layout
 
 \begin_layout Standard
 Este enfoque no es nuevo, y la investigación en sistemas de este tipo en
- especial -presentada formalmente en la tesis doctoral de 
+ específico -presentada formalmente en la tesis doctoral de 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Rhodes2000"
 
 \end_inset
 
-- donde se propone que un sistema que pretenda apoyar una tarea realizada
- por el usuario ¿será verdaderamente 
+- propone que un sistema que pretenda apoyar una tarea realizada por el
+ usuario no será verdaderamente 
 \emph on
 útil
 \emph default
  si proporciona documentos que probablemente no están relacionados con la
- tarea actual más allá del nivel léxico del contexto inmediato? En realidad,
- propone el citado autor, el sistema debería traer a la atención del usuario
- artefactos que habría pasado por alto por no saber cómo buscarlos o ni
- siquiera estar al tanto de su existencia o la relación que guardasen con
- su contexto local.
- Por ello, la medida por la cual se rige un sistema como el propuesto debería
+ tarea actual más allá del nivel léxico del contexto inmediato.
+ Más aún, propone el citado autor, el sistema debería traer a la atención
+ del usuario artefactos que habría pasado por alto por no saber cómo buscarlos
+ o ni siquiera estar al tanto de su existencia o la relación que guardasen
+ con su contexto local.
+ Por ello, la medida por la cual se rige un sistema como el propuesto es
  ser la 
 \emph on
 utilidad
 \emph default
 : qué artefactos pueden traerle una ganancia al usuario mediante la reducción
  de un esfuerzo (al ayudarle a hacer una búsqueda que no sabía cómo realizar)
- o la serendipia (al mostrarle elementos que le ayuden a ampliar su tarea
- -como se menciona en 
+ o la serendipia (al mostrarle elementos desconocidos o inusitados que le
+ ayuden a ampliar su tarea -como se menciona en 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Herlocker2004,Rhodes2000"
@@ -695,8 +718,8 @@ ión y recomendación, por lo usual como parte de un producto de software
 FIXIT: aplicado al dominio de la reparación de fotocopiadoras y bienes relaciona
 dos, permite a los asesores de servicio técnico obtener información de los
  manuales de usuario en base a la consulta que estén atendiendo.
- Construye las consultas mediante los síntomas y problemas identificados,
- se vale de una red de inferencia bayesiana para determinar la probabilidad
+ Construye las consultas mediante los síntomas y problemas identificados
+ y se vale de una red de inferencia bayesiana para determinar la probabilidad
  de relevancia de un documento a una consulta.
  Definido por 
 \begin_inset CommandInset citation
@@ -782,9 +805,9 @@ key "Rhodes2000"
 
 \begin_layout Enumerate
 Margin Notes: Un agente que revisa páginas en html y agrega, en el margen
- derecho, vínculos a documentos locales que podrían ser de interés a las
- distintas secciones del documento; extrae palabras clave de la página y
- se basa en la 
+ derecho, vínculos a documentos locales que podrían expandir lo contenido
+ en las distintas secciones del documento; extrae palabras clave de la página
+ y se basa en la 
 \emph on
 co-ocurrencia
 \emph default
@@ -833,10 +856,10 @@ key "Cutrell2006,Dumais2004"
 \end_layout
 
 \begin_layout Enumerate
-PIRA: un sistema web el cual, a medida se escribe una investigación, sugiere
- documentos relacionados y términos de búsqueda, a la vez que permite citarlos
- automáticamente al elegirlos de entre los resultados, agregándolos a una
- bibliografía.
+PIRA: un sistema web el cual, a medida se escribe un documento en la interfaz
+ provista, sugiere documentos relacionados y términos de búsqueda, a la
+ vez que permite citarlos automáticamente al elegirlos de entre los resultados,
+ agregándolos a una bibliografía.
  Se basa en servicios web de terceros para encontrar los términos clave,
  ampliar la búsqueda con sinónimos y ofrecer las facilidades de cita automática.
  Disponible para pruebas en 
@@ -850,7 +873,7 @@ www.writencite.com
 
 \end_inset
 
- y propuesto por 
+ y descrito en 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Gruzd2006"
@@ -863,8 +886,7 @@ key "Gruzd2006"
 \begin_layout Enumerate
 À propos: trata de determinar en qué etapa de la composición de un documento
  está el usuario para sugerirle lecturas y recursos para ampliar su composición,
- también se basa en búsquedas basadas en palabras clave en distintas bases
- de datos.
+ se basa en búsquedas en distintas bases de datos, basadas en palabras clave.
  Presentado por
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -936,16 +958,17 @@ Identificación del problema
 Aunque, como se puede observar en la sección anterior, existen iniciativas
  que pudieran llevar los avances de la contextualización y la personalización
  de los sistemas de recomendación tradicionales al ámbito de la producción
- de la información, es necesaria una implementación lo suficientemente flexible
- como para permitir la expansión a varios lenguajes naturales y ser utilizada
- por los desarrolladores en cualquier ámbito mediante un protocolo popular,
- como lo es HTTP, sin dejar de lado las ventajas del aprendizaje de máquina
- y la personalización, relegando estas tareas a un servidor que implemente
- un sistema de recomendación, dejando solamente a los implementadores la
- responsabilidad de iniciar la comunicación e interpretar las respuestas
- en las soluciones que creen para sus propias aplicaciones, en lugar de
- tener que crear ellos mismos otro sistema de recomendación oportuna de
- información.
+ de la información, las alternativas actuales son, o que el usuario final
+ tenga que instalar alguna de estas aplicaciones por su cuenta o el desarrollado
+r se deba dedicar a implementarlas mediante complicadas interfaces de programaci
+ón de aplicaciones en su software o se decida por crear su propia solución.
+\end_layout
+
+\begin_layout Standard
+Por otra parte, gran parte de las iniciativas actuales han sido creadas
+ para usuarios que hablan un solo idioma (inglés, por ejemplo, en todos
+ los casos arriba descritos), de modo que aún no existe una que pueda trascender
+ las barreras del lenguaje.
 \end_layout
 
 \begin_layout Section
@@ -972,8 +995,8 @@ El proyecto propuesto aquí busca ofrecer a los implementadores una interfaz
 \end_layout
 
 \begin_layout Standard
-Mientras que los implementadores sólo se habrán de preocupar por hacer solicitud
-es a las URLs definidas en la API e interpretar los datos que el servidor
+Mientras que los implementadores sólo se habrán de ocupar de hacer solicitudes
+ a las URLs definidas en la API e interpretar los datos que el servidor
  regrese en respuesta, el lado del servidor utilizará técnicas de recuperación
  probabilística de la información y aprendizaje heurístico de perfiles de
  usuario para descubrir conceptos en sesiones de uso y mejorar las respuestas
@@ -1012,20 +1035,20 @@ zemanta.com
 
 \end_inset
 
-, pero ésta no soporta la evolución automática de perfiles de usuario (aunque
- provee opciones de personalización explícita) y solo se ofrece en el idioma
+, pero ésta no soporta la evolución automática de perfiles de usuario (solamente
+ provee la opción de personalización explícita) y solo se ofrece en el idioma
  inglés.
  La solución aquí propuesta, en cambio, soporta, por ahora, inglés y español,
- mas el diseño está abierto a la inclusión de nuevos idiomas y se fundamenta
+ con un diseño abierto a la inclusión de nuevos idiomas y se fundamenta
  en la evolución y uso meramente automáticos de perfiles de usuario para
- filtrar las recomendaciones.
+ filtrar la información y generar recomendaciones.
  
 \end_layout
 
 \begin_layout Standard
 Se debe aclarar que el servicio -en esta fase de implementación como proyecto
  de graduación- solamente provee recomendaciones de hipermedia en forma
- de texto (HTML y PDF, por ejemplo), cuenta con una base documental relativament
+ de texto (HTML, texto plano y PDF), cuenta con una base documental relativament
 e pequeña (aproximadamente 14,000 conceptos y 100,000 documentos) y la funcional
 idad de incrementar ésta ya sea de manera automática o explícita, aunque
  facilitada y permitida por el diseño, está fuera del alcance del mismo
@@ -1071,8 +1094,8 @@ reference "fig:app-usage"
 
 \end_inset
 
- se puede ver cómo podría utilizar el usuario final una aplicación con el
- servicio implementado.
+ se puede ver cómo podría utilizar el usuario final una aplicación que implement
+e el servicio.
 \end_layout
 
 \begin_layout Standard
@@ -2647,6 +2670,15 @@ reference "tab:VSM-examples"
 \end_inset
 
  para ilustrar los conceptos clave.
+ En ésta se muestran documentos que han sido procesados lingüísticamente;
+ por claridad, las frecuencias se muestran contiguas a las palabras, aunque
+ esto es responsabilidad del índice inverso.
+ Las ponderaciones se han calculado con 
+\emph on
+if*tdf.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
 wide false
 sideways false
@@ -2872,13 +2904,7 @@ name "tab:VSM-examples"
 \end_inset
 
 Documentos de ejemplo para el modelo de espacio vectorial.
- El procesamiento lingüístico elimina palabras vacías, puntuación y mayúsculas
- y reduce a raíces.
- Por claridad, las frecuencias se muestran contiguas a las palabras, aunque
- esto es responsabilidad del índice inverso.
- Las ponderaciones se han calculado con 
-\emph on
-if*tdf
+ 
 \end_layout
 
 \end_inset
@@ -6174,7 +6200,11 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-Usuarios/Libros
+Usuarios
+\begin_inset Newline newline
+\end_inset
+
+Libros
 \end_layout
 
 \end_inset
@@ -6823,15 +6853,8 @@ Filtrado colaborativo basado en modelos
 \end_layout
 
 \begin_layout Standard
-Como se discutirá en el apartado 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Limitaciones"
-
-\end_inset
-
-, un problema de los sistemas basados en memoria es el escaso uso del historial
- del usuario.
+Como se discutirá en el apartado siguiente, un problema de los sistemas
+ basados en memoria es el escaso uso del historial del usuario.
  Los sistemas basados en modelos tratan de superar este problema: en vez
  de calcular las predicciones cada vez, construyen hipótesis de 
 \emph on
@@ -9363,9 +9386,9 @@ key "Silberschatz2005"
 
 \begin_layout Standard
 En el ámbito de los sistemas web, sin embargo, el rol de funciones lo juegan
- URLs y los parámetros son los que se envían en solicitudes POST o GET.
+ URLs y los parámetros son los que se envían en solicitudes HTTP.
  De esta manera, una llamada a función en el concepto tradicional de API
- se convierte en una solicitud HTTP POST o GET.
+ se convierte en una solicitud en este protocolo.
  
 \end_layout
 
@@ -9475,8 +9498,8 @@ http://www.w3.org/TR/wsdl
 \emph on
 Web Services Description Language, 
 \emph default
-Lenguaje de descripción de servicios web) para establecer las acciones realizabl
-es en el XML que guía la comunicación.
+Lenguaje de descripción de servicios web) para establecer, en el XML, las
+ acciones realizables.
  Asimismo, se utiliza el registro UDDI
 \begin_inset Foot
 status collapsed
@@ -10447,8 +10470,8 @@ widget
 widget
 \emph default
  las opciones de configuración que se deseen.
- Si no se desea utilizar el widget -o no es posible, al no implementarlo
- en un documento html- deberán implementar métodos que hagan las llamadas
+ Si no se desea utilizar el widget -o no es posible, al no estarlo implementando
+ en un documento html- deberán desarrollar métodos que hagan las llamadas
  al servicio de recomendación y lo interpreten: para obtener recomendaciones,
  la llamada correspondiente deberá incluir la clave de aplicación y el contexto
  local en forma de texto; el servidor contestará con una respuesta 404 (página
@@ -10473,15 +10496,16 @@ url
  más: los códigos de documentos elegidos como retroalimentación.
  La actualización del perfil es asíncrona, por lo que un retorno de éxito
  en la llamada a esta función sólo garantiza que la tarea de actualización
- fue puesta en la cola de prioridad, y no la actualización misma; esto se
- debe a que el proceso de evolución de perfil es relativamente largo y un
- procesamiento síncrono ralentizaría innecesariamente la aplicación implementado
-ra (puesto que es un componente secundario de la misma).
+ fue puesta en la cola de prioridad, y no que la actualización misma se
+ llevó a cabo; esto se debe a que el proceso de evolución de perfil es relativam
+ente largo y un procesamiento síncrono ralentizaría innecesariamente la
+ aplicación implementadora (puesto que es un componente secundario de la
+ misma).
 \end_layout
 
 \begin_layout Standard
-Establecido el ámbito, se proceden a identificar los recursos, una vez más,
- siguiendo los lineamientos de gestión de software presentados por 
+Establecido el ámbito, se proceden a identificar los recursos siguiendo,
+ una vez más, los lineamientos de gestión de software presentados por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Pressman2006"
@@ -10495,7 +10519,7 @@ key "Pressman2006"
 Personal: Dada la naturaleza de este proyecto, solamente se cuenta con el
  autor para el desarrollo de software.
  Para la configuración inicial de recursos externos (como el servidor web
- y de base de datos), se solicitó apoyo a la facultad o el encargado del
+ y de base de datos), se solicitó apoyo a la facultad y al encargado del
  laboratorio de ingeniería en sistemas computacionales.
 \end_layout
 
@@ -10524,10 +10548,10 @@ to de
 \emph on
 urls
 \emph default
- y la interpretación y codificación de la comunicación HTTP, luego, se requería
- software pre-existente para las siguientes tareas: indexación y búsqueda
- de documentos para recomendación, entrenamiento del clasificador de categorías
- y extracción de términos clave.
+ y la interpretación y codificación de la comunicación HTTP, se utilizó,
+ además, software pre-existente para las siguientes tareas: indexación y
+ búsqueda de documentos para recomendación, entrenamiento del clasificador
+ de categorías y extracción de términos clave.
  Se desarrolló software nuevo para el manejo de solicitudes al servicio,
  la implementación del widget, la obtención de la colección de software
  documental, el registro de aplicaciones, la creación, evolución y uso de
@@ -10586,7 +10610,7 @@ trabajo: se consideraron los objetivos y se subdividieron en cuatro grandes
 características
 \emph default
  relativamente independientes entre sí y capaces de ser sujetas a pruebas,
- así como la inclusión de un período de pruebas formales y generales:
+ así como la inclusión de un período de pruebas generales formales:
 \end_layout
 
 \begin_deeper
@@ -11134,7 +11158,7 @@ Sumario de requisitos
 
 \begin_layout Standard
 En base al objetivo y la audiencia del proyecto, se resumen a continuación
- los requisitos a tener en las siguientes etapas del análisis y diseño,
+ los requisitos a satisfacer en las siguientes etapas del análisis y diseño,
  redactados y organizados siguiendo las pautas propuestas en 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -11286,8 +11310,8 @@ http://www.w3.org/
 \end_layout
 
 \begin_layout Enumerate
-El sistema utilizará, para el almacenamiento, el servidor de bases de datos
- postgresql
+El sistema utilizará, para el almacenamiento, el sistema administrador de
+ bases de datos postgresql
 \begin_inset Foot
 status open
 
@@ -11330,8 +11354,8 @@ key "Nielsen1994"
 
 \begin_layout Enumerate
 El servicio deberá fundamentarse en los principios de arquitectura REST,
- sobre todo, deberá estar libre de estado: toda la información necesaria
- para el uso del servicio deberá estar contenida en la solicitud, permitiendo
+ sobre todo, deberá ser libre de estado: toda la información necesaria para
+ el uso del servicio deberá estar contenida en la solicitud, permitiendo
  así la escalabilidad mediante sistemas distribuidos.
 \end_layout
 
@@ -11350,7 +11374,7 @@ name "sub:use_cases"
 Se resumen a continuación los distintos casos de uso del servicio.
  Nótese que la escasez y simplicidad de éstos se debe a que la mayor funcionalid
 ad del sistema radica en el trasfondo algorítmico de la indización, búsqueda
- y filtrado y a los requerimientos de simplicidad.
+ y filtrado.
  Un diagrama UML que los ilustra se presenta en la figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11412,9 +11436,9 @@ Actualiza
 \end_inset
 
 Perfil: El sistema implementador provee el usuario, el último contexto inmediato
- y, opcionalmente, los documentos elegidos mediante retroalimentación; en
- base a esto, el servicio actualiza el perfil del usuario con las categorías/con
-ceptos presentes en el contexto.
+ y, opcionalmente, los documentos elegidos como retroalimentación; en base
+ a esto, el servicio actualiza el perfil del usuario con los conceptos presentes
+ en el contexto.
 \end_layout
 
 \begin_layout Description
@@ -11424,9 +11448,7 @@ Provee
 
 Retroalimentación: el usuario final decide utilizar un recurso recomendado.
  En el caso de la interfaz provista por el servicio, es necesario tomar
- éste en cuenta a la hora de actualizar el perfil; el implementador también
- debería tener esto en cuenta, pero ello es responsabilidad exclusiva de
- él.
+ éste en cuenta a la hora de actualizar el perfil.
 \end_layout
 
 \begin_layout Description
@@ -11494,8 +11516,8 @@ Objetos del contenido
 \end_layout
 
 \begin_layout Standard
-Como se puede deducir, el único contenido que el sistema mostrará al usuario
- son las representaciones de los documentos recomendados.
+El único contenido que el sistema mostrará al usuario son las representaciones
+ de los documentos recomendados.
  Éstas consistirán en el título del documento, un sumario y un enlace para
  visitar la fuente original del documento (o descargarlo).
  Nótese que este contenido sólo se mostraría si el implementador decide
@@ -18159,7 +18181,8 @@ La representación de la ontología se creó con la extensibilidad a otros
 \begin_layout Standard
 Se considera que el presente proyecto contribuye a las áreas de investigación
  de los sistemas de recuperación de información oportuna y de recomendación
- al proveer un servicio sobre útil como base para nuevas soluciones de software.
+ al proveer un servicio sobre el cual se puedan fundamentar nuevas soluciones
+ de software.
  Asimismo, es una implementación donde se prueba el concepto de recomendación
  orientada al conocimiento, donde éste se modela mediante ontologías y los
  perfiles del usuario evolucionan heurísticamente, de modo que los investigadore
@@ -18178,9 +18201,9 @@ En primer lugar, se debe hacer notar que, lamentablemente, no se lograron
  la usabilidad; el aprendizaje de perfiles trans-lingüe, y las elecciones
  algorítmicas correspondientes a la creación, uso y evolución automática
  de perfiles.
- Así, este tipo de estudio se habrá de relegar para trabajo futuro, para
- contribuir teóricamente a las áreas de investigación de recuperación oportuna
- de información y sistemas de recomendación.
+ Así, este tipo de estudio se habrá de dejar para trabajo futuro, para contribui
+r teóricamente a las áreas de investigación de recuperación oportuna de
+ información y sistemas de recomendación.
 \end_layout
 
 \begin_layout Standard
