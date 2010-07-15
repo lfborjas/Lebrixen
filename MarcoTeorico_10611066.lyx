@@ -1190,13 +1190,10 @@ Definición de la metodología usada para la solución
 
 \begin_layout Standard
 En primera instancia, el autor debe confesar que no se utilizó ninguna metodolog
-ía estricta en el desarrollo, esto debido a que se consideró lo siguiente:
- el poco tiempo disponible -menos de tres meses, y en éstos, sólo unas cuantas
- horas al día- podría convertir el rigor de una metodología formal en un
- obstáculo al desarrollo (en ésto, quizá, se tomó una decisión propia del
- proceso ágil de desarrollo) y el hecho que, siendo un solo desarrollador,
- un proceso más laxo -mas no totalmente caótico- sería suficiente para mantener
- el derrotero de la implementación.
+ía estricta en el desarrollo: en vista de que el único programador era el
+ autor, el rigor de una metodología formal se reduciría a algo completamente
+ accesorio al proceso y que un control más laxo -mas no totalmente caótico-
+ sería suficiente para mantener el derrotero de la implementación.
 \end_layout
 
 \begin_layout Standard
@@ -10375,10 +10372,7 @@ En este capítulo se definen las prácticas de gestión de proyecto aplicadas
  al presente: se identifican el ámbito y los recursos, se detalla la metodología
  de administración de proyectos detrás de la calendarización y se concluye
  con una estimación post-desarrollo.
- La estimación tardía se debe a la restricción de tiempo impuesta desde
- un principio: el proyecto sólo contaba con tres meses para el desarrollo,
- de manera que una estimación previa hubiera sido hasta cierto punto fútil,
- pues no existía la posibilidad de extenderlo más allá de ese límite.
+ 
 \end_layout
 
 \begin_layout Section
@@ -10646,8 +10640,8 @@ de
 
 tiempos: esta fue quizá la etapa más liberalmente ejecutada del proyecto:
  para cada característica se consideró un máximo de dos semanas, de modo
- que se pudieran cumplir los tres meses (dejando un par de semanas para
- cualquier contingencia).
+ que se pudiera cumplir el tiempo asignado para la fase de implementación
+ (dejando un par de semanas para cualquier contingencia).
  Tratando de que, por su parte, las tareas incluidas dentro de cada característi
 ca no excediesen una semana en su ejecución.
 \end_layout
@@ -13001,13 +12995,13 @@ En este capítulo se discuten los aspectos teóricos y técnicos que llevaron
 \end_layout
 
 \begin_layout Standard
-Para el desarrollo de este proyecto, dada su naturaleza académica y el poco
- tiempo disponible, se optó por construir el producto de software final
- a partir de la mayor cantidad de librerías re-utilizables ya existentes
- posible, de manera que tareas de considerable dificultad mas lo suficientemente
- comunes -como la indexación, búsqueda y clasificación- fueran realizadas
- mediante código ya probado e implementado, de manera que el autor se pudiera
- dedicar a llevar a cabo los objetivos principales con éxito.
+Para el desarrollo de este proyecto se optó por construir el producto de
+ software final a partir de la mayor cantidad de librerías re-utilizables
+ ya existentes posible, de manera que tareas de considerable dificultad
+ mas lo suficientemente comunes -como la indexación, búsqueda y clasificación-
+ fueran realizadas mediante código ya probado e implementado, de manera
+ que el autor se pudiera dedicar a llevar a cabo los objetivos principales
+ con éxito.
 \end_layout
 
 \begin_layout Standard
@@ -13069,8 +13063,8 @@ key "Cimiano2005"
 a la larga
 \emph default
  en una base de conocimiento exacta dentro del contexto de la comunidad
- que la construya y utilice, no es factible, por la restricción de tiempo,
- para la implementación actual.
+ que la construya y utilice, este enfoque trasciende el alcance del presente
+ proyecto.
 \end_layout
 
 \begin_layout Standard
@@ -15957,12 +15951,11 @@ key "Pressman2006"
 \begin_layout Standard
 Se optó por usar pruebas automatizadas donde fuese posible y conveniente,
  tratando de sopesar el costo y el beneficio de cada caso individual por
- lo que -en vista del límite de tiempo que se tuvo- no se desarrollaron
- pruebas automatizadas para componentes o interfaces donde el esfuerzo de
- codificar una prueba hubiera sido mayor que el de conducirla manualmente,
- o donde la función no permitía que se pudiera hacer mediante herramientas
- de prueba (como el caso del formulario de registro, que contiene un campo
- 
+ lo que no se desarrollaron pruebas automatizadas para componentes o interfaces
+ donde el esfuerzo de codificar una prueba hubiera sido mayor que el de
+ conducirla manualmente, o donde la función no permitía que se pudiera hacer
+ mediante herramientas de prueba (como el caso del formulario de registro,
+ que contiene un campo 
 \emph on
 reCaptcha
 \emph default
@@ -17487,10 +17480,9 @@ Este último hallazgo devela que la función de agregación síncrona de usuario
  usuarios -más allá del límite- podrían agregarse casi al mismo tiempo,
  y la condición que revisa el límite podría permitir que todos se agreguen.
  Estos dos descubrimientos hacen patente la necesidad de imponer el límite
- de usuarios a nivel de base de datos, sin embargo, el desarrollo hubiera
- requerido más tiempo del disponible en esta etapa, además de comprometer
- el componente más importante del sistema por una restricción por demás
- accesoria.
+ de usuarios a nivel de base de datos mas el riesgo sobrepasa al beneficio
+ de comprometer el componente más importante del sistema por una restricción
+ por demás accesoria en una etapa tardía del desarrollo.
 \end_layout
 
 \begin_layout Standard
@@ -17546,9 +17538,8 @@ djapian
  algunos componentes necesarios sí están presentes, pero no se utilizan)
  o cambiar el componente de búsqueda, lo cual requeriría cambios de configuració
 n, reconstrucción del componente de búsqueda y creación de un nuevo índice
- documental.
- Ambas alternativas requerían más tiempo del que se disponía para concluir
- el proyecto, por lo que se deja como trabajo futuro.
+ documental, debido a que esto se descubrió al final de la etapa de desarrollo
+ se deja como trabajo futuro.
 \end_layout
 
 \begin_layout Section
@@ -18225,8 +18216,8 @@ El componente de búsqueda incurre en un fallo conceptual: la librería de
  texto en los documentos originales y los sustitutos documentales (además
  del texto que queda en los índices de la herramienta de recuperación de
  información).
- Un enfoque mejor, aunque más caro en términos de desarrollo y tiempo, hubiera
- sido uno como el que se tomó para clasificar categorías: el súper-documento
+ Un enfoque mejor, aunque más caro en términos de esfuerzo, hubiera sido
+ uno como el que se tomó para clasificar categorías: el súper-documento
  de categorías sólo existió a la hora de indexar, mas en realidad sólo se
  almacenan los datos necesarios para recuperación de información y los documento
 s originales.
