@@ -548,7 +548,11 @@ sistema de recuperación oportuna de información
 
 \begin_deeper
 \begin_layout Itemize
-Basado en la no invasión de la tarea.
+Basado en la 
+\emph on
+no invasión
+\emph default
+ de la tarea.
 \end_layout
 
 \begin_layout Itemize
@@ -556,7 +560,7 @@ Ya se ha hecho, pero ha sido independiente o no personalizable.
 \end_layout
 
 \begin_layout Itemize
-Servicios web más simples y aplicaciones híbridas.
+Aprovechar servicios web más simples y aplicaciones híbridas.
 \end_layout
 
 \end_deeper
@@ -569,8 +573,7 @@ Características de la solución
 \end_layout
 
 \begin_layout Itemize
-Servicio web (API) mas un widget javascript: todos lo pueden usar en sus
- aplicaciones.
+Servicio web (API) además de widget javascript opcional
 \end_layout
 
 \begin_layout Itemize
@@ -684,7 +687,7 @@ status open
 
 \begin_deeper
 \begin_layout Itemize
-Conceptos = nodos
+Nodos = conceptos
 \end_layout
 
 \begin_layout Itemize
@@ -772,7 +775,7 @@ Recomendación en la práctica
 \end_layout
 
 \begin_layout BeginFrame
-Construcción de consultas automáticas
+Construcción automática de consultas 
 \end_layout
 
 \begin_layout Itemize
@@ -853,10 +856,6 @@ Sumario
 \begin_layout Itemize
 Consiste en la recomendación de referencias en tiempo real, en base al contenido
  y el perfil.
-\end_layout
-
-\begin_layout Itemize
-Se basa en el conocimiento de ontologías y técnicas estadísticas.
 \end_layout
 
 \begin_layout Itemize
