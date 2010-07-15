@@ -1,0 +1,1416 @@
+#LyX 1.6.4 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usetheme{Warsaw}
+% or ...
+\usecolortheme{beaver}
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+\end_preamble
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This file is a solution template for:
+\end_layout
+
+\begin_layout Plain Layout
+- Talk at a conference/colloquium.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- Talk length is about 20min.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- Style is ornate.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+In principle, this file can be redistributed and/or modified under the terms
+ of the GNU Public License, version 2.
+ However, this file is supposed to be a template to be modified for your
+ own needs.
+ For this reason, if you use this file as a template and not specifically
+ distribute it as part of a another package/program, the author grants the
+ extra permission to freely copy and modify this file as you see fit and
+ even to delete this copyright notice.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Servicio web de recomendación oportuna de información basado en ontologías
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+Servicio de Recomendación 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+optional, use only with long paper titles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subtitle
+Proyecto de Graduación
+\end_layout
+
+\begin_layout Date
+15 de Julio de 2010
+\end_layout
+
+\begin_layout Author
+Luis Felipe Borjas Reyes
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+- Give the names in the same order as the appear in the paper.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- Use the 
+\backslash
+inst{?} command only if the authors have different affiliations.
+\end_layout
+
+\end_inset
+
+
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+Proyecto de Graduación
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+- optional, use only with lots of authors
+\end_layout
+
+\begin_layout Plain Layout
+- if there are reallylots of authors, use 
+\begin_inset Quotes eld
+\end_inset
+
+Author et al.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+Universidad Tecnológica Centroamericana
+\begin_inset Newline newline
+\end_inset
+
+(UNITEC)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+- Use the 
+\backslash
+inst command only if there are several affiliations.
+\end_layout
+
+\begin_layout Plain Layout
+- Keep it simple, no one is interested in your street address.
+\end_layout
+
+\end_inset
+
+
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+UNITEC
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+optional, but mostly needed
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+- Either use conference name or its abbreviation.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- Not really informative to the audience, more for people (including yourself)
+ who are reading the slides online
+\end_layout
+
+\end_inset
+
+
+\begin_inset OptArg
+status open
+
+\begin_layout Plain Layout
+UNITEC 2010
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+optional, should be abbreviation of conference name
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+If you have a file called "institution-logo-filename.xxx", where xxx is a
+ graphic format that can be processed by latex or pdflatex, resp., then you
+ can add a logo by uncommenting the following:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%pgfdeclareimage[height=0.5cm]{institution-logo}{images/logo.png}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+logo{
+\backslash
+includegraphics[height=0.5cm]{images/logo.png}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The following causes the table of contents to be shown at the beginning
+ of every subsection.
+ Delete this, if you do not want it.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSubsection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+frametitle{Contenidos}   
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+If you wish to uncover everything in a step-wise fashion, uncomment the
+ following command:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+beamerdefaultoverlayspecification{<+->}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Structuring a talk is a difficult task and the following structure may not
+ be suitable.
+ Here are some rules that apply for this solution: 
+\end_layout
+
+\begin_layout Plain Layout
+- Exactly two or three sections (other than the summary).
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- At *most* three subsections per section.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- Talk about 30s to 2min per frame.
+ So there should be between about 15 and 30 frames, all told.
+\end_layout
+
+\begin_layout Plain Layout
+- A conference audience is likely to know very little of what you are going
+ to talk about.
+ So *simplify*! 
+\end_layout
+
+\begin_layout Plain Layout
+- In a 20min talk, getting the main ideas across is hard enough.
+ Leave out details, even if it means being less precise than you think necessary.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+- If you omit details that are vital to the proof/implementation, just say
+ so once.
+ Everybody will be happy with that.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Contexto
+\end_layout
+
+\begin_layout Subsection
+Identificación del problema
+\end_layout
+
+\begin_layout BeginFrame
+Etapas de la escritura vs.
+ el principio del mínimo esfuerzo 
+\end_layout
+
+\begin_layout FrameSubtitle
+
+\emph on
+Cuándo
+\emph default
+ se necesita información y 
+\emph on
+qué
+\emph default
+ información se necesita
+\end_layout
+
+\begin_layout FrameSubtitle
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+- A title should summarize the slide in an understandable fashion for anyone
+ how does not follow everything on the slide itself.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Uno tiende a investigar lo más general antes.
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Durante
+\emph default
+ la escritura surgen necesidades 
+\emph on
+específicas
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Mínimo esfuerzo: reducir el tiempo de trabajo.
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+Entra el concepto de 
+\emph on
+sistema de recuperación oportuna de información
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Basado en la no invasión de la tarea.
+\end_layout
+
+\begin_layout Itemize
+Ya se ha hecho, pero ha sido independiente o no personalizable.
+\end_layout
+
+\begin_layout Itemize
+Servicios web más simples y aplicaciones híbridas.
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Descripción de la solución
+\end_layout
+
+\begin_layout BeginFrame
+Características de la solución
+\end_layout
+
+\begin_layout Itemize
+Servicio web (API) mas un widget javascript: todos lo pueden usar en sus
+ aplicaciones.
+\end_layout
+
+\begin_layout Itemize
+Perfilado automático de usuarios (requiere registrarlos, mediante API o
+ sitio)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Aprende preferencias de la historia de uso
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Soporte translingüe, por ahora, inglés y español
+\end_layout
+
+\begin_layout BeginFrame
+Interacción con el usuario final
+\end_layout
+
+\begin_layout FrameSubtitle
+(de una aplicación que use el servicio)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/18_ServiceUsage.dia
+	width 80page%
+	height 80page%
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implementación
+\end_layout
+
+\begin_layout Subsection
+Aprender a recomendar
+\end_layout
+
+\begin_layout BeginFrame
+Tener de dónde recomendar
+\end_layout
+
+\begin_layout Itemize
+Se requiere una colección de datos inicial
+\end_layout
+
+\begin_layout Itemize
+Se puede conseguir con un 
+\emph on
+web crawler
+\end_layout
+
+\begin_layout Itemize
+Luego, poder 
+\emph on
+buscar
+\emph default
+ en la colección 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Utilizando software para recuperación de información
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Simular conocimiento con ontologías
+\end_layout
+
+\begin_layout ColumnsCenterAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Conceptos = nodos
+\end_layout
+
+\begin_layout Itemize
+Aristas = relaciones de inclusión 
+\begin_inset Newline newline
+\end_inset
+
+ponderadas por relevancia
+\end_layout
+
+\end_deeper
+\begin_layout Column
+7 cm
+\end_layout
+
+\end_deeper
+\begin_layout ColumnsCenterAligned
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/15_WeightedOntology.dia
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+¿Cómo obtener la ontología?
+\end_layout
+
+\begin_layout Itemize
+Se puede utilizar aprendizaje de máquina sobre la colección documental
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\begin_layout Itemize
+O adaptar una ya existente: el 
+\emph on
+Open Directory Project
+\emph default
+ 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://dmoz.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+De ahí se obtuvieron ambas: colección y ontología
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Recomendación en la práctica
+\end_layout
+
+\begin_layout BeginFrame
+Construcción de consultas automáticas
+\end_layout
+
+\begin_layout Itemize
+Analizar contexto y determinar el tema
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Encontrar términos clave: estadística y procesamiento de lenguaje natural
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Saber cuándo ha cambiado el contexto: Diferencia de Myers/Distancia de Levenshte
+in
+\end_layout
+
+\begin_layout Itemize
+Uso de servicios web externos
+\end_layout
+
+\begin_layout BeginFrame
+Filtrado de información
+\end_layout
+
+\begin_layout FrameSubtitle
+Adaptar los resultados de la búsqueda automática al perfil
+\end_layout
+
+\begin_layout Itemize
+El perfil como ontología anotada: (concepto, preferencia)
+\end_layout
+
+\begin_layout Itemize
+Re-ordenar resultados: primero los más relacionados a las preferencias
+\end_layout
+
+\begin_layout Itemize
+Otra alternativa: expandir la consulta
+\end_layout
+
+\begin_layout BeginFrame
+Evolución de perfiles
+\end_layout
+
+\begin_layout Itemize
+Clasificar contenido con ontología
+\end_layout
+
+\begin_layout Itemize
+Usar retroalimentación
+\end_layout
+
+\begin_layout Itemize
+Valerse de relaciones en ontología para 
+\emph on
+propagar
+\emph default
+ preferencias
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Envejecer 
+\emph default
+conceptos
+\end_layout
+
+\begin_layout Section*
+Sumario
+\end_layout
+
+\begin_layout BeginFrame
+Sumario
+\end_layout
+
+\begin_layout Itemize
+Consiste en la recomendación de referencias en tiempo real, en base al contenido
+ y el perfil.
+\end_layout
+
+\begin_layout Itemize
+Se provee como servicio web para desarrolladores de cualquier tipo de software
+\color none
+, con una interfaz opcional en javascript.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+An outlook is always optional.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vskip0pt plus.5fill
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Trabajo Futuro
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Actualización automática de la colección documental y ontología
+\end_layout
+
+\begin_layout Itemize
+Mejoramiento de componentes de búsqueda y extracción de términos
+\end_layout
+
+\begin_layout Itemize
+Mayor aprovechamiento del perfil 
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginPlainFrame
+Gracias por su atención
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+API y Widget
+\end_layout
+
+\begin_layout BeginFrame
+Flujo de implementación
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/17_ServiceImplementation.dia
+	width 80page%
+	height 80pheight%
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Respuesta del Servidor
+\end_layout
+
+\begin_layout Itemize
+Message: en caso de error, mensaje diagnóstico
+\end_layout
+
+\begin_layout Itemize
+Data: específico a la llamada
+\end_layout
+
+\begin_layout Itemize
+Code: código http
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+200: éxito
+\end_layout
+
+\begin_layout Itemize
+400: faltan parámetros
+\end_layout
+
+\begin_layout Itemize
+401: autenticación fallida
+\end_layout
+
+\begin_layout Itemize
+404: aplicación no registrada
+\end_layout
+
+\begin_layout Itemize
+403: límite de usuarios excedido
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Agregar/Eliminar Usuarios
+\end_layout
+
+\begin_layout Itemize
+Requieren autenticación: credenciales enviadas al registrar aplicación.
+ Método: POST
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/registerUser/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/deleteUser/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Parámetros
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+appId
+\end_layout
+
+\begin_layout Itemize
+appUser
+\end_layout
+
+\end_deeper
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Data}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+added | deleted
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Listar Usuarios
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/getUsers/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+También requiere autenticación.
+ Método: GET
+\end_layout
+
+\begin_layout Itemize
+Parámetros
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+appId
+\end_layout
+
+\end_deeper
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Data}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+users
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+id
+\end_layout
+
+\begin_layout Itemize
+added
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Obtener Recomendaciones
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/getRecommendations/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Parámetros (método POST o GET)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+appId
+\end_layout
+
+\begin_layout Itemize
+appUser
+\end_layout
+
+\begin_layout Itemize
+context
+\end_layout
+
+\begin_layout Itemize
+lang
+\end_layout
+
+\end_deeper
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Data}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+terms
+\end_layout
+
+\begin_layout Itemize
+results
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+id, title, summary, url, percent, category, weight
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Actualizar Perfil
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://trecs.com/api/updateProfile/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Parámetros
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+appId
+\end_layout
+
+\begin_layout Itemize
+appUser
+\end_layout
+
+\begin_layout Itemize
+context
+\end_layout
+
+\begin_layout Itemize
+docs
+\end_layout
+
+\begin_layout Itemize
+lang
+\end_layout
+
+\end_deeper
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+{Data}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+queued
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Aspectos Técnicos
+\end_layout
+
+\begin_layout BeginFrame
+Diagrama de despliegue
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/19_DeploymentDiagram.dia
+	width 80page%
+	height 80pheight%
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Entorno
+\end_layout
+
+\begin_layout Itemize
+Servicio web desarrollado con django (python)
+\end_layout
+
+\begin_layout Itemize
+Widget, con jQuery
+\end_layout
+
+\begin_layout Itemize
+PostgreSQL como DBMS
+\end_layout
+
+\begin_layout Itemize
+Apache como servidor web
+\end_layout
+
+\begin_layout Itemize
+Linux como sistema operativo
+\end_layout
+
+\begin_layout Itemize
+Xapian (escrito en C++) como componente de recuperación de información
+\end_layout
+
+\begin_layout Section
+Aplicaciones
+\end_layout
+
+\begin_layout BeginFrame
+Comercialización
+\end_layout
+
+\begin_layout Itemize
+Cobrar por número de usuarios: gratis hasta cierto umbral
+\end_layout
+
+\begin_layout Itemize
+Limitar número de solicitudes
+\end_layout
+
+\begin_layout Itemize
+Cobrar a los 
+\emph on
+proveedores
+\emph default
+ de contenido (a cambio de promoverlos)
+\end_layout
+
+\begin_layout BeginFrame
+Aportes
+\end_layout
+
+\begin_layout Itemize
+Librar a los desarrolladores de implementarlo por su cuenta
+\end_layout
+
+\begin_layout Itemize
+Base para futura investigación 
+\end_layout
+
+\begin_layout Itemize
+Base para evaluaciones de los métodos utilizados
+\end_layout
+
+\begin_layout BeginFrame
+Sistemas de recomendación oportuna de información
+\end_layout
+
+\begin_layout FrameSubtitle
+Estado del arte
+\end_layout
+
+\begin_layout Itemize
+Características
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mínima intrusión
+\end_layout
+
+\begin_layout Itemize
+Recomendaciones en tiempo real
+\end_layout
+
+\begin_layout Pause
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Desventajas
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Software independiente o difícil de adaptar
+\end_layout
+
+\begin_layout Itemize
+Un solo lenguaje natural
+\end_layout
+
+\begin_layout Itemize
+No aprenden del usuario
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document
