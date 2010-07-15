@@ -857,6 +857,10 @@ Consiste en la recomendación de referencias en tiempo real, en base al contenid
 \end_layout
 
 \begin_layout Itemize
+Se basa en el conocimiento de ontologías y técnicas estadísticas.
+\end_layout
+
+\begin_layout Itemize
 Se provee como servicio web para desarrolladores de cualquier tipo de software
 \color none
 , con una interfaz opcional en javascript.
