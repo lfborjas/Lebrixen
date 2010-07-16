@@ -128,27 +128,14 @@ La
 world wide web
 \emph default
  ha evolucionado de tal manera que las personas han pasado de ser consumidoras
- de información a productoras: desde los 
-\emph on
-blogs, 
-\emph default
-las revistas en línea y las redes sociales hasta las aplicaciones que permiten
- editar documentos en internet dentro del mismo navegador web, las personas
- están dejando paulatinamente atrás los antiguos medios de consumo y producción
- de datos.
+ de información a productoras.
  Pero este incremento ha traído consigo un efecto secundario: la 
 \emph on
 sobrecarga de información
 \emph default
-:
-\emph on
- 
-\emph default
-ésta no afecta tanto a quien escribe un blog personal o se expresa en una
- red social, porque casi nunca tiene que desarrollar o justificar su argumento,
- mas aquellos cuya opinión está sujeta al escrutinio de otros deben dedicar
- parte del tiempo que utilizan en la producción de información a tratar
- de encontrar
+ la cual afecta a aquellos cuyos documentos están sujetos al escrutinio
+ de otros, pues deben dedicar parte del tiempo que utilizan en la producción
+ de información a tratar de encontrar
 \emph on
  
 \emph default
@@ -168,13 +155,46 @@ específicas
 \end_layout
 
 \begin_layout Abstract
-Para poder asistir en estas etapas de la escritura, ya se han propuesto
- e implementado sistemas que asistan a quien escribe, supervisando en tiempo
- real el proceso y recomendándole referencias oportunamente, de modo que
- pueda ampliar su conocimiento del tema sin interrumpir completamente su
- ocupación principal.
- Pero la mayor parte de estas soluciones o consisten en un sistema exclusivo
- -
+En el espíritu de la nueva generación de servicios web y aplicaciones híbridas,
+ se propone aquí un servicio web que permita ofrecer esta funcionalidad
+ a través de llamadas sobre el protocolo HTTP a una interfaz de programación
+ de aplicaciones, para implementarla en cualquier producto de software que
+ desee mejorar la experiencia de sus usuarios productores de información.
+ 
+\end_layout
+
+\begin_layout Abstract
+Se utiliza una ontología basada en la del Open Directory Project (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://dmoz.org/
+\end_layout
+
+\end_inset
+
+), ponderada según un factor empírico de inclusión.
+ Los perfiles de usuario se representan como instancias de la misma anotadas
+ con valores de preferencia, donde estos valores se descubren mediante la
+ categorización del contenido introducido en una sesión, la retroalimentación
+ en forma de recomendaciones utilizadas, un algoritmo de propagación para
+ asignar preferencias atenuadas a conceptos más generales relacionados indirecta
+mente con los contenidos en la sesión de uso y el 
+\emph on
+envejecimiento 
+\emph default
+de categorías no vueltas a utilizar.
+ 
+\end_layout
+
+\begin_layout Abstract
+Aunque ya se han propuesto e implementado sistemas que asistan a quien escribe,
+ supervisando en tiempo real el proceso y recomendándole referencias oportunamen
+te, de modo que pueda ampliar su conocimiento del tema sin interrumpir completam
+ente su ocupación principal, La mayor parte de estas soluciones o consisten
+ en un sistema exclusivo -
 \emph on
 otra 
 \emph default
@@ -185,22 +205,6 @@ aplicación que el usuario debe instalar y aprender a usar- , no aprovechan
  secundario en aplicaciones dedicadas a crear documentos de texto es quizá
  una pérdida, por la complejidad de procesamiento y almacenamiento involucradas
  y la relativa baja ganancia en el contexto del producto final.
-\end_layout
-
-\begin_layout Abstract
-En el espíritu de la nueva generación de servicios web y aplicaciones híbridas,
- se propone aquí un enfoque distinto: ofrecer esta funcionalidad a través
- de llamadas sobre el protocolo HTTP a una interfaz de programación de aplicacio
-nes, para implementarla en cualquier producto de software que desee mejorar
- la experiencia de sus usuarios productores de información; y, con el fin
- de personalizar las referencias a recomendar, este servicio habrá de aprender
- 
-\emph on
-automáticamente
-\emph default
- las preferencias de los usuarios mediante técnicas estadísticas, basándose
- en conocimiento representado en una ontología.
- 
 \end_layout
 
 \begin_layout Addchap
