@@ -1093,6 +1093,7 @@ En la tabla se hace una comparación de las soluciones existentes respecto
 
 \begin_layout Standard
 \begin_inset Float table
+placement h
 wide false
 sideways false
 status open
@@ -1303,7 +1304,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/18_ServiceUsage.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -1641,7 +1642,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/1_IR_Cycle.dia
-	scale 25
+	scale 35
 
 \end_inset
 
@@ -2431,7 +2432,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/5_IR_taxonomy.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -3396,7 +3397,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/6_VSM_vectors.dia
-	scale 39
+	scale 35
 	groupId vector-space-graphics
 
 \end_inset
@@ -3441,7 +3442,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/7_VSM_flat_space.dia
-	scale 39
+	scale 35
 	groupId vector-space-graphics
 
 \end_inset
@@ -5452,7 +5453,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/2_ER_content_based_RC.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -6097,7 +6098,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/2_ER_collaborative_RC.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -7341,7 +7342,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/3_ER_hybrid.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -8512,7 +8513,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/4_online-framework.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -11616,7 +11617,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/12_New_UseCaseDiagram.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -11730,7 +11731,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/13_New_ClassDiagram.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -11881,7 +11882,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/14_Register.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -11916,7 +11917,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/UML/UC1_session_start.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -11952,7 +11953,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/UML/UC2_document.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -12026,7 +12027,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/UML/UC4_select_document.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -12072,7 +12073,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/UML/UC5_close_session.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -12112,7 +12113,7 @@ Caso de uso 5: Actualizar Perfil
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/16_RegisterUsers.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -12151,7 +12152,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/10_Home.png
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -12200,7 +12201,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/UML/SD_domain_knowledge_approach.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -12241,7 +12242,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/UML/SD_filtering_approach.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -12723,7 +12724,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/1. Stage2_Hint.png
-	scale 45
+	scale 35
 
 \end_inset
 
@@ -12762,7 +12763,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/2. Recommendations_Interface.png
-	scale 45
+	scale 35
 
 \end_inset
 
@@ -13016,7 +13017,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/11_MTV_architecture.dia
-	scale 30
+	scale 35
 
 \end_inset
 
@@ -13102,7 +13103,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/19_DeploymentDiagram.dia
-	scale 40
+	scale 35
 
 \end_inset
 
@@ -14522,7 +14523,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/15_WeightedOntology.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -16234,7 +16235,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/33_TestOntology.dia
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -16282,7 +16283,11 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-Título[Categoría]
+Título
+\begin_inset Newline newline
+\end_inset
+
+[Categoría]
 \end_layout
 
 \end_inset
@@ -16302,7 +16307,11 @@ Contenido
 \begin_inset Text
 
 \begin_layout Plain Layout
-Science [Ciencia]
+Science
+\begin_inset Newline newline
+\end_inset
+
+ [Ciencia]
 \end_layout
 
 \end_inset
@@ -16323,7 +16332,11 @@ Systematic enterprise of gathering knowledge about the world and organizing
 \begin_inset Text
 
 \begin_layout Plain Layout
-Ciencia [Ciencia]
+Ciencia
+\begin_inset Newline newline
+\end_inset
+
+ [Ciencia]
 \end_layout
 
 \end_inset
@@ -16345,7 +16358,11 @@ Conjunto de conocimientos obtenidos mediante la observación y el razonamiento,
 \begin_inset Text
 
 \begin_layout Plain Layout
-Physics [Física]
+Physics
+\begin_inset Newline newline
+\end_inset
+
+ [Física]
 \end_layout
 
 \end_inset
@@ -16560,7 +16577,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/34_ComponentDependencyTests.dia
-	scale 33
+	scale 35
 
 \end_inset
 
