@@ -11291,7 +11291,7 @@ es y respuestas HTTP puedan ser construidas e interpretadas.
 \begin_inset Newline newline
 \end_inset
 
-Desarolladores de software, directamente; Y personas que produzcan información
+Desarrolladores de software, directamente; Y personas que produzcan información
  en la forma de textos, indirectamente.
 \end_layout
 
@@ -13641,7 +13641,7 @@ ODP
 \emph default
 , el siguiente paso consistió en la obtención de aquellos tópicos que se
  referían al sub-árbol elegido (el referente a ciencia y tecnología).
- Los pasos para la completación de esta tarea fueron:
+ Los pasos para la consecución de esta tarea fueron:
 \end_layout
 
 \begin_layout Enumerate
@@ -18535,7 +18535,7 @@ desarrollo conducido por pruebas
 TDD, por Test driven development), 
 \emph default
 por falta de habituación y familiaridad con estas prácticas se dejó el desarroll
-o y aplicación de éstas para la última etapa del desarollo.
+o y aplicación de éstas para la última etapa del desarrollo.
  Las pruebas develaron, como se discute en el capítulo correspondiente,
  algunos problemas que pudieron corregirse y otros que pudieron identificarse
  como trabajo futuro y permitieron una evaluación verdaderamente crítica
