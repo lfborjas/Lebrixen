@@ -160,7 +160,8 @@ En el espíritu de la nueva generación de servicios web y aplicaciones híbrida
  a través de llamadas sobre el protocolo HTTP a una interfaz de programación
  de aplicaciones, para implementarla en cualquier producto de software que
  desee mejorar la experiencia de sus usuarios productores de información.
- 
+ El servicio se fundamenta en los principios de arquitectura REST y utiliza
+ JSON como formato de codificación de los resultados.
 \end_layout
 
 \begin_layout Abstract
@@ -175,18 +176,28 @@ http://dmoz.org/
 
 \end_inset
 
-), ponderada según un factor empírico de inclusión.
- Los perfiles de usuario se representan como instancias de la misma anotadas
+), ponderando las relaciones entre conceptos según un factor empírico de
+ inclusión.
+ Las recomendaciones se hacen extrayendo términos clave del contenido ingresado
+ por el usuario, para luego hacer una búsqueda en la colección documental
+ cuyos resultados se re-ordenan según el interés que se ha mostrado en la
+ categoría bajo la cual estén clasificados.
+\end_layout
+
+\begin_layout Abstract
+Los perfiles de usuario se representan como instancias de la misma anotadas
  con valores de preferencia, donde estos valores se descubren mediante la
- categorización del contenido introducido en una sesión, la retroalimentación
- en forma de recomendaciones utilizadas, un algoritmo de propagación para
- asignar preferencias atenuadas a conceptos más generales relacionados indirecta
-mente con los contenidos en la sesión de uso y el 
+ categorización del contenido introducido en una sesión y la retroalimentación
+ en forma de recomendaciones utilizadas, para luego evolucionar los perfiles
+ mediante un algoritmo de propagación que asigna preferencias atenuadas
+ a conceptos más generales relacionados indirectamente con los descubiertos
+ en la sesión de uso y el 
 \emph on
 envejecimiento 
 \emph default
 de categorías no vueltas a utilizar.
- 
+ Se soporta contenido en inglés y español, siendo posible la expansión a
+ otros idiomas al almacenar los conceptos de manera translingüe.
 \end_layout
 
 \begin_layout Abstract
@@ -586,24 +597,30 @@ Objetivos
 \end_layout
 
 \begin_layout Enumerate
-Elegir la naturaleza de la colección documental base para la implementación
- y pruebas.
- Ya sea en la forma de documentos obtenidos de internet o mediante la interfaz
- de búsqueda de una librería digital o motor de búsqueda existente.
- Acto seguido, obtener una muestra significativa de la colección para efectos
- de desarrollo.
+Implementar una araña web para la obtención de la colección documental,
+ así como un componente que permita obtener la ontología.
 \end_layout
 
 \begin_layout Enumerate
-Elegir e implementar la manera en la que se expresarán, construirán y evoluciona
-rán los perfiles de los usuarios.
+Desarrollar un categorizador que sea entrenado con la colección documental
+ para poder clasificar nuevo contenido como perteneciente a una o varias
+ categorías de la ontología.
+ Agregar componentes de extracción de términos y recuperación de información
+ para encontrar los documentos a recomendar.
 \end_layout
 
 \begin_layout Enumerate
-Implementar un componente de indización e igualación de documentos y consultas;
- y desarrollar un componente que permita el filtrado de los resultados del
- primero en base a los perfiles y contextos.
+Crear un módulo de mantenimiento de perfiles de usuario, que los evolucione
+ en base al contenido de las sesiones de uso y la retroalimentación.
  
+\end_layout
+
+\begin_layout Enumerate
+Consolidar el servicio web, definiendo los métodos, con los parámetros,
+ estructuras de retorno, restricciones de autenticación, mensajes de error
+ y métodos de llamada permitidos.
+ Asimismo, crear el widget opcional de javascript y una interfaz para el
+ registro de aplicaciones y la administración de usuarios.
 \end_layout
 
 \begin_layout Section
@@ -1027,29 +1044,6 @@ arranque en frío.
 \end_layout
 
 \begin_layout Standard
-En la actualidad la única solución popular muy similar a la propuesta es
- 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-zemanta.com
-\end_layout
-
-\end_inset
-
-, pero ésta no soporta la evolución automática de perfiles de usuario (solamente
- provee la opción de personalización explícita) y solo se ofrece en el idioma
- inglés.
- La solución aquí propuesta, en cambio, soporta, por ahora, inglés y español,
- con un diseño abierto a la inclusión de nuevos idiomas y se fundamenta
- en la evolución y uso meramente automáticos de perfiles de usuario para
- filtrar la información y generar recomendaciones.
- 
-\end_layout
-
-\begin_layout Standard
 Se debe aclarar que el servicio -en esta fase de implementación como proyecto
  de graduación- solamente provee recomendaciones de hipermedia en forma
  de texto (HTML, texto plano y PDF), cuenta con una base documental relativament
@@ -1066,20 +1060,7 @@ nuevos
  interpretación de bases de conocimiento y arañas web) se construyeron,
  en menor escala, para la obtención de la colección inicial, sentando las
  bases para trabajo futuro que implemente dicha funcionalidad.
- De ahí que cabe notar que la alternativa (
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-zemanta.com
-\end_layout
-
-\end_inset
-
-) es mucho más madura en este aspecto, pues ofrece no solo recomendaciones
- de hipermedia en forma de texto, sino también imágenes; además de contar
- con una base documental muy extensa y en constante crecimiento.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1100,6 +1081,174 @@ reference "fig:app-usage"
 
  se puede ver cómo podría utilizar el usuario final una aplicación que implement
 e el servicio.
+\end_layout
+
+\begin_layout Standard
+En la tabla se hace una comparación de las soluciones existentes respecto
+ a la aquí descrita.
+ Sólo se consideraron dos, al ser las otras aplicaciones de escritorio o
+ de propósito específico, por lo cual la comparación sería a un nivel más
+ teórico que práctico.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="20page%">
+<column alignment="center" valignment="top" width="20page%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Aplicación
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ventajas
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Carencias
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+writencite.com
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Uso de diversas colecciones documentales
+\begin_inset Newline newline
+\end_inset
+
+Organización de referencias
+\begin_inset Newline newline
+\end_inset
+
+Posibilidad de búsqueda libre y paginación de referencias
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Exclusivo: requiere utilizar la interfaz del sitio y registrarse
+\begin_inset Newline newline
+\end_inset
+
+Orientado al idioma inglés solamente
+\begin_inset Newline newline
+\end_inset
+
+No personaliza las recomendaciones
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+zemanta.com
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Diversas colecciones documentales
+\begin_inset Newline newline
+\end_inset
+
+Mayor variedad de hipermedia
+\begin_inset Newline newline
+\end_inset
+
+Mejores algoritmos de análisis de texto
+\begin_inset Newline newline
+\end_inset
+
+Servicio web con funcionalidad mayor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Requiere personalización explícita, no es automática
+\begin_inset Newline newline
+\end_inset
+
+Orientado al idioma inglés en exclusivo
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Comparación con otras soluciones de alcance similar
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1176,10 +1325,6 @@ Uso de una aplicación que implemente el servicio
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
